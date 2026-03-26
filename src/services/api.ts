@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://3.110.94.0:8080/api';
 
 export interface RestResponse<T> {
   data: T;
