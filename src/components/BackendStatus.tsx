@@ -39,7 +39,7 @@ const BackendStatus: React.FC<BackendStatusProps> = ({ children }) => {
       }}>
         <div>🔄 Checking backend connection...</div>
         <div style={{ fontSize: '14px', color: '#666' }}>
-          Please ensure your SpringBoot backend is running on http://localhost:8080
+          Please ensure your SpringBoot backend is running on http://3.110.94.0:8080
         </div>
       </div>
     );
@@ -66,7 +66,7 @@ const BackendStatus: React.FC<BackendStatusProps> = ({ children }) => {
           Unable to connect to the SpringBoot backend server. Please ensure:
         </div>
         <ul style={{ fontSize: '14px', color: '#666', textAlign: 'left', maxWidth: '500px' }}>
-          <li>SpringBoot application is running on <code>http://localhost:8080</code></li>
+          <li>SpringBoot application is running on <code>http://3.110.94.0:8080</code></li>
           <li>MySQL database is running and accessible</li>
           <li>No firewall is blocking the connection</li>
           <li>CORS is properly configured in the backend</li>
