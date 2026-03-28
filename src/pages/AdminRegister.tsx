@@ -172,7 +172,7 @@ const AdminRegister: React.FC = () => {
       };
 
       // Use fetch directly to avoid axios interceptors that add auth headers
-      const response = await fetch('http://localhost:8080/api/auth/register/admin', {
+      const response = await fetch('http://3.110.94.0:8080/api/auth/register/admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
