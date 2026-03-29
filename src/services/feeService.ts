@@ -109,7 +109,7 @@ export class FeeService {
     }
   }
 
-  // Get fee catalog by student PAN number
+  // Get fee catalog by student PEN number
   static async getFeeCatalogByPan(panNumber: string): Promise<FeeCatalog> {
     try {
       const response = await api.get(`/fees/catalogs/${panNumber}`);
