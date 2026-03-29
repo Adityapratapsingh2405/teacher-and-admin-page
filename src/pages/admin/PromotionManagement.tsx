@@ -298,7 +298,7 @@ const PromotionManagement: React.FC = () => {
             <table className="promotions-table">
               <thead>
                 <tr>
-                  <th>Student PAN</th>
+                  <th>Student PEN</th>
                   <th>Student Name</th>
                   <th>Current Class</th>
                   <th>Promotion To</th>
