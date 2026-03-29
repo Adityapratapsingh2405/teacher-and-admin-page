@@ -2607,7 +2607,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
                 <thead>
                   <tr>
                     <th>Roll No</th>
-                    <th>PAN Number</th>
+                    <th>PEN Number</th>
                     <th>Name</th>
                     <th>Parent Name</th>
                     <th>Mobile</th>
@@ -2640,7 +2640,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
                         <td>
                           <button className="action-btn" onClick={() => {
                             console.log('View details for student:', student);
-                            alert(`Student Details:\n\nName: ${student.name}\nPAN: ${student.id}\nParent: ${student.parentName}\nMobile: ${student.mobileNumber}\nClass: ${student.currentClass}-${student.section}\nRoll No: ${student.rollNumber || 'N/A'}\nFee Status: ${student.feeStatus}`);
+                            alert(`Student Details:\n\nName: ${student.name}\nPEN: ${student.id}\nParent: ${student.parentName}\nMobile: ${student.mobileNumber}\nClass: ${student.currentClass}-${student.section}\nRoll No: ${student.rollNumber || 'N/A'}\nFee Status: ${student.feeStatus}`);
                           }}>View Details</button>
                         </td>
                       </tr>
