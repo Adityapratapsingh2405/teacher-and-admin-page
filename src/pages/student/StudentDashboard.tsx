@@ -504,7 +504,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
   // const student = {
   //   name: 'Rahul Kumar',
   //   currentClass: '10th A',
-  //   pan: 'PAN123456',
+  //   pan: 'PEN123456',
   //   photo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=256&q=80&auto=format&fit=crop',
   //   schoolName: 'Mauritius International School',
   //   schoolLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-8IRdKonj2lw5KF7osJq3GRJSOrjKiKck0g&s'
@@ -962,7 +962,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               </div>
               <div className="student-info">
                 <h2>{student?.name || 'Student'}</h2>
-                <p>Class: {student?.currentClass || 'N/A'} • PAN: {student?.pan || 'N/A'}</p>
+                <p>Class: {student?.currentClass || 'N/A'} • PEN: {student?.pan || 'N/A'}</p>
               </div>
             </div>
             <div className='ln-card'>
@@ -1152,7 +1152,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               <div className="profile-details">
                 <p><strong>Name:</strong> {student.name}</p>
                 <p><strong>Current Class:</strong> {student.currentClass}</p>
-                <p><strong>PAN:</strong> {student.pan}</p>
+                <p><strong>PEN:</strong> {student.pan}</p>
               </div>
             </div>
             
