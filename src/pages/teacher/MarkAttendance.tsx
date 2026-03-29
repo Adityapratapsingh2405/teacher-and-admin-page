@@ -224,7 +224,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ classId, className, sec
                   <tr>
                     <th>Roll No</th>
                     <th>Name</th>
-                    <th>PAN Number</th>
+                    <th>PEN Number</th>
                     <th>Current Status</th>
                     <th style={{ textAlign: 'center' }}>Mark Attendance</th>
                   </tr>
