@@ -39,7 +39,7 @@ const LoginTest: React.FC<LoginTestProps> = ({ onLogin }) => {
         type="text"
         value={panNumber}
         onChange={(e) => setPanNumber(e.target.value)}
-        placeholder="PAN Number"
+        placeholder="PEN Number"
         required
       />
       <input
