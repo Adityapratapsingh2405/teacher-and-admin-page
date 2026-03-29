@@ -159,7 +159,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
         setError(null);
 
         // Fetch current logged-in student's details using /api/students/me
-        // This endpoint is secured for ROLE_STUDENT and doesn't require PAN parameter
+        // This endpoint is secured for ROLE_STUDENT and doesn't require PEN parameter
         const studentData = await StudentService.getCurrentStudent();
         
         // Try multiple possible field names for class ID
