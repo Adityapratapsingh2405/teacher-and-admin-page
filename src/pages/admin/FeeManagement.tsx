@@ -147,7 +147,7 @@ const FeeManagement: React.FC = () => {
           <div className="student-search-wrapper">
             <input
               type="text"
-              placeholder="Search students by name, PAN, or class..."
+              placeholder="Search students by name, PEN, or class..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="student-search-input"
@@ -177,11 +177,11 @@ const FeeManagement: React.FC = () => {
                     <div className="student-details">
                       {student.className ? (
                         <>
-                          Class: {student.className} | PAN: {student.panNumber}
+                          Class: {student.className} | PEN: {student.panNumber}
                         </>
                       ) : (
                         <>
-                          <span style={{color: '#ef4444', fontWeight: 600}}>⚠ Class: Not Assigned</span> | PAN: {student.panNumber}
+                          <span style={{color: '#ef4444', fontWeight: 600}}>⚠ Class: Not Assigned</span> | PEN: {student.panNumber}
                         </>
                       )}
                     </div>
@@ -207,7 +207,7 @@ const FeeManagement: React.FC = () => {
               <div className="student-fee-header">
                 <h3>{selectedStudent.name}</h3>
                 <div className="student-meta">
-                  <span>PAN: {selectedStudent.panNumber}</span>
+                  <span>PEN: {selectedStudent.panNumber}</span>
                   {selectedStudent.className && (
                     <span>Class: {selectedStudent.className}</span>
                   )}
