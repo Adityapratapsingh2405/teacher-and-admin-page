@@ -259,8 +259,8 @@ const StudentRegistration: React.FC = () => {
       console.error('Registration error:', error);
       
       // Handle specific error messages
-      if (error.message.includes('PAN already registered') || error.message.toLowerCase().includes('already exists')) {
-        setErrors({ panNumber: 'This PAN number is already registered. Please use a different PAN or login.' });
+      if (error.message.includes('PEN already registered') || error.message.toLowerCase().includes('already exists')) {
+        setErrors({ panNumber: 'This PEN number is already registered. Please use a different PAN or login.' });
       } else if (error.message.includes('Class not found') || error.message.toLowerCase().includes('invalid class')) {
         setErrors({ classId: 'Selected class is not available. Please choose another class.' });
       } else if (error.message.includes('Session not found') || error.message.toLowerCase().includes('invalid session')) {
@@ -300,7 +300,7 @@ const StudentRegistration: React.FC = () => {
           <h3 className="form-section-title">Personal Information</h3>
           
           <div className="form-group">
-            <label htmlFor="panNumber">PAN Number *</label>
+            <label htmlFor="panNumber">PEN Number *</label>
             <input
               type="text"
               id="panNumber"
