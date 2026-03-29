@@ -56,9 +56,9 @@ export class ResultPDFGenerator {
     doc.text(`${studentResults.className} - ${studentResults.section}`, studentInfoRight + 15, yPos);
     yPos += 6;
 
-    // PAN Number row
+    // PEN Number row
     doc.setFont('helvetica', 'bold');
-    doc.text('PAN Number:', studentInfoLeft, yPos);
+    doc.text('PEN Number:', studentInfoLeft, yPos);
     doc.setFont('helvetica', 'normal');
     doc.text(studentResults.studentPanNumber, studentInfoLeft + 35, yPos);
     yPos += 10;
@@ -229,7 +229,7 @@ export class ResultPDFGenerator {
     yPos += 5;
     doc.text(`Class: ${studentResults.className}`, 15, yPos);
     yPos += 5;
-    doc.text(`PAN Number: ${studentResults.studentPanNumber}`, 15, yPos);
+    doc.text(`PEN Number: ${studentResults.studentPanNumber}`, 15, yPos);
     yPos += 10;
 
     // Exam-wise results
@@ -462,9 +462,9 @@ export class ResultPDFGenerator {
     doc.setFont('helvetica', 'normal');
     doc.text(`${studentResults.className} - Section ${studentResults.section}`, studentInfoMiddle + 15, yPos);
 
-    // PAN
+    // PEN
     doc.setFont('helvetica', 'bold');
-    doc.text('PAN:', studentInfoRight, yPos);
+    doc.text('PEN:', studentInfoRight, yPos);
     doc.setFont('helvetica', 'normal');
     doc.text(studentResults.studentPanNumber, studentInfoRight + 15, yPos);
     yPos += 10;
