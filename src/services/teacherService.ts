@@ -191,7 +191,7 @@ export class TeacherService {
     }
   }
 
-  // Get student details by PAN number
+  // Get student details by PEN number
   static async getStudentByPan(panNumber: string) {
     try {
       const response = await api.get(`/students/${panNumber}`);
@@ -377,7 +377,7 @@ export class TeacherService {
     }
   }
 
-  // Get student scores by PAN
+  // Get student scores by PEN
   static async getStudentScores(panNumber: string) {
     try {
       const response = await api.get(`/scores/pan/${panNumber}`);
