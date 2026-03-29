@@ -646,7 +646,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
           <div className="search-box">
             <input
               type="text"
-              placeholder="Search by name, PAN, class, or section..."
+              placeholder="Search by name, PEN, class, or section..."
               value={classSearchTerm}
               onChange={(e) => setClassSearchTerm(e.target.value)}
             />
@@ -1155,7 +1155,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                   </span>
                 </div>
                 <div className="tc-details">
-                  <p><strong>PAN:</strong> {tc.studentPanNumber || tc.studentPan}</p>
+                  <p><strong>PEN:</strong> {tc.studentPanNumber || tc.studentPan}</p>
                   <p><strong>Class:</strong> {tc.className || 'N/A'}</p>
                   <p><strong>Session:</strong> {tc.sessionName || 'N/A'}</p>
                   <p><strong>Request Date:</strong> {tc.requestDate ? new Date(tc.requestDate).toLocaleDateString() : 'N/A'}</p>
@@ -1218,7 +1218,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
               
               <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
                 <p><strong>Student:</strong> {selectedRequest.studentName}</p>
-                <p><strong>PAN:</strong> {selectedRequest.studentPanNumber || selectedRequest.studentPan}</p>
+                <p><strong>PEN:</strong> {selectedRequest.studentPanNumber || selectedRequest.studentPan}</p>
                 <p><strong>Class:</strong> {selectedRequest.className}</p>
                 <p><strong>Reason:</strong> {selectedRequest.reason}</p>
               </div>
