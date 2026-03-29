@@ -111,8 +111,8 @@ export class AdminService {
     }
   }
 
-  // Get student by PAN number
-  static async getStudentByPAN(panNumber: string): Promise<StudentResponse> {
+  // Get student by PEN number
+  static async getStudentByPEN(panNumber: string): Promise<StudentResponse> {
     try {
       const response = await api.get<RestResponse<StudentResponse>>(`/students/${panNumber}`);
       
