@@ -536,7 +536,7 @@ const MarksUpload: React.FC<MarksUploadProps> = () => {
                     <tr>
                       <th>#</th>
                       <th>Roll No.</th>
-                      <th>PAN Number</th>
+                      <th>PEN Number</th>
                       <th>Student Name</th>
                       <th>Marks Obtained</th>
                       <th>Grade</th>
