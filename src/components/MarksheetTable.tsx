@@ -93,7 +93,7 @@ const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownl
         <div className="student-info">
           <h2>{studentResults.studentName}</h2>
           <p>Class: {studentResults.className}</p>
-          <p>PAN: {studentResults.studentPanNumber}</p>
+          <p>PEN: {studentResults.studentPanNumber}</p>
         </div>
         <button className="download-btn" onClick={onDownload}>
            Download Marksheet
