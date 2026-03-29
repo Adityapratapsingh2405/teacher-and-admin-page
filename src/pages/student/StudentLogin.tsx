@@ -48,7 +48,7 @@ const StudentLogin: React.FC<StudentLoginProps> = ({ onLogin }) => {
             error.message.toLowerCase().includes('staff login')) {
           setError('Access denied. Please use the Student Login Credentials.');
         } else if (error.message.includes('401') || error.message.toLowerCase().includes('invalid credentials')) {
-          setError('Invalid PAN number or password. Please try again.');
+          setError('Invalid PEN number or password. Please try again.');
         } else if (error.message.includes('403')) {
           setError('Access denied. You do not have student privileges.');
         } else if (error.message.includes('Network Error') || error.message.toLowerCase().includes('network')) {
@@ -77,13 +77,13 @@ const StudentLogin: React.FC<StudentLoginProps> = ({ onLogin }) => {
 
         <form onSubmit={handleSubmit} className="student-login-form">
           <div className="form-group">
-            <label htmlFor="panNumber">PAN Number</label>
+            <label htmlFor="panNumber">PEN Number</label>
             <input
               type="text"
               id="panNumber"
               value={panNumber}
               onChange={(e) => setPanNumber(e.target.value)}
-              placeholder="Enter your PAN number"
+              placeholder="Enter your PEN number"
               required
               disabled={isLoading}
               className="student-input"
@@ -117,7 +117,7 @@ const StudentLogin: React.FC<StudentLoginProps> = ({ onLogin }) => {
 
         <div className="student-login-footer">
           <p>Student Credentials:</p>
-          <p>Use your registered PAN number and password</p>
+          <p>Use your registered PEN number and password</p>
           <div className="signup-section">
             <p className="info-text">📝 New students should contact the admin office for registration</p>
           </div>
