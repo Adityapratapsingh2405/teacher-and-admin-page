@@ -235,7 +235,7 @@ const PromotionAssignment: React.FC<Props> = ({ classId, sessionId }) => {
             <tr>
               <th>Roll No.</th>
               <th>Student Name</th>
-              <th>PAN Number</th>
+              <th>PEN Number</th>
               <th>Promote To Class</th>
               <th>Detained</th>
               <th>Remarks</th>
