@@ -126,11 +126,11 @@ const StudentRegistration: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: StudentRegistrationErrors = {};
 
-    // PAN Number validation
+    // PEN Number validation
     if (!formData.panNumber.trim()) {
-      newErrors.panNumber = 'PAN Number is required';
+      newErrors.panNumber = 'PEN Number is required';
     } else if (formData.panNumber.length < 5) {
-      newErrors.panNumber = 'PAN Number must be at least 5 characters';
+      newErrors.panNumber = 'PEN Number must be at least 5 characters';
     }
 
     // Name validation
@@ -253,7 +253,7 @@ const StudentRegistration: React.FC = () => {
       await AuthService.registerStudent(registrationData);
       
       // Show success message and redirect to login
-      alert('Registration successful! Your account has been created. Please login with your PAN number and password.');
+      alert('Registration successful! Your account has been created. Please login with your PEN number and password.');
       navigate('/');
     } catch (error: any) {
       console.error('Registration error:', error);
@@ -307,7 +307,7 @@ const StudentRegistration: React.FC = () => {
               name="panNumber"
               value={formData.panNumber}
               onChange={handleInputChange}
-              placeholder="Enter your PAN number (e.g., PAN001)"
+              placeholder="Enter your PEN number (e.g., PEN001)"
               disabled={isLoading}
               className={errors.panNumber ? 'error' : ''}
             />
