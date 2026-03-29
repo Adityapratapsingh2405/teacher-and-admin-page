@@ -137,7 +137,7 @@ export class TransferCertificateService {
     }
   }
 
-  // Get TC request by student PAN
+  // Get TC request by student PEN
   static async getRequestsByStudentPan(studentPan: string) {
     try {
       const response = await api.get(`/tc/requests/${studentPan}`);
