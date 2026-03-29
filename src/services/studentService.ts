@@ -79,7 +79,7 @@ export class StudentService {
     }
   }
 
-  // Get student by PAN number (for admin/teacher use)
+  // Get student by PEN number (for admin/teacher use)
   static async getStudentByPan(panNumber: string) {
     try {
       const response = await api.get(`/students/${panNumber}`);
@@ -154,7 +154,7 @@ export class StudentService {
     }
   }
 
-  // Update student status (bulk update - backend requires array of PAN numbers)
+  // Update student status (bulk update - backend requires array of PEN numbers)
   static async updateStudentStatus(panNumber: string, statusData: StatusData) {
     try {
       // Backend expects an array of panNumbers and status
