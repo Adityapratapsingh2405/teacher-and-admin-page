@@ -159,11 +159,11 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
   const validateForm = (): boolean => {
     const newErrors: StudentRegistrationErrors = {};
 
-    // PAN Number validation
+    // PEN Number validation
     if (!formData.panNumber.trim()) {
-      newErrors.panNumber = 'PAN number is required';
+      newErrors.panNumber = 'PEN number is required';
     } else if (formData.panNumber.trim().length < 5) {
-      newErrors.panNumber = 'PAN number must be at least 5 characters';
+      newErrors.panNumber = 'PEN number must be at least 5 characters';
     }
 
     // Name validation
@@ -289,7 +289,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
       await AuthService.registerStudent(registrationData);
       
       // Show success message
-      setSuccessMessage(`Student "${formData.name}" has been successfully registered! The student can now login with PAN: ${formData.panNumber.toUpperCase()} and the password you set.`);
+      setSuccessMessage(`Student "${formData.name}" has been successfully registered! The student can now login with PEN: ${formData.panNumber.toUpperCase()} and the password you set.`);
       
       // Reset form
       setFormData({
@@ -325,15 +325,15 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
       console.error('Student registration error:', error);
       
       // Handle specific error messages
-      if (error.message.includes('PAN number already exists') || 
+      if (error.message.includes('PEN number already exists') || 
           error.message.toLowerCase().includes('already registered') ||
           error.message.toLowerCase().includes('duplicate entry') ||
           error.message.toLowerCase().includes('already exists')) {
         setErrors({ 
-          panNumber: 'This PAN number is already registered. Please use a different PAN number.',
-          general: 'A student with this PAN number already exists in the system. Please check and try again.'
+          panNumber: 'This PEN number is already registered. Please use a different PAN number.',
+          general: 'A student with this PEN number already exists in the system. Please check and try again.'
         });
-        // Scroll to PAN number field
+        // Scroll to PEN number field
         document.getElementById('panNumber')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else if (error.message.includes('Class not found') || error.message.toLowerCase().includes('invalid class')) {
         setErrors({ classId: 'Selected class is invalid. Please select a valid class.' });
