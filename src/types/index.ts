@@ -587,7 +587,7 @@ export interface TransferCertificate {
   reason: string;
   status: 'PENDING_ADMIN' | 'PENDING_TEACHER' | 'APPROVED' | 'REJECTED';
   // Admin fields
-  forwardedToTeacher?: string; // Teacher PAN
+  forwardedToTeacher?: string; // Teacher PEN
   forwardedByAdmin?: string; // Admin who forwarded
   forwardedDate?: string;
   adminRemarks?: string;
