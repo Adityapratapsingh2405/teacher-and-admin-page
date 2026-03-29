@@ -11,7 +11,7 @@ export const loginExample = async () => {
   try {
     // Student login
     const studentResponse = await AuthService.loginStudent({
-      panNumber: 'PAN123456',
+      panNumber: 'PEN123456',
       password: 'password123'
     });
     
@@ -38,7 +38,7 @@ export const loginExample = async () => {
 export const loginWithAlias = async () => {
   try {
     const response = await Auth.loginStudent({
-      panNumber: 'PAN123456',
+      panNumber: 'PEN123456',
       password: 'password123'
     });
     console.log('Login successful:', response);
