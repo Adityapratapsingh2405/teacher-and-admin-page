@@ -405,7 +405,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="panNumber">
-                PAN Number <span className="required">*</span>
+                PEN Number <span className="required">*</span>
                 <span className="field-hint">Unique student ID</span>
               </label>
               <input
@@ -415,7 +415,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
                 value={formData.panNumber}
                 onChange={handleInputChange}
                 className={errors.panNumber ? 'error' : ''}
-                placeholder="Enter unique PAN number"
+                placeholder="Enter unique PEN number"
                 disabled={isLoading}
                 required
               />
@@ -730,7 +730,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
             Login Credentials
           </h3>
           <p className="section-description">
-            Set an initial password for the student. The student will use their PAN number and this password to login.
+            Set an initial password for the student. The student will use their PEN number and this password to login.
           </p>
           
           <div className="form-row">
