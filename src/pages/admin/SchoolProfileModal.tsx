@@ -33,7 +33,7 @@ const SchoolProfileModal: React.FC<SchoolProfileModalProps> = ({ schoolId, onClo
     try {
       setLoading(true);
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://3.110.94.0:8080/api/schools/${schoolId}`, {
+      const response = await fetch(`https://3.110.94.0:8080/api/schools/${schoolId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ const SchoolProfileModal: React.FC<SchoolProfileModalProps> = ({ schoolId, onClo
       setError(null);
 
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://3.110.94.0:8080/api/schools/${schoolId}`, {
+      const response = await fetch(`https://3.110.94.0:8080/api/schools/${schoolId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
