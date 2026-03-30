@@ -330,7 +330,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
           error.message.toLowerCase().includes('duplicate entry') ||
           error.message.toLowerCase().includes('already exists')) {
         setErrors({ 
-          panNumber: 'This PEN number is already registered. Please use a different PAN number.',
+          panNumber: 'This PEN number is already registered. Please use a different PEN number.',
           general: 'A student with this PEN number already exists in the system. Please check and try again.'
         });
         // Scroll to PEN number field
