@@ -38,7 +38,7 @@ export class AuthTestUtil {
 
   // Test API connectivity
   static async testAPIConnectivity() {
-    const testUrl = 'https://3.110.94.0:8080/api';
+    const testUrl = 'https://classconnect.it.com/api';
     try {
       const response = await fetch(testUrl);
       console.log('API connectivity test - Status:', response.status);
