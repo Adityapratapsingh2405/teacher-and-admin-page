@@ -86,7 +86,7 @@ const CorsTest: React.FC = () => {
       <div style={{ marginTop: '15px', fontSize: '12px', color: '#666' }}>
         <p><strong>Instructions:</strong></p>
         <ol>
-          <li>Make sure your SpringBoot backend is running on http://3.110.94.0:8080</li>
+          <li>Make sure your SpringBoot backend is running on https://3.110.94.0:8080</li>
           <li>Click "Test Backend Connection" to verify CORS configuration</li>
           <li>Check the browser console for detailed error messages</li>
         </ol>
