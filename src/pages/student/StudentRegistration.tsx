@@ -260,7 +260,7 @@ const StudentRegistration: React.FC = () => {
       
       // Handle specific error messages
       if (error.message.includes('PEN already registered') || error.message.toLowerCase().includes('already exists')) {
-        setErrors({ panNumber: 'This PEN number is already registered. Please use a different PAN or login.' });
+        setErrors({ panNumber: 'This PEN number is already registered. Please use a different PEN or login.' });
       } else if (error.message.includes('Class not found') || error.message.toLowerCase().includes('invalid class')) {
         setErrors({ classId: 'Selected class is not available. Please choose another class.' });
       } else if (error.message.includes('Session not found') || error.message.toLowerCase().includes('invalid session')) {
