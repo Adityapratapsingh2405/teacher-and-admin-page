@@ -184,14 +184,382 @@
   cursor: not-allowed;
 }
 
-/* MOBILE FIX */
-@media (max-width: 600px) {
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .tc-modal-overlay {
+    padding: 18px !important;
+  }
+
   .tc-modal-content {
-    padding: 20px;
-    max-height: calc(100vh - 100px);
+    max-width: 680px;
+    max-height: calc(100vh - 136px);
+    padding: 23px 31px 31px;
+  }
+
+  .tc-modal-close {
+    top: 13px;
+    right: 13px;
+    width: 35px;
+    height: 35px;
+    font-size: 17px;
   }
 
   .tc-modal-title {
-    font-size: 20px;
+    margin: 0 0 23px 0;
+    padding-bottom: 15px;
+    font-size: 23px;
+  }
+
+  .tc-error-message {
+    padding: 13px 15px;
+    margin-bottom: 19px;
+    font-size: 13px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 19px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 7px;
+    font-size: 13px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  .tc-form-textarea {
+    min-height: 87px;
+  }
+
+  .tc-form-actions {
+    gap: 13px;
+    margin-top: 29px;
+    padding-top: 19px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 11px 31px;
+    font-size: 14px;
   }
 }
+
+@media (max-width: 1024px) {
+  .tc-modal-overlay {
+    padding: 16px !important;
+  }
+
+  .tc-modal-content {
+    max-width: 660px;
+    max-height: calc(100vh - 132px);
+    padding: 22px 30px 30px;
+  }
+
+  .tc-modal-close {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .tc-modal-title {
+    margin: 0 0 22px 0;
+    padding-bottom: 14px;
+    font-size: 22px;
+  }
+
+  .tc-error-message {
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 18px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .tc-form-textarea {
+    min-height: 84px;
+  }
+
+  .tc-form-actions {
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 18px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 10px 30px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tc-modal-overlay {
+    padding: 14px !important;
+  }
+
+  .tc-modal-content {
+    max-width: 620px;
+    max-height: calc(100vh - 128px);
+    padding: 20px;
+  }
+
+  .tc-modal-close {
+    top: 11px;
+    right: 11px;
+    width: 33px;
+    height: 33px;
+    font-size: 15px;
+  }
+
+  .tc-modal-title {
+    margin: 0 0 20px 0;
+    padding-bottom: 13px;
+    font-size: 20px;
+  }
+
+  .tc-error-message {
+    padding: 11px 13px;
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 16px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 5px;
+    font-size: 11px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .tc-form-textarea {
+    min-height: 81px;
+  }
+
+  .tc-form-actions {
+    gap: 11px;
+    margin-top: 26px;
+    padding-top: 16px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 9px 29px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tc-modal-overlay {
+    padding: 12px !important;
+  }
+
+  .tc-modal-content {
+    max-width: 580px;
+    max-height: calc(100vh - 124px);
+    padding: 18px;
+  }
+
+  .tc-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .tc-modal-title {
+    margin: 0 0 18px 0;
+    padding-bottom: 12px;
+    font-size: 19px;
+  }
+
+  .tc-error-message {
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    font-size: 10px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 14px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 4px;
+    font-size: 10px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .tc-form-textarea {
+    min-height: 78px;
+  }
+
+  .tc-form-actions {
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 14px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 8px 28px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tc-modal-overlay {
+    padding: 10px !important;
+  }
+
+  .tc-modal-content {
+    max-width: 100%;
+    max-height: calc(100vh - 120px);
+    padding: 16px;
+  }
+
+  .tc-modal-close {
+    top: 9px;
+    right: 9px;
+    width: 31px;
+    height: 31px;
+    font-size: 13px;
+  }
+
+  .tc-modal-title {
+    margin: 0 0 16px 0;
+    padding-bottom: 11px;
+    font-size: 18px;
+  }
+
+  .tc-error-message {
+    padding: 9px 11px;
+    margin-bottom: 12px;
+    font-size: 9px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 12px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 3px;
+    font-size: 9px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .tc-form-textarea {
+    min-height: 75px;
+  }
+
+  .tc-form-actions {
+    gap: 9px;
+    margin-top: 22px;
+    padding-top: 12px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 7px 27px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .tc-modal-overlay {
+    padding: 8px !important;
+  }
+
+  .tc-modal-content {
+    max-width: 100%;
+    max-height: calc(100vh - 116px);
+    padding: 14px;
+  }
+
+  .tc-modal-close {
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .tc-modal-title {
+    margin: 0 0 14px 0;
+    padding-bottom: 10px;
+    font-size: 17px;
+  }
+
+  .tc-error-message {
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    font-size: 8px;
+  }
+
+  .tc-form-group {
+    margin-bottom: 10px;
+  }
+
+  .tc-form-label {
+    margin-bottom: 2px;
+    font-size: 8px;
+  }
+
+  .tc-form-input,
+  .tc-form-textarea {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .tc-form-textarea {
+    min-height: 72px;
+  }
+
+  .tc-form-actions {
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 10px;
+  }
+
+  .tc-btn-cancel,
+  .tc-btn-submit {
+    padding: 6px 26px;
+    font-size: 9px;
+  }
+}
+

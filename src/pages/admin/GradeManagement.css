@@ -335,29 +335,297 @@
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .grade-management-container {
+    padding: 25px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+
+  .grade-table th,
+  .grade-table td {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grade-management-header h2 {
+    font-size: 26px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .grade-preview-card {
+    padding: 18px;
+  }
+
+  .grade-preview-letter {
+    font-size: 28px;
+  }
+}
+
 @media (max-width: 768px) {
-    .grade-management-container {
-        padding: 15px;
-    }
+  .grade-management-container {
+    padding: 15px;
+  }
 
-    .grade-actions {
-        flex-direction: column;
-    }
+  .grade-management-header h2 {
+    font-size: 24px;
+  }
 
-    .btn-grade {
-        width: 100%;
-        justify-content: center;
-    }
+  .grade-description {
+    font-size: 13px;
+  }
 
-    .grade-table-container {
-        overflow-x: auto;
-    }
+  .grade-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-    .grade-table {
-        min-width: 600px;
-    }
+  .btn-grade {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
 
-    .grade-preview-cards {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
+  .grade-table-container {
+    overflow-x: auto;
+  }
+
+  .grade-table {
+    min-width: 600px;
+  }
+
+  .grade-table th,
+  .grade-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .grade-preview {
+    padding: 20px;
+  }
+
+  .grade-preview h3 {
+    font-size: 18px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .grade-preview-card {
+    padding: 15px;
+  }
+
+  .grade-preview-letter {
+    font-size: 24px;
+  }
+
+  .grade-preview-range {
+    font-size: 13px;
+  }
+
+  .grade-preview-desc {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grade-management-container {
+    padding: 12px;
+  }
+
+  .grade-management-header h2 {
+    font-size: 22px;
+  }
+
+  .grade-management-header {
+    margin-bottom: 20px;
+  }
+
+  .grade-alert {
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+
+  .grade-table th,
+  .grade-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .grade-preview {
+    padding: 15px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+
+  .grade-preview-card {
+    padding: 12px;
+  }
+
+  .grade-preview-letter {
+    font-size: 20px;
+  }
+
+  .grade-input {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-management-header h2 {
+    font-size: 20px;
+  }
+
+  .grade-description {
+    font-size: 12px;
+  }
+
+  .grade-actions {
+    margin-bottom: 20px;
+  }
+
+  .btn-grade {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .grade-table-container {
+    margin-bottom: 20px;
+  }
+
+  .grade-preview {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .grade-preview h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .grade-preview-card {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .grade-preview-letter {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .grade-preview-range {
+    font-size: 12px;
+  }
+
+  .grade-preview-desc {
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .grade-save-section {
+    margin-bottom: 20px;
+  }
+
+  .grade-save-hint {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .grade-management-container {
+    padding: 8px;
+  }
+
+  .grade-management-header h2 {
+    font-size: 18px;
+  }
+
+  .grade-management-header {
+    margin-bottom: 15px;
+  }
+
+  .grade-alert {
+    padding: 10px 12px;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .grade-actions {
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .btn-grade {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .grade-table th,
+  .grade-table td {
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .grade-preview {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .grade-preview h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .grade-preview-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .grade-preview-card {
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .grade-preview-letter {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .grade-preview-range {
+    font-size: 11px;
+  }
+
+  .grade-preview-desc {
+    font-size: 9px;
+    margin-top: 6px;
+  }
+
+  .grade-input {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .grade-save-hint {
+    font-size: 11px;
+  }
 }

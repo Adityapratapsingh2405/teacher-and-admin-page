@@ -63,6 +63,7 @@
 .header-right {
   width: 100%;
   display: flex;
+  justify-content: end;
   align-items: center;
   gap: 20px;
 }
@@ -166,7 +167,7 @@
 
 .notifications-dropdown {
   position: absolute;
-  top: 57px;
+  top: 17px;
   left: -40px;
   width: 320px;
   background-color: white;
@@ -289,12 +290,16 @@
   border-radius: 12px;
   padding: 16px 16px 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  width: 100%;
 }
 
 .calendar-table {
-  width: 80%;
+  width: min(100%, 720px);
+  min-width: 320px;
+  table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 8px;
+  border-spacing: 6px;
   justify-self: center;
 }
 
@@ -305,6 +310,7 @@
   text-align: center;
   padding: 10px 0;
   border-radius: 10px;
+  min-width: 0;
 }
 
 .calendar-table tbody td {
@@ -313,6 +319,10 @@
   border-radius: 10px;
   padding: 12px 0;
   min-width: 20px;
+}
+.calendar-table thead th,
+.calendar-table tbody td {
+  width: calc(100% / 7); /* 7 days */
 }
 
 .calendar-table tbody td.present { background-color: #e6f9ed; border: 1px solid #b9e8c7; }
@@ -352,6 +362,2141 @@
   border: 1px solid #f5b5ae;
 }
 
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    padding: 0 12px;
+  }
+
+  .dashboard-header {
+    padding: 14px 18px;
+  }
+
+  .header-top {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+
+  .school-info {
+    gap: 9px;
+  }
+
+  .school-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .school-name {
+    font-size: 18px;
+  }
+
+  .school-motto {
+    font-size: 11px;
+  }
+
+  .student-profile {
+    padding: 11px 18px;
+    gap: 13px;
+  }
+
+  .student-photo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .student-info h2 {
+    font-size: 15px;
+  }
+
+  .student-info p {
+    font-size: 11px;
+  }
+
+  .logout-button {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .tab-navigation {
+    padding: 7px 18px;
+  }
+
+  .tab-button {
+    padding: 7px 12px;
+    margin: 0 5px;
+    min-width: 85px;
+  }
+
+  .tab-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .tab-label {
+    font-size: 12px;
+  }
+
+  .dashboard-sidebar {
+    width: 260px;
+  }
+
+  .main-content {
+    padding: 0 18px 18px 18px;
+    margin: 9px;
+    width: 92%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 18px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  .profile-photo {
+    width: 130px;
+    height: 130px;
+    margin-right: 26px;
+  }
+
+  .profile-details p {
+    font-size: 15px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 18px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 15px;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 11px 13px;
+  }
+
+  .events-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  .event-card {
+    padding: 13px;
+    margin: 9px;
+  }
+
+  .event-date {
+    font-size: 13px;
+  }
+
+  .event-name {
+    font-size: 17px;
+  }
+
+  .result-card {
+    padding: 18px;
+  }
+
+  .result-card h3 {
+    font-size: 17px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 11px 13px;
+  }
+
+  .query-form {
+    padding: 22px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 9px 13px;
+    font-size: 14px;
+  }
+
+  .form-group textarea {
+    min-height: 130px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 11px 18px;
+    font-size: 14px;
+  }
+
+  .transfer-info {
+    padding: 22px;
+  }
+
+  .transfer-info p {
+    font-size: 14px;
+  }
+
+  .school-records {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+  }
+
+  .school-card {
+    padding: 22px;
+  }
+
+  .school-card h3 {
+    font-size: 17px;
+  }
+
+  .school-card p {
+    font-size: 14px;
+  }
+
+  .download-btn {
+    padding: 11px 18px;
+    font-size: 14px;
+  }
+
+  .button-row {
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+  }
+
+  .gallery-card {
+    overflow: hidden;
+  }
+
+  .gallery-image-container {
+    height: 200px;
+  }
+
+  .gallery-title {
+    padding: 13px;
+    font-size: 14px;
+  }
+
+  .gallery-description {
+    padding: 0 13px 13px;
+    font-size: 13px;
+  }
+
+  .gallery-uploaded {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+
+  .sidebar-header {
+    padding: 13px 18px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 17px;
+  }
+
+  .close-sidebar {
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  .notifications-dropdown {
+    width: 300px;
+  }
+
+  .notifications-header {
+    padding: 14px 18px;
+  }
+
+  .notifications-header h3 {
+    font-size: 17px;
+  }
+
+  .close-notifications {
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+  }
+
+  .notifications-list {
+    padding: 4px 0;
+  }
+
+  .notification-item {
+    padding: 14px 18px;
+  }
+
+  .notification-date {
+    font-size: 11px;
+  }
+
+  .notification-message {
+    font-size: 13px;
+  }
+
+  .notification-new-badge {
+    top: 14px;
+    right: 14px;
+    font-size: 9px;
+    padding: 2px 7px;
+  }
+
+  .no-notifications {
+    padding: 28px 18px;
+    font-size: 13px;
+  }
+
+  .calendar {
+    padding: 14px 14px 11px;
+    overflow-x: auto;
+  }
+
+  .calendar-table {
+    width: 100%;
+    min-width: 320px;
+    border-spacing: 5px;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 9px 0;
+  }
+
+  .cal-cell {
+    min-height: 42px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 36px;
+  }
+
+  .calendar-legend {
+    margin-top: 11px;
+  }
+
+  .legend-item {
+    font-size: 11px;
+    padding: 3px 9px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-container {
+    padding: 0 10px;
+  }
+
+  .dashboard-header {
+    padding: 13px 16px;
+  }
+
+  .header-top {
+    margin-bottom: 13px;
+    padding-bottom: 13px;
+  }
+
+  .school-info {
+    gap: 8px;
+  }
+
+  .school-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .school-name {
+    font-size: 17px;
+  }
+
+  .school-motto {
+    font-size: 10px;
+  }
+
+  .student-profile {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .student-photo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .student-info h2 {
+    font-size: 14px;
+  }
+
+  .student-info p {
+    font-size: 10px;
+  }
+
+  .logout-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .tab-navigation {
+    padding: 6px 16px;
+  }
+
+  .tab-button {
+    padding: 6px 11px;
+    margin: 0 4px;
+    min-width: 80px;
+  }
+
+  .tab-icon {
+    font-size: 19px;
+    margin-bottom: 4px;
+  }
+
+  .tab-label {
+    font-size: 11px;
+  }
+
+  .dashboard-sidebar {
+    width: 240px;
+  }
+
+  .main-content {
+    padding: 0 16px 16px 16px;
+    margin: 8px;
+    width: 94%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .profile-section h2,
+  .attendance-section h2,
+  .fees-section h2,
+  .holidays-section h2,
+  .events-section h2,
+  .results-section h2,
+  .query-section h2,
+  .transfer-section h2,
+  .previous-schools-section h2,
+  .gallery-section h2 {
+    font-size: 20px;
+    padding-bottom: 13px;
+    margin-bottom: 22px;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+    margin-right: 24px;
+  }
+
+  .profile-details p {
+    font-size: 14px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 16px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 14px;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 10px 12px;
+  }
+
+  .events-container {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .event-card {
+    padding: 12px;
+    margin: 8px;
+  }
+
+  .event-date {
+    font-size: 12px;
+  }
+
+  .event-name {
+    font-size: 16px;
+  }
+
+  .result-card {
+    padding: 16px;
+  }
+
+  .result-card h3 {
+    font-size: 16px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 10px 12px;
+  }
+
+  .query-form {
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .transfer-info {
+    padding: 20px;
+  }
+
+  .transfer-info p {
+    font-size: 13px;
+  }
+
+  .school-records {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .school-card {
+    padding: 20px;
+  }
+
+  .school-card h3 {
+    font-size: 16px;
+  }
+
+  .school-card p {
+    font-size: 13px;
+  }
+
+  .download-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .button-row {
+    gap: 9px;
+    margin-top: 13px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .gallery-image-container {
+    height: 180px;
+  }
+
+  .gallery-title {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .gallery-description {
+    padding: 0 12px 12px;
+    font-size: 12px;
+  }
+
+  .gallery-uploaded {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+
+  .sidebar-header {
+    padding: 12px 16px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 16px;
+  }
+
+  .close-sidebar {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .notifications-dropdown {
+    width: 280px;
+  }
+
+  .notifications-header {
+    padding: 13px 16px;
+  }
+
+  .notifications-header h3 {
+    font-size: 16px;
+  }
+
+  .close-notifications {
+    width: 26px;
+    height: 26px;
+    font-size: 16px;
+  }
+
+  .notification-item {
+    padding: 13px 16px;
+  }
+
+  .notification-date {
+    font-size: 10px;
+  }
+
+  .notification-message {
+    font-size: 12px;
+  }
+
+  .notification-new-badge {
+    top: 13px;
+    right: 13px;
+    font-size: 8px;
+    padding: 1px 6px;
+  }
+
+  .no-notifications {
+    padding: 24px 16px;
+    font-size: 12px;
+  }
+
+  .calendar {
+    padding: 13px 13px 10px;
+  }
+
+  .calendar-table {
+    width: 70%;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 8px 0;
+  }
+
+  .cal-cell {
+    min-height: 38px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 34px;
+  }
+
+  .calendar-legend {
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+}
+
+@media (max-width: 992px) {
+  .school-name {
+    font-size: 19px;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-photo {
+    margin-right: 0;
+    margin-bottom: 18px;
+  }
+
+  .profile-details {
+    text-align: center;
+  }
+
+  .events-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 8px;
+  }
+
+  .dashboard-header {
+    padding: 12px 14px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+
+  .school-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .school-logo {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .header-right {
+    margin-top: 12px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .student-profile {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .student-photo {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+
+  .menu-toggle {
+    display: inline-flex !important;
+  }
+
+  .tab-navigation {
+    padding: 5px 14px;
+    overflow-x: auto;
+  }
+
+  .tab-button {
+    padding: 8px 12px;
+    margin: 0 3px;
+    min-width: 75px;
+  }
+
+  .tab-icon {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .tab-label {
+    font-size: 11px;
+  }
+
+  .dashboard-sidebar {
+    width: 220px;
+  }
+
+  .main-content {
+    padding: 0 14px 14px 14px;
+    margin: 7px;
+    width: 96%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 14px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .profile-section h2,
+  .attendance-section h2,
+  .fees-section h2,
+  .holidays-section h2,
+  .events-section h2,
+  .results-section h2,
+  .query-section h2,
+  .transfer-section h2,
+  .previous-schools-section h2,
+  .gallery-section h2 {
+    font-size: 18px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .profile-photo {
+    width: 110px;
+    height: 110px;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .profile-details {
+    text-align: center;
+  }
+
+  .profile-details p {
+    font-size: 13px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 14px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 13px;
+  }
+
+  .holidays-table {
+    overflow-x: auto;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  .events-container,
+  .school-records {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .event-card {
+    padding: 11px;
+    margin: 7px;
+  }
+
+  .event-date {
+    font-size: 11px;
+  }
+
+  .event-name {
+    font-size: 15px;
+  }
+
+  .result-card {
+    padding: 14px;
+  }
+
+  .result-card h3 {
+    font-size: 15px;
+  }
+
+  .results-table {
+    overflow-x: auto;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  .query-form {
+    padding: 18px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+
+  .form-group textarea {
+    min-height: 110px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .transfer-info {
+    padding: 18px;
+  }
+
+  .transfer-info p {
+    font-size: 12px;
+  }
+
+  .school-card {
+    padding: 18px;
+  }
+
+  .school-card h3 {
+    font-size: 15px;
+  }
+
+  .school-card p {
+    font-size: 12px;
+  }
+
+  .download-btn {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .button-row {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+  }
+
+  .gallery-image-container {
+    height: 160px;
+  }
+
+  .gallery-title {
+    padding: 11px;
+    font-size: 12px;
+  }
+
+  .gallery-description {
+    padding: 0 11px 11px;
+    font-size: 11px;
+  }
+
+  .gallery-uploaded {
+    padding: 7px 11px;
+    font-size: 9px;
+  }
+
+  .sidebar-header {
+    padding: 11px 14px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 15px;
+  }
+
+  .close-sidebar {
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+  }
+
+  .notifications-dropdown {
+    width: 260px;
+    right: -40px;
+  }
+
+  .notifications-header {
+    padding: 12px 14px;
+  }
+
+  .notifications-header h3 {
+    font-size: 15px;
+  }
+
+  .close-notifications {
+    width: 24px;
+    height: 24px;
+    font-size: 15px;
+  }
+
+  .notification-item {
+    padding: 12px 14px;
+  }
+
+  .notification-date {
+    font-size: 9px;
+  }
+
+  .notification-message {
+    font-size: 11px;
+  }
+
+  .notification-new-badge {
+    top: 12px;
+    right: 12px;
+    font-size: 7px;
+    padding: 1px 5px;
+  }
+
+  .no-notifications {
+    padding: 20px 14px;
+    font-size: 11px;
+  }
+
+  .calendar {
+    padding: 12px 12px 9px;
+    overflow-x: auto;
+  }
+
+  .calendar-table {
+    width: 100%;
+    min-width: 280px;
+    border-spacing: 4px;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 7px 0;
+  }
+
+  .calendar-table thead th {
+    white-space: nowrap;
+  }
+
+  .cal-cell {
+    min-height: 34px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 30px;
+  }
+
+  .calendar-legend {
+    margin-top: 9px;
+  }
+
+  .legend-item {
+    font-size: 9px;
+    padding: 2px 7px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-container {
+    padding: 0 6px;
+  }
+
+  .dashboard-header {
+    padding: 11px 12px;
+  }
+
+  .header-top {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .school-info {
+    gap: 4px;
+  }
+
+  .school-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .school-name {
+    font-size: 16px;
+  }
+
+  .school-motto {
+    font-size: 9px;
+  }
+
+  .student-profile {
+    padding: 9px 14px;
+    gap: 10px;
+  }
+
+  .student-photo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .student-info h2 {
+    font-size: 13px;
+  }
+
+  .student-info p {
+    font-size: 9px;
+  }
+
+  .logout-button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .tab-navigation {
+    padding: 4px 12px;
+  }
+
+  .tab-button {
+    padding: 6px 9px;
+    margin: 0 2px;
+    min-width: 70px;
+  }
+
+  .tab-icon {
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+
+  .tab-label {
+    font-size: 10px;
+  }
+
+  .dashboard-sidebar {
+    width: 200px;
+  }
+
+  .main-content {
+    padding: 0 12px 12px 12px;
+    margin: 6px;
+    width: 98%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .profile-section h2,
+  .attendance-section h2,
+  .fees-section h2,
+  .holidays-section h2,
+  .events-section h2,
+  .results-section h2,
+  .query-section h2,
+  .transfer-section h2,
+  .previous-schools-section h2,
+  .gallery-section h2 {
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 14px;
+  }
+
+  .profile-details p {
+    font-size: 12px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 12px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 12px;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .events-container {
+    gap: 12px;
+  }
+
+  .event-card {
+    padding: 10px;
+    margin: 6px;
+  }
+
+  .event-date {
+    font-size: 10px;
+  }
+
+  .event-name {
+    font-size: 14px;
+  }
+
+  .result-card {
+    padding: 12px;
+  }
+
+  .result-card h3 {
+    font-size: 14px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .query-form {
+    padding: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .transfer-info {
+    padding: 16px;
+  }
+
+  .transfer-info p {
+    font-size: 11px;
+  }
+
+  .school-records {
+    gap: 18px;
+  }
+
+  .school-card {
+    padding: 16px;
+  }
+
+  .school-card h3 {
+    font-size: 14px;
+  }
+
+  .school-card p {
+    font-size: 11px;
+  }
+
+  .download-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .button-row {
+    gap: 7px;
+    margin-top: 11px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+  }
+
+  .gallery-image-container {
+    height: 140px;
+  }
+
+  .gallery-title {
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .gallery-description {
+    padding: 0 10px 10px;
+    font-size: 10px;
+  }
+
+  .gallery-uploaded {
+    padding: 6px 10px;
+    font-size: 8px;
+  }
+
+  .sidebar-header {
+    padding: 10px 12px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 14px;
+  }
+
+  .close-sidebar {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  .notifications-dropdown {
+    width: 240px;
+  }
+
+  .notifications-header {
+    padding: 11px 12px;
+  }
+
+  .notifications-header h3 {
+    font-size: 14px;
+  }
+
+  .close-notifications {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+  }
+
+  .notification-item {
+    padding: 11px 12px;
+  }
+
+  .notification-date {
+    font-size: 8px;
+  }
+
+  .notification-message {
+    font-size: 10px;
+  }
+
+  .notification-new-badge {
+    top: 11px;
+    right: 11px;
+    font-size: 6px;
+    padding: 1px 4px;
+  }
+
+  .no-notifications {
+    padding: 16px 12px;
+    font-size: 10px;
+  }
+
+  .calendar {
+    padding: 11px 11px 8px;
+  }
+
+  .calendar-table {
+    width: 60%;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 6px 0;
+  }
+
+  .cal-cell {
+    min-height: 30px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 26px;
+  }
+
+  .calendar-legend {
+    margin-top: 8px;
+  }
+
+  .legend-item {
+    font-size: 8px;
+    padding: 1px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 0 4px;
+  }
+
+  .dashboard-header {
+    padding: 10px 10px;
+  }
+
+  .header-top {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .school-info {
+    gap: 2px;
+  }
+
+  .school-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .school-name {
+    font-size: 15px;
+  }
+
+  .school-motto {
+    font-size: 8px;
+  }
+
+  .student-profile {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .student-photo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .student-info h2 {
+    font-size: 12px;
+  }
+
+  .student-info p {
+    font-size: 8px;
+  }
+
+  .logout-button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .tab-navigation {
+    padding: 3px 10px;
+  }
+
+  .tab-button {
+    padding: 5px 7px;
+    margin: 0 1px;
+    min-width: 65px;
+  }
+
+  .tab-icon {
+    font-size: 17px;
+    margin-bottom: 2px;
+  }
+
+  .tab-label {
+    font-size: 9px;
+  }
+
+  .dashboard-sidebar {
+    width: 180px;
+  }
+
+  .main-content {
+    padding: 0 10px 10px 10px;
+    margin: 5px;
+    width: 100%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .profile-section h2,
+  .attendance-section h2,
+  .fees-section h2,
+  .holidays-section h2,
+  .events-section h2,
+  .results-section h2,
+  .query-section h2,
+  .transfer-section h2,
+  .previous-schools-section h2,
+  .gallery-section h2 {
+    font-size: 14px;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+
+  .profile-photo {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 12px;
+  }
+
+  .profile-details p {
+    font-size: 11px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 10px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 11px;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .event-card {
+    padding: 9px;
+    margin: 5px;
+  }
+
+  .event-date {
+    font-size: 9px;
+  }
+
+  .event-name {
+    font-size: 13px;
+  }
+
+  .result-card {
+    padding: 10px;
+  }
+
+  .result-card h3 {
+    font-size: 13px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .query-form {
+    padding: 14px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+
+  .form-group textarea {
+    min-height: 90px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .transfer-info {
+    padding: 14px;
+  }
+
+  .transfer-info p {
+    font-size: 10px;
+  }
+
+  .school-card {
+    padding: 14px;
+  }
+
+  .school-card h3 {
+    font-size: 13px;
+  }
+
+  .school-card p {
+    font-size: 10px;
+  }
+
+  .download-btn {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .button-row {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .gallery-image-container {
+    height: 120px;
+  }
+
+  .gallery-title {
+    padding: 9px;
+    font-size: 10px;
+  }
+
+  .gallery-description {
+    padding: 0 9px 9px;
+    font-size: 9px;
+  }
+
+  .gallery-uploaded {
+    padding: 5px 9px;
+    font-size: 7px;
+  }
+
+  .sidebar-header {
+    padding: 9px 10px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 13px;
+  }
+
+  .close-sidebar {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+
+  .notifications-dropdown {
+    width: 220px;
+  }
+
+  .notifications-header {
+    padding: 10px 10px;
+  }
+
+  .notifications-header h3 {
+    font-size: 13px;
+  }
+
+  .close-notifications {
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+  }
+
+  .notification-item {
+    padding: 10px 10px;
+  }
+
+  .notification-date {
+    font-size: 7px;
+  }
+
+  .notification-message {
+    font-size: 9px;
+  }
+
+  .notification-new-badge {
+    top: 10px;
+    right: 10px;
+    font-size: 5px;
+    padding: 0px 3px;
+  }
+
+  .no-notifications {
+    padding: 12px 10px;
+    font-size: 9px;
+  }
+
+  .calendar {
+    padding: 10px 10px 7px;
+  }
+
+  .calendar-table {
+    width: 55%;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 5px 0;
+  }
+
+  .cal-cell {
+    min-height: 26px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 22px;
+  }
+
+  .calendar-legend {
+    margin-top: 7px;
+  }
+
+  .legend-item {
+    font-size: 7px;
+    padding: 1px 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-container {
+    padding: 0 2px;
+  }
+
+  .dashboard-header {
+    padding: 9px 8px;
+  }
+
+  .header-top {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+  }
+
+  .school-info {
+    gap: 1px;
+  }
+
+  .school-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .school-name {
+    font-size: 14px;
+  }
+
+  .school-motto {
+    font-size: 7px;
+  }
+
+  .student-profile {
+    padding: 7px 10px;
+    gap: 6px;
+  }
+
+  .student-photo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .student-info h2 {
+    font-size: 11px;
+  }
+
+  .student-info p {
+    font-size: 7px;
+  }
+
+  .logout-button {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .tab-navigation {
+    padding: 2px 8px;
+  }
+
+  .tab-button {
+    padding: 4px 5px;
+    margin: 0 0px;
+    min-width: 60px;
+  }
+
+  .tab-icon {
+    font-size: 16px;
+    margin-bottom: 1px;
+  }
+
+  .tab-label {
+    font-size: 8px;
+  }
+
+  .dashboard-sidebar {
+    width: 160px;
+  }
+
+  .main-content {
+    padding: 0 8px 8px 8px;
+    margin: 4px;
+    width: 102%;
+  }
+
+  .profile-section,
+  .attendance-section,
+  .fees-section,
+  .holidays-section,
+  .events-section,
+  .results-section,
+  .query-section,
+  .transfer-section,
+  .previous-schools-section,
+  .gallery-section {
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .profile-section h2,
+  .attendance-section h2,
+  .fees-section h2,
+  .holidays-section h2,
+  .events-section h2,
+  .results-section h2,
+  .query-section h2,
+  .transfer-section h2,
+  .previous-schools-section h2,
+  .gallery-section h2 {
+    font-size: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+
+  .profile-photo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+
+  .profile-details p {
+    font-size: 10px;
+  }
+
+  .attendance-info,
+  .fees-info {
+    padding: 8px;
+  }
+
+  .attendance-info p,
+  .fees-info p {
+    font-size: 10px;
+  }
+
+  .holidays-table th,
+  .holidays-table td {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .event-card {
+    padding: 8px;
+    margin: 4px;
+  }
+
+  .event-date {
+    font-size: 8px;
+  }
+
+  .event-name {
+    font-size: 12px;
+  }
+
+  .result-card {
+    padding: 8px;
+  }
+
+  .result-card h3 {
+    font-size: 12px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .query-form {
+    padding: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 8px;
+  }
+
+  .form-group label {
+    font-size: 9px;
+  }
+
+  .form-group select,
+  .form-group textarea,
+  .form-group input {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .form-group textarea {
+    min-height: 80px;
+  }
+
+  .submit-btn,
+  .tc-btn,
+  .download-btn {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .transfer-info {
+    padding: 12px;
+  }
+
+  .transfer-info p {
+    font-size: 9px;
+  }
+
+  .school-card {
+    padding: 12px;
+  }
+
+  .school-card h3 {
+    font-size: 12px;
+  }
+
+  .school-card p {
+    font-size: 9px;
+  }
+
+  .download-btn {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .button-row {
+    gap: 5px;
+    margin-top: 9px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+
+  .gallery-image-container {
+    height: 100px;
+  }
+
+  .gallery-title {
+    padding: 8px;
+    font-size: 9px;
+  }
+
+  .gallery-description {
+    padding: 0 8px 8px;
+    font-size: 8px;
+  }
+
+  .gallery-uploaded {
+    padding: 4px 8px;
+    font-size: 6px;
+  }
+
+  .sidebar-header {
+    padding: 8px 8px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 12px;
+  }
+
+  .close-sidebar {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .notifications-dropdown {
+    width: 200px;
+  }
+
+  .notifications-header {
+    padding: 9px 8px;
+  }
+
+  .notifications-header h3 {
+    font-size: 12px;
+  }
+
+  .close-notifications {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+
+  .notification-item {
+    padding: 9px 8px;
+  }
+
+  .notification-date {
+    font-size: 6px;
+  }
+
+  .notification-message {
+    font-size: 8px;
+  }
+
+  .notification-new-badge {
+    top: 9px;
+    right: 9px;
+    font-size: 4px;
+    padding: 0px 2px;
+  }
+
+  .no-notifications {
+    padding: 8px 8px;
+    font-size: 8px;
+  }
+
+  .calendar {
+    padding: 9px 9px 6px;
+  }
+
+  .calendar-table {
+    width: 50%;
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 4px 0;
+  }
+
+  .cal-cell {
+    min-height: 22px;
+  }
+
+  .cal-cell.cal-head {
+    min-height: 18px;
+  }
+
+  .calendar-legend {
+    margin-top: 6px;
+  }
+
+  .legend-item {
+    font-size: 6px;
+    padding: 0px 4px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-container {
+    padding: 0 8px;
+  }
+
+  .dashboard-header {
+    padding: 12px 10px;
+  }
+
+  .header-top {
+    gap: 8px;
+  }
+
+  .notification-button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .notification-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+    top: -4px;
+    right: -4px;
+  }
+
+  .notifications-dropdown {
+    width: min(94vw, 280px);
+  }
+
+  .calendar-table thead th,
+  .calendar-table tbody td {
+    padding: 8px 0;
+  }
+
+  .calendar-table {
+    border-spacing: 4px;
+  }
+
+  .cal-cell {
+    min-height: 40px;
+  }
+}
+
+
 .cal-day.holiday {
   background-color: #f1f1f1;
   border: 1px dashed #d0d0d0;
@@ -362,6 +2507,8 @@
 .calendar-legend {
   margin-top: 12px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -370,6 +2517,7 @@
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .legend-item.present { background: #e6f9ed; border-color: #b9e8c7; }
@@ -768,6 +2916,7 @@
 
 .previous-schools-section {
   border-top-color: #27ae60;
+  width: 100%;
 }
 
 .profile-section:hover, 

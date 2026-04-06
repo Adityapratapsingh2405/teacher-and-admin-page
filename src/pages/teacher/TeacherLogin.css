@@ -149,6 +149,28 @@
   border-bottom: 1px solid #e1e5e9;
 }
 
+.teacher-login,
+.teacher-login-container,
+.teacher-login-form,
+.form-group,
+.teacher-input,
+.teacher-login-btn {
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .teacher-login {
+    align-items: center;
+  }
+
+  .teacher-login-container {
+    margin: 0 auto;
+    max-width: 360px;
+    width: 100%;
+  }
+}
+
+
 .signup-section p {
   margin: 0;
   color: #666;
@@ -179,16 +201,423 @@
   text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-  .teacher-login-container {
-    padding: 30px 20px;
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .teacher-login {
+    padding: 18px;
   }
-  
+
+  .teacher-login-container {
+    padding: 38px;
+    max-width: 430px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 38px;
+  }
+
+  .teacher-logo {
+    gap: 14px;
+    margin-bottom: 19px;
+  }
+
+  .logo-icon {
+    font-size: 2.9rem;
+  }
+
   .teacher-logo h1 {
+    font-size: 2.4rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    font-size: 0.92rem;
+  }
+
+  .teacher-input {
+    padding: 14px;
+    font-size: 0.98rem;
+  }
+
+  .error-message {
+    padding: 11px;
+    font-size: 0.88rem;
+  }
+
+  .teacher-login-btn {
+    padding: 15px;
+    font-size: 1.05rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 28px;
+    padding-top: 19px;
+    font-size: 0.88rem;
+  }
+
+  .signup-section {
+    margin: 14px 0;
+    padding: 9px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .teacher-login {
+    padding: 16px;
+  }
+
+  .teacher-login-container {
+    padding: 36px;
+    max-width: 410px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 36px;
+  }
+
+  .teacher-logo {
+    gap: 13px;
+    margin-bottom: 18px;
+  }
+
+  .logo-icon {
+    font-size: 2.8rem;
+  }
+
+  .teacher-logo h1 {
+    font-size: 2.3rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 23px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .teacher-input {
+    padding: 13px;
+    font-size: 0.96rem;
+  }
+
+  .error-message {
+    padding: 10px;
+    font-size: 0.86rem;
+  }
+
+  .teacher-login-btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 26px;
+    padding-top: 18px;
+    font-size: 0.86rem;
+  }
+
+  .signup-section {
+    margin: 13px 0;
+    padding: 8px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.86rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-login {
+    padding: 14px;
+  }
+
+  .teacher-login-container {
+    padding: 32px;
+    max-width: 380px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 32px;
+  }
+
+  .teacher-logo {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .logo-icon {
+    font-size: 2.6rem;
+  }
+
+  .teacher-logo h1 {
+    font-size: 2.1rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .form-group {
+    margin-bottom: 21px;
+  }
+
+  .form-group label {
+    font-size: 0.87rem;
+  }
+
+  .teacher-input {
+    padding: 12px;
+    font-size: 0.93rem;
+  }
+
+  .error-message {
+    padding: 9px;
+    font-size: 0.83rem;
+  }
+
+  .teacher-login-btn {
+    padding: 13px;
+    font-size: 0.97rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    font-size: 0.83rem;
+  }
+
+  .signup-section {
+    margin: 12px 0;
+    padding: 7px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.83rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .teacher-login {
+    padding: 12px;
+  }
+
+  .teacher-login-container {
+    padding: 28px;
+    max-width: 350px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 28px;
+  }
+
+  .teacher-logo {
+    gap: 11px;
+    margin-bottom: 14px;
+  }
+
+  .logo-icon {
+    font-size: 2.4rem;
+  }
+
+  .teacher-logo h1 {
+    font-size: 1.9rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    margin-bottom: 19px;
+  }
+
+  .form-group label {
+    font-size: 0.84rem;
+  }
+
+  .teacher-input {
+    padding: 11px;
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .teacher-login-btn {
+    padding: 12px;
+    font-size: 0.94rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 22px;
+    padding-top: 14px;
+    font-size: 0.8rem;
+  }
+
+  .signup-section {
+    margin: 11px 0;
+    padding: 6px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .teacher-login {
+    padding: 10px;
+  }
+
+  .teacher-login-container {
+    padding: 24px;
+    max-width: 320px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 24px;
+  }
+
+  .teacher-logo {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .logo-icon {
+    font-size: 2.2rem;
+  }
+
+  .teacher-logo h1 {
+    font-size: 1.7rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .form-group {
+    margin-bottom: 17px;
+  }
+
+  .form-group label {
+    font-size: 0.81rem;
+  }
+
+  .teacher-input {
+    padding: 10px;
+    font-size: 0.87rem;
+  }
+
+  .error-message {
+    padding: 7px;
+    font-size: 0.77rem;
+  }
+
+  .teacher-login-btn {
+    padding: 11px;
+    font-size: 0.91rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 20px;
+    padding-top: 12px;
+    font-size: 0.77rem;
+  }
+
+  .signup-section {
+    margin: 10px 0;
+    padding: 5px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.77rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .teacher-login {
+    padding: 8px;
+  }
+
+  .teacher-login-container {
+    padding: 20px;
+    max-width: 290px;
+  }
+
+  .teacher-login-header {
+    margin-bottom: 20px;
+  }
+
+  .teacher-logo {
+    gap: 9px;
+    margin-bottom: 10px;
+  }
+
+  .logo-icon {
     font-size: 2rem;
   }
-  
-  .logo-icon {
-    font-size: 2.5rem;
+
+  .teacher-logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .teacher-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    font-size: 0.78rem;
+  }
+
+  .teacher-input {
+    padding: 9px;
+    font-size: 0.84rem;
+  }
+
+  .error-message {
+    padding: 6px;
+    font-size: 0.74rem;
+  }
+
+  .teacher-login-btn {
+    padding: 10px;
+    font-size: 0.88rem;
+  }
+
+  .teacher-login-footer {
+    margin-top: 18px;
+    padding-top: 10px;
+    font-size: 0.74rem;
+  }
+
+  .signup-section {
+    margin: 9px 0;
+    padding: 4px 0;
+  }
+
+  .signup-section p {
+    font-size: 0.74rem;
   }
 } 

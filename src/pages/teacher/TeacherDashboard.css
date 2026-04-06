@@ -3,9 +3,25 @@
   width: 100%;
    display: flex;                /* ✅ REQUIRED */
   flex-direction: column;       /* ✅ REQUIRED */
-            
+  min-height: 100vh;
+  overflow-x: hidden;
   background: #f8fafc;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.teacher-dashboard,
+.teacher-navbar,
+.teacher-content,
+.teacher-sidebar,
+.teacher-main,
+.teacher-profile,
+.teacher-login-container,
+.registration-container,
+.attendance-modal,
+.attendance-list,
+.students-table,
+.students-table table {
+  box-sizing: border-box;
 }
 
 /* Enhanced hover effects for teacher profile cards */
@@ -534,7 +550,7 @@
 }
 
 .profile-info {
-  flex: 1;
+  flex-direction: column;
   gap: 20px;
   display: flex;
   align-items: center;
@@ -543,7 +559,7 @@
 
 .profile-info h2 {
   margin: 0 0 0px 0;
-  color: #1e293b;
+  color: #ffffff;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -1177,27 +1193,2633 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .teacher-navbar {
+    padding: 14px 18px;
+    height: 76px;
+  }
+
+  .nav-brand {
+    gap: 11px;
+  }
+
+  .brand-icon {
+    font-size: 1.9rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1.8rem;
+  }
+
+  .nav-actions {
+    gap: 11px;
+  }
+
+  .nav-btn {
+    padding: 7px 11px;
+    font-size: 1.05rem;
+  }
+
+  .nav-btn.logout {
+    padding: 7px 15px;
+  }
+
+  .notification-badge {
+    top: -4px;
+    right: -4px;
+    width: 17px;
+    height: 17px;
+    font-size: 0.68rem;
+  }
+
+  .notifications-panel {
+    width: 380px;
+    max-height: 580px;
+    right: -380px;
+  }
+
+  .notifications-panel.show {
+    right: 19px;
+  }
+
+  .notifications-header {
+    padding: 14px 18px;
+  }
+
+  .notifications-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .close-notifications {
+    width: 29px;
+    height: 29px;
+    font-size: 1.45rem;
+  }
+
+  .notifications-list {
+    max-height: 480px;
+  }
+
+  .notification-item {
+    padding: 14px 18px;
+  }
+
+  .notification-icon {
+    font-size: 1.45rem;
+    width: 38px;
+    height: 38px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.92rem;
+  }
+
+  .notification-content p {
+    font-size: 0.83rem;
+  }
+
+  .notification-time {
+    font-size: 0.73rem;
+  }
+
+  .priority-badge {
+    padding: 1px 7px;
+    font-size: 0.68rem;
+  }
+
+  .tc-modal {
+    max-width: 580px;
+  }
+
+  .tc-modal-header {
+    padding: 1.4rem 1.9rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .close-tc-modal {
+    width: 38px;
+    height: 38px;
+    font-size: 1.9rem;
+  }
+
+  .tc-modal-content {
+    padding: 1.9rem;
+    max-height: 58vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 1.05rem;
+  }
+
+  .tc-remarks {
+    padding: 11px;
+    font-size: 0.98rem;
+  }
+
+  .tc-actions {
+    gap: 0.95rem;
+  }
+
   .teacher-sidebar {
-    width: 240px;
-    
+    min-width: 19%;
+  }
+
+  .sidebar-nav {
+    padding: 1.9rem 1.4rem;
+    gap: 7px;
+  }
+
+  .nav-item {
+    padding: 15px 19px;
+    font-size: 0.98rem;
+    gap: 11px;
+  }
+
+  .teacher-main {
+    padding: 1.9rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .main-content {
+    padding: 1.9rem;
+  }
+
+  .home-section {
+    gap: 1.9rem;
+  }
+
+  .teacher-profile {
+    padding: 1.9rem;
+  }
+
+  .profile-header {
+    gap: 1.9rem;
+    margin-bottom: 1.9rem;
+  }
+
+  .profile-photo {
+    font-size: 2.9rem;
+    width: 96px;
+    height: 96px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.9rem;
+  }
+
+  .profile-info p {
+    font-size: 0.98rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.18rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.98rem;
+    padding: 3px 11px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.95rem;
+    margin-top: 1.4rem;
+  }
+
+  .info-item {
+    padding: 0.95rem;
+  }
+
+  .info-item label {
+    font-size: 0.88rem;
+  }
+
+  .info-item span {
+    padding: 0.48rem;
+    font-size: 0.93rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.4rem;
+  }
+
+  .stat-card {
+    padding: 1.4rem;
+    gap: 0.95rem;
+  }
+
+  .stat-icon {
+    font-size: 2.4rem;
+    width: 58px;
+    height: 58px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.88rem;
+  }
+
+  .stat-number {
+    font-size: 1.9rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.9rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.4rem;
+  }
+
+  .class-card {
+    padding: 1.4rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.18rem;
+  }
+
+  .subject-badge {
+    padding: 3px 11px;
+    font-size: 0.78rem;
+  }
+
+  .class-details p {
+    font-size: 0.88rem;
+  }
+
+  .class-actions {
+    gap: 7px;
+    margin-top: 0.95rem;
+  }
+
+  .queries-list {
+    gap: 0.95rem;
+  }
+
+  .query-card {
+    padding: 1.4rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.18rem;
+  }
+
+  .query-details p {
+    font-size: 0.88rem;
+  }
+
+  .query-reply {
+    padding: 0.95rem;
+  }
+
+  .query-actions {
+    gap: 7px;
+    margin-top: 0.95rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 1.4rem;
+  }
+
+  .lecture-card {
+    padding: 1.4rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.9rem;
+    width: 76px;
+    height: 76px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.18rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.88rem;
+  }
+
+  .lecture-description {
+    font-size: 0.98rem;
+  }
+
+  .lecture-meta {
+    gap: 0.95rem;
+    margin-bottom: 0.95rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.83rem;
+  }
+
+  .lecture-actions {
+    gap: 7px;
+  }
+
+  .leave-requests-list {
+    gap: 0.95rem;
+  }
+
+  .leave-request-card {
+    padding: 1.4rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.18rem;
+  }
+
+  .leave-details p {
+    font-size: 0.88rem;
+  }
+
+  .leave-image {
+    padding: 0.48rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.95rem;
+  }
+
+  .leave-actions {
+    gap: 7px;
+    margin-top: 0.95rem;
+  }
+
+  .results-list {
+    gap: 0.95rem;
+  }
+
+  .result-card {
+    padding: 1.4rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.18rem;
+  }
+
+  .grade-badge {
+    padding: 3px 11px;
+    font-size: 0.78rem;
+  }
+
+  .result-details p {
+    font-size: 0.88rem;
+  }
+
+  .result-actions {
+    gap: 7px;
+    margin-top: 0.95rem;
+  }
+
+  .class-selector {
+    margin-bottom: 1.4rem;
+  }
+
+  .class-select {
+    padding: 11px 15px;
+    font-size: 0.98rem;
+    min-width: 190px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 11px;
+  }
+
+  .students-table th {
+    font-size: 0.88rem;
+  }
+
+  .students-table td {
+    font-size: 0.88rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.78rem;
+  }
+
+  .status-badge {
+    padding: 3px 11px;
+    font-size: 0.78rem;
+  }
+
+  .action-btn {
+    padding: 7px 15px;
+    font-size: 0.83rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .teacher-navbar {
+    padding: 13px 16px;
+    height: 74px;
+  }
+
+  .nav-brand {
+    gap: 10px;
+  }
+
+  .brand-icon {
+    font-size: 1.8rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1.7rem;
+  }
+
+  .nav-actions {
+    gap: 10px;
+  }
+
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 1rem;
+  }
+
+  .nav-btn.logout {
+    padding: 6px 14px;
+  }
+
+  .notification-badge {
+    top: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    font-size: 0.66rem;
+  }
+
+  .notifications-panel {
+    width: 360px;
+    max-height: 560px;
+    right: -360px;
+  }
+
+  .notifications-panel.show {
+    right: 18px;
+  }
+
+  .notifications-header {
+    padding: 13px 16px;
+  }
+
+  .notifications-header h3 {
+    font-size: 1rem;
+  }
+
+  .close-notifications {
+    width: 28px;
+    height: 28px;
+    font-size: 1.4rem;
+  }
+
+  .notifications-list {
+    max-height: 460px;
+  }
+
+  .notification-item {
+    padding: 13px 16px;
+  }
+
+  .notification-icon {
+    font-size: 1.4rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.9rem;
+  }
+
+  .notification-content p {
+    font-size: 0.81rem;
+  }
+
+  .notification-time {
+    font-size: 0.71rem;
+  }
+
+  .priority-badge {
+    padding: 1px 6px;
+    font-size: 0.66rem;
+  }
+
+  .tc-modal {
+    max-width: 560px;
+  }
+
+  .tc-modal-header {
+    padding: 1.3rem 1.8rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .close-tc-modal {
+    width: 36px;
+    height: 36px;
+    font-size: 1.8rem;
+  }
+
+  .tc-modal-content {
+    padding: 1.8rem;
+    max-height: 56vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 1rem;
+  }
+
+  .tc-remarks {
+    padding: 10px;
+    font-size: 0.96rem;
+  }
+
+  .tc-actions {
+    gap: 0.9rem;
+  }
+
+  .teacher-sidebar {
+    min-width: 18%;
+  }
+
+  .sidebar-nav {
+    padding: 1.8rem 1.3rem;
+    gap: 6px;
+  }
+
+  .nav-item {
+    padding: 14px 18px;
+    font-size: 0.96rem;
+    gap: 10px;
+  }
+
+  .teacher-main {
+    padding: 1.8rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .main-content {
+    padding: 1.8rem;
+  }
+
+  .home-section {
+    gap: 1.8rem;
+  }
+
+  .teacher-profile {
+    padding: 1.8rem;
+  }
+
+  .profile-header {
+    gap: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .profile-photo {
+    font-size: 2.8rem;
+    width: 92px;
+    height: 92px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .profile-info p {
+    font-size: 0.96rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.16rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.96rem;
+    padding: 3px 10px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.3rem;
+  }
+
+  .info-item {
+    padding: 0.9rem;
+  }
+
+  .info-item label {
+    font-size: 0.86rem;
+  }
+
+  .info-item span {
+    padding: 0.46rem;
+    font-size: 0.91rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.3rem;
+  }
+
+  .stat-card {
+    padding: 1.3rem;
+    gap: 0.9rem;
+  }
+
+  .stat-icon {
+    font-size: 2.3rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.86rem;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.8rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.3rem;
+  }
+
+  .class-card {
+    padding: 1.3rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.16rem;
+  }
+
+  .subject-badge {
+    padding: 3px 10px;
+    font-size: 0.76rem;
+  }
+
+  .class-details p {
+    font-size: 0.86rem;
+  }
+
+  .class-actions {
+    gap: 6px;
+    margin-top: 0.9rem;
+  }
+
+  .queries-list {
+    gap: 0.9rem;
+  }
+
+  .query-card {
+    padding: 1.3rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.16rem;
+  }
+
+  .query-details p {
+    font-size: 0.86rem;
+  }
+
+  .query-reply {
+    padding: 0.9rem;
+  }
+
+  .query-actions {
+    gap: 6px;
+    margin-top: 0.9rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.3rem;
+  }
+
+  .lecture-card {
+    padding: 1.3rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.8rem;
+    width: 72px;
+    height: 72px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.16rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.86rem;
+  }
+
+  .lecture-description {
+    font-size: 0.96rem;
+  }
+
+  .lecture-meta {
+    gap: 0.9rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.81rem;
+  }
+
+  .lecture-actions {
+    gap: 6px;
+  }
+
+  .leave-requests-list {
+    gap: 0.9rem;
+  }
+
+  .leave-request-card {
+    padding: 1.3rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.16rem;
+  }
+
+  .leave-details p {
+    font-size: 0.86rem;
+  }
+
+  .leave-image {
+    padding: 0.46rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.9rem;
+  }
+
+  .leave-actions {
+    gap: 6px;
+    margin-top: 0.9rem;
+  }
+
+  .results-list {
+    gap: 0.9rem;
+  }
+
+  .result-card {
+    padding: 1.3rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.16rem;
+  }
+
+  .grade-badge {
+    padding: 3px 10px;
+    font-size: 0.76rem;
+  }
+
+  .result-details p {
+    font-size: 0.86rem;
+  }
+
+  .result-actions {
+    gap: 6px;
+    margin-top: 0.9rem;
+  }
+
+  .class-selector {
+    margin-bottom: 1.3rem;
+  }
+
+  .class-select {
+    padding: 10px 14px;
+    font-size: 0.96rem;
+    min-width: 180px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 10px;
+  }
+
+  .students-table th {
+    font-size: 0.86rem;
+  }
+
+  .students-table td {
+    font-size: 0.86rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.76rem;
+  }
+
+  .status-badge {
+    padding: 3px 10px;
+    font-size: 0.76rem;
+  }
+
+  .action-btn {
+    padding: 6px 14px;
+    font-size: 0.81rem;
   }
 }
 
 @media (max-width: 768px) {
+  .teacher-navbar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .nav-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
   .teacher-content {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .teacher-sidebar {
     width: 100%;
-    height: 20%;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid #e2e8f0;
+    min-width: unset;
   }
-  
+
   .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    gap: 5px;
+  }
+
+  .nav-item {
+    white-space: nowrap;
+    min-width: fit-content;
+    padding: 12px 16px;
+    font-size: 0.93rem;
+    gap: 9px;
+  }
+
+  .teacher-main {
+    width: 100%;
+    padding: 1.6rem;
+    flex-direction: column;
+  }
+
+  .main-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .main-content {
+    padding: 1.6rem;
+  }
+
+  .home-section {
+    gap: 1.6rem;
+  }
+
+  .teacher-profile {
+    padding: 1.6rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .profile-photo {
+    font-size: 2.6rem;
+    width: 88px;
+    height: 88px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.6rem;
+  }
+
+  .profile-info p {
+    font-size: 0.93rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.14rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.93rem;
+    padding: 2px 9px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .info-item {
+    padding: 0.8rem;
+  }
+
+  .info-item label {
+    font-size: 0.83rem;
+  }
+
+  .info-item span {
+    padding: 0.44rem;
+    font-size: 0.88rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .stat-card {
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .stat-icon {
+    font-size: 2.2rem;
+    width: 54px;
+    height: 54px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.83rem;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.6rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .class-card {
+    padding: 1.2rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.14rem;
+  }
+
+  .subject-badge {
+    padding: 2px 9px;
+    font-size: 0.74rem;
+  }
+
+  .class-details p {
+    font-size: 0.83rem;
+  }
+
+  .class-actions {
+    gap: 5px;
+    margin-top: 0.8rem;
+  }
+
+  .queries-list {
+    gap: 0.8rem;
+  }
+
+  .query-card {
+    padding: 1.2rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.14rem;
+  }
+
+  .query-details p {
+    font-size: 0.83rem;
+  }
+
+  .query-reply {
+    padding: 0.8rem;
+  }
+
+  .query-actions {
+    gap: 5px;
+    margin-top: 0.8rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .lecture-card {
+    padding: 1.2rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.6rem;
+    width: 68px;
+    height: 68px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.14rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.83rem;
+  }
+
+  .lecture-description {
+    font-size: 0.93rem;
+  }
+
+  .lecture-meta {
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.78rem;
+  }
+
+  .lecture-actions {
+    gap: 5px;
+  }
+
+  .leave-requests-list {
+    gap: 0.8rem;
+  }
+
+  .leave-request-card {
+    padding: 1.2rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.14rem;
+  }
+
+  .leave-details p {
+    font-size: 0.83rem;
+  }
+
+  .leave-image {
+    padding: 0.44rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.8rem;
+  }
+
+  .leave-actions {
+    gap: 5px;
+    margin-top: 0.8rem;
+  }
+
+  .results-list {
+    gap: 0.8rem;
+  }
+
+  .result-card {
+    padding: 1.2rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.14rem;
+  }
+
+  .grade-badge {
+    padding: 2px 9px;
+    font-size: 0.74rem;
+  }
+
+  .result-details p {
+    font-size: 0.83rem;
+  }
+
+  .result-actions {
+    gap: 5px;
+    margin-top: 0.8rem;
+  }
+
+  .class-selector {
+    margin-bottom: 1.2rem;
+  }
+
+  .class-select {
+    padding: 9px 13px;
+    font-size: 0.93rem;
+    min-width: 170px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 9px;
+  }
+
+  .students-table th {
+    font-size: 0.83rem;
+  }
+
+  .students-table td {
+    font-size: 0.83rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.74rem;
+  }
+
+  .status-badge {
+    padding: 2px 9px;
+    font-size: 0.74rem;
+  }
+
+  .action-btn {
+    padding: 5px 13px;
+    font-size: 0.78rem;
+  }
+
+  .tc-modal-overlay {
+    padding: 14px;
+  }
+
+  .tc-modal {
+    max-width: 100%;
+    max-height: 80vh;
+  }
+
+  .tc-modal-header {
+    padding: 1.2rem 1.6rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .close-tc-modal {
+    width: 34px;
+    height: 34px;
+    font-size: 1.6rem;
+  }
+
+  .tc-modal-content {
+    padding: 1.6rem;
+    max-height: 54vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 0.95rem;
+  }
+
+  .tc-remarks {
+    padding: 9px;
+    font-size: 0.93rem;
+  }
+
+  .tc-actions {
+    gap: 0.8rem;
+  }
+
+  .notifications-panel {
+    width: 340px;
+    max-height: 540px;
+    right: -340px;
+  }
+
+  .notifications-panel.show {
+    right: 16px;
+  }
+
+  .notifications-header {
+    padding: 12px 14px;
+  }
+
+  .notifications-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .close-notifications {
+    width: 26px;
+    height: 26px;
+    font-size: 1.3rem;
+  }
+
+  .notifications-list {
+    max-height: 440px;
+  }
+
+  .notification-item {
+    padding: 12px 14px;
+  }
+
+  .notification-icon {
+    font-size: 1.3rem;
+    width: 34px;
+    height: 34px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.87rem;
+  }
+
+  .notification-content p {
+    font-size: 0.78rem;
+  }
+
+  .notification-time {
+    font-size: 0.68rem;
+  }
+
+  .priority-badge {
+    padding: 1px 5px;
+    font-size: 0.63rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .teacher-navbar {
+    padding: 12px 14px;
+    height: 72px;
+  }
+
+  .nav-brand {
+    gap: 9px;
+  }
+
+  .brand-icon {
+    font-size: 1.7rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1.6rem;
+  }
+
+  .nav-actions {
+    gap: 9px;
+  }
+
+  .nav-btn {
+    padding: 5px 9px;
+    font-size: 0.95rem;
+  }
+
+  .nav-btn.logout {
+    padding: 5px 13px;
+  }
+
+  .notification-badge {
+    top: -3px;
+    right: -3px;
+    width: 15px;
+    height: 15px;
+    font-size: 0.64rem;
+  }
+
+  .teacher-sidebar {
+    height: 18%;
+  }
+
+  .sidebar-nav {
+    padding: 0.9rem;
+    gap: 4px;
+  }
+
+  .nav-item {
+    padding: 11px 15px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .teacher-main {
+    padding: 1.4rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-content {
+    padding: 1.4rem;
+  }
+
+  .home-section {
+    gap: 1.4rem;
+  }
+
+  .teacher-profile {
+    padding: 1.4rem;
+  }
+
+  .profile-header {
+    gap: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .profile-photo {
+    font-size: 2.5rem;
+    width: 84px;
+    height: 84px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .profile-info p {
+    font-size: 0.9rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.12rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.9rem;
+    padding: 2px 8px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+  }
+
+  .info-item {
+    padding: 0.7rem;
+  }
+
+  .info-item label {
+    font-size: 0.8rem;
+  }
+
+  .info-item span {
+    padding: 0.42rem;
+    font-size: 0.85rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .stat-card {
+    padding: 1.1rem;
+    gap: 0.7rem;
+  }
+
+  .stat-icon {
+    font-size: 2.1rem;
+    width: 52px;
+    height: 52px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.8rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .class-card {
+    padding: 1.1rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.12rem;
+  }
+
+  .subject-badge {
+    padding: 2px 8px;
+    font-size: 0.72rem;
+  }
+
+  .class-details p {
+    font-size: 0.8rem;
+  }
+
+  .class-actions {
+    gap: 4px;
+    margin-top: 0.7rem;
+  }
+
+  .queries-list {
+    gap: 0.7rem;
+  }
+
+  .query-card {
+    padding: 1.1rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.12rem;
+  }
+
+  .query-details p {
+    font-size: 0.8rem;
+  }
+
+  .query-reply {
+    padding: 0.7rem;
+  }
+
+  .query-actions {
+    gap: 4px;
+    margin-top: 0.7rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .lecture-card {
+    padding: 1.1rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.5rem;
+    width: 64px;
+    height: 64px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.12rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.8rem;
+  }
+
+  .lecture-description {
+    font-size: 0.9rem;
+  }
+
+  .lecture-meta {
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.75rem;
+  }
+
+  .lecture-actions {
+    gap: 4px;
+  }
+
+  .leave-requests-list {
+    gap: 0.7rem;
+  }
+
+  .leave-request-card {
+    padding: 1.1rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.12rem;
+  }
+
+  .leave-details p {
+    font-size: 0.8rem;
+  }
+
+  .leave-image {
+    padding: 0.42rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.7rem;
+  }
+
+  .leave-actions {
+    gap: 4px;
+    margin-top: 0.7rem;
+  }
+
+  .results-list {
+    gap: 0.7rem;
+  }
+
+  .result-card {
+    padding: 1.1rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.12rem;
+  }
+
+  .grade-badge {
+    padding: 2px 8px;
+    font-size: 0.72rem;
+  }
+
+  .result-details p {
+    font-size: 0.8rem;
+  }
+
+  .result-actions {
+    gap: 4px;
+    margin-top: 0.7rem;
+  }
+
+  .class-selector {
+    margin-bottom: 1.1rem;
+  }
+
+  .class-select {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-width: 160px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 8px;
+  }
+
+  .students-table th {
+    font-size: 0.8rem;
+  }
+
+  .students-table td {
+    font-size: 0.8rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.72rem;
+  }
+
+  .status-badge {
+    padding: 2px 8px;
+    font-size: 0.72rem;
+  }
+
+  .action-btn {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+  }
+
+  .tc-modal-overlay {
+    padding: 12px;
+  }
+
+  .tc-modal {
+    max-width: 100%;
+    max-height: 78vh;
+  }
+
+  .tc-modal-header {
+    padding: 1.1rem 1.4rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .close-tc-modal {
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+  }
+
+  .tc-modal-content {
+    padding: 1.4rem;
+    max-height: 52vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 0.92rem;
+  }
+
+  .tc-remarks {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .tc-actions {
+    gap: 0.7rem;
+  }
+
+  .notifications-panel {
+    width: 320px;
+    max-height: 520px;
+    right: -320px;
+  }
+
+  .notifications-panel.show {
+    right: 14px;
+  }
+
+  .notifications-header {
+    padding: 11px 12px;
+  }
+
+  .notifications-header h3 {
+    font-size: 0.92rem;
+  }
+
+  .close-notifications {
+    width: 24px;
+    height: 24px;
+    font-size: 1.2rem;
+  }
+
+  .notifications-list {
+    max-height: 420px;
+  }
+
+  .notification-item {
+    padding: 11px 12px;
+  }
+
+  .notification-icon {
+    font-size: 1.2rem;
+    width: 32px;
+    height: 32px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.84rem;
+  }
+
+  .notification-content p {
+    font-size: 0.75rem;
+  }
+
+  .notification-time {
+    font-size: 0.65rem;
+  }
+
+  .priority-badge {
+    padding: 1px 4px;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .teacher-navbar {
+    padding: 11px 12px;
+    height: 70px;
+  }
+
+  .nav-brand {
+    gap: 8px;
+  }
+
+  .brand-icon {
+    font-size: 1.6rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1.5rem;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav-btn {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+
+  .nav-btn.logout {
+    padding: 4px 12px;
+  }
+
+  .notification-badge {
+    top: -3px;
+    right: -3px;
+    width: 14px;
+    height: 14px;
+    font-size: 0.62rem;
+  }
+
+  .teacher-sidebar {
+    height: 16%;
+  }
+
+  .sidebar-nav {
+    padding: 0.8rem;
+    gap: 3px;
+  }
+
+  .nav-item {
+    padding: 10px 14px;
+    font-size: 0.87rem;
+    gap: 7px;
+  }
+
+  .teacher-main {
+    padding: 1.2rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .main-content {
+    padding: 1.2rem;
+  }
+
+  .home-section {
+    gap: 1.2rem;
+  }
+
+  .teacher-profile {
+    padding: 1.2rem;
+  }
+
+  .profile-header {
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .profile-photo {
+    font-size: 2.4rem;
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.4rem;
+  }
+
+  .profile-info p {
+    font-size: 0.87rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.1rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.87rem;
+    padding: 2px 7px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .info-item {
+    padding: 0.6rem;
+  }
+
+  .info-item label {
+    font-size: 0.77rem;
+  }
+
+  .info-item span {
+    padding: 0.4rem;
+    font-size: 0.82rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.77rem;
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .class-card {
+    padding: 1rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .subject-badge {
+    padding: 2px 7px;
+    font-size: 0.7rem;
+  }
+
+  .class-details p {
+    font-size: 0.77rem;
+  }
+
+  .class-actions {
+    gap: 3px;
+    margin-top: 0.6rem;
+  }
+
+  .queries-list {
+    gap: 0.6rem;
+  }
+
+  .query-card {
+    padding: 1rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .query-details p {
+    font-size: 0.77rem;
+  }
+
+  .query-reply {
+    padding: 0.6rem;
+  }
+
+  .query-actions {
+    gap: 3px;
+    margin-top: 0.6rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .lecture-card {
+    padding: 1rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.4rem;
+    width: 60px;
+    height: 60px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.1rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.77rem;
+  }
+
+  .lecture-description {
+    font-size: 0.87rem;
+  }
+
+  .lecture-meta {
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.72rem;
+  }
+
+  .lecture-actions {
+    gap: 3px;
+  }
+
+  .leave-requests-list {
+    gap: 0.6rem;
+  }
+
+  .leave-request-card {
+    padding: 1rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .leave-details p {
+    font-size: 0.77rem;
+  }
+
+  .leave-image {
+    padding: 0.4rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.6rem;
+  }
+
+  .leave-actions {
+    gap: 3px;
+    margin-top: 0.6rem;
+  }
+
+  .results-list {
+    gap: 0.6rem;
+  }
+
+  .result-card {
+    padding: 1rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.1rem;
+  }
+
+  .grade-badge {
+    padding: 2px 7px;
+    font-size: 0.7rem;
+  }
+
+  .result-details p {
+    font-size: 0.77rem;
+  }
+
+  .result-actions {
+    gap: 3px;
+    margin-top: 0.6rem;
+  }
+
+  .class-selector {
+    margin-bottom: 1rem;
+  }
+
+  .class-select {
+    padding: 7px 11px;
+    font-size: 0.87rem;
+    min-width: 150px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 7px;
+  }
+
+  .students-table th {
+    font-size: 0.77rem;
+  }
+
+  .students-table td {
+    font-size: 0.77rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.7rem;
+  }
+
+  .status-badge {
+    padding: 2px 7px;
+    font-size: 0.7rem;
+  }
+
+  .action-btn {
+    padding: 3px 11px;
+    font-size: 0.72rem;
+  }
+
+  .tc-modal-overlay {
+    padding: 10px;
+  }
+
+  .tc-modal {
+    max-width: 100%;
+    max-height: 76vh;
+  }
+
+  .tc-modal-header {
+    padding: 1rem 1.2rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 1rem;
+  }
+
+  .close-tc-modal {
+    width: 30px;
+    height: 30px;
+    font-size: 1.4rem;
+  }
+
+  .tc-modal-content {
+    padding: 1.2rem;
+    max-height: 50vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 0.9rem;
+  }
+
+  .tc-remarks {
+    padding: 7px;
+    font-size: 0.87rem;
+  }
+
+  .tc-actions {
+    gap: 0.6rem;
+  }
+
+  .notifications-panel {
+    width: 300px;
+    max-height: 500px;
+    right: -300px;
+  }
+
+  .notifications-panel.show {
+    right: 12px;
+  }
+
+  .notifications-header {
+    padding: 10px 10px;
+  }
+
+  .notifications-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .close-notifications {
+    width: 22px;
+    height: 22px;
+    font-size: 1.1rem;
+  }
+
+  .notifications-list {
+    max-height: 400px;
+  }
+
+  .notification-item {
+    padding: 10px 10px;
+  }
+
+  .notification-icon {
+    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.81rem;
+  }
+
+  .notification-content p {
+    font-size: 0.72rem;
+  }
+
+  .notification-time {
+    font-size: 0.62rem;
+  }
+
+  .priority-badge {
+    padding: 1px 3px;
+    font-size: 0.57rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .teacher-navbar {
+    padding: 10px 10px;
+    height: 68px;
+  }
+
+  .nav-brand {
+    gap: 7px;
+  }
+
+  .brand-icon {
+    font-size: 1.5rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1.4rem;
+  }
+
+  .nav-actions {
+    gap: 7px;
+  }
+
+  .nav-btn {
+    padding: 3px 7px;
+    font-size: 0.85rem;
+  }
+
+  .nav-btn.logout {
+    padding: 3px 11px;
+  }
+
+  .notification-badge {
+    top: -2px;
+    right: -2px;
+    width: 13px;
+    height: 13px;
+    font-size: 0.6rem;
+  }
+
+  .teacher-sidebar {
+    height: 14%;
+  }
+
+  .sidebar-nav {
+    padding: 0.7rem;
+    gap: 2px;
+  }
+
+  .nav-item {
+    padding: 9px 13px;
+    font-size: 0.84rem;
+    gap: 6px;
+  }
+
+  .teacher-main {
+    padding: 1rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .home-section {
+    gap: 1rem;
+  }
+
+  .teacher-profile {
+    padding: 1rem;
+  }
+
+  .profile-header {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .profile-photo {
+    font-size: 2.3rem;
+    width: 76px;
+    height: 76px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .profile-info p {
+    font-size: 0.84rem;
+  }
+
+  .profile-info .designation {
+    font-size: 1.08rem;
+  }
+
+  .profile-info .qualification,
+  .profile-info .school {
+    font-size: 0.84rem;
+    padding: 1px 6px;
+  }
+
+  .personal-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .info-item {
+    padding: 0.5rem;
+  }
+
+  .info-item label {
+    font-size: 0.74rem;
+  }
+
+  .info-item span {
+    padding: 0.38rem;
+    font-size: 0.79rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .stat-card {
+    padding: 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .stat-icon {
+    font-size: 1.9rem;
+    width: 48px;
+    height: 48px;
+  }
+
+  .stat-content h3 {
+    font-size: 0.74rem;
+  }
+
+  .stat-number {
+    font-size: 1.3rem;
+  }
+
+  .assigned-classes-section h3,
+  .queries-section h3,
+  .video-lectures-section h3,
+  .leave-requests-section h3,
+  .results-section h3,
+  .student-info-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .class-card {
+    padding: 0.9rem;
+  }
+
+  .class-header h4 {
+    font-size: 1.08rem;
+  }
+
+  .subject-badge {
+    padding: 1px 6px;
+    font-size: 0.68rem;
+  }
+
+  .class-details p {
+    font-size: 0.74rem;
+  }
+
+  .class-actions {
+    gap: 2px;
+    margin-top: 0.5rem;
+  }
+
+  .queries-list {
+    gap: 0.5rem;
+  }
+
+  .query-card {
+    padding: 0.9rem;
+  }
+
+  .query-header h4 {
+    font-size: 1.08rem;
+  }
+
+  .query-details p {
+    font-size: 0.74rem;
+  }
+
+  .query-reply {
+    padding: 0.5rem;
+  }
+
+  .query-actions {
+    gap: 2px;
+    margin-top: 0.5rem;
+  }
+
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .lecture-card {
+    padding: 0.9rem;
+  }
+
+  .lecture-thumbnail {
+    font-size: 2.3rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .lecture-content h4 {
+    font-size: 1.08rem;
+  }
+
+  .lecture-class,
+  .lecture-subject {
+    font-size: 0.74rem;
+  }
+
+  .lecture-description {
+    font-size: 0.84rem;
+  }
+
+  .lecture-meta {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .lecture-meta span {
+    font-size: 0.69rem;
+  }
+
+  .lecture-actions {
+    gap: 2px;
+  }
+
+  .leave-requests-list {
+    gap: 0.5rem;
+  }
+
+  .leave-request-card {
+    padding: 0.9rem;
+  }
+
+  .leave-header h4 {
+    font-size: 1.08rem;
+  }
+
+  .leave-details p {
+    font-size: 0.74rem;
+  }
+
+  .leave-image {
+    padding: 0.38rem;
+  }
+
+  .teacher-remarks {
+    padding: 0.5rem;
+  }
+
+  .leave-actions {
+    gap: 2px;
+    margin-top: 0.5rem;
+  }
+
+  .results-list {
+    gap: 0.5rem;
+  }
+
+  .result-card {
+    padding: 0.9rem;
+  }
+
+  .result-header h4 {
+    font-size: 1.08rem;
+  }
+
+  .grade-badge {
+    padding: 1px 6px;
+    font-size: 0.68rem;
+  }
+
+  .result-details p {
+    font-size: 0.74rem;
+  }
+
+  .result-actions {
+    gap: 2px;
+    margin-top: 0.5rem;
+  }
+
+  .class-selector {
+    margin-bottom: 0.9rem;
+  }
+
+  .class-select {
+    padding: 6px 10px;
+    font-size: 0.84rem;
+    min-width: 140px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 6px;
+  }
+
+  .students-table th {
+    font-size: 0.74rem;
+  }
+
+  .students-table td {
+    font-size: 0.74rem;
+  }
+
+  .attendance-percentage,
+  .score {
+    font-size: 0.68rem;
+  }
+
+  .status-badge {
+    padding: 1px 6px;
+    font-size: 0.68rem;
+  }
+
+  .action-btn {
+    padding: 2px 10px;
+    font-size: 0.69rem;
+  }
+
+  .tc-modal-overlay {
+    padding: 8px;
+  }
+
+  .tc-modal {
+    max-width: 100%;
+    max-height: 74vh;
+  }
+
+  .tc-modal-header {
+    padding: 0.9rem 1rem;
+  }
+
+  .tc-modal-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .close-tc-modal {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+  }
+
+  .tc-modal-content {
+    padding: 1rem;
+    max-height: 48vh;
+  }
+
+  .tc-student-info h4,
+  .admin-message h4,
+  .tc-response-form h4,
+  .tc-response-status h4 {
+    font-size: 0.87rem;
+  }
+
+  .tc-remarks {
+    padding: 6px;
+    font-size: 0.84rem;
+  }
+
+  .tc-actions {
+    gap: 0.5rem;
+  }
+
+  .notifications-panel {
+    width: 280px;
+    max-height: 480px;
+    right: -280px;
+  }
+
+  .notifications-panel.show {
+    right: 10px;
+  }
+
+  .notifications-header {
+    padding: 9px 8px;
+  }
+
+  .notifications-header h3 {
+    font-size: 0.87rem;
+  }
+
+  .close-notifications {
+    width: 20px;
+    height: 20px;
+    font-size: 1rem;
+  }
+
+  .notifications-list {
+    max-height: 380px;
+  }
+
+  .notification-item {
+    padding: 9px 8px;
+  }
+
+  .notification-icon {
+    font-size: 1rem;
+    width: 28px;
+    height: 28px;
+  }
+
+  .notification-content h4 {
+    font-size: 0.78rem;
+  }
+
+  .notification-content p {
+    font-size: 0.69rem;
+  }
+
+  .notification-time {
+    font-size: 0.59rem;
+  }
+
+  .priority-badge {
+    padding: 0px 2px;
+    font-size: 0.54rem;
+  }
+}
     flex-direction: row;
     overflow-x: auto;
     padding: 1rem;
@@ -1230,4 +3852,68 @@
   .main-content {
     padding: 1rem;
   }
-} 
+}
+
+@media (max-width: 375px) {
+  .teacher-navbar {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .nav-brand h2 {
+    font-size: 1rem;
+  }
+
+  .nav-btn,
+  .nav-btn.logout {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  .teacher-sidebar {
+    padding: 0.5rem;
+  }
+
+  .sidebar-nav {
+    padding: 0.5rem;
+    gap: 6px;
+  }
+
+  .teacher-main {
+    padding: 0.8rem;
+  }
+
+  .main-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .class-card,
+  .result-card,
+  .query-card,
+  .lecture-card,
+  .leave-request-card {
+    padding: 1rem;
+  }
+
+  .quick-stats,
+  .classes-grid,
+  .lectures-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .profile-photo {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .info-item {
+    padding: 0.85rem;
+  }
+}
+ 

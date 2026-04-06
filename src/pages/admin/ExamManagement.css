@@ -10,6 +10,7 @@
   align-items: center;
   margin-bottom: 2rem;
   padding: 1.5rem;
+  gap:20px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -65,6 +66,18 @@
   gap: 0.5rem;
 }
 
+.assign-exam-btn{
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
 .filter-group label {
   font-weight: 600;
   color: #374151;
@@ -132,7 +145,7 @@
 .no-exams {
   text-align: center;
   padding: 4rem 2rem;
-  background: white;
+  background: rgba(255, 255, 255, 0);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -280,10 +293,19 @@
 
 .delete-btn:hover {
   background: #dc2626;
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
-
+.assign-btn{
+  color: black;
+}
+.assign-btn:hover{
+  background:rgb(0, 0, 0) ;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
@@ -448,6 +470,59 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .exams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .modal-content {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .exam-management {
+    padding: 1.5rem;
+  }
+
+  .exam-header {
+    padding: 1.25rem;
+    gap: 15px;
+  }
+
+  .exam-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .exam-header p {
+    font-size: 0.9rem;
+  }
+
+  .add-exam-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .exam-filters {
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .exams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .modal-content {
+    max-width: 600px;
+  }
+
+  .exam-form {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .exam-management {
     padding: 1rem;
@@ -457,23 +532,476 @@
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1rem;
+  }
+
+  .exam-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .exam-header p {
+    font-size: 0.85rem;
+  }
+
+  .add-exam-btn {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 200px;
   }
 
   .exam-filters {
     flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .filter-group {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .search-group {
+    flex: none;
+    width: 100%;
   }
 
   .exams-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
+  .exam-card {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .exam-card-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .exam-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .exam-type-badge {
+    align-self: flex-end;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .exam-card-body {
+    padding: 1rem;
+  }
+
+  .exam-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem 0;
+  }
+
+  .info-value {
+    text-align: left;
+    font-size: 0.85rem;
+  }
+
+  .exam-info-row.instructions .info-value {
+    font-size: 0.8rem;
+  }
+
+  .exam-card-footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exam-card-footer button {
+    width: 100%;
   }
 
   .modal-content {
     max-width: 100%;
     margin: 0;
     border-radius: 0;
+    max-height: 100vh;
+  }
+
+  .modal-header {
+    padding: 1.25rem;
+  }
+
+  .modal-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .exam-form {
+    padding: 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-footer {
+    padding: 1.25rem;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .modal-footer button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .exam-management {
+    padding: 0.75rem;
+  }
+
+  .exam-header {
+    padding: 0.75rem;
+  }
+
+  .exam-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .exam-header p {
+    font-size: 0.8rem;
+  }
+
+  .add-exam-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .exam-filters {
+    padding: 0.75rem;
+  }
+
+  .filter-group label {
+    font-size: 0.8rem;
+  }
+
+  .filter-group select,
+  .filter-group input[type="text"] {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .clear-search {
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    top: 32px;
+  }
+
+  .exam-card-header {
+    padding: 0.75rem;
+  }
+
+  .exam-card-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .exam-type-badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .exam-card-body {
+    padding: 0.75rem;
+  }
+
+  .info-label {
+    font-size: 0.8rem;
+  }
+
+  .info-value {
+    font-size: 0.8rem;
+  }
+
+  .exam-info-row.instructions .info-value {
+    font-size: 0.75rem;
+  }
+
+  .exam-card-footer {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .exam-card-footer button {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .close-modal-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+  }
+
+  .exam-form {
+    padding: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .modal-footer {
+    padding: 1rem;
+  }
+
+  .modal-footer button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .exam-management {
+    padding: 0.5rem;
+  }
+
+  .exam-header {
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .exam-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .exam-header p {
+    font-size: 0.75rem;
+  }
+
+  .add-exam-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+    max-width: 150px;
+  }
+
+  .exam-filters {
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-group {
+    gap: 0.4rem;
+  }
+
+  .filter-group label {
+    font-size: 0.75rem;
+  }
+
+  .filter-group select,
+  .filter-group input[type="text"] {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .clear-search {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    top: 28px;
+  }
+
+  .loading-message,
+  .error-message {
+    padding: 1.5rem 1rem;
+  }
+
+  .no-exams {
+    padding: 3rem 1rem;
+  }
+
+  .no-exams-icon {
+    font-size: 3rem;
+  }
+
+  .no-exams h3 {
+    font-size: 1.2rem;
+  }
+
+  .no-exams p {
+    font-size: 0.9rem;
+  }
+
+  .exam-card-header {
+    padding: 0.6rem;
+  }
+
+  .exam-card-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .exam-type-badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .exam-card-body {
+    padding: 0.6rem;
+  }
+
+  .exam-info-row {
+    padding: 0.4rem 0;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+  }
+
+  .info-value {
+    font-size: 0.75rem;
+  }
+
+  .exam-info-row.instructions .info-value {
+    font-size: 0.7rem;
+  }
+
+  .exam-card-footer {
+    padding: 0.5rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .exam-card-footer button {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    border-radius: 8px;
+  }
+
+  .modal-header {
+    padding: 0.75rem;
+  }
+
+  .modal-header h3 {
+    font-size: 1rem;
+  }
+
+  .close-modal-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .exam-form {
+    padding: 0.75rem;
+  }
+
+  .form-row {
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .modal-footer button {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .exam-management {
+    padding: 0.25rem;
+  }
+
+  .exam-header {
+    padding: 0.4rem;
+  }
+
+  .exam-header h2 {
+    font-size: 1rem;
+  }
+
+  .exam-header p {
+    font-size: 0.7rem;
+  }
+
+  .add-exam-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .exam-filters {
+    padding: 0.4rem;
+  }
+
+  .exam-card-header {
+    padding: 0.5rem;
+  }
+
+  .exam-card-body {
+    padding: 0.5rem;
+  }
+
+  .exam-card-footer {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .modal-header {
+    padding: 0.6rem;
+  }
+
+  .exam-form {
+    padding: 0.6rem;
+  }
+
+  .modal-footer {
+    padding: 0.6rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.5rem;
+    font-size: 0.75rem;
   }
 }

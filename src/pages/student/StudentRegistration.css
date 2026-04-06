@@ -182,14 +182,157 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .student-registration {
+    padding: 18px;
+  }
+
+  .registration-container {
+    padding: 38px;
+    max-width: 580px;
+  }
+
+  .registration-header {
+    margin-bottom: 28px;
+  }
+
+  .registration-header h1 {
+    font-size: 2.4rem;
+  }
+
+  .registration-header p {
+    font-size: 1.05rem;
+  }
+
+  .registration-form {
+    gap: 19px;
+  }
+
+  .form-row {
+    gap: 19px;
+  }
+
+  .form-group label {
+    font-size: 0.92rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 11px 15px;
+    font-size: 0.98rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 9px;
+  }
+
+  .form-group small {
+    font-size: 0.83rem;
+  }
+
+  .error-message {
+    font-size: 0.83rem;
+  }
+
+  .register-btn {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+  }
+
+  .login-link {
+    margin-top: 28px;
+    padding-top: 19px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .student-registration {
+    padding: 16px;
+  }
+
+  .registration-container {
+    padding: 36px;
+    max-width: 560px;
+  }
+
+  .registration-header {
+    margin-bottom: 26px;
+  }
+
+  .registration-header h1 {
+    font-size: 2.3rem;
+  }
+
+  .registration-header p {
+    font-size: 1rem;
+  }
+
+  .registration-form {
+    gap: 18px;
+  }
+
+  .form-row {
+    gap: 18px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 14px;
+    font-size: 0.96rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 8px;
+  }
+
+  .form-group small {
+    font-size: 0.81rem;
+  }
+
+  .error-message {
+    font-size: 0.81rem;
+  }
+
+  .register-btn {
+    padding: 13px 26px;
+    font-size: 1rem;
+  }
+
+  .login-link {
+    margin-top: 26px;
+    padding-top: 18px;
+  }
+}
+
 @media (max-width: 768px) {
+  .student-registration {
+    padding: 14px;
+  }
+
   .registration-container {
     padding: 30px 20px;
+    max-width: 520px;
     margin: 10px;
+  }
+
+  .registration-header {
+    margin-bottom: 24px;
   }
 
   .registration-header h1 {
     font-size: 2rem;
+  }
+
+  .registration-header p {
+    font-size: 0.95rem;
+  }
+
+  .registration-form {
+    gap: 16px;
   }
 
   .form-row {
@@ -197,15 +340,116 @@
     gap: 15px;
   }
 
+  .form-group label {
+    font-size: 0.87rem;
+  }
+
   .form-group input,
   .form-group select {
     padding: 10px 14px;
+    font-size: 0.93rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 7px;
+  }
+
+  .form-group small {
+    font-size: 0.78rem;
+  }
+
+  .error-message {
+    font-size: 0.78rem;
+  }
+
+  .register-btn {
+    padding: 12px 24px;
+    font-size: 0.97rem;
+  }
+
+  .login-link {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .student-registration {
+    padding: 12px;
+  }
+
+  .registration-container {
+    padding: 26px 18px;
+    max-width: 480px;
+    margin: 8px;
+  }
+
+  .registration-header {
+    margin-bottom: 22px;
+  }
+
+  .registration-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .registration-header p {
+    font-size: 0.9rem;
+  }
+
+  .registration-form {
+    gap: 14px;
+  }
+
+  .form-row {
+    gap: 13px;
+  }
+
+  .form-group label {
+    font-size: 0.84rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 9px 13px;
+    font-size: 0.9rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 6px;
+  }
+
+  .form-group small {
+    font-size: 0.75rem;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+  }
+
+  .register-btn {
+    padding: 11px 22px;
+    font-size: 0.94rem;
+  }
+
+  .login-link {
+    margin-top: 22px;
+    padding-top: 14px;
   }
 }
 
 @media (max-width: 480px) {
+  .student-registration {
+    padding: 10px;
+  }
+
   .registration-container {
     padding: 20px 15px;
+    max-width: 420px;
+    margin: 6px;
+  }
+
+  .registration-header {
+    margin-bottom: 20px;
   }
 
   .registration-header h1 {
@@ -216,8 +460,118 @@
     font-size: 1rem;
   }
 
+  .registration-form {
+    gap: 12px;
+  }
+
+  .form-row {
+    gap: 11px;
+  }
+
+  .form-group label {
+    font-size: 0.81rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 8px 12px;
+    font-size: 0.87rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 5px;
+  }
+
+  .form-group small {
+    font-size: 0.72rem;
+  }
+
+  .error-message {
+    font-size: 0.72rem;
+  }
+
   .register-btn {
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 10px 20px;
+    font-size: 0.91rem;
+  }
+
+  .login-link {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
+
+  .login-link p {
+    font-size: 0.9rem;
   }
 }
+
+@media (max-width: 360px) {
+  .student-registration {
+    padding: 8px;
+  }
+
+  .registration-container {
+    padding: 16px 12px;
+    max-width: 100%;
+    width: 100%;
+    margin: 4px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .registration-header {
+    margin-bottom: 18px;
+  }
+
+  .registration-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .registration-header p {
+    font-size: 0.95rem;
+  }
+
+  .registration-form {
+    gap: 10px;
+  }
+
+  .form-row {
+    gap: 10px;
+  }
+
+  .form-group label {
+    font-size: 0.78rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 7px 11px;
+    font-size: 0.84rem;
+  }
+
+  .form-group input[type="file"] {
+    padding: 4px;
+  }
+
+  .form-group small {
+    font-size: 0.69rem;
+  }
+
+  .error-message {
+    font-size: 0.69rem;
+  }
+
+  .register-btn {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+  }
+
+  .login-link {
+    margin-top: 18px;
+    padding-top: 10px;
+  }
+
+  .login-link p {
+    font-size: 0.87rem;
+  }
+}
+

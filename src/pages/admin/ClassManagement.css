@@ -13,6 +13,7 @@
   margin-bottom: 32px;
   padding-bottom: 20px;
   border-bottom: 2px solid #e9ecef;
+  gap: 20px;
 }
 
 .class-header h2 {
@@ -600,6 +601,68 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .classes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .modal-content {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .class-management {
+    padding: 20px;
+  }
+
+  .class-header {
+    gap: 16px;
+  }
+
+  .class-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .class-header p {
+    font-size: 0.9rem;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .btn-create-class,
+  .btn-copy-classes {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .session-filter {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .session-filter label {
+    font-size: 0.95rem;
+  }
+
+  .session-filter select {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .modal-content {
+    max-width: 400px;
+  }
+}
+
 @media (max-width: 768px) {
   .class-management {
     padding: 16px;
@@ -608,38 +671,654 @@
   .class-header {
     flex-direction: column;
     gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .class-header h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .class-header p {
+    font-size: 0.85rem;
+    text-align: center;
   }
 
   .header-actions {
     width: 100%;
     flex-direction: column;
+    gap: 12px;
   }
 
   .btn-create-class,
   .btn-copy-classes {
     width: 100%;
+    padding: 12px 20px;
+    font-size: 0.85rem;
   }
 
   .session-filter {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+
+  .session-filter label {
+    font-size: 0.9rem;
   }
 
   .session-filter select {
     max-width: none;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .alert {
+    padding: 14px 16px;
+    font-size: 0.9rem;
   }
 
   .classes-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .class-card {
+    padding: 20px;
+  }
+
+  .class-card-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .class-card-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .student-count {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+  }
+
+  .class-card-body {
+    margin-bottom: 16px;
+  }
+
+  .class-info {
+    gap: 10px;
+  }
+
+  .info-label {
+    font-size: 0.85rem;
+  }
+
+  .info-value {
+    font-size: 0.9rem;
+  }
+
+  .class-card-footer {
+    padding-top: 12px;
+    gap: 6px;
+  }
+
+  .btn-action {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: none;
+    border-radius: 8px;
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-footer {
+    padding: 16px 20px;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+
+  .class-form-container {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .class-form .form-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .class-form .form-header h3 {
+    font-size: 1.1rem;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
   }
 
-  
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .form-actions {
+    padding-top: 12px;
+    gap: 10px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .loading-spinner {
+    padding: 40px 16px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .empty-state {
+    padding: 60px 16px;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.3rem;
+  }
+
+  .empty-state p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .class-management {
+    padding: 12px;
+  }
+
+  .class-header {
+    margin-bottom: 20px;
+  }
+
+  .class-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .class-header p {
+    font-size: 0.8rem;
+  }
+
+  .btn-create-class,
+  .btn-copy-classes {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+
+  .session-filter {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .session-filter label {
+    font-size: 0.85rem;
+  }
+
+  .session-filter select {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .alert {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+
+  .class-card {
+    padding: 16px;
+  }
+
+  .class-card-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .class-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .student-count {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+  }
+
+  .class-card-body {
+    margin-bottom: 12px;
+  }
+
+  .class-info {
+    gap: 8px;
+  }
+
+  .info-label {
+    font-size: 0.8rem;
+  }
+
+  .info-value {
+    font-size: 0.85rem;
+  }
+
+  .class-card-footer {
+    padding-top: 10px;
+  }
+
+  .btn-action {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-header h3 {
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-footer {
+    padding: 12px 16px;
+  }
+
+  .class-form-container {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .class-form .form-header {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  .class-form .form-header h3 {
+    font-size: 1rem;
+  }
+
+  .form-grid {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .form-actions {
+    padding-top: 10px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .loading-spinner {
+    padding: 30px 12px;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .empty-state {
+    padding: 40px 12px;
+  }
+
+  .empty-icon {
+    font-size: 2.5rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.1rem;
+  }
+
+  .empty-state p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .class-management {
+    padding: 8px;
+  }
+
+  .class-header {
+    margin-bottom: 16px;
+  }
+
+  .class-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .class-header p {
+    font-size: 0.75rem;
+  }
+
+  .btn-create-class,
+  .btn-copy-classes {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .session-filter {
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+
+  .session-filter label {
+    font-size: 0.8rem;
+  }
+
+  .session-filter select {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .alert {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+  }
+
+  .class-card {
+    padding: 12px;
+  }
+
+  .class-card-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .class-card-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .student-count {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+
+  .class-card-body {
+    margin-bottom: 10px;
+  }
+
+  .class-info {
+    gap: 6px;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+  }
+
+  .info-value {
+    font-size: 0.8rem;
+  }
+
+  .class-card-footer {
+    padding-top: 8px;
+    gap: 4px;
+  }
+
+  .btn-action {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .modal-overlay {
+    padding: 8px;
+  }
 
   .modal-content {
-    width: 100%;
+    border-radius: 6px;
+  }
+
+  .modal-header {
+    padding: 12px;
+  }
+
+  .modal-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .modal-body {
+    padding: 12px;
+  }
+
+  .modal-footer {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .class-form-container {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .class-form .form-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .class-form .form-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .form-grid {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .form-actions {
+    padding-top: 8px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .loading-spinner {
+    padding: 20px 8px;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .empty-state {
+    padding: 30px 8px;
+  }
+
+  .empty-icon {
+    font-size: 2rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1rem;
+  }
+
+  .empty-state p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .class-management {
+    padding: 4px;
+  }
+
+  .class-header {
+    margin-bottom: 12px;
+  }
+
+  .class-header h2 {
+    font-size: 1rem;
+  }
+
+  .class-header p {
+    font-size: 0.7rem;
+  }
+
+  .btn-create-class,
+  .btn-copy-classes {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .session-filter {
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+
+  .session-filter select {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .class-card {
+    padding: 8px;
+  }
+
+  .class-card-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .class-card-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .student-count {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+  }
+
+  .class-card-body {
+    margin-bottom: 8px;
+  }
+
+  .info-label {
+    font-size: 0.7rem;
+  }
+
+  .info-value {
+    font-size: 0.75rem;
+  }
+
+  .class-card-footer {
+    padding-top: 6px;
+  }
+
+  .btn-action {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .modal-header {
+    padding: 8px;
+  }
+
+  .modal-body {
+    padding: 8px;
+  }
+
+  .modal-footer {
+    padding: 8px;
+  }
+
+  .class-form-container {
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+
+  .form-grid {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .empty-state {
+    padding: 20px 4px;
   }
 }

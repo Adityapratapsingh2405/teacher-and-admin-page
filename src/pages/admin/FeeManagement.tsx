@@ -181,7 +181,7 @@ const FeeManagement: React.FC = () => {
                         </>
                       ) : (
                         <>
-                          <span style={{color: '#ef4444', fontWeight: 600}}>⚠ Class: Not Assigned</span> | PEN: {student.panNumber}
+                          <span style={{color: '#ef4444', fontWeight: 600}}>⚠ Class: Not Assigned</span> | PAN: {student.panNumber}
                         </>
                       )}
                     </div>

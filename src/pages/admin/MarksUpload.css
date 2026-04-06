@@ -373,31 +373,103 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .marks-upload-container {
-    padding: 20px 15px;
+@media (max-width: 1200px) {
+  .selection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
   }
 
-  .marks-upload-header {
-    padding: 20px;
+  .marks-upload-container {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .selection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
   }
 
   .marks-upload-header h2 {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
+  }
+
+  .marks-table th,
+  .marks-table td {
+    padding: 11px 9px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .marks-upload-container {
+    padding: 15px;
+  }
+
+  .marks-upload-header {
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .marks-upload-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .marks-upload-header p {
+    font-size: 0.875rem;
+  }
+
+  .alert {
+    padding: 12px 16px;
+    font-size: 0.9rem;
   }
 
   .marks-upload-form {
-    padding: 20px 15px;
+    padding: 18px 15px;
   }
 
   .selection-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 0.825rem;
+  }
+
+  .form-group select {
+    padding: 9px 11px;
+    font-size: 0.925rem;
+  }
+
+  .marks-table-container {
+    margin-top: 18px;
   }
 
   .table-header {
+    padding: 12px 16px;
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+  }
+
+  .table-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .table-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .max-marks-info {
+    font-size: 0.825rem;
+  }
+
+  .btn-reset {
+    padding: 5px 12px;
+    font-size: 0.825rem;
   }
 
   .marks-table {
@@ -409,23 +481,224 @@
     padding: 10px 8px;
   }
 
+  .marks-input {
+    max-width: 80px;
+    padding: 7px 8px;
+    font-size: 0.875rem;
+  }
+
+  .grade-badge {
+    min-width: 40px;
+    font-size: 0.75rem;
+  }
+
+  .form-actions {
+    margin-top: 18px;
+    padding-top: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .btn-submit {
     width: 100%;
     justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .loading-container,
+  .no-data {
+    padding: 50px 15px;
+  }
+
+  .loading-container p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .marks-upload-container {
+    padding: 12px;
+  }
+
+  .marks-upload-header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .marks-upload-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .marks-upload-form {
+    padding: 16px 12px;
+  }
+
+  .selection-grid {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+
+  .form-group select {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .marks-table-container {
+    margin-top: 16px;
+  }
+
+  .table-header {
+    padding: 10px 14px;
+  }
+
+  .table-header h3 {
+    font-size: 1rem;
+  }
+
+  .max-marks-info {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+
+  .btn-reset {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .marks-table th,
+  .marks-table td {
+    padding: 9px 7px;
+    font-size: 0.825rem;
+  }
+
+  .marks-input {
+    max-width: 70px;
+    padding: 6px 7px;
+    font-size: 0.825rem;
+  }
+
+  .grade-badge {
+    min-width: 38px;
+    padding: 3px 10px;
+    font-size: 0.725rem;
+  }
+
+  .percentage {
+    font-size: 0.825rem;
+  }
+
+  .form-actions {
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .btn-submit {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  .loading-container,
+  .no-data {
+    padding: 40px 12px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .loading-container p {
+    font-size: 0.9rem;
+  }
+
+  .no-data {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .marks-upload-container {
+    padding: 10px;
+  }
+
+  .marks-upload-header {
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  .marks-upload-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .marks-upload-header p {
+    font-size: 0.85rem;
+  }
+
+  .alert {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+
+  .marks-upload-form {
+    padding: 14px 10px;
+  }
+
+  .selection-grid {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    font-size: 0.775rem;
+  }
+
+  .form-group select {
+    padding: 7px 9px;
+    font-size: 0.875rem;
+  }
+
+  .marks-table-container {
+    margin-top: 14px;
+  }
+
+  .table-header {
+    padding: 8px 12px;
+  }
+
+  .table-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .table-actions {
+    gap: 8px;
+  }
+
+  .max-marks-info {
+    padding: 4px 10px;
+    font-size: 0.775rem;
+  }
+
+  .btn-reset {
+    padding: 4px 8px;
+    font-size: 0.775rem;
+  }
+
   .marks-table thead {
     display: none;
   }
 
   .marks-table tbody tr {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
-    padding: 15px;
+    padding: 12px;
   }
 
   .marks-table tbody tr:hover {
@@ -435,17 +708,189 @@
   .marks-table td {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 6px 0;
     border: none;
+    font-size: 0.8rem;
   }
 
   .marks-table td::before {
     content: attr(data-label);
     font-weight: 700;
     color: #2d3748;
+    font-size: 0.775rem;
   }
 
   .marks-input {
-    max-width: 150px;
+    max-width: 120px;
+    padding: 5px 6px;
+    font-size: 0.8rem;
   }
+
+  .grade-badge {
+    min-width: 35px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+  }
+
+  .percentage {
+    font-size: 0.8rem;
+  }
+
+  .form-actions {
+    margin-top: 14px;
+    padding-top: 12px;
+    gap: 8px;
+  }
+
+  .btn-submit {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .loading-container,
+  .no-data {
+    padding: 30px 10px;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .loading-container p {
+    font-size: 0.85rem;
+  }
+
+  .no-data {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .marks-upload-container {
+    padding: 8px;
+  }
+
+  .marks-upload-header {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .marks-upload-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .marks-upload-header p {
+    font-size: 0.8rem;
+  }
+
+  .alert {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .marks-upload-form {
+    padding: 12px 8px;
+  }
+
+  .selection-grid {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+
+  .form-group select {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  .marks-table-container {
+    margin-top: 12px;
+  }
+
+  .table-header {
+    padding: 6px 10px;
+  }
+
+  .table-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .table-actions {
+    gap: 6px;
+  }
+
+  .max-marks-info {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .btn-reset {
+    padding: 3px 6px;
+    font-size: 0.75rem;
+  }
+
+  .marks-table tbody tr {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .marks-table td {
+    padding: 5px 0;
+    font-size: 0.775rem;
+  }
+
+  .marks-table td::before {
+    font-size: 0.75rem;
+  }
+
+  .marks-input {
+    max-width: 100px;
+    padding: 4px 5px;
+    font-size: 0.775rem;
+  }
+
+  .grade-badge {
+    min-width: 32px;
+    padding: 2px 6px;
+    font-size: 0.675rem;
+  }
+
+  .percentage {
+    font-size: 0.775rem;
+  }
+
+  .form-actions {
+    margin-top: 12px;
+    padding-top: 10px;
+    gap: 6px;
+  }
+
+  .btn-submit {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
+
+  .loading-container,
+  .no-data {
+    padding: 25px 8px;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .loading-container p {
+    font-size: 0.8rem;
+  }
+
+  .no-data {
+    font-size: 0.9rem;
+  }
+}
 }

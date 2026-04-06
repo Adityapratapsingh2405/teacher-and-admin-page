@@ -117,7 +117,7 @@
 .arrow-icon {
   font-size: 32px;
   color: #3498db;
-  margin-bottom: 10px;
+  
   font-weight: bold;
 }
 
@@ -369,7 +369,7 @@
 
 .status-promoted {
   background: #d4edda;
-  color: #155724;
+  color: #155724!important;
 }
 
 .status-detained {
@@ -520,19 +520,139 @@
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .promotion-management {
+    padding: 18px;
+  }
+
+  .summary-cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .promotion-controls {
+    padding: 22px;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .promotion-header h2 {
+    font-size: 26px;
+  }
+
+  .summary-cards {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+  }
+
+  .promotion-controls {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .control-group select {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+
+  .execute-btn {
+    padding: 11px 26px;
+    font-size: 15px;
+  }
+}
+
 @media (max-width: 768px) {
+  .promotion-management {
+    padding: 15px;
+  }
+
+  .promotion-header h2 {
+    font-size: 24px;
+  }
+
+  .promotion-header p {
+    font-size: 13px;
+  }
+
+  .alert {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
   .promotion-controls {
     flex-direction: column;
     align-items: stretch;
+    padding: 18px;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .control-group {
+    gap: 6px;
+  }
+
+  .control-group label {
+    font-size: 13px;
+  }
+
+  .control-group select {
+    padding: 10px 12px;
+    font-size: 14px;
   }
 
   .arrow-icon {
     transform: rotate(90deg);
     margin: 0;
+    visibility: hidden;
+  }
+
+  .execute-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .promotion-summary h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
   }
 
   .summary-cards {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .summary-card {
+    padding: 16px;
+  }
+
+  .card-icon {
+    font-size: 32px;
+  }
+
+  .card-value {
+    font-size: 28px;
+  }
+
+  .card-label {
+    font-size: 12px;
+  }
+
+  .promotions-table-container {
+    padding: 20px;
+  }
+
+  .promotions-table-container h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .promotions-table th,
+  .promotions-table td {
+    padding: 12px;
+    font-size: 13px;
   }
 
   .confirm-dialog {
@@ -540,11 +660,501 @@
     padding: 20px;
   }
 
+  .confirm-dialog h3 {
+    font-size: 20px;
+  }
+
+  .confirm-list li {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .warning-text {
+    padding: 10px;
+    font-size: 13px;
+  }
+
   .dialog-actions {
     flex-direction: column;
+    gap: 12px;
   }
 
   .btn {
     width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .loading-state,
+  .empty-state {
+    padding: 50px 15px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .empty-icon {
+    font-size: 56px;
+  }
+
+  .empty-state h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .promotion-management {
+    padding: 12px;
+  }
+
+  .promotion-header h2 {
+    font-size: 22px;
+  }
+
+  .promotion-header {
+    margin-bottom: 25px;
+  }
+
+  .alert {
+    padding: 10px 14px;
+    font-size: 0.875rem;
+  }
+
+  .promotion-controls {
+    padding: 16px;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .control-group label {
+    font-size: 12px;
+  }
+
+  .control-group select {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  .execute-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .promotion-summary h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .summary-cards {
+    gap: 10px;
+  }
+
+  .summary-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .card-icon {
+    font-size: 28px;
+  }
+
+  .card-value {
+    font-size: 24px;
+  }
+
+  .card-label {
+    font-size: 11px;
+  }
+
+  .promotions-table-container {
+    padding: 16px;
+  }
+
+  .promotions-table-container h3 {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .promotions-table th,
+  .promotions-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .class-badge,
+  .promotion-badge,
+  .status-badge {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .confirm-dialog {
+    padding: 18px;
+  }
+
+  .confirm-dialog h3 {
+    font-size: 18px;
+  }
+
+  .confirm-dialog p {
+    font-size: 14px;
+  }
+
+  .confirm-list li {
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .warning-text {
+    padding: 9px;
+    font-size: 12px;
+  }
+
+  .dialog-actions {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .loading-state,
+  .empty-state {
+    padding: 40px 12px;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+  }
+
+  .empty-state h3 {
+    font-size: 16px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promotion-management {
+    padding: 10px;
+  }
+
+  .promotion-header h2 {
+    font-size: 20px;
+  }
+
+  .promotion-header p {
+    font-size: 12px;
+  }
+
+  .promotion-header {
+    margin-bottom: 20px;
+  }
+
+  .alert {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .promotion-controls {
+    padding: 14px;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .control-group label {
+    font-size: 11px;
+  }
+
+  .control-group select {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .execute-btn {
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+
+  .promotion-summary h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .summary-cards {
+    gap: 8px;
+  }
+
+  .summary-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .card-icon {
+    font-size: 24px;
+  }
+
+  .card-value {
+    font-size: 20px;
+  }
+
+  .card-label {
+    font-size: 10px;
+  }
+
+  .promotions-table-container {
+    padding: 14px;
+  }
+
+  .promotions-table-container h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .promotions-table th,
+  .promotions-table td {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .class-badge,
+  .promotion-badge,
+  .status-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  .remarks-cell {
+    max-width: 150px;
+  }
+
+  .confirm-dialog {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .confirm-dialog h3 {
+    font-size: 16px;
+  }
+
+  .confirm-dialog p {
+    font-size: 13px;
+  }
+
+  .confirm-list {
+    margin: 16px 0;
+  }
+
+  .confirm-list li {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .warning-text {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .dialog-actions {
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+
+  .loading-state,
+  .empty-state {
+    padding: 30px 10px;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .empty-icon {
+    font-size: 40px;
+  }
+
+  .empty-state h3 {
+    font-size: 14px;
+  }
+
+  .empty-state p {
+    font-size: 13px;
+  }
+
+  .empty-state .hint {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .promotion-management {
+    padding: 8px;
+  }
+
+  .promotion-header h2 {
+    font-size: 18px;
+  }
+
+  .promotion-header p {
+    font-size: 11px;
+  }
+
+  .promotion-header {
+    margin-bottom: 15px;
+  }
+
+  .alert {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .promotion-controls {
+    padding: 12px;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .control-group label {
+    font-size: 10px;
+  }
+
+  .control-group select {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .execute-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .promotion-summary h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .summary-cards {
+    gap: 6px;
+  }
+
+  .summary-card {
+    padding: 10px;
+    gap: 8px;
+    border-radius: 10px;
+  }
+
+  .card-icon {
+    font-size: 20px;
+  }
+
+  .card-value {
+    font-size: 18px;
+  }
+
+  .card-label {
+    font-size: 9px;
+  }
+
+  .promotions-table-container {
+    padding: 12px;
+  }
+
+  .promotions-table-container h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .promotions-table th,
+  .promotions-table td {
+    padding: 6px;
+    font-size: 10px;
+  }
+
+  .class-badge,
+  .promotion-badge,
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .remarks-cell {
+    max-width: 120px;
+  }
+
+  .confirm-dialog {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .confirm-dialog h3 {
+    font-size: 15px;
+  }
+
+  .confirm-dialog p {
+    font-size: 12px;
+  }
+
+  .confirm-list {
+    margin: 14px 0;
+  }
+
+  .confirm-list li {
+    padding: 5px 7px;
+    font-size: 11px;
+  }
+
+  .warning-text {
+    padding: 7px;
+    font-size: 10px;
+  }
+
+  .dialog-actions {
+    gap: 6px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .loading-state,
+  .empty-state {
+    padding: 25px 8px;
+  }
+
+  .spinner {
+    width: 25px;
+    height: 25px;
+  }
+
+  .empty-icon {
+    font-size: 35px;
+  }
+
+  .empty-state h3 {
+    font-size: 13px;
+  }
+
+  .empty-state p {
+    font-size: 12px;
+  }
+
+  .empty-state .hint {
+    font-size: 11px;
   }
 }

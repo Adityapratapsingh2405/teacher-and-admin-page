@@ -842,58 +842,1531 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .timetable-management {
+    padding: 0.9rem;
+  }
+
+  .timetable-header {
+    padding: 0.9rem 1.3rem;
+  }
+
+  .timetable-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.85rem;
+  }
+
+  .btn-settings {
+    padding: 9px 18px;
+    font-size: 0.9rem;
+  }
+
+  .notification {
+    padding: 0.9rem 1.3rem;
+    font-size: 0.95rem;
+  }
+
+  .class-selector-card {
+    padding: 0.9rem 1.3rem;
+  }
+
+  .class-selector-card label {
+    font-size: 1.05rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .label-icon {
+    font-size: 1.4rem;
+  }
+
+  .class-select {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .timetable-container {
+    padding: 1.8rem;
+  }
+
+  .timetable-info {
+    gap: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .info-item {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+
+  .info-icon {
+    font-size: 1.4rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.9rem 1.3rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.925rem;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.45rem;
+    font-size: 0.85rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.7rem 0.45rem;
+    min-width: 85px;
+  }
+
+  .period-header {
+    min-width: 110px;
+  }
+
+  .period-number {
+    font-size: 0.85rem;
+  }
+
+  .period-time {
+    font-size: 0.725rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.9rem;
+  }
+
+  .slot-cell {
+    height: 90px;
+  }
+
+  .slot-content {
+    padding: 0.7rem;
+  }
+
+  .slot-subject {
+    font-size: 0.925rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.825rem;
+  }
+
+  .slot-room {
+    font-size: 0.775rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.85rem;
+  }
+
+  .loading-state {
+    padding: 3.6rem 1.8rem;
+  }
+
+  .spinner {
+    width: 45px;
+    height: 45px;
+  }
+
+  .modal-content {
+    max-width: 550px;
+  }
+
+  .modal-header {
+    padding: 1.3rem 1.8rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.4rem;
+  }
+
+  .modal-body {
+    padding: 1.8rem;
+  }
+
+  .slot-info {
+    gap: 0.9rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .info-badge {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .form-row {
+    gap: 0.9rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.3rem;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .form-control {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .modal-footer {
+    padding: 1.3rem 1.8rem;
+    gap: 0.9rem;
+  }
+
+  .btn-secondary,
+  .btn-primary {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+  }
+
+  .settings-modal {
+    max-width: 550px;
+  }
+
+  .settings-info {
+    padding: 11px 15px;
+    margin-bottom: 18px;
+  }
+
+  .settings-info p {
+    font-size: 0.9rem;
+  }
+
+  .form-group small {
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+
+  .settings-preview {
+    padding: 15px;
+    margin-top: 18px;
+  }
+
+  .settings-preview h4 {
+    font-size: 0.95rem;
+    margin-bottom: 11px;
+  }
+
+  .preview-periods {
+    gap: 7px;
+  }
+
+  .preview-period {
+    padding: 9px 13px;
+  }
+
+  .preview-label {
+    font-size: 0.9rem;
+  }
+
+  .preview-time {
+    font-size: 0.85rem;
+  }
+
+  .preview-more {
+    font-size: 0.85rem;
+    margin-top: 7px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .timetable-management {
+    padding: 0.8rem;
+  }
+
+  .timetable-header {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .timetable-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.825rem;
+  }
+
+  .btn-settings {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  .notification {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.925rem;
+  }
+
+  .class-selector-card {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .class-selector-card label {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .label-icon {
+    font-size: 1.3rem;
+  }
+
+  .class-select {
+    padding: 0.8rem;
+    font-size: 0.925rem;
+  }
+
+  .timetable-container {
+    padding: 1.6rem;
+  }
+
+  .timetable-info {
+    gap: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .info-item {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.925rem;
+  }
+
+  .info-icon {
+    font-size: 1.3rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.9rem;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.4rem;
+    font-size: 0.825rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.65rem 0.4rem;
+    min-width: 80px;
+  }
+
+  .period-header {
+    min-width: 100px;
+  }
+
+  .period-number {
+    font-size: 0.825rem;
+  }
+
+  .period-time {
+    font-size: 0.7rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.8rem;
+  }
+
+  .slot-cell {
+    height: 85px;
+  }
+
+  .slot-content {
+    padding: 0.65rem;
+  }
+
+  .slot-subject {
+    font-size: 0.9rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.8rem;
+  }
+
+  .slot-room {
+    font-size: 0.75rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.18rem 0.4rem;
+    font-size: 0.825rem;
+  }
+
+  .loading-state {
+    padding: 3.2rem 1.6rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-content {
+    max-width: 500px;
+  }
+
+  .modal-header {
+    padding: 1.2rem 1.6rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+  }
+
+  .modal-body {
+    padding: 1.6rem;
+  }
+
+  .slot-info {
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .info-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .form-row {
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.925rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-control {
+    padding: 0.65rem;
+    font-size: 0.925rem;
+  }
+
+  .modal-footer {
+    padding: 1.2rem 1.6rem;
+    gap: 0.8rem;
+  }
+
+  .btn-secondary,
+  .btn-primary {
+    padding: 0.65rem 1.6rem;
+    font-size: 0.925rem;
+  }
+
+  .settings-modal {
+    max-width: 500px;
+  }
+
+  .settings-info {
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+
+  .settings-info p {
+    font-size: 0.875rem;
+  }
+
+  .form-group small {
+    font-size: 0.825rem;
+    margin-top: 4px;
+  }
+
+  .settings-preview {
+    padding: 14px;
+    margin-top: 16px;
+  }
+
+  .settings-preview h4 {
+    font-size: 0.925rem;
+    margin-bottom: 10px;
+  }
+
+  .preview-periods {
+    gap: 6px;
+  }
+
+  .preview-period {
+    padding: 8px 12px;
+  }
+
+  .preview-label {
+    font-size: 0.875rem;
+  }
+
+  .preview-time {
+    font-size: 0.825rem;
+  }
+
+  .preview-more {
+    font-size: 0.825rem;
+    margin-top: 6px;
+  }
+}
+
 @media (max-width: 768px) {
   .timetable-management {
-    padding: 1rem;
+    padding: 0.7rem;
   }
 
   .timetable-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.8rem;
+    padding: 0.7rem 1rem;
   }
 
   .timetable-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.8rem;
   }
 
   .btn-settings {
     width: 100%;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .notification {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .class-selector-card {
+    padding: 0.7rem 1rem;
+  }
+
+  .class-selector-card label {
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .label-icon {
+    font-size: 1.2rem;
+  }
+
+  .class-select {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .timetable-container {
+    padding: 1.4rem;
   }
 
   .timetable-info {
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .info-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .info-icon {
+    font-size: 1.2rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.7rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.875rem;
+  }
+
+  .timetable-grid-wrapper {
+    overflow-x: auto;
+  }
+
+  .timetable-grid {
+    min-width: 800px;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.35rem;
+    font-size: 0.8rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.6rem 0.35rem;
+    min-width: 75px;
+  }
+
+  .period-header {
+    min-width: 90px;
+  }
+
+  .period-number {
+    font-size: 0.8rem;
+  }
+
+  .period-time {
+    font-size: 0.675rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.7rem;
+  }
+
+  .slot-cell {
+    height: 80px;
+  }
+
+  .slot-content {
+    padding: 0.6rem;
+  }
+
+  .slot-subject {
+    font-size: 0.875rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.775rem;
+  }
+
+  .slot-room {
+    font-size: 0.725rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.15rem 0.35rem;
+    font-size: 0.8rem;
+  }
+
+  .loading-state {
+    padding: 2.8rem 1.4rem;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .modal-overlay {
+    padding: 0.7rem;
   }
 
   .modal-content {
     width: 95%;
+    max-width: none;
     max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 1rem 1.4rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .close-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 1.2rem;
+  }
+
+  .modal-body {
+    padding: 1.4rem;
+  }
+
+  .slot-info {
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .info-badge {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.825rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .form-control {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    padding: 1rem 1.4rem;
+    gap: 0.7rem;
+  }
+
+  .btn-secondary,
+  .btn-primary {
+    width: 100%;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
   }
 
   .settings-modal {
     max-width: 95%;
   }
 
-  .info-item {
+  .settings-info {
+    padding: 9px 13px;
+    margin-bottom: 14px;
+  }
+
+  .settings-info p {
+    font-size: 0.85rem;
+  }
+
+  .form-group small {
+    font-size: 0.8rem;
+    margin-top: 3px;
+  }
+
+  .settings-preview {
+    padding: 13px;
+    margin-top: 14px;
+  }
+
+  .settings-preview h4 {
     font-size: 0.9rem;
-    padding: 0.5rem 1rem;
+    margin-bottom: 9px;
+  }
+
+  .preview-periods {
+    gap: 5px;
+  }
+
+  .preview-period {
+    padding: 7px 11px;
+  }
+
+  .preview-label {
+    font-size: 0.85rem;
+  }
+
+  .preview-time {
+    font-size: 0.8rem;
+  }
+
+  .preview-more {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .timetable-management {
+    padding: 0.6rem;
+  }
+
+  .timetable-header {
+    padding: 0.6rem 0.9rem;
+  }
+
+  .timetable-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.775rem;
+  }
+
+  .btn-settings {
+    padding: 7px 14px;
+    font-size: 0.825rem;
+  }
+
+  .notification {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .class-selector-card {
+    padding: 0.6rem 0.9rem;
+  }
+
+  .class-selector-card label {
+    font-size: 0.925rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .label-icon {
+    font-size: 1.15rem;
+  }
+
+  .class-select {
+    padding: 0.65rem;
+    font-size: 0.875rem;
+  }
+
+  .timetable-container {
+    padding: 1.2rem;
+  }
+
+  .timetable-info {
+    margin-bottom: 1.2rem;
+  }
+
+  .info-item {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .info-icon {
+    font-size: 1.15rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.85rem;
+  }
+
+  .timetable-grid {
+    min-width: 750px;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.3rem;
+    font-size: 0.775rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.55rem 0.3rem;
+    min-width: 70px;
+  }
+
+  .period-header {
+    min-width: 85px;
+  }
+
+  .period-number {
+    font-size: 0.775rem;
+  }
+
+  .period-time {
+    font-size: 0.65rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.65rem;
+  }
+
+  .slot-cell {
+    height: 75px;
+  }
+
+  .slot-content {
+    padding: 0.55rem;
+  }
+
+  .slot-subject {
+    font-size: 0.85rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.75rem;
+  }
+
+  .slot-room {
+    font-size: 0.7rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.12rem 0.3rem;
+    font-size: 0.775rem;
+  }
+
+  .loading-state {
+    padding: 2.4rem 1.2rem;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .modal-overlay {
+    padding: 0.6rem;
   }
 
   .modal-content {
-    margin: 1rem;
+    width: 96%;
+    max-height: 96vh;
+  }
+
+  .modal-header {
+    padding: 0.9rem 1.2rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .close-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 1.15rem;
+  }
+
+  .modal-body {
+    padding: 1.2rem;
   }
 
   .slot-info {
-    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .info-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .form-row {
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .form-control {
+    padding: 0.55rem;
+    font-size: 0.875rem;
   }
 
   .modal-footer {
-    flex-direction: column;
+    padding: 0.9rem 1.2rem;
+    gap: 0.6rem;
   }
 
   .btn-secondary,
   .btn-primary {
-    width: 100%;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.875rem;
+  }
+
+  .settings-modal {
+    max-width: 96%;
+  }
+
+  .settings-info {
+    padding: 8px 12px;
+    margin-bottom: 12px;
+  }
+
+  .settings-info p {
+    font-size: 0.825rem;
+  }
+
+  .form-group small {
+    font-size: 0.775rem;
+    margin-top: 2px;
+  }
+
+  .settings-preview {
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .settings-preview h4 {
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+  }
+
+  .preview-periods {
+    gap: 4px;
+  }
+
+  .preview-period {
+    padding: 6px 10px;
+  }
+
+  .preview-label {
+    font-size: 0.825rem;
+  }
+
+  .preview-time {
+    font-size: 0.775rem;
+  }
+
+  .preview-more {
+    font-size: 0.775rem;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timetable-management {
+    padding: 0.5rem;
+  }
+
+  .timetable-header {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .timetable-header h1 {
+    font-size: 1.15rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.75rem;
+  }
+
+  .btn-settings {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .notification {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .class-selector-card {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .class-selector-card label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .label-icon {
+    font-size: 1.1rem;
+  }
+
+  .class-select {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .timetable-container {
+    padding: 1rem;
+  }
+
+  .timetable-info {
+    margin-bottom: 1rem;
+  }
+
+  .info-item {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .info-icon {
+    font-size: 1.1rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.825rem;
+  }
+
+  .timetable-grid {
+    min-width: 700px;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.5rem 0.25rem;
+    min-width: 65px;
+  }
+
+  .period-header {
+    min-width: 80px;
+  }
+
+  .period-number {
+    font-size: 0.75rem;
+  }
+
+  .period-time {
+    font-size: 0.625rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.6rem;
+  }
+
+  .slot-cell {
+    height: 70px;
+  }
+
+  .slot-content {
+    padding: 0.5rem;
+  }
+
+  .slot-subject {
+    font-size: 0.825rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.725rem;
+  }
+
+  .slot-room {
+    font-size: 0.675rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.1rem 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .loading-state {
+    padding: 2rem 1rem;
+  }
+
+  .spinner {
+    width: 25px;
+    height: 25px;
+  }
+
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    width: 97%;
+    max-height: 97vh;
+  }
+
+  .modal-header {
+    padding: 0.8rem 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .close-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .slot-info {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.775rem;
+  }
+
+  .form-row {
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-control {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .modal-footer {
+    padding: 0.8rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .btn-secondary,
+  .btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .settings-modal {
+    max-width: 97%;
+  }
+
+  .settings-info {
+    padding: 7px 11px;
+    margin-bottom: 10px;
+  }
+
+  .settings-info p {
+    font-size: 0.8rem;
+  }
+
+  .form-group small {
+    font-size: 0.75rem;
+    margin-top: 1px;
+  }
+
+  .settings-preview {
+    padding: 11px;
+    margin-top: 10px;
+  }
+
+  .settings-preview h4 {
+    font-size: 0.85rem;
+    margin-bottom: 7px;
+  }
+
+  .preview-periods {
+    gap: 3px;
+  }
+
+  .preview-period {
+    padding: 5px 9px;
+  }
+
+  .preview-label {
+    font-size: 0.8rem;
+  }
+
+  .preview-time {
+    font-size: 0.75rem;
+  }
+
+  .preview-more {
+    font-size: 0.75rem;
+    margin-top: 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .timetable-management {
+    padding: 0.4rem;
+  }
+
+  .timetable-header {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .timetable-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .timetable-header p {
+    font-size: 0.725rem;
+  }
+
+  .btn-settings {
+    padding: 5px 10px;
+    font-size: 0.775rem;
+  }
+
+  .notification {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.825rem;
+  }
+
+  .class-selector-card {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .class-selector-card label {
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .label-icon {
+    font-size: 1.05rem;
+  }
+
+  .class-select {
+    padding: 0.55rem;
+    font-size: 0.825rem;
+  }
+
+  .timetable-container {
+    padding: 0.8rem;
+  }
+
+  .timetable-info {
+    margin-bottom: 0.8rem;
+  }
+
+  .info-item {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.825rem;
+  }
+
+  .info-icon {
+    font-size: 1.05rem;
+  }
+
+  .timetable-instructions {
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .timetable-instructions p {
+    font-size: 0.8rem;
+  }
+
+  .timetable-grid {
+    min-width: 650px;
+  }
+
+  .timetable-grid th,
+  .timetable-grid td {
+    padding: 0.2rem;
+    font-size: 0.725rem;
+  }
+
+  .day-header,
+  .period-header {
+    padding: 0.45rem 0.2rem;
+    min-width: 60px;
+  }
+
+  .period-header {
+    min-width: 75px;
+  }
+
+  .period-number {
+    font-size: 0.725rem;
+  }
+
+  .period-time {
+    font-size: 0.6rem;
+  }
+
+  .day-cell,
+  .lunch-cell {
+    padding: 0.55rem;
+  }
+
+  .slot-cell {
+    height: 65px;
+  }
+
+  .slot-content {
+    padding: 0.45rem;
+  }
+
+  .slot-subject {
+    font-size: 0.8rem;
+  }
+
+  .slot-teacher {
+    font-size: 0.7rem;
+  }
+
+  .slot-room {
+    font-size: 0.65rem;
+  }
+
+  .delete-slot-btn {
+    padding: 0.08rem 0.2rem;
+    font-size: 0.725rem;
+  }
+
+  .loading-state {
+    padding: 1.6rem 0.8rem;
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+  }
+
+  .modal-overlay {
+    padding: 0.4rem;
+  }
+
+  .modal-content {
+    width: 98%;
+    max-height: 98vh;
+  }
+
+  .modal-header {
+    padding: 0.7rem 0.9rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.05rem;
+  }
+
+  .close-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 1.05rem;
+  }
+
+  .modal-body {
+    padding: 0.9rem;
+  }
+
+  .slot-info {
+    gap: 0.4rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .info-badge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .form-row {
+    gap: 0.4rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.7rem;
+  }
+
+  .form-group label {
+    font-size: 0.825rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .form-control {
+    padding: 0.45rem;
+    font-size: 0.825rem;
+  }
+
+  .modal-footer {
+    padding: 0.7rem 0.9rem;
+    gap: 0.4rem;
+  }
+
+  .btn-secondary,
+  .btn-primary {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.825rem;
+  }
+
+  .settings-modal {
+    max-width: 98%;
+  }
+
+  .settings-info {
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  .settings-info p {
+    font-size: 0.775rem;
+  }
+
+  .form-group small {
+    font-size: 0.725rem;
+  }
+
+  .settings-preview {
+    padding: 10px;
+    margin-top: 8px;
+  }
+
+  .settings-preview h4 {
+    font-size: 0.825rem;
+    margin-bottom: 6px;
+  }
+
+  .preview-periods {
+    gap: 2px;
+  }
+
+  .preview-period {
+    padding: 4px 8px;
+  }
+
+  .preview-label {
+    font-size: 0.775rem;
+  }
+
+  .preview-time {
+    font-size: 0.725rem;
+  }
+
+  .preview-more {
+    font-size: 0.725rem;
+    margin-top: 2px;
   }
 }

@@ -1358,7 +1358,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
-        alignItems: 'center', 
+        alignItems: 'center',
         marginBottom: '2rem',
         padding: '1.5rem',
         backgroundColor: '#ffffff',
@@ -1403,7 +1403,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
           </p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <div style={{ display: 'flex',flexWrap:'wrap',flexDirection:'column-reverse',justifyContent:'center', gap: '1.5rem' }}>
           {teacherQueries.map((query) => (
             <div key={query.id} style={{
               backgroundColor: '#ffffff',
@@ -1411,6 +1411,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
               borderLeft: `4px solid ${query.status === 'RESPONDED' ? '#10b981' : '#f59e0b'}`,
               borderRadius: '12px',
               padding: '1.75rem',
+              flexWrap:'wrap',
+              
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.08)',
               transition: 'all 0.2s'
             }}
@@ -1454,6 +1456,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                   padding: '0.6rem 1.25rem',
                   borderRadius: '24px',
                   fontSize: '0.9rem',
+                  margin:'20px',
                   fontWeight: '700',
                   backgroundColor: query.status === 'OPEN' ? '#fef3c7' : '#d1fae5',
                   color: query.status === 'OPEN' ? '#92400e' : '#065f46',
@@ -1629,7 +1632,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                         }
                       }}
                     >
-                      <span>📤</span>
+                      <span></span>
                       <span>Send Response</span>
                     </button>
                     {queryResponseText[query.id]?.trim() && (
@@ -1653,7 +1656,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
 
   // Render staff leave requests
   const renderStaffLeaves = () => (
-    <div style={{ padding: '1.5rem' }}>
+    <div style={{ padding: '1.5rem' ,width:'100%'}}>
       <h2 style={{ marginBottom: '1.5rem' }}>Staff Leave Requests</h2>
       {staffLeaves.length === 0 ? (
         <div style={{ 
@@ -1665,7 +1668,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
           <p style={{ fontSize: '1.1rem', color: '#6b7280' }}>No staff leave requests at the moment</p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        
+        <div style={{ display: 'flex', justifyContent:'center', gap: '1rem' ,width:'100%',flexWrap:'wrap' }}>
           {staffLeaves.map((leave) => (
             <div key={leave.id} style={{
               border: '1px solid #e5e7eb',

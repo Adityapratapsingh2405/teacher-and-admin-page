@@ -515,7 +515,7 @@ const MarksUpload: React.FC<MarksUploadProps> = () => {
                   className="btn-reset"
                   disabled={loading}
                 >
-                   Reset All
+                  Reset All
                 </button>
               </div>
             </div>

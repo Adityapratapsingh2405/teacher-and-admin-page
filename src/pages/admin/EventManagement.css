@@ -326,18 +326,589 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .events-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .event-management {
+    padding: 16px;
+  }
+
+  .event-header {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .event-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .event-form-container {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .event-form-container h3 {
+    font-size: 1.25rem;
   }
 
   .events-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .event-card-header {
+    padding: 14px;
+  }
+
+  .event-card-header h4 {
+    font-size: 16px;
+  }
+
+  .event-card-body {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .event-management {
+    padding: 12px;
   }
 
   .event-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .event-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .alert {
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+  }
+
+  .event-form-container {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .event-form-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .event-form {
+    gap: 14px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  .form-actions {
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .btn-secondary {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  .events-list {
+    margin-top: 24px;
+  }
+
+  .events-list h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  .loading,
+  .no-data {
+    padding: 32px 16px;
+    font-size: 15px;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .event-card {
+    border-radius: 6px;
+  }
+
+  .event-card-header {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .event-card-header h4 {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .event-type-badge {
+    margin-left: 0;
+    align-self: flex-end;
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .event-card-body {
+    padding: 12px;
+  }
+
+  .event-description {
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .event-details {
+    gap: 6px;
+  }
+
+  .event-detail {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .event-detail .icon {
+    font-size: 14px;
+  }
+
+  .event-card-actions {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 7px 14px;
+    font-size: 12px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .event-management {
+    padding: 8px;
+  }
+
+  .event-header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .event-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .alert {
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+  }
+
+  .event-form-container {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .event-form-container h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .event-form {
+    gap: 12px;
+  }
+
+  .form-row {
+    gap: 12px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .form-actions {
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .btn-secondary {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .events-list {
+    margin-top: 20px;
+  }
+
+  .events-list h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .loading,
+  .no-data {
+    padding: 24px 12px;
+    font-size: 14px;
+  }
+
+  .events-grid {
+    gap: 12px;
+  }
+
+  .event-card-header {
+    padding: 10px;
+  }
+
+  .event-card-header h4 {
+    font-size: 14px;
+  }
+
+  .event-type-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  .event-card-body {
+    padding: 10px;
+  }
+
+  .event-description {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .event-details {
+    gap: 4px;
+  }
+
+  .event-detail {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .event-detail .icon {
+    font-size: 13px;
+  }
+
+  .event-card-actions {
+    padding: 8px 10px;
+    gap: 4px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 6px 12px;
+    font-size: 11px;
+    gap: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-management {
+    padding: 6px;
+  }
+
+  .event-header {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .event-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .alert {
+    padding: 6px 10px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+
+  .event-form-container {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .event-form-container h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .event-form {
+    gap: 10px;
+  }
+
+  .form-row {
+    gap: 10px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .form-actions {
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .btn-primary {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .btn-secondary {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .events-list {
+    margin-top: 16px;
+  }
+
+  .events-list h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .loading,
+  .no-data {
+    padding: 20px 8px;
+    font-size: 13px;
+  }
+
+  .events-grid {
+    gap: 10px;
+  }
+
+  .event-card {
+    border-radius: 4px;
+  }
+
+  .event-card-header {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .event-card-header h4 {
+    font-size: 13px;
+  }
+
+  .event-type-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .event-card-body {
+    padding: 8px;
+  }
+
+  .event-description {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .event-details {
+    gap: 3px;
+  }
+
+  .event-detail {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .event-detail .icon {
+    font-size: 12px;
+  }
+
+  .event-card-actions {
+    padding: 6px 8px;
+    gap: 3px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 5px 10px;
+    font-size: 10px;
+    gap: 2px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .event-management {
+    padding: 4px;
+  }
+
+  .event-header {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .event-header h2 {
+    font-size: 1rem;
+  }
+
+  .alert {
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+  }
+
+  .event-form-container {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  .event-form-container h3 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .event-form {
+    gap: 8px;
+  }
+
+  .form-row {
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+
+  .form-actions {
+    gap: 4px;
+    margin-top: 0px;
+  }
+
+  .btn-primary {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .btn-secondary {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .events-list {
+    margin-top: 12px;
+  }
+
+  .events-list h3 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .loading,
+  .no-data {
+    padding: 16px 6px;
+    font-size: 12px;
+  }
+
+  .events-grid {
+    gap: 8px;
+  }
+
+  .event-card-header {
+    padding: 6px;
+  }
+
+  .event-card-header h4 {
+    font-size: 12px;
+  }
+
+  .event-type-badge {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+
+  .event-card-body {
+    padding: 6px;
+  }
+
+  .event-description {
+    margin-bottom: 6px;
+    font-size: 10px;
+  }
+
+  .event-detail {
+    font-size: 10px;
+  }
+
+  .event-detail .icon {
+    font-size: 11px;
+  }
+
+  .event-card-actions {
+    padding: 4px 6px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 9px;
   }
 }

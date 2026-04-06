@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './StudentDashboard.css';
 import './TCForm.css';
 import StudentService from '../../services/studentService';
@@ -1877,10 +1878,13 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
                           fontWeight: '600'
                         }}>
                           {isSingleDay ? (
-                            startDate.getDate()
+                             <div>
+                              <div style={{fontSize:'25px'}}>{startDate.getDate()} {startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})} </div>
+                            </div>
+
                           ) : (
                             <div>
-                              <div>{startDate.getDate()} {startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})} - {endDate.getDate()} {endDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div>
+                              <div style={{fontSize:'25px'}}>{startDate.getDate()} {startDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})} - {endDate.getDate()} {endDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div>
                               <div style={{ fontSize: '0.7em', opacity: 0.9, marginTop: '0.25rem' }}>
                                 ({daysDiff + 1} days)
                               </div>

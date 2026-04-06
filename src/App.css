@@ -157,3 +157,68 @@ input, select, textarea {
 .read-the-docs {
   color: #888;
 }
+
+/* Responsive utilities for App specific layout */
+.app-wrapper {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.page-header,
+.page-footer {
+  padding-bottom: 1rem;
+}
+
+.page-content {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .app-wrapper {
+    padding: 14px;
+  }
+  .page-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  .page-content {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    padding: 16px;
+  }
+  .btn,
+  .btn-secondary {
+    width: 100%;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+  .app-wrapper {
+    padding: 10px;
+  }
+  .logo {
+    height: 4.5em;
+    padding: 1em;
+  }
+  .btn,
+  .btn-secondary {
+    font-size: 0.95rem;
+  }
+  .page-title {
+    text-align: center;
+  }
+}

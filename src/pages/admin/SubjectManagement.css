@@ -22,7 +22,7 @@
 
 .subject-header h2 {
   margin: 0 0 8px 0;
-  color: #2c3e50;
+  color: #ffffff;
   font-size: 1.75rem;
   font-weight: 600;
 }
@@ -294,7 +294,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+.btn-edit{
+  color: white!important;
+}
 .subject-actions {
   display: flex;
   justify-content: center;
@@ -475,7 +477,8 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
   transition: background-color 0.2s;
 }
 
@@ -593,37 +596,306 @@
   background-color: #c82333;
 }
 
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .subject-management {
+    padding: 20px;
   }
 
   .subject-header {
+    padding: 18px;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .bulk-subject-row {
+    grid-template-columns: 30px 1fr 1fr auto;
+    gap: 10px;
+  }
+
+  .subjects-table th,
+  .subjects-table td {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .subject-management {
+    padding: 18px;
+  }
+
+  .subject-header {
+    padding: 16px;
+    margin-bottom: 28px;
+  }
+
+  .subject-header h2 {
+    font-size: 1.625rem;
+  }
+
+  .subject-header p {
+    font-size: 0.925rem;
+  }
+
+  .alert {
+    padding: 14px 18px;
+    font-size: 0.925rem;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 18px;
+  }
+
+  .subject-form-container h3,
+  .bulk-form-container h3 {
+    font-size: 1.2rem;
+  }
+
+  .form-row {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 11px 13px;
+    font-size: 0.925rem;
+  }
+
+  .form-actions {
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 11px 22px;
+    font-size: 0.9rem;
+  }
+
+  .bulk-subject-row {
+    grid-template-columns: 30px 1fr 1fr auto;
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .subject-number {
+    font-size: 0.9rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 9px 11px;
+    font-size: 0.9rem;
+  }
+
+  .btn-remove {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .subjects-table th,
+  .subjects-table td {
+    padding: 11px 13px;
+    font-size: 0.9rem;
+  }
+
+  .subject-description {
+    max-width: 250px;
+  }
+
+  .btn-assign,
+  .btn-edit,
+  .btn-delete {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+  }
+
+  .modal-content {
+    max-width: 480px;
+  }
+
+  .modal-header {
+    padding: 18px 22px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 22px;
+  }
+
+  .modal-footer {
+    padding: 14px 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .subject-management {
+    padding: 16px;
+  }
+
+  .subject-header {
+    padding: 14px;
+    margin-bottom: 24px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
+  .subject-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .subject-header p {
+    font-size: 0.9rem;
+  }
+
+  .alert {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+
+  .alert-icon {
+    font-size: 1.1rem;
+  }
+
+  .alert-close {
+    width: 20px;
+    height: 20px;
+    font-size: 1.3rem;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+
+  .subject-form-container h3,
+  .bulk-form-container h3 {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+  }
+
+  .subject-form,
+  .bulk-subject-form {
+    gap: 14px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .form-actions {
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+  }
+
   .header-buttons {
     width: 100%;
     flex-direction: column;
+    gap: 10px;
   }
 
   .header-buttons button {
     width: 100%;
   }
 
+  .btn-success {
+    padding: 9px 18px;
+    font-size: 0.95rem;
+  }
+
+  .bulk-subjects-list {
+    padding: 14px;
+  }
+
+  .bulk-list-header {
+    margin-bottom: 14px;
+  }
+
+  .bulk-list-header h4 {
+    font-size: 0.95rem;
+  }
+
+  .btn-add-small {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+  }
+
   .bulk-subject-row {
     grid-template-columns: 1fr;
     gap: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
   }
 
   .subject-number {
     grid-column: 1 / -1;
+    font-size: 0.875rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 8px 10px;
+    font-size: 0.875rem;
   }
 
   .btn-remove {
     width: 100%;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .subjects-list {
+    margin-top: 24px;
+  }
+
+  .subjects-list h3 {
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+  }
+
+  .loading,
+  .no-data {
+    padding: 35px;
+    font-size: 0.95rem;
   }
 
   .subjects-table-container {
@@ -635,13 +907,634 @@
     overflow-x: auto;
   }
 
+  .subjects-table th,
+  .subjects-table td {
+    padding: 10px 12px;
+    font-size: 0.875rem;
+  }
+
+  .subject-description {
+    max-width: 200px;
+  }
+
   .subject-actions {
     flex-direction: column;
-    
+    gap: 6px;
+  }
+
+  .btn-assign,
+  .btn-edit,
+  .btn-delete {
+    padding: 6px 12px;
+    font-size: 0.825rem;
+    width: 100%;
   }
 
   .modal-content {
     width: 95%;
+    max-width: none;
+  }
+
+  .modal-header {
+    padding: 16px 20px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .modal-close {
+    font-size: 24px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-subject-info {
+    padding: 10px;
+    margin-bottom: 18px;
+  }
+
+  .modal-footer {
+    padding: 12px 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .subject-management {
+    padding: 14px;
+  }
+
+  .subject-header {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .subject-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .subject-header p {
+    font-size: 0.875rem;
+  }
+
+  .alert {
+    padding: 10px 14px;
+    font-size: 0.875rem;
+  }
+
+  .alert-icon {
+    font-size: 1rem;
+  }
+
+  .alert-close {
+    width: 18px;
+    height: 18px;
+    font-size: 1.2rem;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 14px;
+    margin-bottom: 20px;
+  }
+
+  .subject-form-container h3,
+  .bulk-form-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .subject-form,
+  .bulk-subject-form {
+    gap: 12px;
+  }
+
+  .form-row {
+    gap: 12px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 9px 11px;
+    font-size: 0.875rem;
+  }
+
+  .form-actions {
+    gap: 8px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 9px 18px;
+    font-size: 0.85rem;
+  }
+
+  .header-buttons {
+    gap: 8px;
+  }
+
+  .btn-success {
+    padding: 8px 16px;
+    font-size: 0.925rem;
+  }
+
+  .bulk-subjects-list {
+    padding: 12px;
+  }
+
+  .bulk-list-header {
+    margin-bottom: 12px;
+  }
+
+  .bulk-list-header h4 {
+    font-size: 0.9rem;
+  }
+
+  .btn-add-small {
+    padding: 4px 10px;
+    font-size: 0.825rem;
+  }
+
+  .bulk-subject-row {
+    margin-bottom: 8px;
+    padding: 9px;
+  }
+
+  .subject-number {
+    font-size: 0.85rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 7px 9px;
+    font-size: 0.85rem;
+  }
+
+  .btn-remove {
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .subjects-list {
+    margin-top: 20px;
+  }
+
+  .subjects-list h3 {
+    margin-bottom: 16px;
+    font-size: 1.15rem;
+  }
+
+  .loading,
+  .no-data {
+    padding: 30px;
+    font-size: 0.9rem;
+  }
+
+  .subjects-table th,
+  .subjects-table td {
+    padding: 9px 11px;
+    font-size: 0.85rem;
+  }
+
+  .subject-description {
+    max-width: 180px;
+  }
+
+  .subject-actions {
+    gap: 5px;
+  }
+
+  .btn-assign,
+  .btn-edit,
+  .btn-delete {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .modal-content {
+    width: 96%;
+  }
+
+  .modal-header {
+    padding: 14px 18px;
+  }
+
+  .modal-header h3 {
+    font-size: 1rem;
+  }
+
+  .modal-close {
+    font-size: 22px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .modal-body {
+    padding: 18px;
+  }
+
+  .modal-subject-info {
+    padding: 9px;
+    margin-bottom: 16px;
+  }
+
+  .modal-footer {
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subject-management {
+    padding: 12px;
+  }
+
+  .subject-header {
+    padding: 10px;
+    margin-bottom: 18px;
+  }
+
+  .subject-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .subject-header p {
+    font-size: 0.85rem;
+  }
+
+  .alert {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+
+  .alert-icon {
+    font-size: 0.95rem;
+  }
+
+  .alert-close {
+    width: 16px;
+    height: 16px;
+    font-size: 1.1rem;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+
+  .subject-form-container h3,
+  .bulk-form-container h3 {
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+  }
+
+  .subject-form,
+  .bulk-subject-form {
+    gap: 10px;
+  }
+
+  .form-row {
+    gap: 10px;
+  }
+
+  .form-group label {
+    font-size: 0.825rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .form-actions {
+    gap: 6px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 8px 16px;
+    font-size: 0.825rem;
+  }
+
+  .header-buttons {
+    gap: 6px;
+  }
+
+  .btn-success {
+    padding: 7px 14px;
+    font-size: 0.9rem;
+  }
+
+  .bulk-subjects-list {
+    padding: 10px;
+  }
+
+  .bulk-list-header {
+    margin-bottom: 10px;
+  }
+
+  .bulk-list-header h4 {
+    font-size: 0.875rem;
+  }
+
+  .btn-add-small {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+  }
+
+  .bulk-subject-row {
+    margin-bottom: 6px;
+    padding: 8px;
+  }
+
+  .subject-number {
+    font-size: 0.825rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 6px 8px;
+    font-size: 0.825rem;
+  }
+
+  .btn-remove {
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .subjects-list {
+    margin-top: 18px;
+  }
+
+  .subjects-list h3 {
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+  }
+
+  .loading,
+  .no-data {
+    padding: 25px;
+    font-size: 0.875rem;
+  }
+
+  .subjects-table th,
+  .subjects-table td {
+    padding: 8px 10px;
+    font-size: 0.825rem;
+  }
+
+  .subject-description {
+    max-width: 160px;
+  }
+
+  .subject-actions {
+    gap: 4px;
+  }
+
+  .btn-assign,
+  .btn-edit,
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 0.775rem;
+  }
+
+  .modal-content {
+    width: 97%;
+  }
+
+  .modal-header {
+    padding: 12px 16px;
+  }
+
+  .modal-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .modal-close {
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-subject-info {
+    padding: 8px;
+    margin-bottom: 14px;
+  }
+
+  .modal-footer {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .subject-management {
+    padding: 10px;
+  }
+
+  .subject-header {
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+
+  .subject-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .subject-header p {
+    font-size: 0.825rem;
+  }
+
+  .alert {
+    padding: 6px 10px;
+    font-size: 0.825rem;
+    gap: 6px;
+  }
+
+  .alert-icon {
+    font-size: 0.9rem;
+  }
+
+  .alert-close {
+    width: 14px;
+    height: 14px;
+    font-size: 1rem;
+  }
+
+  .subject-form-container,
+  .bulk-form-container {
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+
+  .subject-form-container h3,
+  .bulk-form-container h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .subject-form,
+  .bulk-subject-form {
+    gap: 8px;
+  }
+
+  .form-row {
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 7px 9px;
+    font-size: 0.825rem;
+  }
+
+  .form-actions {
+    gap: 4px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
+
+  .header-buttons {
+    gap: 4px;
+  }
+
+  .btn-success {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+  }
+
+  .bulk-subjects-list {
+    padding: 8px;
+  }
+
+  .bulk-list-header {
+    margin-bottom: 8px;
+  }
+
+  .bulk-list-header h4 {
+    font-size: 0.85rem;
+  }
+
+  .btn-add-small {
+    padding: 2px 6px;
+    font-size: 0.775rem;
+  }
+
+  .bulk-subject-row {
+    margin-bottom: 4px;
+    padding: 7px;
+  }
+
+  .subject-number {
+    font-size: 0.8rem;
+  }
+
+  .form-input,
+  .form-select {
+    padding: 5px 7px;
+    font-size: 0.8rem;
+  }
+
+  .btn-remove {
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .subjects-list {
+    margin-top: 16px;
+  }
+
+  .subjects-list h3 {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+  }
+
+  .loading,
+  .no-data {
+    padding: 20px;
+    font-size: 0.85rem;
+  }
+
+  .subjects-table th,
+  .subjects-table td {
+    padding: 7px 9px;
+    font-size: 0.8rem;
+  }
+
+  .subject-description {
+    max-width: 140px;
+  }
+
+  .subject-actions {
+    gap: 3px;
+  }
+
+  .btn-assign,
+  .btn-edit,
+  .btn-delete {
+    padding: 3px 6px;
+    font-size: 0.75rem;
+  }
+
+  .modal-content {
+    width: 98%;
+  }
+
+  .modal-header {
+    padding: 10px 14px;
+  }
+
+  .modal-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .modal-close {
+    font-size: 18px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .modal-body {
+    padding: 14px;
+  }
+
+  .modal-subject-info {
+    padding: 7px;
+    margin-bottom: 12px;
+  }
+
+  .modal-footer {
+    padding: 6px 14px;
   }
 }
 
