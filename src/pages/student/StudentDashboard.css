@@ -33,6 +33,13 @@
   flex-direction:column;
   justify-content:space-around;
 }
+
+@media (max-width: 768px) {
+  .ln-card {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
 .dashboard-header {
   background: linear-gradient(135deg, #3f5efb 0%, #6e54ec 100%);
   color: white;
@@ -1112,13 +1119,17 @@
     gap: 12px;
   }
 
+  .student-profile {
+    display: none;
+  }
+
   .student-photo {
     margin-right: 0;
     margin-bottom: 12px;
   }
 
   .menu-toggle {
-    display: inline-flex !important;
+    display: none !important;
   }
 
   .tab-navigation {

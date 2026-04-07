@@ -460,7 +460,7 @@ export class ResultPDFGenerator {
     doc.setFont('helvetica', 'bold');
     doc.text('Class:', studentInfoMiddle, yPos);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${studentResults.className} - Section ${studentResults.section}`, studentInfoMiddle + 15, yPos);
+    doc.text(`${studentResults.className.split("-")[0]} - Section : ${studentResults.className.split("-")[1]}`, studentInfoMiddle + 15, yPos);
 
     // PEN
     doc.setFont('helvetica', 'bold');
