@@ -1905,7 +1905,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       <nav className="admin-navbar">
         <div className="nav-brand">
           <div className="brand-icon"></div>
-          <h2>SLMS Admin</h2>
+          <h2>Class-Connect Admin</h2>
         </div>
         <div className="nav-actions">
           <button className="nav-btn" onClick={() => setShowSchoolProfile(true)} title="School Profile">🏢</button>

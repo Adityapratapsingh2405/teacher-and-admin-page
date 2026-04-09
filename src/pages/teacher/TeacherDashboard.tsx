@@ -467,7 +467,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
         email: teacherData.email || '',
         qualification: teacherData.qualification || '',
         designation: teacherData.designation || 'Teacher',
-        currentSchool: teacherData.currentSchool || 'SLMS School',
+        currentSchool: teacherData.currentSchool || 'Class-Connect School',
         profilePhoto: '👨‍🏫',
         personalInfo: {
           address: teacherData.address || '',
@@ -2878,7 +2878,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
       <nav className="teacher-navbar">
         <div className="nav-brand">
           <div className="brand-icon">👨‍🏫</div>
-          <h2>SLMS Teacher</h2>
+          <h2>Teacher</h2>
         </div>
         <div className="nav-actions">
           <button 

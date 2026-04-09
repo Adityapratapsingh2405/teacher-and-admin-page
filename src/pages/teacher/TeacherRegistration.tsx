@@ -183,7 +183,7 @@ const TeacherRegistration: React.FC = () => {
       <div className="registration-container">
         <div className="registration-header">
           <h1>Teacher Registration</h1>
-          <p>Create your SLMS teacher account</p>
+          <p>Create your teacher account</p>
         </div>
 
         {/* General error message */}

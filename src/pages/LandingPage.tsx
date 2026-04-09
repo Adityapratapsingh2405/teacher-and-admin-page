@@ -43,7 +43,7 @@ const LandingPage: React.FC = () => {
         <div className="landing-header">
           <div className="main-logo">
             <div className="logo-circle">🎓</div>
-            <h1>SLMS</h1>
+            <h1>Class Connect</h1>
           </div>
           <h2>School Learning Management System</h2>
           <p>Comprehensive solution for modern education management</p>
@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
         </div>
 
         <div className="landing-footer">
-          <p>&copy; 2025 SLMS - School Learning Management System</p>
+          <p>&copy; 2025 ClassConnect.it.com - School Learning Management System</p>
           <p className="footer-links">
             <a href="#about">About</a>
             <span>•</span>

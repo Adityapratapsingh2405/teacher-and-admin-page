@@ -280,7 +280,7 @@ const StudentRegistration: React.FC = () => {
       <div className="registration-container">
         <div className="registration-header">
           <h1>Student Registration</h1>
-          <p>Create your SLMS student account</p>
+          <p>Create your student account</p>
         </div>
 
         {dropdownError && (

@@ -7,7 +7,7 @@
     "email": "teacher@slms.com",
     "qualification": "Ph.D. in Mathematics",
     "designation": "Senior Mathematics Teacher",
-    "currentSchool": "SLMS School"
+    "currentSchool": "ClassConnect School"
   },
   "assignedClasses": [
     { "id": "1", "className": "10th", "section": "A", "subject": "Mathematics", "periodNumber": 1, "startTime": "08:00", "endTime": "08:45", "dayOfWeek": "Monday", "totalStudents": 35 }
