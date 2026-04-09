@@ -53,8 +53,9 @@ export class ResultPDFGenerator {
     doc.setFont('helvetica', 'bold');
     doc.text('Class:', studentInfoRight, yPos);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${studentResults.className} - ${studentResults.section}`, studentInfoRight + 15, yPos);
+    doc.text(`${studentResults.className.split("-")[0]} - ${studentResults.className.split("-")[1]}`, studentInfoRight + 15, yPos);
     yPos += 6;
+   
 
     // PEN Number row
     doc.setFont('helvetica', 'bold');
