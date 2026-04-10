@@ -70,7 +70,7 @@ const StudentLogin: React.FC<StudentLoginProps> = ({ onLogin }) => {
         <div className="student-login-header">
           <div className="student-logo">
             <div className="logo-icon">🏫</div>
-            <h1>Student</h1>
+            <h1>Class Connect Student</h1>
           </div>
           <p className="student-subtitle">School Learning Management System</p>
         </div>

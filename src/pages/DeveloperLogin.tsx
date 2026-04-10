@@ -55,7 +55,7 @@ const DeveloperLogin: React.FC<DeveloperLoginProps> = ({ onLogin }) => {
             <div className="logo-icon">🔧</div>
             <h1>Developer Portal</h1>
           </div>
-          <p className="developer-subtitle">Class-Connect School Registration System</p>
+          <p className="developer-subtitle">Class Connect School Registration System</p>
           <div className="security-badge">
             <i className="fas fa-shield-alt"></i>
             <span>Restricted Access</span>
@@ -138,7 +138,7 @@ const DeveloperLogin: React.FC<DeveloperLoginProps> = ({ onLogin }) => {
         <div className="developer-login-footer">
           <div className="warning-box">
             <i className="fas fa-exclamation-circle"></i>
-            <p>This is a restricted area for Class-Connect developers only.</p>
+            <p>This is a restricted area for Class Connect developers only.</p>
             <p>Unauthorized access is strictly prohibited.</p>
           </div>
           <p className="back-link">

@@ -79,7 +79,7 @@ const TeacherLogin: React.FC<TeacherLoginProps> = ({ onLogin }) => {
         <div className="teacher-login-header">
           <div className="teacher-logo">
             <div className="logo-icon">👨‍🏫</div>
-            <h1>Teacher</h1>
+            <h1>Class Connect Teacher</h1>
           </div>
           <p className="teacher-subtitle">School Learning Management System</p>
         </div>

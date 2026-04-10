@@ -467,7 +467,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
         email: teacherData.email || '',
         qualification: teacherData.qualification || '',
         designation: teacherData.designation || 'Teacher',
-        currentSchool: teacherData.currentSchool || 'Class-Connect School',
+        currentSchool: teacherData.currentSchool || 'Class Connect School',
         profilePhoto: '👨‍🏫',
         personalInfo: {
           address: teacherData.address || '',

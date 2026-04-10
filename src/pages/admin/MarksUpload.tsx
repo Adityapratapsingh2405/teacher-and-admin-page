@@ -563,11 +563,11 @@ const MarksUpload: React.FC<MarksUploadProps> = () => {
                       
                       return (
                         <tr key={student.panNumber}>
-                          <td>{index + 1}</td>
-                          <td>{student.rollNumber || '-'}</td>
-                          <td className="pan-number">{student.panNumber}</td>
-                          <td className="student-name">{student.name}</td>
-                          <td>
+                          <td data-label="#">{index + 1}</td>
+                          <td data-label="Roll No.">{student.rollNumber || '-'}</td>
+                          <td data-label="PEN Number" className="pan-number">{student.panNumber}</td>
+                          <td data-label="Student Name" className="student-name">{student.name}</td>
+                          <td data-label="Marks">
                             <input
                               type="number"
                               min="0"
@@ -579,12 +579,12 @@ const MarksUpload: React.FC<MarksUploadProps> = () => {
                               className="marks-input"
                             />
                           </td>
-                          <td>
+                          <td data-label="Grade">
                             <span className={`grade-badge grade-${grades[student.panNumber]?.replace('+', 'plus')}`}>
                               {grades[student.panNumber] || '-'}
                             </span>
                           </td>
-                          <td className="percentage">
+                          <td data-label="Percentage" className="percentage">
                             {percentage !== '-' ? `${percentage}%` : '-'}
                           </td>
                         </tr>

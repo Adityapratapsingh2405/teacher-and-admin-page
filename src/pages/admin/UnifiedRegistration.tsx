@@ -3,6 +3,7 @@ import StudentRegistrationForm from './StudentRegistrationForm.tsx';
 import TeacherRegistrationForm from './TeacherRegistrationForm.tsx';
 import NonTeachingStaffRegistrationForm from './NonTeachingStaffRegistrationForm.tsx';
 import './UnifiedRegistration.css';
+import BulkEntry from './BulkEntryPopUp.tsx';
 
 // Unified registration component for student, teacher, and staff
 
@@ -12,14 +13,20 @@ interface UnifiedRegistrationProps {
 
 type RegistrationType = 'student' | 'teacher' | 'non-teaching-staff';
 
-const UnifiedRegistration: React.FC<UnifiedRegistrationProps> = ({ onRegistrationSuccess }) => {
+  const UnifiedRegistration: React.FC<UnifiedRegistrationProps> = ({ onRegistrationSuccess }) => {
   const [registrationType, setRegistrationType] = useState<RegistrationType>('student');
+
+  const [isBulkEntry,setIsBulkEntry] = useState(false);  
 
   return (
     <div className="unified-registration">
+
+      <button onClick={()=>setIsBulkEntry(true)} className="submit-btn">Bulk Entry</button>
+
       <div className="registration-header">
         <h2>Registration</h2>
         <p>Select the type of registration you want to perform</p>
+
       </div>
 
       <div className="registration-type-selector">
@@ -57,6 +64,10 @@ const UnifiedRegistration: React.FC<UnifiedRegistrationProps> = ({ onRegistratio
           <NonTeachingStaffRegistrationForm onRegistrationSuccess={onRegistrationSuccess} />
         )}
       </div>
+
+       {isBulkEntry && (
+        <BulkEntry onClose={() => setIsBulkEntry(false)} />
+      )}
     </div>
   );
 };
