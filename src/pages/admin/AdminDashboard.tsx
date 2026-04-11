@@ -18,6 +18,7 @@ import GalleryManagement from './GalleryManagement';
 import MessagesManagement from './MessagesManagement';
 import PromotionManagement from './PromotionManagement';
 import GradeManagement from './GradeManagement';
+import PasswordResetModal from '../../components/PasswordResetModal';
 import { FeeService } from '../../services/feeService';
 import AdminService, { StudentResponse, TeacherResponse, NonTeachingStaffResponse, ClassInfoResponse } from '../../services/adminService';
 import StudentService from '../../services/studentService';
@@ -36,7 +37,8 @@ interface AdminDashboardProps {
   onLogout: () => void;
 }
 
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => 
+{
   const [activeTab, setActiveTab] = useState(() => {
     // Restore last active tab from localStorage
     const savedTab = localStorage.getItem('adminActiveTab');
@@ -81,6 +83,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const [adminReply, setAdminReply] = useState('');
   const [processing, setProcessing] = useState(false);
 
+  // Password Reset Modal state
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
+
   // Teacher Query and Leave Management state
   const [teacherQueries, setTeacherQueries] = useState<TeacherQueryResponse[]>([]);
   const [staffLeaves, setStaffLeaves] = useState<StaffLeaveResponse[]>([]);
@@ -96,6 +101,20 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     localStorage.removeItem('adminActiveTab');
     // Call parent onLogout which will handle navigation and clear userType
     onLogout();
+  };
+
+  const handlePasswordReset = async (passwords: { currentPassword: string; newPassword: string; confirmPassword: string }) => {
+    try {
+      // Call your password reset API endpoint here
+      // For example: await AdminService.resetPassword(passwords);
+      console.log('Password reset request:', passwords);
+      // Placeholder - replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // If using actual API:
+      // await AdminService.resetPassword(passwords);
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to reset password');
+    }
   };
 
   // Scroll to top whenever tab changes
@@ -1909,7 +1928,14 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
         </div>
         <div className="nav-actions">
           <button className="nav-btn" onClick={() => setShowSchoolProfile(true)} title="School Profile">🏢</button>
-          <button className="nav-btn logout" onClick={handleLogout}>Logout</button>
+          <button 
+            className="nav-btn"
+            onClick={() => setShowPasswordResetModal(true)}
+            title="Reset Password"
+          >
+            🔒
+          </button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
       </nav>
 
@@ -2122,6 +2148,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
           onClose={() => setShowSchoolProfile(false)}
         />
       )}
+
+      {/* Password Reset Modal */}
+      {showPasswordResetModal?<PasswordResetModal 
+             onClose={() => setShowPasswordResetModal(false)}
+           />:""}
     </div>
   );
 };

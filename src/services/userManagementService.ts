@@ -5,9 +5,14 @@ interface UserData {
   [key: string]: any;
 }
 
-interface PasswordData {
-  [key: string]: any;
-}
+type ChangePasswordRequest = {
+  email: string | null;
+  panNumber: string | null;
+  userType: string | null;
+  password: string | null;
+  oldpassword: string | null;
+};
+
 
 export class UserManagementService {
   // Get all users
@@ -86,12 +91,13 @@ export class UserManagementService {
   }
 
   // Change user password
-  static async changeUserPassword(id: string | number, passwordData: PasswordData) {
+  static async changeUserPassword(data:ChangePasswordRequest) {
     try {
-      const response = await api.patch(`/users/${id}/password`, passwordData);
+      console.log(data);
+      const response = await api.put(`/users/change-password`, data);
       
       if (response.status >= 200 && response.status < 300) {
-        return response.data.data;
+        return response.data.message;
       }
       throw new Error(response.data.message || 'Failed to change password');
     } catch (error: any) {

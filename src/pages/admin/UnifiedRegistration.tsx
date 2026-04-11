@@ -13,7 +13,7 @@ interface UnifiedRegistrationProps {
 
 type RegistrationType = 'student' | 'teacher' | 'non-teaching-staff';
 
-  const UnifiedRegistration: React.FC<UnifiedRegistrationProps> = ({ onRegistrationSuccess }) => {
+const UnifiedRegistration: React.FC<UnifiedRegistrationProps> = ({ onRegistrationSuccess }) => {
   const [registrationType, setRegistrationType] = useState<RegistrationType>('student');
 
   const [isBulkEntry,setIsBulkEntry] = useState(false);  

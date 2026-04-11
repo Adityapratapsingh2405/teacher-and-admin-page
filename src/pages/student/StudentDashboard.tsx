@@ -22,6 +22,7 @@ import PeriodSettingsService, { PeriodSettings } from '../../services/periodSett
 import CloudinaryUploadWidget from '../../components/CloudinaryUploadWidget';
 import MarksheetTable from '../../components/MarksheetTable';
 import PreviousSchoolingTable from '../../components/PreviousSchoolingTable';
+import PasswordResetModal from '../../components/PasswordResetModal';
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -127,6 +128,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
 
   // Transfer Certificate state
   const [tcRequests, setTcRequests] = useState<TransferCertificateRequest[]>([]);
+
+  // Password Reset Modal state
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
   const [showTCForm, setShowTCForm] = useState(false);
   const [tcFormData, setTcFormData] = useState<TCRequest>({
     reason: '',
@@ -785,6 +789,20 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
     }
   };
 
+  const handlePasswordReset = async (passwords: { currentPassword: string; newPassword: string; confirmPassword: string }) => {
+    try {
+      // Call your password reset API endpoint here
+      // For example: await StudentService.resetPassword(passwords);
+      console.log('Password reset request:', passwords);
+      // Placeholder - replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // If using actual API:
+      // await StudentService.resetPassword(passwords);
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to reset password');
+    }
+  };
+
   const handleSubmitLeave = async () => {
     if (!leaveSubject.trim() || !leaveStartDate || !leaveEndDate) {
       alert('Please fill in all fields: reason, start date, and end date.');
@@ -967,7 +985,14 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               </div>
             </div>
             <div className='ln-card'>
-            <button className="logout-button" onClick={onLogout}>Logout</button>
+              <button 
+                className="nav-btn"
+                onClick={() => setShowPasswordResetModal(true)}
+                title="Reset Password"
+              >
+                🔒
+              </button>
+            
             <button
                 className={`notification-button ${showNotifications ? 'open' : ''}`}
                 onClick={() => setShowNotifications(!showNotifications)}
@@ -978,6 +1003,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
                   <span className="notification-badge">{unreadCount}</span>
                 )}
               </button>
+              <button className="logout-button" onClick={onLogout}>Logout</button>
             </div>
           </div>
         </div>
@@ -2993,6 +3019,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
         )}
       </main>
       </div>
+
+       {/* Password Reset Modal */}
+            {showPasswordResetModal?<PasswordResetModal 
+                   onClose={() => setShowPasswordResetModal(false)}
+                 />:""}
     </div>
   );
 };

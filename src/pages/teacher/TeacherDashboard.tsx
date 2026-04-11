@@ -15,6 +15,7 @@ import NotificationService, { NotificationDto } from '../../services/notificatio
 import { SessionService } from '../../services/sessionService';
 import HolidayService, { Holiday } from '../../services/holidayService';
 import PromotionAssignment from '../../components/PromotionAssignment';
+import PasswordResetModal from '../../components/PasswordResetModal';
 
 interface TeacherDashboardProps {
   onLogout: () => void;
@@ -78,6 +79,9 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
   const [activeSessionId, setActiveSessionId] = useState<number | null>(null);
   // @ts-ignore - Used for future feature
   const [sessionLoading, setSessionLoading] = useState(true);
+
+  // Password Reset Modal state
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
 
   // Fetch active session
   useEffect(() => {
@@ -253,6 +257,20 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
       fetchLeaveAllowance();
     } catch (err: any) {
       alert('Failed to submit leave request: ' + err.message);
+    }
+  };
+
+  const handlePasswordReset = async (passwords: { currentPassword: string; newPassword: string; confirmPassword: string }) => {
+    try {
+      // Call your password reset API endpoint here
+      // For example: await TeacherService.resetPassword(passwords);
+      console.log('Password reset request:', passwords);
+      // Placeholder - replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // If using actual API:
+      // await TeacherService.resetPassword(passwords);
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to reset password');
     }
   };
 
@@ -2890,8 +2908,14 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
               <span className="notification-badge">{unreadCount}</span>
             )}
           </button>
-          <button className="nav-btn">👤</button>
-          <button className="nav-btn logout" onClick={onLogout}>Logout</button>
+          <button 
+            className="nav-btn"
+            onClick={() => setShowPasswordResetModal(true)}
+            title="Reset Password"
+          >
+            🔒
+          </button>
+          <button className="logout-button" onClick={onLogout}>Logout</button>
         </div>
       </nav>
 
@@ -2973,6 +2997,12 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
           }}
         />
       )}
+
+      {/* Password Reset Modal */}
+      {/* Password Reset Modal */}
+      {showPasswordResetModal?<PasswordResetModal 
+             onClose={() => setShowPasswordResetModal(false)}
+           />:""}
     </div>
   );
 };
