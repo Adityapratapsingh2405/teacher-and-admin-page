@@ -31,7 +31,6 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
     setUploadType(type);
     fileInputRef.current?.click();
   };
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -51,8 +50,9 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
 
       // Convert to JSON
     let jsonData = XLSX.utils.sheet_to_json(worksheet, {
-      defval: undefined
+      defval: undefined,  raw: false
     });
+    // Correct Columns
     jsonData = jsonData.map((row: any) => {
         const newObj: any = {};
         const columns = uploadType=="Student"?studentColumns:teacherColumns;
@@ -97,20 +97,10 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
     reader.readAsArrayBuffer(file);
   };
 
-  const isValidFormat = (dateStr:any) => {
-    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-    return regex.test(dateStr);
-  };
-  const isRealDate = (dateStr:any) => {
-    const [day, month, year] = dateStr.split("/").map(Number);
-    const date = new Date(year, month - 1, day);
-
-    return (
-      date.getFullYear() === year &&
-      date.getMonth() === month - 1 &&
-      date.getDate() === day
-    );
-  };
+const isValidFormat = (dateStr: any) => {
+  const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{2}$/;
+  return regex.test(dateStr);
+};
 
   const upload = async ()=>
   {
@@ -123,7 +113,7 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
 
       // Wrong DOB Format
        if(uploadType == "Student"){
-        status = uploadData.every((ob:any)=>isValidFormat(ob.DOB) && isRealDate(ob.DOB));
+        status = uploadData.every((ob:any)=>isValidFormat(ob.DOB));
         if(!status){
           alert("Wrong DOB Format in records !");
           return;
