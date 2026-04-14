@@ -97,7 +97,7 @@ export class ClassService {
         className: classData.className,
         feesAmount: classData.feeAmount,  // Map feeAmount -> feesAmount
         sessionId: classData.sessionId,
-        classTeacherId: classData.classTeacherId  // Required field
+        classTeacherId: classData.classTeacherId  // Required field,
       };
       
       const response = await api.post('/classes', backendData);

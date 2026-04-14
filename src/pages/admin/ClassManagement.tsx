@@ -168,6 +168,7 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+
     if (!(await validateForm())) {
       return;
     }

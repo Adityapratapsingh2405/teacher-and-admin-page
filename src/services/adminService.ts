@@ -76,8 +76,50 @@ export interface ClassInfoResponse {
   classTeacherName?: string;
 }
 
+type BulkStudentDataType = {  
+  panNumber: string | null;
+  name: string | null;
+  gender: string | null;
+  className: string | null;
+  sessionName: string | null;
+  fatherName: string | null;
+  mobile: string | null;
+};
+type BulkTeacherDataType = {  
+  name: string | null;
+  email : string | null;
+  mobile: string | null;
+};
+
 export class AdminService {
   // ============ Student APIs ============
+
+  // Bulk-Student Entry
+  static async bulkStudents(data:BulkStudentDataType): Promise<string>
+  {
+    try{
+      const response = await api.post('/auth/register/bulkstudent', data);
+      return response.data.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Save';
+     return message;
+    }
+  }
+
+  static async bulkTeachers(data:BulkTeacherDataType): Promise<string>
+  {
+    try{
+      const response = await api.post('/auth/register/bulkteacher', data);
+      console.log(response)
+      return response.data.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Teacher Not Save';
+     return message;
+    }
+  }
+
+
+
   
   // Get all students
   static async getAllStudents(): Promise<StudentResponse[]> {

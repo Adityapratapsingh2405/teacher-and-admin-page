@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import "./BulkEntry.css";
 
+import {AdminService} from '../../services/adminService';
+
 interface BulkEntryProps {
   onClose: () => void;
 }
@@ -17,9 +19,11 @@ const studentColumns = [
 ];
 const teacherColumns = ["Name", "Email", "Mobile"];
 
-const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) => {
+const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) => 
+{
   const [uploadType, setUploadType] = useState<string>("");
   const [uploadData, setUploadData] = useState<any>([]);
+  const [saving,setSaving] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -92,12 +96,41 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) => {
     reader.readAsArrayBuffer(file);
   };
 
-  const upload = async ()=>{
-    for(let ob of uploadData){
+  const upload = async ()=>
+  {
+    setSaving(true);
+    let copyData:any[] = [];
+    for(let ob of uploadData)
+    {
       if(!ob.Missing){
         console.log("Upload : " , ob);
+        if(uploadType == "Student")
+        {
+          const msg = await AdminService.bulkStudents({
+            panNumber: ob["PEN / SR No"],
+            name: ob['Name'],
+            gender: ob['Gender'],
+            className: ob['Class'],
+            sessionName: ob['Session'],
+            fatherName: ob['Father Name'],
+            mobile: ob['Mobile']
+          });
+          copyData.push({...ob,'Server Response':msg});
+        }else{
+          const msg = await AdminService.bulkTeachers({           
+            name: ob['Name'],
+            mobile: ob['Mobile'],
+            email : ob['Email']
+          });
+          copyData.push({...ob,'Server Response':msg});
+        }        
+      }else{
+        copyData.push({...ob});
       }
     }
+
+    setUploadData(copyData);
+    setSaving(false);
   }
 
   return (
@@ -171,7 +204,11 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) => {
             <>
               <br />
               <h2>Upload {uploadType} Records</h2>
+              <div>
               <button className="btn btn-primary" onClick={upload}>Save Records</button>
+              &nbsp;
+              <b style={{color:'red',display:saving?'inline':'none'}}  >Saving Records</b>
+              </div>
               <div className="table-responsive mt-3">
                 <table className="table table-border">
                   <thead>
