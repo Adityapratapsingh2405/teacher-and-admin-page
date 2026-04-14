@@ -15,7 +15,7 @@ const studentColumns = [
   "Class",
   "Session",
   "Father Name",
-  "Mobile",
+  "Mobile", "DOB" , "Address"
 ];
 const teacherColumns = ["Name", "Email", "Mobile"];
 
@@ -79,9 +79,10 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
             return {
               ...ob,
               Missing: hasMissing, // true if any value is missing
-              'Server Response': "",
+              'Server Response': ""
             };
           });
+
           setUploadData(data);
         } else {
           alert("Column Mismatch !");
@@ -96,8 +97,38 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
     reader.readAsArrayBuffer(file);
   };
 
+  const isValidFormat = (dateStr:any) => {
+    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    return regex.test(dateStr);
+  };
+  const isRealDate = (dateStr:any) => {
+    const [day, month, year] = dateStr.split("/").map(Number);
+    const date = new Date(year, month - 1, day);
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day
+    );
+  };
+
   const upload = async ()=>
   {
+      // Missing Check
+      let status = uploadData.some((ob:any)=>ob.Missing);
+      if(status){
+        alert("Fill Missing Values First !");
+        return;
+      }
+
+      // Wrong DOB Format
+       if(uploadType == "Student"){
+        status = uploadData.every((ob:any)=>isValidFormat(ob.DOB) && isRealDate(ob.DOB));
+        if(!status){
+          alert("Wrong DOB Format in records !");
+          return;
+        }
+       }
     setSaving(true);
     let copyData:any[] = [];
     for(let ob of uploadData)
@@ -113,7 +144,9 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
             className: ob['Class'],
             sessionName: ob['Session'],
             fatherName: ob['Father Name'],
-            mobile: ob['Mobile']
+            mobile: ob['Mobile'],
+            dob: ob['DOB'],
+            address: ob['Address']
           });
           copyData.push({...ob,'Server Response':msg});
         }else{

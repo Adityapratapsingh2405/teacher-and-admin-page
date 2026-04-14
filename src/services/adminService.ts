@@ -84,6 +84,8 @@ type BulkStudentDataType = {
   sessionName: string | null;
   fatherName: string | null;
   mobile: string | null;
+  dob: string | null;
+  address: string | null;
 };
 type BulkTeacherDataType = {  
   name: string | null;
