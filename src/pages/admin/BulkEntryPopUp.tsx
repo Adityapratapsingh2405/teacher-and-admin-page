@@ -232,8 +232,8 @@ const isValidFormat = (dateStr: any) => {
               &nbsp;
               <b style={{color:'red',display:saving?'inline':'none'}}  >Saving Records</b>
               </div>
-              <div className="table-responsive mt-3">
-                <table className="table table-border">
+             <div className="table-responsive mt-3">
+                <table className="table table-bordered">
                   <thead>
                     <tr>
                       {Object.keys(uploadData[0]).map((k) => (
@@ -243,7 +243,7 @@ const isValidFormat = (dateStr: any) => {
                   </thead>
                   <tbody>
                     {uploadData.map((ob: any) => (
-                      <tr style={{border:ob.Missing?'solid red 0.5px':""}}>
+                     <tr style={ob.Missing ? { border: "0.5px solid red" } : {}}>
                         {Object.values(ob).map((v: any) => (
                           <td>
                             {typeof(v)=='boolean'? v?"Missing Values": "Good" : v}
