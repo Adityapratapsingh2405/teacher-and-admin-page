@@ -162,8 +162,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
     // PEN Number validation
     if (!formData.panNumber.trim()) {
       newErrors.panNumber = 'PEN number is required';
-    } else if (formData.panNumber.trim().length < 5) {
-      newErrors.panNumber = 'PEN number must be at least 5 characters';
+    } else if (formData.panNumber.trim().length < 4) {
+      newErrors.panNumber = 'PEN number must be at least 4 characters';
     }
 
     // Name validation
@@ -237,9 +237,9 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
     }
 
     // Blood group validation
-    if (!formData.bloodGroup) {
-      newErrors.bloodGroup = 'Please select blood group';
-    }
+    // if (!formData.bloodGroup) {
+    //   newErrors.bloodGroup = 'Please select blood group';
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -482,7 +482,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
 
             <div className="form-group">
               <label htmlFor="bloodGroup">
-                Blood Group <span className="required">*</span>
+                Blood Group (Optional)
               </label>
               <select
                 id="bloodGroup"
@@ -490,9 +490,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
                 value={formData.bloodGroup}
                 onChange={handleInputChange}
                 className={errors.bloodGroup ? 'error' : ''}
-                disabled={isLoading}
-                required
-              >
+                disabled={isLoading}>
                 <option value="">Select Blood Group</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>

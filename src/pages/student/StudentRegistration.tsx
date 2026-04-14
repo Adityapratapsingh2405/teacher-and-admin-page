@@ -129,8 +129,8 @@ const StudentRegistration: React.FC = () => {
     // PEN Number validation
     if (!formData.panNumber.trim()) {
       newErrors.panNumber = 'PEN Number is required';
-    } else if (formData.panNumber.length < 5) {
-      newErrors.panNumber = 'PEN Number must be at least 5 characters';
+    } else if (formData.panNumber.length < 4) {
+      newErrors.panNumber = 'PEN Number must be at least 4 characters';
     }
 
     // Name validation
@@ -204,9 +204,9 @@ const StudentRegistration: React.FC = () => {
     }
 
     // Blood group validation
-    if (!formData.bloodGroup) {
-      newErrors.bloodGroup = 'Blood group is required';
-    }
+    // if (!formData.bloodGroup) {
+    //   newErrors.bloodGroup = 'Blood group is required';
+    // }
 
     // Photo validation (optional but recommended)
     if (!formData.photo) {
@@ -399,7 +399,7 @@ const StudentRegistration: React.FC = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="bloodGroup">Blood Group *</label>
+              <label htmlFor="bloodGroup">Blood Group (Optional)</label>
               <select
                 id="bloodGroup"
                 name="bloodGroup"
