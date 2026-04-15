@@ -181,7 +181,9 @@ const exportExcel = (data:any) => {
 
     setUploadData(copyData);
     setSaving(false);
-    exportExcel(errorData);
+    if(errorData.length>0){
+      exportExcel(errorData);
+    }
   }
 
   return (
