@@ -106,6 +106,18 @@ const isValidFormat = (dateStr: any) => {
   return regex.test(dateStr);
 };
 
+const exportExcel = (data:any) => {
+  // Convert JSON → Sheet
+  const worksheet = XLSX.utils.json_to_sheet(data);
+
+  // Create Workbook
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+  // 🚀 This line auto downloads file
+  XLSX.writeFile(workbook, "notSavedRecord.xlsx");
+};
+
   const upload = async ()=>
   {
       // Missing Check
@@ -123,11 +135,11 @@ const isValidFormat = (dateStr: any) => {
           return;
         }
        }
-
-       return;
+      
 
     setSaving(true);
     let copyData:any[] = [];
+    let errorData:any[] = [];
     for(let ob of uploadData)
     {
       if(!ob.Missing){
@@ -145,14 +157,22 @@ const isValidFormat = (dateStr: any) => {
             dob: ob['DOB'],
             address: ob['Address']
           });
-          copyData.push({...ob,'Server Response':msg});
+          var newOb = {...ob,'Server Response':msg};
+          if(msg!='success'){
+            errorData.push({...newOb});
+          }
+          copyData.push(newOb);
         }else{
           const msg = await AdminService.bulkTeachers({           
             name: ob['Name'],
             mobile: ob['Mobile'],
             email : ob['Email']
           });
-          copyData.push({...ob,'Server Response':msg});
+          var newOb = {...ob,'Server Response':msg};
+          if(msg!='success'){
+            errorData.push({...newOb});
+          }
+          copyData.push(newOb);
         }        
       }else{
         copyData.push({...ob});
@@ -161,6 +181,7 @@ const isValidFormat = (dateStr: any) => {
 
     setUploadData(copyData);
     setSaving(false);
+    exportExcel(errorData);
   }
 
   return (
