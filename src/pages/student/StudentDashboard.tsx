@@ -166,7 +166,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
         // Fetch current logged-in student's details using /api/students/me
         // This endpoint is secured for ROLE_STUDENT and doesn't require PEN parameter
         const studentData = await StudentService.getCurrentStudent();
-        
+        console.log(studentData)
         // Try multiple possible field names for class ID
         const classId = studentData.classId || studentData.currentClassId || studentData.class_id;
         
@@ -981,7 +981,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               </div>
               <div className="student-info">
                 <h2>{student?.name || 'Student'}</h2>
-                <p>Class: {student?.currentClass || 'N/A'} • PEN: {student?.pan || 'N/A'}</p>
+                <p>Class: {student?.currentClass || 'N/A'}-{student.section} • PEN: {student?.pan || 'N/A'}</p>
               </div>
             </div>
             <div className='ln-card'>
@@ -1178,7 +1178,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               )}
               <div className="profile-details">
                 <p><strong>Name:</strong> {student.name}</p>
-                <p><strong>Current Class:</strong> {student.currentClass}</p>
+                <p><strong>Current Class:</strong> {student.currentClass}-{student.section}</p>
                 <p><strong>PEN:</strong> {student.pan}</p>
               </div>
             </div>

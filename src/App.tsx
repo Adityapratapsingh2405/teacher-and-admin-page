@@ -24,6 +24,9 @@ import TeacherLogin from './pages/teacher/TeacherLogin'
 import TeacherDashboard from './pages/teacher/TeacherDashboard'
 import TeacherRegistration from './pages/teacher/TeacherRegistration'
 
+import {delData} from './redux/DataSlice';
+import { useDispatch } from "react-redux";
+
 // Protected Route Component with Role-Based Access Control
 interface ProtectedRouteProps {
   children: React.ReactElement;
@@ -144,6 +147,7 @@ const DeveloperProtectedRoute: React.FC<DeveloperProtectedRouteProps> = ({ child
 // Main App Content Component (needs to be inside Router to use navigation)
 const AppContent = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userType, setUserType] = useState<'student' | 'admin' | 'teacher' | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -211,6 +215,7 @@ const AppContent = () => {
     const currentUserType = userType;
     
     AuthService.logout();
+    dispatch(delData());
     setIsAuthenticated(false)
     setUserType(null)
     

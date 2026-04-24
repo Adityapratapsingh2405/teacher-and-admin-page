@@ -464,6 +464,59 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+}
+
+/* Staff Section Header */
+.staff-section > .section-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+  margin-bottom: 1rem;
+}
+
+.staff-section > .section-header h3 {
+  margin: 0 0 1rem 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.staff-section > .section-header .search-box {
+  max-width: 100%;
+}
+
+.staff-section > .section-header .search-box input {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #1e293b;
+  padding: 12px 45px;
+}
+
+.staff-section > .section-header .search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.staff-section > .section-header .search-box input:focus {
+  background: white;
+  border-color: white;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.staff-section > .section-header .search-box::before {
+  color: #1e293b;
+}
+
+.staff-section > .section-header .clear-search-btn {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.staff-section > .section-header .clear-search-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: white;
 }
 
 /* Staff Filter Controls */
@@ -472,175 +525,603 @@ body {
   background: white;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: space-between;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  align-items: flex-start;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.staff-filters:hover,
+.student-filters:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .staff-filters h3,
 .student-filters h3 {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.5rem 0;
   color: #1e293b;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .filter-buttons {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .filter-btn {
-  padding: 10px 20px;
-  border: 2px solid #e2e8f0;
+  padding: 12px 24px;
+  border: 2px solid #cbd5e1;
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.95rem;
   color: #64748b;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .filter-btn:hover {
   border-color: #667eea;
   color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.2);
+  background: #f8fafc;
 }
 
 .filter-btn.active {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+  transform: translateY(-2px);
 }
 
 .filter-count {
-  font-size: 0.85rem;
-  opacity: 0.8;
+  font-size: 0.8rem;
+  opacity: 0.75;
   margin-left: 4px;
+  font-weight: 600;
 }
 
 .filter-btn.active .filter-count {
   opacity: 1;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* Staff Tabs Container */
+.staff-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.staff-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .staff-tab h3 {
-  margin: 10px 10px;
-  
+  margin: 0;
+  padding: 0 1rem;
   color: #1e293b;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid #667eea;
+  padding-left: 1rem;
 }
 
+/* Staff Grid */
 .staff-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.75rem;
+  width: 100%;
 }
 
+/* Staff Card */
 .staff-card {
   background: white;
   border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
+  padding: 1.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.staff-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
 .staff-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: #e2e8f0;
 }
 
+.staff-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Staff Avatar */
 .staff-avatar {
   font-size: 3rem;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
+  border-radius: 14px;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  flex-shrink: 0;
+}
+
+/* Staff Info */
+.staff-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .staff-info h4 {
-  margin: 0 0 8px 0;
+  margin: 0;
   color: #1e293b;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  word-break: break-word;
 }
 
 .staff-info p {
-  margin: 0 0 4px 0;
+  margin: 0;
   color: #64748b;
   font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 .staff-designation {
   color: #667eea !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+
+.staff-qualification {
+  color: #059669 !important;
   font-weight: 600;
+  font-size: 0.85rem !important;
+}
+
+.staff-contact {
+  color: #7c3aed !important;
+  font-weight: 500;
+}
+
+.staff-email {
+  color: #0284c7 !important;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .teacher-queries-section{
   width: 100%;
   
 }
 .staff-classes {
-  margin: 12px 0px;
-  padding: 8px 12px;
-  background: #f0f9ff;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  margin: 1rem 0;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+  border-left: 4px solid #0284c7;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #0c4a6e;
+  font-weight: 500;
+  line-height: 1.6;
+  word-break: break-word;
 }
 
+.staff-status {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.staff-status .status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+}
+
+.staff-status .status-badge.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.staff-status .status-badge.inactive {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Staff Actions */
 .staff-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 1rem;
+  gap: 10px;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.staff-actions .action-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.staff-actions .action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.staff-actions .action-btn:active {
+  transform: translateY(0);
 }
 
 .deactivate-btn {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
   color: white !important;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(245, 87, 108, 0.2);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
 }
 
 .deactivate-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(245, 87, 108, 0.3);
+  box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
 }
 
 .activate-btn {
   background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%) !important;
-  color: #1e293b !important;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(132, 250, 176, 0.2);
+  color: #0f172a !important;
+  box-shadow: 0 4px 12px rgba(132, 250, 176, 0.3);
+  font-weight: 700;
 }
 
 .activate-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(132, 250, 176, 0.3);
+  box-shadow: 0 6px 16px rgba(132, 250, 176, 0.4);
+}
+
+/* Enhanced responsive design for staff section */
+@media (max-width: 1024px) {
+  .staff-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .staff-card {
+    padding: 1.5rem;
+  }
+
+  .staff-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+
+  .staff-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .staff-actions {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-section {
+    gap: 1.5rem;
+  }
+
+  .staff-section > .section-header {
+    padding: 1.5rem;
+  }
+
+  .staff-section > .section-header h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .staff-filters,
+  .student-filters {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .staff-filters h3,
+  .student-filters h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+  }
+
+  .filter-buttons {
+    gap: 10px;
+  }
+
+  .filter-btn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .staff-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .staff-card {
+    padding: 1.25rem;
+  }
+
+  .staff-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .staff-info h4 {
+    font-size: 1rem;
+  }
+
+  .staff-info p {
+    font-size: 0.85rem;
+  }
+
+  .staff-classes {
+    margin: 0.75rem 0;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .staff-actions {
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .staff-actions .action-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .staff-tab h3 {
+    font-size: 1.1rem;
+    padding: 0;
+    padding-left: 0.75rem;
+    border-left-width: 3px;
+  }
+}
+
+@media (max-width: 640px) {
+  .staff-section > .section-header {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .staff-section > .section-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .staff-filters,
+  .student-filters {
+    padding: 1.25rem;
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-btn {
+    width: 100%;
+    padding: 10px 16px;
+  }
+
+  .staff-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .staff-card {
+    padding: 1rem;
+  }
+
+  .staff-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .staff-info h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .staff-info p {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .staff-designation {
+    font-size: 0.85rem !important;
+  }
+
+  .staff-classes {
+    margin: 0.5rem 0;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .staff-status {
+    margin: 0.75rem 0;
+  }
+
+  .staff-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .staff-actions .action-btn {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .staff-tab h3 {
+    font-size: 1rem;
+  }
+
+  .staff-tab {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-section > .section-header {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .staff-section > .section-header h3 {
+    font-size: 1rem;
+  }
+
+  .staff-section > .section-header .search-box input {
+    padding: 10px 38px;
+    font-size: 0.9rem;
+  }
+
+  .staff-filters,
+  .student-filters {
+    padding: 1rem;
+  }
+
+  .staff-filters h3,
+  .student-filters h3 {
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .filter-buttons {
+    width: 100%;
+  }
+
+  .filter-btn {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+
+  .staff-grid {
+    gap: 0.75rem;
+  }
+
+  .staff-card {
+    padding: 0.75rem;
+  }
+
+  .staff-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .staff-info h4 {
+    font-size: 0.95rem;
+  }
+
+  .staff-info p {
+    font-size: 0.75rem;
+  }
+
+  .staff-classes {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    margin: 0.5rem 0;
+  }
+
+  .staff-actions {
+    gap: 4px;
+  }
+
+  .staff-actions .action-btn {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+
+  .staff-tab h3 {
+    font-size: 0.95rem;
+    margin: 0;
+  }
 }
 
 /* Transfer Certificates */

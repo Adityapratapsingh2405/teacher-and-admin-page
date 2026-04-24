@@ -33,12 +33,27 @@ import {
   FeeCatalog
 } from '../../types/admin';
 
+import {setData} from '../../redux/DataSlice';
+import { useDispatch, useSelector } from "react-redux";
+
 interface AdminDashboardProps {
   onLogout: () => void;
 }
 
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => 
 {
+  const dispatcher = useDispatch();
+  const { students, classes , teachers,nonTeachingStaff,load_done } = useSelector(
+    (store: any): { students: StudentResponse[]; 
+                    classes: ClassInfoResponse[];
+                    teachers:TeacherResponse[];
+                    nonTeachingStaff : NonTeachingStaffResponse[],
+                    load_done : boolean   } =>
+      store.data.value
+  );
+
+
+
   const [activeTab, setActiveTab] = useState(() => {
     // Restore last active tab from localStorage
     const savedTab = localStorage.getItem('adminActiveTab');
@@ -54,11 +69,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   const [showSchoolProfile, setShowSchoolProfile] = useState(false);
   
   // State for real data from database
-  const [students, setStudents] = useState<StudentResponse[]>([]);
-  const [teachers, setTeachers] = useState<TeacherResponse[]>([]);
-  const [nonTeachingStaff, setNonTeachingStaff] = useState<NonTeachingStaffResponse[]>([]);
-  const [classes, setClasses] = useState<ClassInfoResponse[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [students, setStudents] = useState<StudentResponse[]>([]);
+  // const [teachers, setTeachers] = useState<TeacherResponse[]>([]);
+  // const [nonTeachingStaff, setNonTeachingStaff] = useState<NonTeachingStaffResponse[]>([]);
+  // const [classes, setClasses] = useState<ClassInfoResponse[]>([]);
+  const [loading, setLoading] = useState(false);
+  
   const [error, setError] = useState<string>('');
   
   // Filter state for staff (active, inactive, all)
@@ -148,7 +164,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
 
   // Fetch all data on component mount
   useEffect(() => {
-    fetchAllData();
+    setLoading(!load_done);
+    fetchAllData();    
   }, []);
   
   // Load TC requests when switching to TC tab (no auto-refresh)
@@ -179,10 +196,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   }, [staffFilter]);
 
   const fetchAllData = async () => {
-    try {
-      setLoading(true);
-      setError('');
-      
+    try { 
       // Fetch all data in parallel
       const [studentsData, teachersData, staffData, classesData] = await Promise.all([
         AdminService.getAllStudents().catch(err => { console.error('Students fetch error:', err); return []; }),
@@ -203,19 +217,56 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         : staffFilter === 'inactive'
         ? staffData.filter(s => s.status === 'INACTIVE')
         : staffData;
-      
-      // No filtering for students - store all students to enable status management
-      setStudents(studentsData);
-      setTeachers(filteredTeachers);
-      setNonTeachingStaff(filteredStaff);
-      setClasses(classesData);
-    } catch (err: any) {
-      console.error('Failed to fetch admin data:', err);
-      setError(err.message || 'Failed to load admin data');
-    } finally {
-      setLoading(false);
+
+      dispatcher(setData({
+                students : studentsData,
+                teachers : filteredTeachers,
+                classes : classesData,
+                nonTeachingStaff : filteredStaff}))
+       setLoading(false);
+    } catch(err){
+      alert("Error Loading Data.")
     }
   };
+
+  // const fetchAllData = async () => {
+  //   try {
+  //     setLoading(true);
+  //     setError('');
+      
+  //     // Fetch all data in parallel
+  //     const [studentsData, teachersData, staffData, classesData] = await Promise.all([
+  //       AdminService.getAllStudents().catch(err => { console.error('Students fetch error:', err); return []; }),
+  //       AdminService.getAllTeachers().catch(err => { console.error('Teachers fetch error:', err); return []; }),
+  //       AdminService.getAllNonTeachingStaff().catch(err => { console.error('Staff fetch error:', err); return []; }),
+  //       AdminService.getAllClasses().catch(err => { console.error('Classes fetch error:', err); return []; })
+  //     ]);
+      
+  //     // Filter teachers and staff based on staffFilter
+  //     const filteredTeachers = staffFilter === 'active'
+  //       ? teachersData.filter(t => t.status === 'ACTIVE')
+  //       : staffFilter === 'inactive'
+  //       ? teachersData.filter(t => t.status === 'INACTIVE')
+  //       : teachersData;
+        
+  //     const filteredStaff = staffFilter === 'active'
+  //       ? staffData.filter(s => s.status === 'ACTIVE')
+  //       : staffFilter === 'inactive'
+  //       ? staffData.filter(s => s.status === 'INACTIVE')
+  //       : staffData;
+      
+  //     // No filtering for students - store all students to enable status management
+  //     setStudents(studentsData);
+  //     setTeachers(filteredTeachers);
+  //     setNonTeachingStaff(filteredStaff);
+  //     setClasses(classesData);
+  //   } catch (err: any) {
+  //     console.error('Failed to fetch admin data:', err);
+  //     setError(err.message || 'Failed to load admin data');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Transfer Certificate helper functions
   const loadTCRequests = async (silent = false) => {
@@ -494,9 +545,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   };
 
   const renderOverview = () => {
-    if (loading) {
-      return <div className="loading-message">Loading dashboard data...</div>;
-    }
+    // if (loading) {
+    //   return <div className="loading-message">Loading dashboard data...</div>;
+    // }
 
     if (error) {
       return (
@@ -509,7 +560,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
 
     return (
       <div className="overview-section">
-        <div className="stats-grid">
+        {loading?<h5 className='text-center text-danger'>Loading Dashboard Data...</h5>:""}
+        <div className="stats-grid">          
           <div className="stat-card">
             <div className="stat-icon">👥</div>
             <div className="stat-content">
@@ -543,7 +595,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
             </div>
           </div>
         </div>
-
+        <button onClick={()=>{
+          setLoading(true);
+          fetchAllData();
+        }} className="retry-btn btn-success"><b>🔄 Refresh Data</b></button>
         <div className="recent-activities">
           <h3>Recent Activities</h3>
           <div className="activity-list">
@@ -909,7 +964,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
           staff.designation.toLowerCase().includes(searchTerm) ||
           (staff.contactNumber && staff.contactNumber.includes(searchTerm))
         );
-
+    //console.log(">> " , filteredNonTeachingStaff , searchTerm,nonTeachingStaff)
     return (
       <div className="staff-section">
         {/* Search Bar */}
