@@ -196,6 +196,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   }, [staffFilter]);
 
   const fetchAllData = async () => {
+    setLoading(true);
     try { 
       // Fetch all data in parallel
       const [studentsData, teachersData, staffData, classesData] = await Promise.all([
@@ -640,14 +641,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
       ? students 
       : students.filter(s => s.status === studentFilter.toUpperCase());
 
-    // Calculate counts for filter badges
-    const studentCounts = {
-      all: students.length,
-      active: students.filter(s => s.status === 'ACTIVE').length,
-      inactive: students.filter(s => s.status === 'INACTIVE').length,
-      graduated: students.filter(s => s.status === 'GRADUATED').length
-    };
-
     // Then group filtered students by class
     const filteredByStatusClassData: ClassData[] = classes.map(cls => {
       const classStudents = statusFilteredStudents.filter(s => s.classId === cls.id);
@@ -681,6 +674,21 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
             cls.className.toLowerCase().includes(classSearchTerm.toLowerCase()) ||
             cls.students.length > 0
           );
+
+          
+    // Calculate counts for filter badges
+    const studentCounts = {
+      all : filteredClassData.reduce((pv:any,cv:any)=>pv+cv.students.length,0),
+      active: filteredClassData.reduce((pv:number,cv:any)=>pv + cv.students.reduce((p:any,s:any)=>s.status === 'ACTIVE'?p+1:p,0),0),
+      inactive: filteredClassData.reduce((pv:any,cv:any)=>pv + cv.students.reduce((p:any,s:any)=>s.status === 'INACTIVE'?p+1:p,0),0),
+      graduated: filteredClassData.reduce((pv:any,cv:any)=>pv + cv.students.reduce((p:any,s:any)=>s.status === 'GRADUATED'?p+1:p,0),0)
+    };
+    // const studentCounts = {
+    //   all: students.length,     
+    //   active: students.filter(s => s.status === 'ACTIVE').length,
+    //   inactive: students.filter(s => s.status === 'INACTIVE').length,
+    //   graduated: students.filter(s => s.status === 'GRADUATED').length
+    // };
 
     return (
       <div className="students-section">

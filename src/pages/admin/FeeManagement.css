@@ -1,84 +1,110 @@
 /* Fee Management Container */
 .fee-management-container {
-  padding: 24px;
-  background: #f8f9fa;
+  padding: 32px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%);
   min-height: 100vh;
- 
   width: 100%;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fee-header {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(102, 126, 234, 0.15);
 }
 
 .fee-header h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin: 0 0 8px 0;
-  font-weight: 700;
+  font-size: 2.25rem;
+  color: #1a202c;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .fee-header p {
-  color: #7f8c8d;
+  color: #718096;
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 /* Fee Content Layout */
 .fee-content {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   justify-content: space-around;
- flex-wrap: wrap;
-
+  flex-wrap: wrap;
 }
 
 /* Student Selection Panel */
 .student-selection-panel {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   display: flex;
-  
   flex-direction: column;
   overflow: hidden;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+}
+
+.student-selection-panel:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
 
 .student-search-wrapper {
-  padding: 20px;
-  border-bottom: 2px solid #e9ecef;
-  background: #f8f9fa;
+  padding: 24px;
+  border-bottom: 2px solid #f0f4f8;
+  background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
   position: relative;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
 }
 
 .student-search-wrapper::before {
   content: "🔍";
   position: absolute;
-  left: 38px;
+  left: 42px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 18px;
   pointer-events: none;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 
 .student-search-input {
   flex: 1;
   padding: 14px 20px;
   padding-left: 50px;
-  border: 2px solid #cbd5e1;
-  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: white;
   font-weight: 500;
+  color: #2d3748;
 }
 
 .student-search-input::placeholder {
-  color: #94a3b8;
+  color: #a0aec0;
   font-weight: 500;
 }
 
@@ -86,7 +112,8 @@
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-  background: white;
+  background: #f9fafb;
+  transform: translateY(-1px);
 }
 
 .refresh-button {
@@ -94,11 +121,11 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,8 +134,8 @@
 }
 
 .refresh-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .refresh-button:disabled {
@@ -124,108 +151,182 @@
 .student-list {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 16px;
+  scroll-behavior: smooth;
+}
+
+.student-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.student-list::-webkit-scrollbar-track {
+  background: #f0f4f8;
+  border-radius: 10px;
+}
+
+.student-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.student-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5568d3, #6a3f8f);
 }
 
 .student-item {
   padding: 14px;
-  border-radius: 8px;
-  margin-bottom: 6px;
+  border-radius: 12px;
+  margin-bottom: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
+  background: #f8fafc;
 }
 
 .student-item:hover {
-  background: #f8f9fa;
-  border-color: #e2e8f0;
+  background: #e8f1ff;
+  border-color: #cbd5e1;
+  transform: translateX(4px);
 }
 
 .student-item.selected {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-color: #667eea;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transform: translateX(4px);
 }
 
 .student-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .student-name {
-  color: #2c3e50;
-  font-weight: 600;
+  color: #1a202c;
+  font-weight: 700;
   font-size: 1rem;
+  letter-spacing: -0.3px;
 }
 
 .student-item.selected .student-name {
   color: white;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .student-details {
-  color: #2c3e50;
+  color: #4a5568;
   font-size: 0.85rem;
   opacity: 0.8;
+  font-weight: 500;
 }
 
 .student-item.selected .student-details {
-  color: white;
-  opacity: 0.95;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  opacity: 1;
+  font-weight: 600;
 }
 
 /* Fee Details Panel */
 .fee-details-panel {
   background: white;
   gap: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 28px;
   overflow-y: auto;
   overflow-x: auto;
-  
-  max-width: 100%; 
+  max-width: 100%;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
 }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fee-details-panel:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
 .fee-details-panel > * {
-  min-width: max-content;  /* ✅ forces overflow instead of shrinking */
+  min-width: max-content;
 }
+
+.fee-details-panel::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.fee-details-panel::-webkit-scrollbar-track {
+  background: #f0f4f8;
+}
+
+.fee-details-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
 /* Empty State */
 .empty-state,
 .error-state {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding-top: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 60px;
   text-align: center;
-  color: #475569;
-  padding: 40px;
+  color: #4a5568;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 .empty-icon,
 .error-icon {
-  font-size: 5rem;
-  margin-bottom: 24px;
+  font-size: 5.5rem;
+  margin-bottom: 32px;
   opacity: 0.9;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .empty-state h3,
 .error-state h3 {
-  color: #0f172a;
-  margin: 0 0 12px 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 16px 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
 }
 
 .empty-state p,
 .error-state p {
-  color: #475569;
+  color: #718096;
   margin: 0;
   font-size: 1.05rem;
   max-width: 400px;
-  line-height: 1.6;
+  line-height: 1.7;
   font-weight: 500;
 }
 
@@ -236,231 +337,355 @@
   height: 100%;
   font-size: 1.1rem;
   color: #667eea;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Student Fee Header */
 .student-fee-header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   height: fit-content;
-  padding: 16px 20px;
+  padding: 24px 28px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
+  border-radius: 16px;
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .student-fee-header h3 {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   color: white;
-  margin: 0 0 8px 0;
-  font-weight: 700;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .student-meta {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  flex-wrap: wrap;
 }
 
 .student-meta span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.student-meta span:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
 }
 
 /* Fee Summary */
 .fee-summary {
   display: grid;
   height: fit-content;
-
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
 }
 
 .summary-card {
-  padding: 20px;
+  padding: 24px;
   width: 100%;
-  border-radius: 12px;
-  background: white;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
   border: 2px solid #e2e8f0;
-  border-left: 5px solid #6b7280;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  border-left: 6px solid #6b7280;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .summary-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #cbd5e1;
 }
 
 .summary-card.paid {
-  background: white;
-  border: 2px solid #10b981;
-  border-left: 5px solid #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #86efac;
+  border-left: 6px solid #10b981;
+}
+
+.summary-card.paid:hover {
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
 }
 
 .summary-card.pending {
-  background: white;
-  border: 2px solid #f59e0b;
-  border-left: 5px solid #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #fcd34d;
+  border-left: 6px solid #f59e0b;
+}
+
+.summary-card.pending:hover {
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.25);
 }
 
 .summary-card.overdue {
-  background: white;
-  border: 2px solid #ef4444;
-  border-left: 5px solid #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fca5a5;
+  border-left: 6px solid #ef4444;
+}
+
+.summary-card.overdue:hover {
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.25);
 }
 
 .summary-label {
   font-size: 0.9rem;
-  color: #6b7280;
-  margin-bottom: 8px;
-  font-weight: 600;
+  color: #718096;
+  margin-bottom: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .summary-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #2c3e50;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #1a202c;
+  letter-spacing: -0.5px;
 }
 
 /* Messages */
 .success-message {
   background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
   color: #065f46;
-  padding: 14px 18px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  border-left: 4px solid #10b981;
-  font-weight: 500;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 5px solid #10b981;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+  animation: slideInDown 0.3s ease-out;
+  letter-spacing: 0.3px;
 }
 
 .error-message {
   background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
   color: #991b1b;
-  padding: 14px 18px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  border-left: 4px solid #ef4444;
-  font-weight: 500;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 5px solid #ef4444;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  animation: slideInDown 0.3s ease-out;
+  letter-spacing: 0.3px;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Monthly Fees Section */
 .monthly-fees-section {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .monthly-fees-section h4 {
-  font-size: 1.25rem;
-  color: #2c3e50;
-  margin: 0 0 16px 0;
-  font-weight: 600;
+  font-size: 1.35rem;
+  color: #1a202c;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  letter-spacing: -0.3px;
 }
 
 .monthly-fees-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
 }
 
 .fee-month-card {
-  padding: 18px;
-  border-radius: 12px;
-  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
   border: 2px solid #e2e8f0;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  animation: fadeInUp 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.fee-month-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
 .fee-month-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
   border-color: #cbd5e1;
 }
 
+.fee-month-card:hover::before {
+  transform: scaleX(1);
+}
+
 .fee-month-card.paid {
-  background: white;
-  border: 2px solid #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #86efac;
   border-width: 3px;
   cursor: default;
 }
 
 .fee-month-card.paid:hover {
   transform: none;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.fee-month-card.paid::before {
+  background: #10b981;
+  transform: scaleX(1);
 }
 
 .fee-month-card.pending {
-  border: 2px solid #f59e0b;
+  border: 2px solid #fcd34d;
   border-width: 3px;
-  background: #fffbeb;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
 }
 
 .fee-month-card.pending:hover {
-  border-color: #f59e0b;
+  border-color: #fcd34d;
   background: white;
+}
+
+.fee-month-card.pending::before {
+  background: #f59e0b;
 }
 
 .fee-month-card.overdue {
-  border: 2px solid #ef4444;
+  border: 2px solid #fca5a5;
   border-width: 3px;
-  background: #fef2f2;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
 }
 
 .fee-month-card.overdue:hover {
-  border-color: #ef4444;
+  border-color: #fca5a5;
   background: white;
+}
+
+.fee-month-card.overdue::before {
+  background: #ef4444;
 }
 
 .fee-month-card.selected {
   border-color: #667eea;
   border-width: 3px;
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
-  transform: translateY(-3px);
-  background: #f0f4ff;
+  transform: translateY(-6px);
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+}
+
+.fee-month-card.selected::before {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(1);
 }
 
 .fee-month-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  gap: 10px;
 }
 
 .month-name {
-  font-weight: 600;
-  font-size: 1rem;
-  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #1a202c;
+  letter-spacing: -0.2px;
 }
 
 .fee-status-badge {
-  padding: 4px 10px;
-  border-radius: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .fee-month-details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 8px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .fee-amount {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #1a202c;
   letter-spacing: -0.5px;
 }
 
@@ -468,60 +693,80 @@
 .fee-payment-date,
 .fee-receipt {
   font-size: 0.875rem;
-  color: #64748b;
-  font-weight: 500;
+  color: #718096;
+  font-weight: 600;
 }
 
 .fee-due-date {
-  color: #f59e0b;
-  font-weight: 600;
+  color: #d97706;
+  font-weight: 700;
 }
 
 .fee-payment-date {
-  color: #10b981;
-  font-weight: 600;
+  color: #059669;
+  font-weight: 700;
 }
 
 .fee-receipt {
   color: #667eea;
-  font-weight: 600;
+  font-weight: 700;
   font-family: 'Courier New', monospace;
+  background: rgba(102, 126, 234, 0.08);
+  padding: 4px 8px;
+  border-radius: 6px;
+  word-break: break-all;
 }
 
 /* Payment Form Section */
 .payment-form-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 20px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+  padding: 24px;
+  border-radius: 14px;
   border: 2px solid #e2e8f0;
-  margin-top: 24px;
+  margin-top: 28px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .payment-form-section h4 {
-  font-size: 1.25rem;
-  color: #2c3e50;
-  margin: 0 0 16px 0;
-  font-weight: 600;
+  font-size: 1.3rem;
+  color: #1a202c;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  letter-spacing: -0.3px;
 }
 
 .payment-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .payment-details {
-  background: white;
-  padding: 16px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 20px;
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .payment-info-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf2f7;
+  gap: 16px;
 }
 
 .payment-info-row:last-child {
@@ -529,79 +774,117 @@
 }
 
 .payment-info-row .label {
-  font-weight: 500;
-  color: #6b7280;
+  font-weight: 700;
+  color: #718096;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .payment-info-row .value {
-  font-weight: 600;
-  color: #2c3e50;
+  font-weight: 700;
+  color: #1a202c;
+  font-size: 1.05rem;
+  text-align: right;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .form-group label {
-  font-weight: 600;
-  color: #2c3e50;
+  font-weight: 700;
+  color: #1a202c;
   font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .receipt-input {
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: 2px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  color: #1a202c;
+  font-weight: 500;
+}
+
+.receipt-input::placeholder {
+  color: #a0aec0;
+  font-weight: 500;
 }
 
 .receipt-input:focus {
   outline: none;
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+  background: #f9fafb;
+  transform: translateY(-2px);
 }
 
 .payment-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 14px;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 .btn-cancel,
 .btn-pay {
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-cancel {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
   color: #495057;
-  border: 2px solid #dee2e6;
+  border: 2px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .btn-cancel:hover {
-  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #cbd5e1 0%, #a0aec0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #a0aec0;
+}
+
+.btn-cancel:active {
+  transform: translateY(0);
 }
 
 .btn-pay {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  border: 2px solid transparent;
 }
 
 .btn-pay:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
+}
+
+.btn-pay:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .btn-pay:disabled {
@@ -613,29 +896,33 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
   .fee-management-container {
-    padding: 20px;
+    padding: 24px;
+  }
+
+  .fee-header h2 {
+    font-size: 2rem;
   }
 
   .fee-content {
-    gap: 16px;
+    gap: 20px;
   }
 
   .fee-summary {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
+    gap: 16px;
   }
 
   .monthly-fees-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
   }
 
   .student-fee-header {
-    padding: 14px 18px;
+    padding: 20px 24px;
   }
 
   .student-fee-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .student-meta {
@@ -646,11 +933,11 @@
 
 @media (max-width: 1024px) {
   .fee-management-container {
-    padding: 18px;
+    padding: 20px;
   }
 
   .fee-header h2 {
-    font-size: 1.75rem;
+    font-size: 1.85rem;
   }
 
   .fee-header p {
@@ -658,35 +945,36 @@
   }
 
   .fee-content {
-    gap: 14px;
+    gap: 16px;
   }
 
   .student-selection-panel {
     flex: 1;
-    min-width: 300px;
+    min-width: 320px;
   }
 
   .fee-details-panel {
-    flex: 2;
+    flex: 1.5;
     min-width: 400px;
+    padding: 24px;
   }
 
   .fee-summary {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    gap: 14px;
   }
 
   .monthly-fees-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
   }
 
   .summary-card {
-    padding: 16px;
+    padding: 18px;
   }
 
   .summary-value {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .fee-month-card {
@@ -694,7 +982,16 @@
   }
 
   .fee-amount {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+  }
+
+  .student-fee-header {
+    padding: 18px 20px;
+    margin-bottom: 24px;
+  }
+
+  .student-fee-header h3 {
+    font-size: 1.5rem;
   }
 }
 
@@ -704,11 +1001,13 @@
   }
 
   .fee-header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
   }
 
   .fee-header h2 {
     font-size: 1.5rem;
+    margin-bottom: 8px;
   }
 
   .fee-header p {
@@ -722,17 +1021,27 @@
 
   .student-selection-panel {
     min-width: auto;
-    max-height: 300px;
+    max-height: 320px;
+  }
+
+  .student-selection-panel:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   }
 
   .fee-details-panel {
     min-width: auto;
     padding: 20px;
+    animation: none;
   }
 
   .student-search-wrapper {
     padding: 16px;
-    gap: 8px;
+    gap: 10px;
+  }
+
+  .student-search-wrapper::before {
+    left: 30px;
+    font-size: 16px;
   }
 
   .student-search-input {
@@ -741,15 +1050,11 @@
     font-size: 0.9rem;
   }
 
-  .student-search-wrapper::before {
-    left: 32px;
-    font-size: 16px;
-  }
-
   .refresh-button {
     min-width: 44px;
     height: 44px;
     font-size: 1.25rem;
+    flex-shrink: 0;
   }
 
   .student-list {
@@ -758,6 +1063,7 @@
 
   .student-item {
     padding: 12px;
+    margin-bottom: 8px;
   }
 
   .student-name {
@@ -771,34 +1077,48 @@
   .student-fee-header {
     padding: 16px;
     margin-bottom: 20px;
+    animation: none;
   }
 
   .student-fee-header h3 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
+    margin-bottom: 10px;
   }
 
   .student-meta {
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     font-size: 0.85rem;
   }
 
+  .student-meta span {
+    padding: 6px 10px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .fee-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 20px;
   }
 
   .summary-card {
     padding: 16px;
+    animation: none;
+  }
+
+  .summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 
   .summary-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .summary-value {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
   .monthly-fees-section {
@@ -807,19 +1127,32 @@
 
   .monthly-fees-section h4 {
     font-size: 1.1rem;
+    margin-bottom: 16px;
   }
 
   .monthly-fees-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 10px;
+    gap: 12px;
   }
 
   .fee-month-card {
     padding: 14px;
+    animation: none;
+  }
+
+  .fee-month-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .fee-month-card.paid:hover {
+    transform: none;
   }
 
   .fee-month-header {
     margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .month-name {
@@ -828,7 +1161,7 @@
 
   .fee-status-badge {
     font-size: 0.7rem;
-    padding: 3px 8px;
+    padding: 4px 10px;
   }
 
   .fee-amount {
@@ -841,13 +1174,22 @@
     font-size: 0.8rem;
   }
 
+  .success-message,
+  .error-message {
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+  }
+
   .payment-form-section {
     padding: 16px;
     margin-top: 20px;
+    animation: none;
   }
 
   .payment-form-section h4 {
     font-size: 1.1rem;
+    margin-bottom: 16px;
   }
 
   .payment-details {
@@ -855,7 +1197,15 @@
   }
 
   .payment-info-row {
-    padding: 6px 0;
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .payment-info-row .value {
+    text-align: left;
+    width: 100%;
   }
 
   .form-group label {
@@ -863,19 +1213,22 @@
   }
 
   .receipt-input {
-    padding: 10px 14px;
+    padding: 11px 14px;
     font-size: 0.95rem;
   }
 
   .payment-actions {
     gap: 10px;
     margin-top: 12px;
+    flex-wrap: wrap;
   }
 
   .btn-cancel,
   .btn-pay {
-    padding: 10px 20px;
+    padding: 11px 20px;
     font-size: 0.9rem;
+    flex: 1;
+    min-width: 140px;
   }
 }
 
@@ -884,8 +1237,14 @@
     padding: 12px;
   }
 
+  .fee-header {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+  }
+
   .fee-header h2 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
+    margin-bottom: 6px;
   }
 
   .fee-header p {
@@ -902,10 +1261,11 @@
     padding: 10px 12px;
     padding-left: 40px;
     font-size: 0.85rem;
+    width: 100%;
   }
 
   .student-search-wrapper::before {
-    left: 28px;
+    left: 26px;
     font-size: 14px;
   }
 
@@ -922,6 +1282,7 @@
 
   .student-item {
     padding: 10px;
+    margin-bottom: 6px;
   }
 
   .student-name {
@@ -934,6 +1295,29 @@
 
   .fee-details-panel {
     padding: 16px;
+    border-radius: 12px;
+  }
+
+  .empty-state,
+  .error-state {
+    padding: 32px 16px;
+  }
+
+  .empty-icon,
+  .error-icon {
+    font-size: 4rem;
+    margin-bottom: 24px;
+  }
+
+  .empty-state h3,
+  .error-state h3 {
+    font-size: 1.3rem;
+  }
+
+  .empty-state p,
+  .error-state p {
+    font-size: 0.9rem;
+    max-width: none;
   }
 
   .student-fee-header {
@@ -942,14 +1326,21 @@
   }
 
   .student-fee-header h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
   }
 
   .student-meta {
     font-size: 0.8rem;
+    gap: 8px;
+  }
+
+  .student-meta span {
+    padding: 5px 8px;
   }
 
   .fee-summary {
+    grid-template-columns: 1fr;
     gap: 10px;
     margin-bottom: 16px;
   }
@@ -960,23 +1351,33 @@
 
   .summary-label {
     font-size: 0.8rem;
+    margin-bottom: 6px;
   }
 
   .summary-value {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .monthly-fees-section {
+    margin-bottom: 18px;
   }
 
   .monthly-fees-section h4 {
     font-size: 1rem;
+    margin-bottom: 12px;
   }
 
   .monthly-fees-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 10px;
   }
 
   .fee-month-card {
     padding: 12px;
+  }
+
+  .fee-month-header {
+    gap: 6px;
   }
 
   .month-name {
@@ -985,11 +1386,11 @@
 
   .fee-status-badge {
     font-size: 0.65rem;
-    padding: 2px 6px;
+    padding: 3px 6px;
   }
 
   .fee-amount {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   .fee-due-date,
@@ -998,25 +1399,43 @@
     font-size: 0.75rem;
   }
 
+  .success-message,
+  .error-message {
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    border-left-width: 4px;
+  }
+
   .payment-form-section {
     padding: 14px;
     margin-top: 16px;
+    border-radius: 12px;
   }
 
   .payment-form-section h4 {
     font-size: 1rem;
+    margin-bottom: 14px;
   }
 
   .payment-details {
     padding: 12px;
   }
 
+  .payment-info-row {
+    padding: 8px 0;
+  }
+
   .payment-info-row .label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .payment-info-row .value {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    gap: 6px;
   }
 
   .form-group label {
@@ -1037,8 +1456,10 @@
   .btn-cancel,
   .btn-pay {
     width: 100%;
-    padding: 12px 16px;
-    font-size: 0.9rem;
+    padding: 11px 16px;
+    font-size: 0.85rem;
+    flex: unset;
+    min-width: unset;
   }
 }
 
@@ -1049,14 +1470,21 @@
 
   .fee-header {
     margin-bottom: 16px;
+    padding-bottom: 12px;
   }
 
   .fee-header h2 {
     font-size: 1.2rem;
+    margin-bottom: 4px;
   }
 
   .fee-header p {
     font-size: 0.8rem;
+  }
+
+  .student-selection-panel {
+    border-radius: 12px;
+    max-height: 300px;
   }
 
   .student-search-wrapper {
@@ -1070,7 +1498,7 @@
   }
 
   .student-search-wrapper::before {
-    left: 24px;
+    left: 22px;
     font-size: 12px;
   }
 
@@ -1091,6 +1519,7 @@
 
   .student-name {
     font-size: 0.85rem;
+    font-weight: 600;
   }
 
   .student-details {
@@ -1099,6 +1528,7 @@
 
   .fee-details-panel {
     padding: 12px;
+    border-radius: 12px;
   }
 
   .empty-state,
@@ -1109,34 +1539,42 @@
   .empty-icon,
   .error-icon {
     font-size: 3rem;
+    margin-bottom: 20px;
   }
 
   .empty-state h3,
   .error-state h3 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   .empty-state p,
   .error-state p {
-    font-size: 0.9rem;
-    max-width: none;
+    font-size: 0.85rem;
   }
 
   .loading-state {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .student-fee-header {
     padding: 12px;
     margin-bottom: 12px;
+    border-radius: 12px;
   }
 
   .student-fee-header h3 {
     font-size: 1.1rem;
+    margin-bottom: 8px;
   }
 
   .student-meta {
     font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .student-meta span {
+    padding: 4px 6px;
+    font-size: 0.7rem;
   }
 
   .fee-summary {
@@ -1146,10 +1584,12 @@
 
   .summary-card {
     padding: 12px;
+    border-radius: 10px;
   }
 
   .summary-label {
     font-size: 0.75rem;
+    margin-bottom: 4px;
   }
 
   .summary-value {
@@ -1162,14 +1602,16 @@
 
   .monthly-fees-section h4 {
     font-size: 0.95rem;
+    margin-bottom: 10px;
   }
 
   .monthly-fees-grid {
-    gap: 6px;
+    gap: 8px;
   }
 
   .fee-month-card {
     padding: 10px;
+    border-radius: 10px;
   }
 
   .fee-month-header {
@@ -1182,7 +1624,7 @@
 
   .fee-status-badge {
     font-size: 0.6rem;
-    padding: 2px 4px;
+    padding: 2px 5px;
   }
 
   .fee-month-details {
@@ -1191,7 +1633,7 @@
   }
 
   .fee-amount {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .fee-due-date,
@@ -1202,18 +1644,20 @@
 
   .success-message,
   .error-message {
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
   }
 
   .payment-form-section {
     padding: 12px;
     margin-top: 12px;
+    border-radius: 10px;
   }
 
   .payment-form-section h4 {
     font-size: 0.95rem;
+    margin-bottom: 12px;
   }
 
   .payment-form {
@@ -1222,22 +1666,24 @@
 
   .payment-details {
     padding: 10px;
+    border-radius: 8px;
   }
 
   .payment-info-row {
-    padding: 4px 0;
+    padding: 6px 0;
+    gap: 8px;
   }
 
   .payment-info-row .label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .payment-info-row .value {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .form-group {
-    gap: 6px;
+    gap: 5px;
   }
 
   .form-group label {
@@ -1247,6 +1693,7 @@
   .receipt-input {
     padding: 6px 10px;
     font-size: 0.85rem;
+    border-radius: 8px;
   }
 
   .payment-actions {
@@ -1257,7 +1704,8 @@
   .btn-cancel,
   .btn-pay {
     padding: 10px 14px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
   }
 }
 

@@ -449,18 +449,34 @@ export class AdminService {
   // ============ Statistics ============
   
   // Calculate statistics from data
-  static calculateStats(students: StudentResponse[], teachers: TeacherResponse[], classes: ClassInfoResponse[]) {
-    const totalStudents = students.length;
-    const activeStudents = students.filter(s => s.status === 'ACTIVE').length;
+  static calculateStats(students: StudentResponse[], teachers: TeacherResponse[], 
+    classes: ClassInfoResponse[]) 
+  {
+    // const classWiseCurrentSessionStudents = classes.map(cls => {
+    //   //console.log(cls)
+    //   const classStudents = students.filter(s => s.classId === cls.id);
+    //   return classStudents;   
+    // });
+
+    const classWiseCurrentSessionStudents = classes.flatMap(cls => {
+      return students
+        .filter(s => s.classId === cls.id);
+    });
+
+    //console.log("classWiseCurrentSessionStudents >>> " , classWiseCurrentSessionStudents);
+    const totalStudents = classWiseCurrentSessionStudents.length;
+    //console.log(">>> " , totalStudents);
+
+    const activeStudents = classWiseCurrentSessionStudents.filter(s => s.status === 'ACTIVE').length;
     const totalTeachers = teachers.length;
     const activeTeachers = teachers.filter(t => t.status === 'ACTIVE').length;
     
     // Fee collection calculation
-    const paidStudents = students.filter(s => s.feeStatus === 'PAID').length;
+    const paidStudents = classWiseCurrentSessionStudents.filter(s => s.feeStatus === 'PAID').length;
     const feeCollectionRate = totalStudents > 0 ? Math.round((paidStudents / totalStudents) * 100) : 0;
     
     // Pending requests (students with pending fee status)
-    const pendingRequests = students.filter(s => s.feeStatus === 'PENDING' || s.feeStatus === 'OVERDUE').length;
+    const pendingRequests = classWiseCurrentSessionStudents.filter(s => s.feeStatus === 'PENDING' || s.feeStatus === 'OVERDUE').length;
     
     return {
       totalStudents,

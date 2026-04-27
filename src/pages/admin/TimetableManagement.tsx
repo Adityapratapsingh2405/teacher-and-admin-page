@@ -5,6 +5,8 @@ import { ClassService } from '../../services/classService';
 import { TeacherService } from '../../services/teacherService';
 import { SubjectService } from '../../services/subjectService';
 import PeriodSettingsService, { PeriodSettings } from '../../services/periodSettingsService';
+import { useSelector } from 'react-redux';
+import { ClassInfoResponse } from '../../services/adminService';
 
 interface Teacher {
   id: number;
@@ -42,7 +44,11 @@ interface TimetableSlot {
 }
 
 const TimetableManagement: React.FC = () => {
-  const [classes, setClasses] = useState<Class[]>([]);
+  // const [classes, setClasses] = useState<Class[]>([]);
+   const { classes } = useSelector(
+      (store: any): { classes: ClassInfoResponse[];} =>
+        store.data.value
+    );
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -178,7 +184,7 @@ const TimetableManagement: React.FC = () => {
   // Load period settings and classes on mount
   useEffect(() => {
     loadPeriodSettings();
-    loadClasses();
+    //loadClasses();
   }, []);
 
   // Load teachers and subjects when class is selected
@@ -189,25 +195,25 @@ const TimetableManagement: React.FC = () => {
     }
   }, [selectedClass]);
 
-  const loadClasses = async () => {
-    try {
-      setLoading(true);
-      const response = await ClassService.getAllClasses();
-      // Map the response to include section property
-      const mappedClasses = (response || []).map((cls: any) => ({
-        id: cls.id,
-        className: cls.className,
-        section: cls.section || 'A',
-        classTeacherId: cls.classTeacherId,
-        classTeacherName: cls.classTeacherName
-      }));
-      setClasses(mappedClasses);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load classes');
-    } finally {
-      setLoading(false);
-    }
-  };
+ // const loadClasses = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await ClassService.getAllClasses();
+  //     // Map the response to include section property
+  //     const mappedClasses = (response || []).map((cls: any) => ({
+  //       id: cls.id,
+  //       className: cls.className,
+  //       section: cls.section || 'A',
+  //       classTeacherId: cls.classTeacherId,
+  //       classTeacherName: cls.classTeacherName
+  //     }));
+  //     setClasses(mappedClasses);
+  //   } catch (err: any) {
+  //     setError(err.message || 'Failed to load classes');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const loadTeachersAndSubjects = async () => {
     if (!selectedClass) return;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SubjectService, { SubjectResponse } from '../../services/subjectService';
 import AdminService, { ClassInfoResponse, TeacherResponse } from '../../services/adminService';
 import './SubjectManagement.css';
+import { useSelector } from 'react-redux';
 
 interface SubjectFormData {
   id?: number;
@@ -16,10 +17,18 @@ interface BulkSubjectItem {
   teacherId: number;
 }
 
-const SubjectManagement: React.FC = () => {
+const SubjectManagement: React.FC = () => 
+{
+
+   const { classes , teachers } = useSelector(
+      (store: any): { classes: ClassInfoResponse[];
+                      teachers:TeacherResponse[]; } =>
+        store.data.value
+    );
+
   const [subjects, setSubjects] = useState<SubjectResponse[]>([]);
-  const [classes, setClasses] = useState<ClassInfoResponse[]>([]);
-  const [teachers, setTeachers] = useState<TeacherResponse[]>([]);
+  // const [classes, setClasses] = useState<ClassInfoResponse[]>([]);
+  // const [teachers, setTeachers] = useState<TeacherResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -41,8 +50,8 @@ const SubjectManagement: React.FC = () => {
 
   useEffect(() => {
     fetchSubjects();
-    fetchClasses();
-    fetchTeachers();
+    // fetchClasses();
+    // fetchTeachers();
   }, []);
 
   const fetchSubjects = async () => {
@@ -58,23 +67,23 @@ const SubjectManagement: React.FC = () => {
     }
   };
 
-  const fetchClasses = async () => {
-    try {
-      const data = await AdminService.getAllClasses();
-      setClasses(data);
-    } catch (err: any) {
-      console.error('Error fetching classes:', err);
-    }
-  };
+  // const fetchClasses = async () => {
+  //   try {
+  //     const data = await AdminService.getAllClasses();
+  //     setClasses(data);
+  //   } catch (err: any) {
+  //     console.error('Error fetching classes:', err);
+  //   }
+  // };
 
-  const fetchTeachers = async () => {
-    try {
-      const data = await AdminService.getAllTeachers();
-      setTeachers(data);
-    } catch (err: any) {
-      console.error('Error fetching teachers:', err);
-    }
-  };
+  // const fetchTeachers = async () => {
+  //   try {
+  //     const data = await AdminService.getAllTeachers();
+  //     setTeachers(data);
+  //   } catch (err: any) {
+  //     console.error('Error fetching teachers:', err);
+  //   }
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { FeeService, FeeCatalog, MonthlyFee, FeePaymentData } from '../../services/feeService';
 import AdminService, { StudentResponse } from '../../services/adminService';
 import './FeeManagement.css';
+import { useSelector } from 'react-redux';
 
-const FeeManagement: React.FC = () => {
-  const [students, setStudents] = useState<StudentResponse[]>([]);
+const FeeManagement: React.FC = () => 
+{
+  // const [students, setStudents] = useState<StudentResponse[]>([]);
+   const { students } = useSelector(
+    (store: any): { students: StudentResponse[];} =>
+      store.data.value
+  );
   const [selectedStudent, setSelectedStudent] = useState<StudentResponse | null>(null);
   const [feeCatalog, setFeeCatalog] = useState<FeeCatalog | null>(null);
   const [loading, setLoading] = useState(false);
@@ -16,12 +22,10 @@ const FeeManagement: React.FC = () => {
   const [receiptNumber, setReceiptNumber] = useState('');
 
   useEffect(() => {
-    loadStudents();
-
     // Reload students when window/tab regains focus
     const handleFocus = () => {
       console.log('Tab focused, reloading students...');
-      loadStudents();
+      //loadStudents();
     };
 
     window.addEventListener('focus', handleFocus);
@@ -31,18 +35,18 @@ const FeeManagement: React.FC = () => {
     };
   }, []);
 
-  const loadStudents = async () => {
-    setLoading(true);
-    try {
-      const data = await AdminService.getAllStudents();
-      // console.log('Loaded students:', data);
-      setStudents(data);
-    } catch (error: any) {
-      setErrorMessage(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const loadStudents = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const data = await AdminService.getAllStudents();
+  //     // console.log('Loaded students:', data);
+  //     setStudents(data);
+  //   } catch (error: any) {
+  //     setErrorMessage(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleStudentSelect = async (student: StudentResponse) => {
     setSelectedStudent(student);
@@ -154,7 +158,7 @@ const FeeManagement: React.FC = () => {
             />
             <button 
               className="refresh-button"
-              onClick={loadStudents}
+              // onClick={loadStudents}
               disabled={loading}
               title="Refresh student list"
             >
@@ -201,7 +205,10 @@ const FeeManagement: React.FC = () => {
               <p>Choose a student from the list to view and manage their fees</p>
             </div>
           ) : loading ? (
-            <div className="loading-state">Loading fee details...</div>
+            <div className="empty-state">
+              <div className="empty-icon"></div>
+              <h3>Loading Fees Details ...</h3>
+            </div>
           ) : feeCatalog ? (
             <>
               <div className="student-fee-header">
