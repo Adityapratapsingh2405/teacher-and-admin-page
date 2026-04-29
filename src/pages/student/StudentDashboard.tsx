@@ -23,6 +23,7 @@ import CloudinaryUploadWidget from '../../components/CloudinaryUploadWidget';
 import MarksheetTable from '../../components/MarksheetTable';
 import PreviousSchoolingTable from '../../components/PreviousSchoolingTable';
 import PasswordResetModal from '../../components/PasswordResetModal';
+import AdminService from '../../services/adminService';
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -91,6 +92,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
   const [myLeaveRequests, setMyLeaveRequests] = useState<StudentLeaveResponse[]>([]);
   const [myQueries, setMyQueries] = useState<StudentQueryResponse[]>([]);
   const [selectedQueryTeacher, setSelectedQueryTeacher] = useState<number | null>(null);
+
+  const [routeRecords,setRouteRecords] = useState<any[]>([]);
 
   // State for real data from API
   const [student, setStudent] = useState<any>(null);
@@ -458,7 +461,14 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
       }
     };
     fetchTCRequests();
+    fetchTransData();
   }, []);
+
+  const fetchTransData = async()=>{
+      const rec = await AdminService.transList();
+      console.log(rec);
+      setRouteRecords(rec);
+    }
 
   // Handle TC form submission
   const handleSubmitTCRequest = async () => {
@@ -617,10 +627,10 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
 
   // Video lectures and gallery are now fetched from backend - removed static data
 
-  const routes: VehicleRoute[] = [
-    { id: 'r1', route: 'Route 1 - Sector 21', pickup: '07:10 AM', drop: '02:30 PM', note: 'Expect delay on Mondays' },
-    { id: 'r2', route: 'Route 2 - City Center', pickup: '07:25 AM', drop: '02:45 PM' },
-  ];
+  // const routes: VehicleRoute[] = [
+  //   { id: 'r1', route: 'Route 1 - Sector 21', pickup: '07:10 AM', drop: '02:30 PM', note: 'Expect delay on Mondays' },
+  //   { id: 'r2', route: 'Route 2 - City Center', pickup: '07:25 AM', drop: '02:45 PM' },
+  // ];
 
   // @ts-ignore - Used for future feature
   const previousRecords: PreviousClassRecord[] = [
@@ -981,7 +991,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
               </div>
               <div className="student-info">
                 <h2>{student?.name || 'Student'}</h2>
-                <p>Class: {student?.currentClass || 'N/A'}-{student.section} • PEN: {student?.pan || 'N/A'}</p>
+                <p>Class: {student?.currentClass || 'N/A'}-{student?.section} • PEN: {student?.pan || 'N/A'}</p>
               </div>
             </div>
             <div className='ln-card'>
@@ -2488,8 +2498,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
           <section className="attendance-section">
             <SectionHeader icon="" title="Vehicle Route Timing" />
             <div className="fees-info">
-              {routes.map(r => (
-                <p key={r.id}><strong>{r.route}:</strong> Pickup {r.pickup} • Drop {r.drop} {r.note ? `• ${r.note}` : ''}</p>
+              {routeRecords.map((r:any,i:number) => (
+                <p key={i+1}><strong>{r.routeTitle}:</strong> Pickup {r.pickUpLocation} ({r.pickUpTime}) • Drop {r.dropTime} {r.note ? `• ${r.note}` : ''}</p>
               ))}
             </div>
           </section>

@@ -76,6 +76,14 @@ export interface ClassInfoResponse {
   classTeacherName?: string;
 }
 
+export type TransDataType = {  
+  routeTitle: string | null;
+  pickUpLocation: string | null;
+  pickUpTime: string | null;
+  dropTime: string | null;
+  note: string | null;
+};
+
 type BulkStudentDataType = {  
   panNumber: string | null;
   name: string | null;
@@ -95,6 +103,45 @@ type BulkTeacherDataType = {
 
 export class AdminService {
   // ============ Student APIs ============
+
+  // Trans List
+  static async transList(): Promise<any[]>
+  {
+    try{
+      const response = await api.get('/trans/list');
+      return response.data.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Transport List Failed';
+     return message;
+    }
+  }
+
+  // Trans Save
+  static async transSave(data:TransDataType): Promise<any[]>
+  {
+    try{
+      console.log(">>>",data)
+      const response = await api.post('/admin/transsave',data);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Transport Not Save';
+
+     return message;
+    }
+  }
+
+
+// School List
+  static async schoolsList(): Promise<any[]>
+  {
+    try{
+      const response = await api.get('/dev/schools');
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Save';
+     return message;
+    }
+  }
 
   // Bulk-Student Entry
   static async bulkStudents(data:BulkStudentDataType): Promise<string>

@@ -35,6 +35,7 @@ import {
 
 import {setData} from '../../redux/DataSlice';
 import { useDispatch, useSelector } from "react-redux";
+import TransportManagement from './TransportManagement';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -1977,6 +1978,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         return <HolidayManagement />;
       case 'grade-management':
         return <GradeManagement />;
+      case 'transport':
+        return <TransportManagement/>;  
       default:
         return renderOverview();
     }
@@ -2124,6 +2127,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               onClick={() => setActiveTab('grade-management')}
             >
               Grade Management
+            </button>
+            <button
+              className={`nav-item ${activeTab === 'transport' ? 'active' : ''}`}
+              onClick={() => setActiveTab('transport')}
+            >
+             Transport
             </button>
           </nav>
         </aside>

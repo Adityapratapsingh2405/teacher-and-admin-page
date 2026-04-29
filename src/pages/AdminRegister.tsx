@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CloudinaryUploadWidget from '../components/CloudinaryUploadWidget';
 import './AdminRegister.css';
+import SchoolList from './SchoolListPopUp';
 
 interface AdminRegisterForm {
   // Admin Details
@@ -23,13 +24,16 @@ interface AdminRegisterForm {
   schoolTagline: string;
 }
 
-const AdminRegister: React.FC = () => {
+const AdminRegister: React.FC = () => 
+{
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const [step, setStep] = useState(1); // 1 for admin details, 2 for school details
   const [isDeveloperMode, setIsDeveloperMode] = useState(false);
+
+  const [isSchoolList,setIsSchoolList] = useState(false);  
 
   useEffect(() => {
     // Check if user is logged in as developer
@@ -243,7 +247,13 @@ const AdminRegister: React.FC = () => {
             {success}
           </div>
         )}
-
+        <button
+                  type="button"
+                  className="btn btn-primary mt-3 ml-3"
+                  onClick={()=>setIsSchoolList(true)} 
+                >
+                  Show Schools <i className="fas fa-arrow-right"></i>
+                </button>
         <form onSubmit={handleSubmit} className="register-form">
           {step === 1 && (
             <div className="form-step">
@@ -599,6 +609,9 @@ const AdminRegister: React.FC = () => {
           )}
         </div>
       </div>
+      {isSchoolList && (
+        <SchoolList onClose={() => setIsSchoolList(false)} />
+      )}
     </div>
   );
 };
