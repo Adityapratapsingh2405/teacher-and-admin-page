@@ -3,6 +3,7 @@ import { FeeService, FeeCatalog, MonthlyFee, FeePaymentData } from '../../servic
 import AdminService, { StudentResponse } from '../../services/adminService';
 import './FeeManagement.css';
 import { useSelector } from 'react-redux';
+import AdmitCard from './AdmitCardPopUp';
 
 const FeeManagement: React.FC = () => 
 {
@@ -20,6 +21,8 @@ const FeeManagement: React.FC = () =>
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedMonth, setSelectedMonth] = useState<MonthlyFee | null>(null);
   const [receiptNumber, setReceiptNumber] = useState('');
+
+  const [adminCardShow,setAdminCardShow] = useState(false);
 
   useEffect(() => {
     // Reload students when window/tab regains focus
@@ -244,6 +247,16 @@ const FeeManagement: React.FC = () =>
                 </div>
               </div>
 
+              <div className="summary-card overdue">
+                  <div className="summary-label">
+                    <b>Admin Card</b>
+                  </div>
+                  <div className="summary-value">
+                    <button className='btn btn-success' onClick={()=>setAdminCardShow(true)}>View Card</button>
+                  </div>
+              </div>
+              <br/>
+
               {/* Messages */}
               {successMessage && (
                 <div className="success-message">
@@ -359,6 +372,9 @@ const FeeManagement: React.FC = () =>
           )}
         </div>
       </div>
+      {adminCardShow && (
+        <AdmitCard onClose={() => setAdminCardShow(false)}  student={selectedStudent}/>
+      )}
     </div>
   );
 };

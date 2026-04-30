@@ -143,6 +143,17 @@ export class AdminService {
     }
   }
 
+  static async school(id:any): Promise<any[]>
+  {
+    try{
+      const response = await api.get(`/dev/school/${id}`);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Found';
+     return message;
+    }
+  }
+
   // Bulk-Student Entry
   static async bulkStudents(data:BulkStudentDataType): Promise<string>
   {
