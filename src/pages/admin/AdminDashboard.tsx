@@ -2123,17 +2123,18 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               Holidays
             </button>
             <button
-              className={`nav-item ${activeTab === 'grade-management' ? 'active' : ''}`}
-              onClick={() => setActiveTab('grade-management')}
-            >
-              Grade Management
-            </button>
-            <button
               className={`nav-item ${activeTab === 'transport' ? 'active' : ''}`}
               onClick={() => setActiveTab('transport')}
             >
              Transport
             </button>
+            <button
+              className={`nav-item ${activeTab === 'grade-management' ? 'active' : ''}`}
+              onClick={() => setActiveTab('grade-management')}
+            >
+              Grade Management
+            </button>
+            
           </nav>
         </aside>
 

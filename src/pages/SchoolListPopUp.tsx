@@ -9,16 +9,25 @@ interface BulkEntryProps {
 
 const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) => 
 { 
+  const [isload , setIsLoad] = useState(false);
+  const [schools, setSchools] = useState<any[]>([]);
+
   useEffect(()=>{
     fetchSchool();
   },[]);
 
-  const [schools, setSchools] = useState<any[]>([]);
+  const deactivate = async(id:any)=>{
+     const res = await AdminService.deactiveSchool(id);
+     fetchSchool();
+  }
+ 
 
   const fetchSchool = async()=>{
+    setIsLoad(true);
     const res = await AdminService.schoolsList();
     console.log(res);
-    setSchools(res)
+    setSchools(res);
+    setIsLoad(false);
   }
   return (
     <div className="bulk-overlay">
@@ -34,7 +43,7 @@ const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) =>
 
         {/* BODY */}
         <div className="bulk-body">
-          {/* DOWNLOAD SECTION */}  
+          {isload?<b>Loading School Records ....</b>:""}<br/>
           <table className="table">
             <thead>
               <tr>
@@ -43,6 +52,7 @@ const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) =>
                 <th>Email</th>
                 <th>Contact</th>
                 <th>WebSite</th>
+                <th>Deactivate</th>
               </tr>
             </thead>
             <tbody>
@@ -56,6 +66,9 @@ const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) =>
                 <td>{ob.schoolContactNumber}</td>
                 <td>
                   <a href={ob.schoolWebsite} target="_blank">{ob.schoolWebsite}</a>
+                </td>
+                <td>
+                  <button className="btn-sm btn-primary" onClick={()=>deactivate(ob.id)}>Deactivate</button>
                 </td>
               </tr>)}
             </tbody>

@@ -143,6 +143,17 @@ export class AdminService {
     }
   }
 
+  static async deactiveSchool(id:any): Promise<any[]>
+  {
+    try{
+      const response = await api.get('/dev/deactiveschool/'+id);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Save';
+     return message;
+    }
+  }
+
   static async school(id:any): Promise<any[]>
   {
     try{
