@@ -1,0 +1,149 @@
+.transport-page {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.transport-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(44, 62, 86, 0.08);
+  border: 1px solid rgba(100, 116, 139, 0.12);
+  padding: 28px 26px;
+  margin-bottom: 24px;
+}
+
+.transport-card h3 {
+  margin-bottom: 18px;
+  font-size: clamp(1.35rem, 1.8vw, 1.8rem);
+  letter-spacing: -0.02em;
+  color: #1f2937;
+}
+
+.transport-card .section-note {
+  color: #475569;
+  font-size: 0.96rem;
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.transport-form {
+  display: grid;
+  gap: 18px;
+}
+
+.transport-form-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.transport-form-row.wide {
+  grid-template-columns: 1fr 2fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-control {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d2d6dc;
+  background-color: #f8fafc;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3f5efb;
+  box-shadow: 0 0 0 4px rgba(63, 94, 251, 0.12);
+  background-color: #ffffff;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-actions .btn {
+  min-width: 170px;
+}
+
+.transport-table-container {
+  overflow-x: auto;
+}
+
+.transport-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.transport-table th,
+.transport-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transport-table thead th {
+  background: #f3f4f6;
+  color: #1f2937;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.transport-table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.transport-table tbody td {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.transport-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 960px) {
+  .transport-page {
+    padding: 22px 16px 32px;
+  }
+
+  .transport-form-row,
+  .transport-form-row.wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .transport-card {
+    padding: 20px;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .transport-table {
+    min-width: 100%;
+  }
+}
