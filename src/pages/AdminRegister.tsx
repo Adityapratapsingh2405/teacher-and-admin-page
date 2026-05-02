@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import CloudinaryUploadWidget from '../components/CloudinaryUploadWidget';
 import './AdminRegister.css';
 import SchoolList from './SchoolListPopUp';
+import SchoolDeactiveList from './SchoolDeactiveListPopUp';
 
 interface AdminRegisterForm {
   // Admin Details
@@ -34,6 +35,7 @@ const AdminRegister: React.FC = () =>
   const [isDeveloperMode, setIsDeveloperMode] = useState(false);
 
   const [isSchoolList,setIsSchoolList] = useState(false);  
+  const [isDeactiveSchoolList,setIsDeactiveSchoolList] = useState(false);  
 
   useEffect(() => {
     // Check if user is logged in as developer
@@ -253,6 +255,14 @@ const AdminRegister: React.FC = () =>
                   onClick={()=>setIsSchoolList(true)} 
                 >
                   Show Schools <i className="fas fa-arrow-right"></i>
+                </button>
+        &nbsp;
+         <button
+                  type="button"
+                  className="btn btn-primary mt-3 ml-3"
+                  onClick={()=>setIsDeactiveSchoolList(true)} 
+                >
+                  Show Deactive Schools <i className="fas fa-arrow-right"></i>
                 </button>
         <form onSubmit={handleSubmit} className="register-form">
           {step === 1 && (
@@ -611,6 +621,10 @@ const AdminRegister: React.FC = () =>
       </div>
       {isSchoolList && (
         <SchoolList onClose={() => setIsSchoolList(false)} />
+      )}
+
+      {isDeactiveSchoolList && (
+        <SchoolDeactiveList onClose={() => setIsDeactiveSchoolList(false)} />
       )}
     </div>
   );

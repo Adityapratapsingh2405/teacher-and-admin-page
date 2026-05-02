@@ -142,11 +142,32 @@ export class AdminService {
      return message;
     }
   }
+   static async schoolsDeactiveList(): Promise<any[]>
+  {
+    try{
+      const response = await api.get('/dev/deactiveschools');
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Save';
+     return message;
+    }
+  }
 
   static async deactiveSchool(id:any): Promise<any[]>
   {
     try{
       const response = await api.get('/dev/deactiveschool/'+id);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Student Not Save';
+     return message;
+    }
+  }
+
+   static async activeSchool(id:any): Promise<any[]>
+  {
+    try{
+      const response = await api.get('/dev/activeschool/'+id);
       return response.data;
     }catch (error: any) {
       const message = error.response?.data?.message || error.message || 'Student Not Save';
