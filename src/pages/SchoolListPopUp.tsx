@@ -21,6 +21,7 @@ const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) =>
      if(status)
      {
       const res = await AdminService.deactiveSchool(id);
+      console.log(res);
       fetchSchool();
      }
   }

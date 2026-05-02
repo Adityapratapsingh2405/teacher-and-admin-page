@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./SchoolDeactiveList.css";
+import "./SchoolList.css";
 
 import {AdminService} from '../services/adminService';
 
