@@ -31,7 +31,7 @@ const TransportManagement = () =>
     };
     console.log(ob);
     const res = await AdminService.transSave(ob);
-    console.log(">>> ",res);
+    fetchData();
   }
 
   function convertTo12Hour(time: any) {

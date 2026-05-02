@@ -17,8 +17,12 @@ const SchoolList: React.FC<BulkEntryProps> = ({ onClose }) =>
   },[]);
 
   const deactivate = async(id:any)=>{
-     const res = await AdminService.deactiveSchool(id);
-     fetchSchool();
+     const status = confirm("Are You Sure To Deactivate ?");
+     if(status)
+     {
+      const res = await AdminService.deactiveSchool(id);
+      fetchSchool();
+     }
   }
  
 
