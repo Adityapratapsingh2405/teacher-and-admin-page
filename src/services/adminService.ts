@@ -130,6 +130,30 @@ export class AdminService {
     }
   }
 
+  static async transDelete(id:any): Promise<any[]>
+  {
+    try{
+      
+      const response = await api.delete(`/admin/transdelete/${id}`);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Transport Not Save';
+     return message;
+    }
+  }
+
+  static async transUpdate(data:TransDataType,id:any): Promise<any[]>
+  {
+    try{
+      
+      const response = await api.put(`/admin/transupdate/${id}`,data);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Transport Not Save';
+     return message;
+    }
+  }
+
 
 // School List
   static async schoolsList(): Promise<any[]>

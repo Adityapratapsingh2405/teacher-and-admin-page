@@ -249,9 +249,10 @@ const AdminRegister: React.FC = () =>
             {success}
           </div>
         )}
-        <button
+        <div className='mt-3 row ml-3 mr-3'>
+          <button
                   type="button"
-                  className="btn btn-primary mt-3 ml-3"
+                  className="btn btn-primary ml-3"
                   onClick={()=>setIsSchoolList(true)} 
                 >
                   Show Schools <i className="fas fa-arrow-right"></i>
@@ -259,11 +260,12 @@ const AdminRegister: React.FC = () =>
         &nbsp;
          <button
                   type="button"
-                  className="btn btn-primary mt-3 ml-3"
+                  className="btn btn-primary ml-3"
                   onClick={()=>setIsDeactiveSchoolList(true)} 
                 >
                   Show Deactive Schools <i className="fas fa-arrow-right"></i>
                 </button>
+        </div>
         <form onSubmit={handleSubmit} className="register-form">
           {step === 1 && (
             <div className="form-step">
