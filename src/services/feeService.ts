@@ -34,6 +34,38 @@ export interface MonthlyFee {
 }
 
 export class FeeService {
+
+ static async editFees(receipt:any,amt:any) {
+    try {
+      const response = await api.put(`/fees/edit/${amt}/${receipt}`);
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to edit fee structure');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to create fee structure';
+      throw new Error(message);
+    }
+  }
+
+  static async deleteFees(receipt:any) {
+    try {
+      const response = await api.delete(`/fees/delete/${receipt}`);
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to delete fee structure');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to create fee structure';
+      throw new Error(message);
+    }
+  }
+
+
+
+
   // Create fee structure
   static async createFeeStructure(feeStructureData: FeeStructureData) {
     try {

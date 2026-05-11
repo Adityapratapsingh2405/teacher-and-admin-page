@@ -51,7 +51,9 @@ const FeeManagement: React.FC = () =>
   //   }
   // };
 
-  const handleStudentSelect = async (student: StudentResponse) => {
+  const handleStudentSelect = async (student: StudentResponse | null) => {
+    if(student==null)
+      return;
     setSelectedStudent(student);
     setSuccessMessage('');
     setErrorMessage('');
@@ -140,6 +142,26 @@ const FeeManagement: React.FC = () =>
       default: return '○';
     }
   };
+
+  const editFees = async (rec:any)=>
+  {
+    console.log(rec);
+    const amt = prompt("Enter Fees Amount");
+    const receipt = rec.receiptNumber;
+    await FeeService.editFees(receipt,amt);
+    await handleStudentSelect(selectedStudent);
+  }
+   const delFees = async (rec:any)=>
+  {
+    console.log(rec);
+    const status = confirm("Are You Sure To Delete ?");
+    const receipt = rec.receiptNumber;
+    if(status){
+      console.log("aaya")
+      await FeeService.deleteFees(receipt);
+      await handleStudentSelect(selectedStudent);
+    }
+  }
 
   return (
     <div className="fee-management-container">
@@ -281,6 +303,24 @@ const FeeManagement: React.FC = () =>
                     >
                       <div className="fee-month-header">
                         <span className="month-name">{monthFee.month}</span>
+
+                        {monthFee.status=='paid'?<>
+                        <span
+                          onClick={()=>editFees(monthFee)}
+                          className="fee-status-badge"
+                          style={{ backgroundColor: 'white',fontSize:'15px',cursor:'pointer' }}
+                        >
+                          ✏️
+                        </span>
+                        <span
+                          onClick={()=>delFees(monthFee)}
+                          className="fee-status-badge"
+                          style={{ backgroundColor: 'white',fontSize:'15px',cursor:'pointer' }}
+                        >
+                          🗑️
+                        </span>
+                        </>:""}
+
                         <span
                           className="fee-status-badge"
                           style={{ backgroundColor: getStatusColor(monthFee.status) }}
