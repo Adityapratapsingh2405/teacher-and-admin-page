@@ -36,6 +36,7 @@ import {
 import {setData} from '../../redux/DataSlice';
 import { useDispatch, useSelector } from "react-redux";
 import TransportManagement from './TransportManagement';
+import TodayCollection from './TodayCollectionPopUp';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -99,6 +100,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   const [modalAction, setModalAction] = useState<'APPROVED' | 'REJECTED' | null>(null);
   const [adminReply, setAdminReply] = useState('');
   const [processing, setProcessing] = useState(false);
+
+  const [feeCollection,setFeeCollection] = useState<boolean>(false);
 
   // Password Reset Modal state
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
@@ -585,9 +588,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
             <div className="stat-content">
               <h3>Fee Collection</h3>
               <p className="stat-number">{stats.feeCollectionRate}%</p>
-              <p className="stat-change positive">Overall collection rate</p>
+              <b onClick={()=>{
+               setFeeCollection(true);
+              }} style={{cursor:'pointer',color:'red'}}>Today's Fee</b>
+             
             </div>
           </div>
+           
           <div className="stat-card">
             <div className="stat-icon">📋</div>
             <div className="stat-content">
@@ -2226,6 +2233,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
       {showPasswordResetModal?<PasswordResetModal 
              onClose={() => setShowPasswordResetModal(false)}
            />:""}
+
+      {feeCollection?<TodayCollection onClose={()=>setFeeCollection(false)}/>:""}
     </div>
   );
 };

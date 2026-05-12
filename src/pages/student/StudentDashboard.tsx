@@ -2022,6 +2022,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
                     setResultsError(null);
                     try {
                       const results = await resultService.getStudentAllResults(student.pan);
+                      console.log(">>> " ,  results);
                       setStudentResults(results);
                     } catch (err: any) {
                       console.error('Error fetching results:', err);
