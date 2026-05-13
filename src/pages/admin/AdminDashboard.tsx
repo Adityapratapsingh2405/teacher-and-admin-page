@@ -1224,6 +1224,28 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               ✓ Last Month {!tcDataLoaded || tcLoading ? '(...)' : `(${processedTcRequests.length})`}
             </button>
           </div>
+          <hr/>
+          <div style={{ marginBottom: '20px' }}>
+            <h3>Certificate Samples</h3>
+            <div className='row'>
+              <div className='col-xl-3 col-lg-4'>
+                <a href="/tc.jpeg" target="_blank"><img src="/tc.jpeg" className='img-fluid'/></a>
+                <b>Transfer Certificate</b>
+              </div>              
+              <div className='col-xl-3 col-lg-4'>
+                <a href="/identity.jpeg" target="_blank"><img src="/identity.jpeg" className='img-fluid'/></a>
+                <b>Identity Card</b>
+              </div>
+              <div className='col-xl-3 col-lg-4'>
+                <a href="/cert.jpeg" target="_blank"><img src="/cert.jpeg" className='img-fluid'/></a>
+                <b>Certificate</b>
+              </div>
+              <div className='col-xl-3 col-lg-4'>
+                <a href="/dob.jpeg" target="_blank"><img src="/dob.jpeg" className='img-fluid'/></a>
+                <b>DOB Certificate</b>
+              </div>
+            </div>
+          </div>
         </div>
 
         {tcLoading ? (
