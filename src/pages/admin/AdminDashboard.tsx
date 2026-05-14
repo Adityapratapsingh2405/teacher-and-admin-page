@@ -1227,7 +1227,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
           <hr/>
           <div style={{ marginBottom: '20px' }}>
             <h3>Certificate Samples</h3>
-            <div className='row'>
+            <div className='row mt-3'>
               <div className='col-xl-3 col-lg-4'>
                 <a href="/tc.jpeg" target="_blank"><img src="/tc.jpeg" className='img-fluid'/></a>
                 <b>Transfer Certificate</b>
@@ -1245,6 +1245,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                 <b>DOB Certificate</b>
               </div>
             </div>
+            <div className='row mt-3'>
+              <div className='col-xl-3 col-lg-4'>
+                <a href="/bonafide.jpeg" target="_blank"><img src="/bonafide.jpeg" className='img-fluid'/></a>
+                <b>Bonafide Certificate</b>
+              </div> 
+            </div>  
           </div>
         </div>
 
@@ -2107,7 +2113,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               className={`nav-item ${activeTab === 'transfer-certificates' ? 'active' : ''}`}
               onClick={() => setActiveTab('transfer-certificates')}
             >
-          Transfer Certificates
+              Certificates
             </button>
             <button
               className={`nav-item ${activeTab === 'events' ? 'active' : ''}`}
