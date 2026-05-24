@@ -145,7 +145,7 @@ const FeeManagement: React.FC = () =>
 
   const editFees = async (rec:any)=>
   {
-    console.log(rec);
+    //console.log(rec);
     const amt = prompt("Enter Fees Amount");
     const receipt = rec.receiptNumber;
     await FeeService.editFees(receipt,amt);

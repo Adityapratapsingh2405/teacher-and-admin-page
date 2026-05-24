@@ -19,6 +19,7 @@ export interface Student {
   bloodGroup: string;
   admissionDate: string;
   previousSchool?: string;
+  transport?:boolean;
 }
 
 export interface MonthlyFee {

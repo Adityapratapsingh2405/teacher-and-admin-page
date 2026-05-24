@@ -20,6 +20,7 @@ interface StudentFormData {
   bloodGroup: string;
   previousSchool: string;
   photo: File | null;
+  transport: boolean;
 }
 
 interface StudentRegistrationErrors {
@@ -38,6 +39,7 @@ interface StudentRegistrationErrors {
   bloodGroup?: string;
   photo?: string;
   general?: string;
+  transport?:boolean;
 }
 
 interface StudentRegistrationFormProps {
@@ -60,7 +62,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
     emergencyContact: '',
     bloodGroup: '',
     previousSchool: '',
-    photo: null
+    photo: null,
+    transport:false
   });
   
   const [errors, setErrors] = useState<StudentRegistrationErrors>({});
@@ -282,7 +285,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
         previousSchool: formData.previousSchool.trim() || undefined,
         classId: parseInt(formData.classId),
         sessionId: parseInt(formData.sessionId),
-        photo: photoUrl
+        photo: photoUrl,
+        transport : formData.transport
       };
 
       // Call backend API to register student
@@ -307,7 +311,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
         emergencyContact: '',
         bloodGroup: '',
         previousSchool: '',
-        photo: null
+        photo: null,
+        transport:false
       });
 
       // Reset file input
@@ -503,6 +508,21 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
               </select>
               {errors.bloodGroup && <span className="error-message">{errors.bloodGroup}</span>}
             </div>
+
+            <div className="form-group">
+              <label htmlFor="transport">
+                Transport Needed
+              </label>
+              <input
+                type='checkbox'                
+                checked={formData.transport}                
+                className={errors.transport ? 'error form-control' : 'form-control'}
+                disabled={isLoading}
+                onChange={(e)=>setFormData({...formData,transport:e.target.checked})}
+              />
+              {errors.transport && <span className="error-message">{errors.transport}</span>}
+            </div>
+
           </div>
 
           <div className="form-group">

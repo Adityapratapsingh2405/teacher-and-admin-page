@@ -124,7 +124,7 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
       };
 
       console.log('Sending update data:', updateData);
-
+   
       // Call update API
       const updatedStudentData = await StudentService.updateStudent(editedStudent.id, updateData);
       
@@ -295,7 +295,7 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
 
   const renderPersonalInfo = () => {
     const displayStudent = isEditing ? editedStudent : student;
-    
+   
     return (
       <div className="personal-info">
         <div className="info-section">
@@ -433,6 +433,19 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
                 />
               ) : (
                 <span>{displayStudent.previousSchool || 'N/A'}</span>
+              )}
+            </div>
+
+             <div className="info-item">
+              <label>Transport Needed:</label>
+              {isEditing ? (
+                <input
+                type='checkbox'                
+                checked={displayStudent.transport}
+                onChange={(e) => setEditedStudent({...editedStudent,transport:e.target.checked})}
+                />
+              ) : (
+                <span>{displayStudent.transport?"Transport Added":"Not Added"}</span>
               )}
             </div>
           </div>

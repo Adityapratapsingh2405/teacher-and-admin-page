@@ -229,6 +229,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                 classes : classesData,
                 nonTeachingStaff : filteredStaff}))
        setLoading(false);
+       //console.log(studentsData)
     } catch(err){
       alert("Error Loading Data.")
     }
@@ -365,7 +366,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
     emergencyContact: backendStudent.emergencyContact,
     bloodGroup: backendStudent.bloodGroup,
     admissionDate: backendStudent.admissionDate,
-    previousSchool: backendStudent.previousSchool
+    previousSchool: backendStudent.previousSchool,
+    transport : backendStudent.transport
   });
 
   // Compute statistics from real data
@@ -376,6 +378,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
   const mockMessages: Message[] = [];
 
   const handleViewStudent = (student: Student) => {
+    //console.log(">>> ",student);
     setSelectedStudent(student);
     setShowStudentDetail(true);
   };

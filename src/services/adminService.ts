@@ -27,6 +27,7 @@ export interface StudentResponse {
   createdAt: string;
   updatedAt?: string;
   deletedAt?: string;
+  transport?:boolean;
 }
 
 export interface TeacherResponse {
@@ -94,6 +95,7 @@ type BulkStudentDataType = {
   mobile: string | null;
   dob: string | null;
   address: string | null;
+  transport : string | null;
 };
 type BulkTeacherDataType = {  
   name: string | null;

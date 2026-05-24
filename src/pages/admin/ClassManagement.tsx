@@ -23,7 +23,11 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
     className: '',
     feeAmount: 0,
     sessionId: 0,
-    classTeacherId: 0
+    classTeacherId: 0,
+    transportFees : 0 ,
+    computerFees: 0,
+    tuitionFees: 0,
+    otherFees: 0
   });
   
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -92,7 +96,11 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
       className: '',
       feeAmount: 0,
       sessionId: selectedSession || 0,
-      classTeacherId: 0
+      classTeacherId: 0,
+      transportFees : 0 ,
+      computerFees: 0,
+      tuitionFees: 0,
+      otherFees: 0
     });
     setFormErrors({});
     setShowForm(true);
@@ -105,7 +113,11 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
       className: classItem.className,
       feeAmount: classItem.feeAmount,
       sessionId: classItem.sessionId,
-      classTeacherId: classItem.classTeacherId || 0
+      classTeacherId: classItem.classTeacherId || 0,
+      transportFees : classItem.transportFees ,
+      computerFees: classItem.computerFees,
+      tuitionFees: classItem.tuitionFees,
+      otherFees: classItem.otherFees
     });
     setFormErrors({});
     setShowForm(true);
@@ -157,6 +169,18 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
 
     if (exists) {
       errors.className = 'A class with this name already exists in this session';
+      setFormErrors(errors);
+      return false;
+    }
+
+    let tf = formData.transportFees | 0;
+    let cf = formData.computerFees | 0;
+    let tuf = formData.tuitionFees | 0;
+    let otf = formData.otherFees | 0;
+
+    let fees = formData.feeAmount;
+    if(fees != (tf+cf+tuf+otf)){
+      errors.feeAmount = 'Total Amount Not Match';
       setFormErrors(errors);
       return false;
     }
@@ -392,34 +416,12 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
                 {formErrors.className && (
                   <span className="error-text">{formErrors.className}</span>
                 )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="feeAmount">
-                  Monthly Fee Amount (₹) <span className="required">*</span>
-                  <span className="hint">Base monthly fee for this class</span>
-                </label>
-                <input
-                  type="number"
-                  id="feeAmount"
-                  value={formData.feeAmount}
-                  onChange={(e) => setFormData({ ...formData, feeAmount: parseFloat(e.target.value) || 0 })}
-                  placeholder="0.00"
-                  min="0"
-                  step="0.01"
-                  required
-                  disabled={submitting}
-                  className={formErrors.feeAmount ? 'error' : ''}
-                />
-                {formErrors.feeAmount && (
-                  <span className="error-text">{formErrors.feeAmount}</span>
-                )}
-              </div>
+              </div>            
 
               <div className="form-group">
                 <label htmlFor="classTeacherId">
                   Class Teacher <span className="required">*</span>
-                  <span className="hint">Select the teacher for this class</span>
+                  <span className="hint">Select the teacher</span>
                 </label>
                 <select
                   id="classTeacherId"
@@ -463,6 +465,117 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
                   <span className="hint">Session cannot be changed when editing</span>
                 )}
               </div>
+
+
+                <div className="form-group">
+                <label htmlFor="transportFees">
+                  Transport Fee Amount (₹) <span className="required">*</span>
+                  <span className="hint">Transport fee</span>
+                </label>
+                <input
+                  type="number"
+                  id="transportFees"
+                  value={formData.transportFees}
+                  onChange={(e) => setFormData({ ...formData, transportFees: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.transportFees ? 'error' : ''}
+                />
+                {formErrors.transportFees && (
+                  <span className="error-text">{formErrors.transportFees}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="computerFees">
+                  Computer Fee Amount (₹)
+                </label>
+                <input
+                  type="number"
+                  id="computerFees"
+                  value={formData.computerFees}
+                  onChange={(e) => setFormData({ ...formData, computerFees: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.computerFees ? 'error' : ''}
+                />
+                {formErrors.computerFees && (
+                  <span className="error-text">{formErrors.computerFees}</span>
+                )}
+              </div>
+
+               <div className="form-group">
+                <label htmlFor="tuitionFees">
+                  Tuition Fee Amount (₹) <span className="required">*</span>
+                  <span className="hint">Tuition fee</span>
+                </label>
+                <input
+                  type="number"
+                  id="tuitionFees"
+                  value={formData.tuitionFees}
+                  onChange={(e) => setFormData({ ...formData, tuitionFees: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.tuitionFees ? 'error' : ''}
+                />
+                {formErrors.tuitionFees && (
+                  <span className="error-text">{formErrors.tuitionFees}</span>
+                )}
+              </div>
+
+               <div className="form-group">
+                <label htmlFor="otherFees">
+                  Other Fee Amount (₹) 
+                </label>
+                <input
+                  type="number"
+                  id="otherFees"
+                  value={formData.otherFees}
+                  onChange={(e) => setFormData({ ...formData, otherFees: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.otherFees ? 'error' : ''}
+                />
+                {formErrors.otherFees && (
+                  <span className="error-text">{formErrors.otherFees}</span>
+                )}
+              </div>
+
+
+              <div className="form-group">
+                <label htmlFor="feeAmount">
+                  Monthly Fee Amount (₹) <span className="required">*</span>
+                  <span className="hint">Monthly fee for this class</span>
+                </label>
+                <input
+                  type="number"
+                  id="feeAmount"
+                  value={formData.feeAmount}
+                  onChange={(e) => setFormData({ ...formData, feeAmount: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.feeAmount ? 'error' : ''}
+                />
+                {formErrors.feeAmount && (
+                  <span className="error-text">{formErrors.feeAmount}</span>
+                )}
+              </div>
+
             </div>
 
             <div className="form-actions">

@@ -15,7 +15,7 @@ const studentColumns = [
   "Class",
   "Session",
   "Father Name",
-  "Mobile", "DOB" , "Address"
+  "Mobile", "DOB" , "Address" , "Transport"
 ];
 const teacherColumns = ["Name", "Email", "Mobile"];
 
@@ -155,7 +155,8 @@ const exportExcel = (data:any) => {
             fatherName: ob['Father Name'],
             mobile: ob['Mobile'],
             dob: ob['DOB'],
-            address: ob['Address']
+            address: ob['Address'],
+            transport : ob['Transport']
           });
           var newOb = {...ob,'Server Response':msg};
           if(msg!='success'){

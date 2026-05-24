@@ -6,6 +6,10 @@ export interface ClassData {
   feeAmount: number;
   sessionId: number;
   classTeacherId: number;  // Required field for class teacher
+  transportFees: number;
+  computerFees: number ;
+  tuitionFees: number;
+  otherFees: number;
 }
 
 // Backend response interface (matches Java DTO)
@@ -20,6 +24,10 @@ interface BackendClassResponse {
   classTeacherName?: string;
   feeCollectionRate?: number;
   students?: any[];
+  transportFees: number;
+  computerFees: number;
+  tuitionFees: number ;
+  otherFees: number ;
 }
 
 // Frontend interface (what components expect)
@@ -34,6 +42,10 @@ export interface ClassResponse {
   classTeacherName?: string;
   createdAt?: string;
   updatedAt?: string;
+  transportFees: number;
+  computerFees: number;
+  tuitionFees: number;
+  otherFees: number ;
 }
 
 // Map backend response to frontend interface
@@ -46,7 +58,11 @@ const mapBackendToFrontend = (backendClass: BackendClassResponse): ClassResponse
     sessionId: backendClass.sessionId,
     sessionName: backendClass.sessionName,
     classTeacherId: backendClass.classTeacherId,
-    classTeacherName: backendClass.classTeacherName
+    classTeacherName: backendClass.classTeacherName,
+    transportFees: backendClass.transportFees,
+    computerFees: backendClass.computerFees,
+    tuitionFees: backendClass.tuitionFees,
+    otherFees: backendClass.otherFees,
   };
 };
 
@@ -97,7 +113,11 @@ export class ClassService {
         className: classData.className,
         feesAmount: classData.feeAmount,  // Map feeAmount -> feesAmount
         sessionId: classData.sessionId,
-        classTeacherId: classData.classTeacherId  // Required field,
+        classTeacherId: classData.classTeacherId,  // Required field,
+        transportFees : classData.transportFees ,
+        computerFees: classData.computerFees,
+        tuitionFees: classData.tuitionFees,
+        otherFees: classData.otherFees
       };
       
       const response = await api.post('/classes', backendData);
@@ -120,7 +140,11 @@ export class ClassService {
       const backendData = {
         className: classData.className,
         feesAmount: classData.feeAmount,  // Map feeAmount -> feesAmount for backend
-        classTeacherId: classData.classTeacherId
+        classTeacherId: classData.classTeacherId,
+        transportFees : classData.transportFees ,
+        computerFees: classData.computerFees,
+        tuitionFees: classData.tuitionFees,
+        otherFees: classData.otherFees
       };
       
       // Backend uses PATCH /classes/{id} (not PUT)
@@ -219,7 +243,11 @@ export class ClassService {
           className: sourceClass.className,
           feeAmount: sourceClass.feeAmount,
           sessionId: targetSessionId,
-          classTeacherId: sourceClass.classTeacherId
+          classTeacherId: sourceClass.classTeacherId,
+          transportFees: sourceClass.transportFees,
+          computerFees: sourceClass.computerFees,
+          tuitionFees: sourceClass.tuitionFees,
+          otherFees: sourceClass.otherFees,
         });
         createdClasses.push(newClass);
       }
