@@ -54,7 +54,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
       store.data.value
   );
 
-
+  const schoolid:any = localStorage.getItem('schoolId');
 
   const [activeTab, setActiveTab] = useState(() => {
     // Restore last active tab from localStorage
@@ -2255,7 +2255,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
 
       {showSchoolProfile && (
         <SchoolProfileModal
-          schoolId={1} // Assuming school ID is 1, adjust if needed
+          schoolId={schoolid} // Assuming school ID is 1, adjust if needed
           onClose={() => setShowSchoolProfile(false)}
         />
       )}
