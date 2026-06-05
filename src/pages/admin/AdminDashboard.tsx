@@ -37,6 +37,11 @@ import {setData} from '../../redux/DataSlice';
 import { useDispatch, useSelector } from "react-redux";
 import TransportManagement from './TransportManagement';
 import TodayCollection from './TodayCollectionPopUp';
+import DOBCertificate from './DOBCertificate';
+import BonafideCertificate from './BonaFideCertificate';
+import IdentityCard from './IdentityCardPopUp';
+import TransferCertificate from './TransferCertificate';
+import ActivityUndertaking from './ActivityCertificate';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -53,6 +58,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                     load_done : boolean   } =>
       store.data.value
   );
+  const [studentRes,setStudentRes] = useState<StudentResponse|null>(null);
+  const [certificateType,setCertificateType] = useState<string | null>(null);
+  const [certificateBox,setCertificateBox] = useState<boolean>(false);
 
   const schoolid:any = localStorage.getItem('schoolId');
 
@@ -565,6 +573,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         </div>
       );
     }
+
+   
 
     return (
       <div className="overview-section">
@@ -1188,6 +1198,26 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
     }
   };
 
+   const generateCertificate = (type:string)=>
+   {
+      if(studentRes!=null)
+        setCertificateType(type);
+      else
+        alert("Select Student First")
+   }
+   const showCertificatePopUp = ()=>{
+      if(certificateType=='dob')
+        return <DOBCertificate onClose={()=>setCertificateType(null)}  student={studentRes}/>
+      if(certificateType=='bonafide')
+        return <BonafideCertificate onClose={()=>setCertificateType(null)}  student={studentRes}/>  
+      if(certificateType=='id')
+        return <IdentityCard onClose={()=>setCertificateType(null)}  student={studentRes}/> 
+      if(certificateType=='tc')
+        return <TransferCertificate onClose={()=>setCertificateType(null)}  student={studentRes}/> 
+       if(certificateType=='activity')
+        return <ActivityUndertaking onClose={()=>setCertificateType(null)}  student={studentRes}/>  
+   }
+
   const renderTransferCertificates = () => {
     const requestsToShow = tcView === 'pending' ? tcRequests : processedTcRequests;
     
@@ -1226,6 +1256,37 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
             >
               ✓ Last Month {!tcDataLoaded || tcLoading ? '(...)' : `(${processedTcRequests.length})`}
             </button>
+          </div>
+          <hr/>
+          <div style={{ marginBottom: '20px' }}>
+            <h3>Certificate Generator</h3>
+            <div className='row mt-3 mb-3'>
+              <div className='col-xl-4 col-lg-4'>
+                <select className='form-control' onChange={(e:any)=>{
+                  if(e.target.value!='')
+                    setStudentRes(students[e.target.value])
+                }}>
+                  <option value=''>Choose Student</option>
+                  {students.map((ob:StudentResponse,i:number)=><option value={i}>
+                    {ob.name} - {ob.className}</option>)}
+                </select>
+              </div>
+              <div className='col-xl-1 col-lg-1'>
+                <button className='btn' onClick={()=>generateCertificate('tc')}>TC</button>
+              </div>
+               <div className='col-xl-1 col-lg-1'>
+                <button className='btn' onClick={()=>generateCertificate('id')}>ID</button>
+              </div>
+              <div className='col-xl-1 col-lg-1'>
+                <button className='btn' onClick={()=>generateCertificate('dob')}>DOB</button>
+              </div>
+               <div className='col-xl-2 col-lg-2 ml-3'>
+                <button className='btn' onClick={()=>generateCertificate('bonafide')}>Bonafide</button>
+              </div>
+               <div className='col-xl-1 col-lg-1 ml-3'>
+                <button className='btn' onClick={()=>generateCertificate('activity')}>Activity</button>
+              </div>
+            </div>
           </div>
           <hr/>
           <div style={{ marginBottom: '20px' }}>
@@ -2259,6 +2320,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
           onClose={() => setShowSchoolProfile(false)}
         />
       )}
+
+      {studentRes!=null && certificateType!=null?showCertificatePopUp():""}
 
       {/* Password Reset Modal */}
       {showPasswordResetModal?<PasswordResetModal 

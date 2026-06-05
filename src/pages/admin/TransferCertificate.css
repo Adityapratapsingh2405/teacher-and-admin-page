@@ -1,0 +1,71 @@
+.tc-container {
+  background: #fff;
+  padding: 30px 50px;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+.tc-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tc-logo {
+  width: 120px;
+}
+
+.tc-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.tc-school {
+  flex: 1;
+  text-align: center;
+}
+
+.tc-school h1 {
+  margin: 0;
+  font-size: 38px;
+}
+
+.tc-school p {
+  margin: 2px 0;
+}
+
+.tc-school h2 {
+  margin-top: 20px;
+  text-decoration: underline;
+  font-size: 28px;
+}
+
+.tc-number {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.tc-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tc-table td {
+  border-bottom: 1px solid #999;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.tc-table td:first-child {
+  width: 50%;
+}
+
+.tc-footer {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+}

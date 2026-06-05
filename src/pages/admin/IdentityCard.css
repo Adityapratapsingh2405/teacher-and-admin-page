@@ -1,0 +1,104 @@
+.identity-card {
+  width: 100%;
+  background: white;
+  border: 2px solid #000;
+  font-family: Arial, sans-serif;
+}
+
+.id-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #000;
+}
+
+.id-logo {
+  width: 120px;
+  text-align: center;
+}
+
+.id-logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.id-school {
+  flex: 1;
+  text-align: center;
+}
+
+.id-school h1 {
+  margin: 5px 0;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.id-school h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.id-school p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.id-affiliation {
+  text-align: center;
+  font-weight: bold;
+  padding: 12px;
+  border-bottom: 1px solid #000;
+}
+
+.id-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  padding: 12px;
+  border-bottom: 1px solid #000;
+}
+
+.id-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.id-table td {
+  border: 1px solid #000;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.label {
+  width: 180px;
+  font-weight: bold;
+}
+
+.photo-cell {
+  width: 220px;
+  text-align: center;
+}
+
+.photo-cell img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  width: 180px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #999;
+  margin: auto;
+}
+
+.id-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}

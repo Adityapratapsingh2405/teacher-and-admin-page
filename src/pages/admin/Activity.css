@@ -1,0 +1,77 @@
+.undertaking-container {
+  background: #fff;
+  padding: 40px 60px;
+  min-height: 900px;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+.undertaking-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.undertaking-logo {
+  width: 100px;
+}
+
+.undertaking-logo img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.undertaking-school {
+  flex: 1;
+  text-align: center;
+}
+
+.undertaking-school h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.undertaking-school p {
+  margin: 3px 0;
+}
+
+.undertaking-school h2 {
+  margin-top: 20px;
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+.undertaking-content {
+  margin-top: 50px;
+  font-size: 22px;
+  line-height: 2;
+  text-align: justify;
+}
+
+.undertaking-content p {
+  margin-bottom: 35px;
+}
+
+.undertaking-footer {
+  margin-top: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.parent-sign {
+  margin-top: 80px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.right-sign {
+  margin-top: 80px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.left-sign {
+  display: flex;
+  flex-direction: column;
+}
