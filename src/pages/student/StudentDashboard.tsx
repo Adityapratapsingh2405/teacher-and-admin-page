@@ -24,6 +24,7 @@ import MarksheetTable from '../../components/MarksheetTable';
 import PreviousSchoolingTable from '../../components/PreviousSchoolingTable';
 import PasswordResetModal from '../../components/PasswordResetModal';
 import AdminService from '../../services/adminService';
+import { GeminiAssistant } from './GeminiComp';
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -79,7 +80,8 @@ const formatDateTime = (dateValue: any): string => {
   }
 };
 
-const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
+const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => 
+{
   const [showSidebar, setShowSidebar] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [activeTab, setActiveTab] = useState<'home' | 'attendance' | 'holidays' | 'timetable' | 'events' | 'results' | 'fees' | 'gallery' | 'lectures' | 'queries' | 'enquiry' | 'leave' | 'transport' | 'tc' | 'history'>('home');
@@ -864,6 +866,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => {
 
   return (
     <div className="dashboard-container">
+          <GeminiAssistant/>
       <header className="dashboard-header">
         <div className="header-top">
           <div className="header-left">

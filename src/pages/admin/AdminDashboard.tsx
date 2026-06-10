@@ -1260,36 +1260,44 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
           <hr/>
           <div style={{ marginBottom: '20px' }}>
             <h3>Certificate Generator</h3>
-            <div className='row mt-3 mb-3'>
-              <div className='col-xl-4 col-lg-4'>
+            <div className='row mt-3 mb-3 align-items-center'>
+              <div className='col-12 col-lg-4 mb-2 mt-3'>
                 <select className='form-control' onChange={(e:any)=>{
-                  if(e.target.value!='')
-                    setStudentRes(students[e.target.value])
+                  const val = e.target.value;
+                  if(val !== '') setStudentRes(students[Number(val)]);
                 }}>
                   <option value=''>Choose Student</option>
-                  {students.map((ob:StudentResponse,i:number)=><option value={i}>
-                    {ob.name} - {ob.className}</option>)}
+                  {students.map((ob:StudentResponse,i:number)=>(
+                    <option key={ob.panNumber || i} value={i}>{ob.name} - {ob.className}</option>
+                  ))}
                 </select>
               </div>
-              <div className='col-xl-1 col-lg-1'>
-                <button className='btn' onClick={()=>generateCertificate('tc')}>TC</button>
               </div>
-               <div className='col-xl-1 col-lg-1'>
-                <button className='btn' onClick={()=>generateCertificate('id')}>ID</button>
+              <div className='row mt-3 mb-3 align-items-center'>
+
+              <div className='col-6 col-sm-4 col-lg-2 mb-2 mt-3'>
+                <button type='button' className='btn btn-block' style={{minWidth: 100, whiteSpace: 'nowrap'}} onClick={()=>generateCertificate('tc')}>TC</button>
               </div>
-              <div className='col-xl-1 col-lg-1'>
-                <button className='btn' onClick={()=>generateCertificate('dob')}>DOB</button>
+
+              <div className='col-6 col-sm-4 col-lg-2 mb-2 mt-3'>
+                <button type='button' className='btn btn-block' style={{minWidth: 100, whiteSpace: 'nowrap'}} onClick={()=>generateCertificate('id')}>ID</button>
               </div>
-               <div className='col-xl-2 col-lg-2 ml-3'>
-                <button className='btn' onClick={()=>generateCertificate('bonafide')}>Bonafide</button>
+
+              <div className='col-6 col-sm-4 col-lg-2 mb-2 mt-3'>
+                <button type='button'className='btn btn-block' style={{minWidth: 100, whiteSpace: 'nowrap'}} onClick={()=>generateCertificate('dob')}>DOB</button>
               </div>
-               <div className='col-xl-1 col-lg-1 ml-3'>
-                <button className='btn' onClick={()=>generateCertificate('activity')}>Activity</button>
+
+              <div className='col-12 col-sm-6 col-lg-3 mb-2 mt-3'>
+                <button type='button' className='btn btn-block' style={{minWidth: 100, whiteSpace: 'nowrap'}} onClick={()=>generateCertificate('bonafide')}>Bonafide</button>
+              </div>
+
+              <div className='col-12 col-sm-6 col-lg-2 mb-2 mt-3'>
+                <button type='button' className='btn btn-block' style={{minWidth: 120, whiteSpace: 'nowrap'}} onClick={()=>generateCertificate('activity')}>Activity</button>
               </div>
             </div>
           </div>
           <hr/>
-          <div style={{ marginBottom: '20px' }}>
+          {/* <div style={{ marginBottom: '20px' }}>
             <h3>Certificate Samples</h3>
             <div className='row mt-3'>
               <div className='col-xl-3 col-lg-4'>
@@ -1315,7 +1323,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                 <b>Bonafide Certificate</b>
               </div> 
             </div>  
-          </div>
+          </div> */}
         </div>
 
         {tcLoading ? (

@@ -15,7 +15,7 @@ const TransferCertificate: React.FC<TransferCertificateProps> = ({
 }) => {
   const certificateRef = useRef<HTMLDivElement>(null);
   const [school, setSchool] = useState<any>({});
-
+  console.log(student)
   useEffect(() => {
     fetchSchool();
   }, []);
@@ -25,6 +25,17 @@ const TransferCertificate: React.FC<TransferCertificateProps> = ({
     const res = await AdminService.school(id);
     setSchool(res);
   };
+
+  const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+};
 
   const handleDownload = () => {
     if (!certificateRef.current) return;
@@ -116,7 +127,7 @@ const TransferCertificate: React.FC<TransferCertificateProps> = ({
 
                   <tr>
                     <td>2. PEN No.</td>
-                    <td>{student?.penNumber}</td>
+                    <td>{student?.panNumber}</td>
                   </tr>
 
                   <tr>
@@ -141,12 +152,12 @@ const TransferCertificate: React.FC<TransferCertificateProps> = ({
 
                   <tr>
                     <td>7. Date of Birth (in Words)</td>
-                    <td>{student?.dobInWords}</td>
+                    <td>{formatDate(student?.dateOfBirth)}</td>
                   </tr>
 
                   <tr>
                     <td>8. Nationality</td>
-                    <td>{student?.nationality}</td>
+                    <td>INDIAN</td>
                   </tr>
 
                   <tr>
