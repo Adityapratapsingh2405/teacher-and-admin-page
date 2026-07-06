@@ -129,7 +129,12 @@ const exportExcel = (data:any) => {
 
       // Wrong DOB Format
        if(uploadType == "Student"){
-        status = uploadData.every((ob:any)=>isValidFormat(ob.DOB));
+        status = uploadData.every((ob:any)=>{
+          const s = isValidFormat(ob.DOB);
+          if(!s)
+            console.log(ob);
+          return s;
+        });
         if(!status){
           alert("Wrong DOB Format in records !");
           return;

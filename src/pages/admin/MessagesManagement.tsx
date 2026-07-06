@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NotificationService, { NotificationDto, BroadcastMessageDto } from '../../services/notificationService';
 import './MessagesManagement.css';
-
+import AdminService from '../../services/adminService';
 interface MessagesManagementProps {
   students: any[];
   teachers: any[];
@@ -31,6 +31,7 @@ const MessagesManagement: React.FC<MessagesManagementProps> = ({ students, teach
 
   // Compose state
   const [showCompose, setShowCompose] = useState(false);
+   const [showMobileCompose, setMobileCompose] = useState(false);
   const [broadcastTitle, setBroadcastTitle] = useState('');
   const [broadcastMessage, setBroadcastMessage] = useState('');
   const [broadcastPriority, setBroadcastPriority] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM');
@@ -365,6 +366,13 @@ const MessagesManagement: React.FC<MessagesManagementProps> = ({ students, teach
   return (
     <div className="messages-management">
       <div className="page-header">
+        <h2>Mobile Messages</h2>
+        <button className="compose-btn" onClick={() => setMobileCompose(true)}>
+          New Message
+        </button>
+      </div>
+      <hr/>
+      <div className="page-header">
         <h2>Broadcast Messages</h2>
         <button className="compose-btn" onClick={() => setShowCompose(true)}>
           Compose New Message
@@ -510,6 +518,9 @@ const MessagesManagement: React.FC<MessagesManagementProps> = ({ students, teach
           </div>
         </div>
       )} */}
+
+      {showMobileCompose?<MobileMessage onClose={setMobileCompose} 
+            students={filteredStudents} />:""}
 
       {/* Compose Modal */}
       {showCompose && (
@@ -763,5 +774,188 @@ const MessagesManagement: React.FC<MessagesManagementProps> = ({ students, teach
     </div>
   );
 };
+
+interface BulkEntryProps {
+  onClose: (status:boolean) => void;
+  students: any[]
+}
+const MobileMessage: React.FC<BulkEntryProps>  = ({onClose,students})=>
+{
+  const [type,setType] = useState(undefined);
+
+  const setUIViaType = ()=>{
+    if(type==undefined || type==null || type=='')
+      return "";
+    else if(type=='1') return <EventMessage students={students}/>
+    else if(type=='2') return <FeesMessage/>
+    else if(type=='3') return <HolidayMessage/>
+  }
+
+  return  <div className="modal-overlay" onClick={() => onClose(false)}>
+          <div className="compose-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>✏️ New Message</h3>
+              <button className="close-btn" onClick={() => onClose(false)}>×</button>
+            </div>
+
+            <div className="modal-body">
+              <select className='form-control' onChange={(e:any)=>setType(e.target.value)}>
+                <option value=''>Choose Message Type</option>
+                <option value='1'>Event Message</option>
+                <option value='2'>Fees Message</option>
+                <option value='3'>Holiday Message</option>
+              </select>
+              <hr/>
+              {setUIViaType()}
+              <hr/>
+              <button className="btn btn-primary" onClick={() => onClose(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+}
+
+interface MsgProps {
+  students: any[]
+}
+
+const EventMessage: React.FC<MsgProps>  = ({students})=>
+{
+  const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
+  const [selectAllStudents, setSelectAllStudents] = useState(false);
+  const [studentSearchTerm, setStudentSearchTerm] = useState('');
+
+  const titleRef = useRef<HTMLInputElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
+  const timeRef = useRef<HTMLInputElement>(null);
+  const venueRef = useRef<HTMLInputElement>(null);
+
+  const handleStudentToggle = (panNumber: string) => {
+    setSelectedStudents(prev => {
+      if (prev.includes(panNumber)) {
+        return prev.filter(p => p !== panNumber);
+      } else {
+        return [...prev, panNumber];
+      }
+    });
+  };
+  const handleSelectAllStudents = (checked: boolean) => {
+    setSelectAllStudents(checked);
+    if (checked) {
+      setSelectedStudents(students.map(s => s.panNumber));
+    } else {
+      setSelectedStudents([]);
+    }
+  };
+
+  const handleSubmit= async (e:any)=>
+  {
+      e.preventDefault();
+
+      if(selectedStudents.length==0){
+        alert("Choose Student First !")
+      }    
+
+      const obj = {
+        title : titleRef.current?.value,
+        date : dateRef.current?.value,
+        time : timeRef.current?.value,
+        venue : venueRef.current?.value,
+        students : selectedStudents
+      };
+      console.log(obj);
+      const res = await AdminService.eventMsg(obj);
+      console.log(res);
+  }
+
+  return <>
+    <h3>Event Message</h3>
+    <form onSubmit={handleSubmit}>
+    <div className="form-group mt-3">
+                <label>Event Title <span className="required">*</span></label>
+                <input
+                  type="text"
+                  ref={titleRef}
+                  className="form-input"
+                  placeholder="Event Title"
+                  required/>
+    </div>
+    <div className="form-group mt-3">
+        <label>Event Date <span className="required">*</span></label>
+                <input
+                  type="date"
+                  ref={dateRef}
+                  className="form-input"
+                  required/>
+    </div>
+    <div className="form-group mt-3">
+        <label>Event Time <span className="required">*</span></label>
+                <input
+                  type="time"
+                  ref={timeRef}
+                  className="form-input"
+                  required/>
+    </div>
+    <div className="form-group mt-3">
+        <label>Event Venue <span className="required">*</span></label>
+                <input
+                  type="text"
+                  ref={venueRef}
+                  className="form-input"
+                  required/>
+    </div>
+
+  <div className="recipients-section">
+                  <div className="section-header">
+                    <h4>Select Students ({selectedStudents.length} selected)</h4>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={selectAllStudents}
+                        onChange={(e) => handleSelectAllStudents(e.target.checked)}
+                      />
+                      Select All
+                    </label>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="🔍 Search students..."
+                    value={studentSearchTerm}
+                    onChange={(e) => setStudentSearchTerm(e.target.value)}
+                    className="search-input"
+                  />
+                  <div className="recipients-list">
+                    {students.map(student => (
+                      <label key={student.panNumber} className="recipient-item">
+                        <input
+                          type="checkbox"
+                          checked={selectedStudents.includes(student.panNumber)}
+                          onChange={() => handleStudentToggle(student.panNumber)}
+                        />
+                        <div className="recipient-info">
+                          <div className="recipient-name">{student.name}</div>
+                          <div className="recipient-meta">{student.className} • {student.panNumber}</div>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+
+    <div className="form-group mt-3">
+        <button className='btn btn-success'>Send Message</button>
+    </div>
+    </form>
+      </>
+}
+const FeesMessage = ()=>{
+  return <>
+    <h3>Fees Message</h3>
+  </>
+}
+const HolidayMessage = ()=>{
+  return <>
+    <h3>Holiday Message</h3>
+  </>
+}
 
 export default MessagesManagement;

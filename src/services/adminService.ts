@@ -106,6 +106,18 @@ type BulkTeacherDataType = {
 export class AdminService {
   // ============ Student APIs ============
 
+   // Fees List
+  static async eventMsg(data:any): Promise<any[]>
+  {
+    try{
+      const response = await api.post('/admin/sendEventMsg',data);
+      return response.data;
+    }catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Event Msg Failed';
+     return message;
+    }
+  }
+
   // Fees List
   static async feesList(date:any): Promise<any[]>
   {
