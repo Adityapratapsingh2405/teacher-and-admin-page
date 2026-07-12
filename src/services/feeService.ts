@@ -144,7 +144,7 @@ export class FeeService {
   // Get fee catalog by student PEN number
   static async getFeeCatalogByPan(panNumber: string): Promise<FeeCatalog> {
     try {
-      const response = await api.get(`/fees/catalogs/${panNumber}`);
+      const response = await api.get(`/fees/catalogsviapan?pan=${panNumber}`);
       
       if (response.status >= 200 && response.status < 300) {
         return response.data.data;
