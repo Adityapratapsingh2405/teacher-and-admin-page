@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Student, FeeCatalog } from '../../types/admin';
 import './StudentDetailView.css';
 import { StudentService } from '../../services/studentService';
@@ -24,6 +24,13 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   const [showResultsModal, setShowResultsModal] = useState(false);
   const [studentResults, setStudentResults] = useState<any[]>([]);
   const [loadingResults, setLoadingResults] = useState(false);
+
+   const [isEdit,setEdit] = useState(false);
+   const transRef = useRef<HTMLInputElement>(null);
+   const compRef = useRef<HTMLInputElement>(null);
+   const tuitRef = useRef<HTMLInputElement>(null);
+   const otherRef = useRef<HTMLInputElement>(null);
+   const examRef = useRef<HTMLInputElement>(null);
   
   // Editable student data
   const [editedStudent, setEditedStudent] = useState<Student>({ ...student });
@@ -272,7 +279,10 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   // Reorder months to start from session start month
   const getSessionMonths = () => {
     if (sessionStartIndex === -1 || sessionStartIndex === 0) {
-      return months.map(month => ({ month, year: currentYear }));
+      const monthArr =  months.map(month => ({ month, year: currentYear }));
+      //  monthArr.splice(0,0,{ month: "Exam", year: currentYear + 1 });
+      monthArr.push({ month: "Exam", year: currentYear + 1 });
+       return monthArr;
     }
     
     // Create array starting from session start month
@@ -287,12 +297,14 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
     for (let i = 0; i < sessionStartIndex; i++) {
       reorderedMonths.push({ month: months[i], year: currentYear + 1 });
     }
-    
+    //console.log("reorderedMonths : " , reorderedMonths.length)
+    reorderedMonths.push({ month: "Exam", year: currentYear + 1 });
+    //console.log("reorderedMonths : " , reorderedMonths.length)
     return reorderedMonths;
   };
 
   const sessionMonths = getSessionMonths();
-
+  
   const renderPersonalInfo = () => {
     const displayStudent = isEditing ? editedStudent : student;
    
@@ -516,10 +528,11 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   };
 
   const renderFeeCatalog = () => {
-    console.log('Fee Catalog Data:', feeCatalog);
-    console.log('Monthly Fees:', feeCatalog.monthlyFees);
-    console.log('Monthly Fees detailed:', JSON.stringify(feeCatalog.monthlyFees, null, 2));
     
+    //console.log('Fee Catalog Data:', feeCatalog);
+    //console.log('Monthly Fees:', feeCatalog.monthlyFees);
+    //console.log('Monthly Fees detailed:', JSON.stringify(feeCatalog.monthlyFees, null, 2));
+    //console.log("sessionMonths : ",sessionMonths.length)
     // Check if fees are valid (not just empty objects)
     const hasValidFees = feeCatalog.monthlyFees.length > 0 && 
                          feeCatalog.monthlyFees.some(fee => fee.month && fee.amount !== undefined);
@@ -552,6 +565,29 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
         </div>
       );
     }
+
+    const editfees = async (e:any)=>{
+      e.preventDefault();
+      var ob = {
+        trans : transRef.current?.value || 0,
+        comp : compRef.current?.value || 0,
+        tuit : tuitRef.current?.value || 0,
+        other : otherRef.current?.value || 0,
+        exam : examRef.current?.value || 0,
+      }
+      const res = await FeeService.editFeesStructure(ob,student.id);
+      console.log(res);
+      setActiveTab('fees');
+              // Refresh fee catalog when tab is opened
+              try {
+               // console.log('Fee Catalog tab clicked, refreshing...');
+                const updatedCatalog = await FeeService.getFeeCatalogByPan(student.id);
+                setFeeCatalog(updatedCatalog);
+                //console.log('Fee catalog refreshed on tab click');
+              } catch (err) {
+                console.error('Failed to refresh fee catalog:', err);
+              }
+    }
     
     return (
     <div className="fee-catalog">
@@ -575,12 +611,66 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
       </div>
 
       <div className="fee-calendar">
+
+        <div>
+          <button className='btn btn-success' onClick={()=>{
+            const status = feeCatalog.monthlyFees.some(ob=>ob.status=="paid")
+            if(!status){
+              setEdit(true)
+            }else{
+              alert("Can't be edit , already paid .");
+            }
+          }}>Edit Fee Structure</button>
+          {isEdit?<div className='mt-3'>
+              <b>Edit Fees</b>
+              <form onSubmit={editfees}>
+              <div className='row mt-3'>
+                <div className='col-xl-3 col-lg-3'>
+                  <input type='number' ref={transRef} className='form-control' placeholder='Transport Fees' required/>
+                </div>
+                <div className='col-xl-3 col-lg-3'>
+                  <input type='number' ref={compRef} className='form-control' placeholder='Computer Fees' required/>
+                </div>
+                <div className='col-xl-3 col-lg-3'>
+                  <input type='number' ref={tuitRef} className='form-control' placeholder='Tuition Fees' required/>
+                </div>
+                <div className='col-xl-3 col-lg-3'>
+                  <input type='number' ref={otherRef}className='form-control' placeholder='Other Fees' required/>
+                </div>
+              </div>
+              <div className='row mt-3'>
+                <div className='col-xl-3 col-lg-3'>
+                  <input type='number' ref={examRef} className='form-control' placeholder='Exam Fees' required/>
+                </div>
+                <div className='col-xl-3 col-lg-3'>
+                  <button onClick={editfees} className='btn btn-primary'>Edit Fees</button>
+                </div>
+                <div className='col-xl-3 col-lg-3'>
+                  <button onClick={()=>setEdit(false)} className='btn btn-primary'>Close</button>
+                </div>
+              </div>
+            </form>
+          </div>:""}          
+        </div>
+
+        <br/>
         <h4>Monthly Fee Calendar - Session {currentYear}-{currentYear + 1}</h4>
         <div className="calendar-grid">
           {sessionMonths.map(({ month, year }) => {
-            const monthFee = feeCatalog.monthlyFees.find(
-              fee => fee && fee.month && fee.month.toUpperCase() === month.toUpperCase() && fee.year === year
-            );
+            console.log({ month, year })
+            let monthFee = undefined;
+            if(month=="Exam"){
+              monthFee = feeCatalog.monthlyFees.find(
+                    fee => fee.type=='exam');
+            }else{
+              monthFee = feeCatalog.monthlyFees.find(
+                fee => {
+                  //console.log(">>> " , fee , month , year)
+                  return fee && fee.month && 
+                            fee.month.toUpperCase() === month.toUpperCase() && fee.type==='monthly'
+                });              
+            }
+            //console.log(monthFee)
             
             // Safely get status with fallback
             let status = 'pending';
@@ -864,10 +954,10 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
               setActiveTab('fees');
               // Refresh fee catalog when tab is opened
               try {
-                console.log('Fee Catalog tab clicked, refreshing...');
+               // console.log('Fee Catalog tab clicked, refreshing...');
                 const updatedCatalog = await FeeService.getFeeCatalogByPan(student.id);
                 setFeeCatalog(updatedCatalog);
-                console.log('Fee catalog refreshed on tab click');
+                //console.log('Fee catalog refreshed on tab click');
               } catch (err) {
                 console.error('Failed to refresh fee catalog:', err);
               }

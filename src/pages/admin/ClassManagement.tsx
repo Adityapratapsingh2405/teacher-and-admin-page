@@ -27,7 +27,8 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
     transportFees : 0 ,
     computerFees: 0,
     tuitionFees: 0,
-    otherFees: 0
+    otherFees: 0,
+    examAmount:0
   });
   
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -100,7 +101,8 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
       transportFees : 0 ,
       computerFees: 0,
       tuitionFees: 0,
-      otherFees: 0
+      otherFees: 0,
+      examAmount : 0
     });
     setFormErrors({});
     setShowForm(true);
@@ -117,7 +119,8 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
       transportFees : classItem.transportFees ,
       computerFees: classItem.computerFees,
       tuitionFees: classItem.tuitionFees,
-      otherFees: classItem.otherFees
+      otherFees: classItem.otherFees,
+      examAmount : classItem.examAmount
     });
     setFormErrors({});
     setShowForm(true);
@@ -180,7 +183,7 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
 
     let fees = formData.feeAmount;
     if(fees != (tf+cf+tuf+otf)){
-      errors.feeAmount = 'Total Amount Not Match';
+      errors.feeAmount = 'Monthly Amount Not Match';
       setFormErrors(errors);
       return false;
     }
@@ -550,6 +553,28 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
                 />
                 {formErrors.otherFees && (
                   <span className="error-text">{formErrors.otherFees}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="examAmount">
+                  Exam Fee Amount (₹) <span className="required">*</span>
+                  <span className="hint">Exam fees for this class</span>
+                </label>
+                <input
+                  type="number"
+                  id="examAmount"
+                  value={formData.examAmount}
+                  onChange={(e) => setFormData({ ...formData, examAmount: parseFloat(e.target.value) || 0 })}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                  disabled={submitting}
+                  className={formErrors.examAmount ? 'error' : ''}
+                />
+                {formErrors.examAmount && (
+                  <span className="error-text">{formErrors.examAmount}</span>
                 )}
               </div>
 

@@ -10,6 +10,7 @@ export interface ClassData {
   computerFees: number ;
   tuitionFees: number;
   otherFees: number;
+  examAmount: number;
 }
 
 // Backend response interface (matches Java DTO)
@@ -28,6 +29,7 @@ interface BackendClassResponse {
   computerFees: number;
   tuitionFees: number ;
   otherFees: number ;
+  examAmount : number;
 }
 
 // Frontend interface (what components expect)
@@ -46,6 +48,7 @@ export interface ClassResponse {
   computerFees: number;
   tuitionFees: number;
   otherFees: number ;
+  examAmount : number;
 }
 
 // Map backend response to frontend interface
@@ -63,6 +66,7 @@ const mapBackendToFrontend = (backendClass: BackendClassResponse): ClassResponse
     computerFees: backendClass.computerFees,
     tuitionFees: backendClass.tuitionFees,
     otherFees: backendClass.otherFees,
+    examAmount : backendClass.examAmount
   };
 };
 
@@ -117,7 +121,8 @@ export class ClassService {
         transportFees : classData.transportFees ,
         computerFees: classData.computerFees,
         tuitionFees: classData.tuitionFees,
-        otherFees: classData.otherFees
+        otherFees: classData.otherFees,
+        examAmount : classData.examAmount
       };
       
       const response = await api.post('/classes', backendData);
@@ -144,7 +149,8 @@ export class ClassService {
         transportFees : classData.transportFees ,
         computerFees: classData.computerFees,
         tuitionFees: classData.tuitionFees,
-        otherFees: classData.otherFees
+        otherFees: classData.otherFees,
+        examAmount : classData.examAmount
       };
       
       // Backend uses PATCH /classes/{id} (not PUT)
@@ -248,6 +254,7 @@ export class ClassService {
           computerFees: sourceClass.computerFees,
           tuitionFees: sourceClass.tuitionFees,
           otherFees: sourceClass.otherFees,
+          examAmount : sourceClass.examAmount
         });
         createdClasses.push(newClass);
       }

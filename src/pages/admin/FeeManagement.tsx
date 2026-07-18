@@ -62,6 +62,7 @@ const FeeManagement: React.FC = () =>
     setLoading(true);
     try {
       const catalog = await FeeService.getFeeCatalogByPan(student.panNumber);
+      console.log(catalog)
       setFeeCatalog(catalog);
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -87,13 +88,15 @@ const FeeManagement: React.FC = () =>
     setErrorMessage('');
 
     try {
+      console.log(">>> " , selectedMonth)
       const paymentData: FeePaymentData = {
         studentPanNumber: selectedStudent.panNumber,
         amount: selectedMonth.amount,
         month: selectedMonth.month,
         sessionId: selectedStudent.sessionId,
         classId: selectedStudent.classId,
-        receiptNumber: receiptNumber.trim() || '' // Auto-generate if empty
+        receiptNumber: receiptNumber.trim() || '', // Auto-generate if empty
+        type : selectedMonth.type || ''
       };
 
       const response = await FeeService.processFeePayment(paymentData);
@@ -148,7 +151,8 @@ const FeeManagement: React.FC = () =>
     //console.log(rec);
     const amt = prompt("Enter Fees Amount");
     const receipt = rec.receiptNumber;
-    await FeeService.editFees(receipt,amt);
+    const msg = await FeeService.editFees(receipt,amt);
+    alert(msg)
     await handleStudentSelect(selectedStudent);
   }
    const delFees = async (rec:any)=>
@@ -302,16 +306,17 @@ const FeeManagement: React.FC = () =>
                       onClick={() => monthFee.status !== 'paid' && setSelectedMonth(monthFee)}
                     >
                       <div className="fee-month-header">
-                        <span className="month-name">{monthFee.month}</span>
+                        <span className="month-name">{monthFee.type=='exam'?"Exam Fees":monthFee.month}</span>
 
                         {monthFee.status=='paid'?<>
-                        <span
-                          onClick={()=>editFees(monthFee)}
-                          className="fee-status-badge"
-                          style={{ backgroundColor: 'white',fontSize:'15px',cursor:'pointer' }}
-                        >
-                          ✏️
-                        </span>
+                          {monthFee.type!='exam'?<span
+                            onClick={()=>editFees(monthFee)}
+                            className="fee-status-badge"
+                            style={{ backgroundColor: 'white',fontSize:'15px',cursor:'pointer' }}
+                          >
+                            ✏️
+                          </span>:""}
+                        
                         <span
                           onClick={()=>delFees(monthFee)}
                           className="fee-status-badge"

@@ -12,6 +12,7 @@ export interface FeePaymentData {
   sessionId: number;
   classId: number;
   receiptNumber: string;
+  type:string;
 }
 
 export interface FeeCatalog {
@@ -31,9 +32,24 @@ export interface MonthlyFee {
   status: 'paid' | 'pending' | 'unpaid' | 'overdue';
   paymentDate?: string;
   receiptNumber?: string;
+  type?:string;
 }
 
 export class FeeService {
+
+  static async editFeesStructure(data:any,pan:any) {
+    try {
+      const response = await api.put(`/fees/editfees/${pan}`,data);
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to edit fee structure');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to create fee structure';
+      throw new Error(message);
+    }
+  }
 
  static async editFees(receipt:any,amt:any) {
     try {

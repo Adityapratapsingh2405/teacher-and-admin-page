@@ -30,6 +30,7 @@ export interface MonthlyFee {
   status: 'paid' | 'pending' | 'overdue' | 'unpaid';
   paymentDate?: string;
   receiptNumber?: string;
+  type?:string;
 }
 
 export interface FeeCatalog {
