@@ -102,6 +102,7 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
 //   return regex.test(dateStr);
 // };
 const isValidFormat = (dateStr: any) => {
+  
   const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{2}|\d{4})$/;
   return regex.test(dateStr);
 };
@@ -118,6 +119,12 @@ const exportExcel = (data:any) => {
   XLSX.writeFile(workbook, "notSavedRecord.xlsx");
 };
 
+const formatDate = (date:any) => {
+  return date
+    .replace(/\b(\d)(?=\/)/g, "0$1")
+    .replace(/(?<=\/)(\d)(?=\/)/g, "0$1");
+};
+
   const upload = async ()=>
   {
       // Missing Check
@@ -130,9 +137,10 @@ const exportExcel = (data:any) => {
       // Wrong DOB Format
        if(uploadType == "Student"){
         status = uploadData.every((ob:any)=>{
+          ob.DOB = formatDate(ob.DOB);
           const s = isValidFormat(ob.DOB);
           if(!s)
-            console.log(ob);
+            console.log(ob , s);
           return s;
         });
         if(!status){
