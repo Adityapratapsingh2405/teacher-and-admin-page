@@ -188,6 +188,13 @@ const ClassManagement: React.FC<ClassManagementProps> = ({ onClassChange }) => {
       return false;
     }
 
+    let exam = formData.examAmount;
+    if(exam==undefined || exam<=0){
+      errors.examAmount = 'Exam Amount Not Given';
+      setFormErrors(errors);
+      return false;
+    }
+
     setFormErrors({});
     return true;
   };

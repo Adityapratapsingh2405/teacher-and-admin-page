@@ -28,6 +28,12 @@ export interface StudentResponse {
   updatedAt?: string;
   deletedAt?: string;
   transport?:boolean;
+  transportFees?:number;
+  computerFees?:number;
+  tuitionFees?:number;
+  otherFees?:number;    
+  feesAmount?:number;
+  examAmount?:number;
 }
 
 export interface TeacherResponse {
