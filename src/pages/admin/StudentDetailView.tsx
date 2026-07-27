@@ -252,8 +252,8 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   // Get the year from the fee data, or use current year as fallback
   const getFeeYear = () => {
     if (feeCatalog.monthlyFees && feeCatalog.monthlyFees.length > 0) {
-      const firstFeeWithYear = feeCatalog.monthlyFees.find(fee => fee.year);
-      return firstFeeWithYear ? firstFeeWithYear.year : new Date().getFullYear();
+      const firstFeeWithYear = feeCatalog.monthlyFees.find(fee => fee.month=='APRIL')?.year;
+      return firstFeeWithYear ? firstFeeWithYear: new Date().getFullYear();
     }
     return new Date().getFullYear();
   };
@@ -304,7 +304,7 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   };
 
   const sessionMonths = getSessionMonths();
-  
+  console.log("sessionMonths : " , sessionMonths)
   const renderPersonalInfo = () => {
     const displayStudent = isEditing ? editedStudent : student;
    
