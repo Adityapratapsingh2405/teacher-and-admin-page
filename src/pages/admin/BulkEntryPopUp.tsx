@@ -138,6 +138,7 @@ const formatDate = (date:any) => {
        if(uploadType == "Student"){
         status = uploadData.every((ob:any)=>{
           ob.DOB = formatDate(ob.DOB);
+          //console.log(ob.DOB)
           const s = isValidFormat(ob.DOB);
           if(!s)
             console.log(ob , s);

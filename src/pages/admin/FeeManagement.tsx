@@ -4,6 +4,7 @@ import AdminService, { StudentResponse } from '../../services/adminService';
 import './FeeManagement.css';
 import { useSelector } from 'react-redux';
 import AdmitCard from './AdmitCardPopUp';
+import FeesReport from './FeesReport';
 
 const FeeManagement: React.FC = () => 
 {
@@ -23,6 +24,7 @@ const FeeManagement: React.FC = () =>
   const [receiptNumber, setReceiptNumber] = useState('');
 
   const [adminCardShow,setAdminCardShow] = useState(false);
+  const [feeReportShow,setfeeReportShow] = useState(false);
 
   useEffect(() => {
     // Reload students when window/tab regains focus
@@ -54,6 +56,7 @@ const FeeManagement: React.FC = () =>
   const handleStudentSelect = async (student: StudentResponse | null) => {
     if(student==null)
       return;
+    console.log(student);
     setSelectedStudent(student);
     setSuccessMessage('');
     setErrorMessage('');
@@ -272,12 +275,15 @@ const FeeManagement: React.FC = () =>
                   <div className="summary-value">₹{feeCatalog.totalOverdue.toFixed(2)}</div>
                 </div>
               </div>
-
               <div className="summary-card overdue">
-                  <div className="summary-label">
-                    <b>Admin Card</b>
+                  <div className="summary-value mr-3">
+                      <b>Fees Report</b>
+                      <div className="summary-value">
+                      <button className='btn btn-success' onClick={()=>setfeeReportShow(true)}>View Fees</button>
+                    </div>
                   </div>
-                  <div className="summary-value">
+                   <div className="summary-value ml-3">
+                     <b>Admin Card</b>
                     <button className='btn btn-success' onClick={()=>setAdminCardShow(true)}>View Card</button>
                   </div>
               </div>
@@ -419,6 +425,16 @@ const FeeManagement: React.FC = () =>
       </div>
       {adminCardShow && (
         <AdmitCard onClose={() => setAdminCardShow(false)}  student={selectedStudent}/>
+      )}
+
+      {feeReportShow && (
+        <FeesReport onClose={() => setfeeReportShow(false)}  
+          fees={feeCatalog?.monthlyFees.map(rec=>{
+            const {month,type,receiptNumber,paymentDate,amount} = rec; 
+            return {
+              month , type , receiptNumber , paymentDate , amount
+            }
+          })} student={selectedStudent}/>
       )}
     </div>
   );

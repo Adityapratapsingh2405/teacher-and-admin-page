@@ -217,7 +217,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         AdminService.getAllNonTeachingStaff().catch(err => { console.error('Staff fetch error:', err); return []; }),
         AdminService.getAllClasses().catch(err => { console.error('Classes fetch error:', err); return []; })
       ]);
-      
+      //console.log(studentsData)
       // Filter teachers and staff based on staffFilter
       const filteredTeachers = staffFilter === 'active'
         ? teachersData.filter(t => t.status === 'ACTIVE')

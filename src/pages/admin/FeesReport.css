@@ -1,0 +1,53 @@
+.fees-report{
+    background:#fff;
+    padding:25px;
+    color:#000;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.report-header{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.school-logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+}
+
+.student-table,
+.fees-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.student-table td{
+    padding:8px;
+}
+
+.fees-table th,
+.fees-table td{
+    border:1px solid #000;
+    padding:8px;
+}
+
+.fees-table th{
+    background:#f3f3f3;
+}
+
+.total-row{
+    background:#efefef;
+    font-weight:bold;
+}
+
+.paid-row{
+    background:#d8f7d8;
+    font-weight:bold;
+}
+
+.remaining-row{
+    background:#ffe5e5;
+    font-weight:bold;
+}
