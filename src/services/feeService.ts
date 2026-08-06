@@ -39,7 +39,7 @@ export class FeeService {
 
   static async editFeesStructure(data:any,pan:any) {
     try {
-      const response = await api.put(`/fees/editfees/${pan}`,data);
+      const response = await api.put(`/fees/editfees?pan=${pan}`,data);
       
       if (response.status >= 200 && response.status < 300) {
         return response.data;
