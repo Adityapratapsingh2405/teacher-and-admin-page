@@ -17,8 +17,8 @@ const DeveloperLogin: React.FC<DeveloperLoginProps> = ({ onLogin }) => {
   // Developer credentials (hardcoded for security)
   const DEVELOPER_CREDENTIALS = {
     username: 'slms_developer',
-    email: 'developer@slms.com',
-    password: 'SLMS@Dev2025'
+    email: 'dev@slms.com',
+    password: 'dev@slms26'
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
