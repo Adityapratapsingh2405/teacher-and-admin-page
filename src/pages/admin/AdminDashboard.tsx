@@ -662,6 +662,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
       ? students 
       : students.filter(s => s.status === studentFilter.toUpperCase());
 
+    //console.log(statusFilteredStudents)
+
     // Then group filtered students by class
     const filteredByStatusClassData: ClassData[] = classes.map(cls => {
       const classStudents = statusFilteredStudents.filter(s => s.classId === cls.id);
@@ -842,6 +844,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                           <th>Name</th>
                           <th>Roll No</th>
                           <th>Section</th>
+                          <th>Mobile</th>
                           <th>Fee Status</th>
                           <th>Student Status</th>
                           <th>Actions</th>
@@ -896,13 +899,15 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                             </td>
                             <td>{student.classRollNumber}</td>
                             <td>{student.section}</td>
+                            <td>{student.mobileNumber}</td>
                             <td>
                               <span className={`status-badge ${student.feeStatus}`}>
                                 {student.feeStatus === 'paid' && 'Paid'}
                                 {student.feeStatus === 'pending' && 'Pending'}
                                 {student.feeStatus === 'overdue' && 'Overdue'}
                                 {!['paid', 'pending', 'overdue'].includes(student.feeStatus) && student.feeStatus}
-                              </span>
+                              </span>&nbsp;
+                              {student.overdueTotal}
                             </td>
                             <td>
                               <select

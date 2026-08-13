@@ -56,7 +56,7 @@ const FeeManagement: React.FC = () =>
   const handleStudentSelect = async (student: StudentResponse | null) => {
     if(student==null)
       return;
-    console.log(student);
+    //console.log(student);
     setSelectedStudent(student);
     setSuccessMessage('');
     setErrorMessage('');
@@ -65,7 +65,7 @@ const FeeManagement: React.FC = () =>
     setLoading(true);
     try {
       const catalog = await FeeService.getFeeCatalogByPan(student.panNumber);
-      console.log(catalog)
+      //console.log(catalog)
       setFeeCatalog(catalog);
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -91,7 +91,7 @@ const FeeManagement: React.FC = () =>
     setErrorMessage('');
 
     try {
-      console.log(">>> " , selectedMonth)
+      //console.log(">>> " , selectedMonth)
       const paymentData: FeePaymentData = {
         studentPanNumber: selectedStudent.panNumber,
         amount: selectedMonth.amount,
@@ -164,7 +164,7 @@ const FeeManagement: React.FC = () =>
     const status = confirm("Are You Sure To Delete ?");
     const receipt = rec.receiptNumber;
     if(status){
-      console.log("aaya")
+      //console.log("aaya")
       await FeeService.deleteFees(receipt);
       await handleStudentSelect(selectedStudent);
     }

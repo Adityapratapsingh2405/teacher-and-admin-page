@@ -34,6 +34,7 @@ export interface StudentResponse {
   otherFees?:number;    
   feesAmount?:number;
   examAmount?:number;
+  overdueTotal?:number;
 }
 
 export interface TeacherResponse {
