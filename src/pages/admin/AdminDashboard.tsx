@@ -375,7 +375,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
     bloodGroup: backendStudent.bloodGroup,
     admissionDate: backendStudent.admissionDate,
     previousSchool: backendStudent.previousSchool,
-    transport : backendStudent.transport
+    transport : backendStudent.transport,
+    overdueTotal : backendStudent.overdueTotal
   });
 
   // Compute statistics from real data
@@ -712,7 +713,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
     //   inactive: students.filter(s => s.status === 'INACTIVE').length,
     //   graduated: students.filter(s => s.status === 'GRADUATED').length
     // };
-
+    console.log(filteredClassData)
     return (
       <div className="students-section">
         {/* Student Status Filter */}
@@ -904,10 +905,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                               <span className={`status-badge ${student.feeStatus}`}>
                                 {student.feeStatus === 'paid' && 'Paid'}
                                 {student.feeStatus === 'pending' && 'Pending'}
-                                {student.feeStatus === 'overdue' && 'Overdue'}
+                                {student.feeStatus === 'overdue' && <span className="text-center"><b>OverDue</b><br/>{student.overdueTotal}</span>}
                                 {!['paid', 'pending', 'overdue'].includes(student.feeStatus) && student.feeStatus}
-                              </span>&nbsp;
-                              {student.overdueTotal}
+                              </span>
                             </td>
                             <td>
                               <select
