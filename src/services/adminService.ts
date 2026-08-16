@@ -100,6 +100,7 @@ type BulkStudentDataType = {
   className: string | null;
   sessionName: string | null;
   fatherName: string | null;
+  motherName: string | null;
   mobile: string | null;
   dob: string | null;
   address: string | null;

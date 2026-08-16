@@ -15,6 +15,7 @@ const studentColumns = [
   "Class",
   "Session",
   "Father Name",
+  "Mother Name",
   "Mobile", "DOB" , "Address" , "Transport"
 ];
 const teacherColumns = ["Name", "Email", "Mobile"];
@@ -63,7 +64,7 @@ const BulkEntry: React.FC<BulkEntryProps> = ({ onClose }) =>
         return newObj;
       });
 
-      console.log("Excel JSON:", jsonData);
+      //console.log("Excel JSON:", jsonData);
 
       const checkingColumn =
         uploadType == "Student" ? studentColumns : teacherColumns;
@@ -167,6 +168,7 @@ const formatDate = (date:any) => {
             className: ob['Class'],
             sessionName: ob['Session'],
             fatherName: ob['Father Name'],
+            motherName : ob['Mother Name'],
             mobile: ob['Mobile'],
             dob: ob['DOB'],
             address: ob['Address'],
