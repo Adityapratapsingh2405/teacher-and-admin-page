@@ -21,6 +21,7 @@ interface StudentFormData {
   previousSchool: string;
   photo: File | null;
   transport: boolean;
+   motherName?:string;
 }
 
 interface StudentRegistrationErrors {
@@ -40,6 +41,7 @@ interface StudentRegistrationErrors {
   photo?: string;
   general?: string;
   transport?:boolean;
+  motherName?:string;
 }
 
 interface StudentRegistrationFormProps {
@@ -286,7 +288,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
         classId: parseInt(formData.classId),
         sessionId: parseInt(formData.sessionId),
         photo: photoUrl,
-        transport : formData.transport
+        transport : formData.transport,
+        motherName : formData.motherName
       };
 
       // Call backend API to register student
@@ -706,7 +709,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
 
           <div className="form-group">
             <label htmlFor="parentName">
-              Parent/Guardian Name <span className="required">*</span>
+              Father Name <span className="required">*</span>
             </label>
             <input
               type="text"
@@ -720,6 +723,24 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
               required
             />
             {errors.parentName && <span className="error-message">{errors.parentName}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="parentName">
+              Mother Name <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="motherName"
+              name="motherName"
+              value={formData.motherName}
+              onChange={handleInputChange}
+              className={errors.motherName ? 'error' : ''}
+              placeholder="Enter mother name"
+              disabled={isLoading}
+              required
+            />
+            {errors.motherName && <span className="error-message">{errors.motherName}</span>}
           </div>
 
           <div className="form-group">

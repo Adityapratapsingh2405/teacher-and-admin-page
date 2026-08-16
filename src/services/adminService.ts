@@ -35,6 +35,7 @@ export interface StudentResponse {
   feesAmount?:number;
   examAmount?:number;
   overdueTotal?:number;
+  motherName?:string;
 }
 
 export interface TeacherResponse {

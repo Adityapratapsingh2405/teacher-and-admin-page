@@ -31,6 +31,8 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
    const tuitRef = useRef<HTMLInputElement>(null);
    const otherRef = useRef<HTMLInputElement>(null);
    const examRef = useRef<HTMLInputElement>(null);
+
+   //console.log(student)
   
   // Editable student data
   const [editedStudent, setEditedStudent] = useState<Student>({ ...student });
@@ -304,7 +306,7 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
   };
 
   const sessionMonths = getSessionMonths();
-  console.log("sessionMonths : " , sessionMonths)
+  //console.log("sessionMonths : " , sessionMonths)
   const renderPersonalInfo = () => {
     const displayStudent = isEditing ? editedStudent : student;
    
@@ -467,7 +469,7 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
           <h3 className="section-title">Contact Information</h3>
           <div className="info-grid">
             <div className="info-item">
-              <label>Parent Name:</label>
+              <label>Father Name:</label>
               {isEditing ? (
                 <input
                   type="text"
@@ -479,6 +481,23 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
                 <span>{displayStudent.parentName}</span>
               )}
             </div>
+
+            <div className="info-item">
+              <label>Mother Name:</label>
+              {isEditing ? (
+                <input
+                  type="text"
+                  className="edit-input"
+                  value={displayStudent.motherName || ''}
+                  onChange={(e) => handleInputChange('motherName', e.target.value)}
+                />
+              ) : (
+                <span>{displayStudent.motherName}</span>
+              )}
+            </div>
+
+
+  
             
             <div className="info-item">
               <label>Mobile Number:</label>

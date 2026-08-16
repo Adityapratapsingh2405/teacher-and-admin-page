@@ -21,6 +21,7 @@ export interface Student {
   previousSchool?: string;
   transport?:boolean;
   overdueTotal?:number;
+  motherName?: string;
 }
 
 export interface MonthlyFee {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AdminDashboard.css';
+import html2pdf from "html2pdf.js";
 import StudentDetailView from './StudentDetailView';
 import TeacherDetailView from './TeacherDetailView';
 import NonTeachingStaffDetailView from './NonTeachingStaffDetailView';
@@ -376,7 +377,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
     admissionDate: backendStudent.admissionDate,
     previousSchool: backendStudent.previousSchool,
     transport : backendStudent.transport,
-    overdueTotal : backendStudent.overdueTotal
+    overdueTotal : backendStudent.overdueTotal,
+    motherName : backendStudent.motherName
   });
 
   // Compute statistics from real data
@@ -789,7 +791,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               const classId = classEntity?.id;
               
               return (
-                <div key={cls.className} className="class-tab">
+                <div key={cls.className} id={cls.className} className="class-tab">
                   <div style={{flexWrap:'wrap', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <div>
                       <h4 style={{ margin: 0 }}>{formattedClassName}</h4>
@@ -804,7 +806,36 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                         </p>
                       )}
                     </div>
-                    {classId && (
+                    {classId && <>
+                      <button className="btn-sm btn-primary" onClick={()=>{
+                        const element = document.getElementById(cls.className);
+
+                          if (element) {
+                            html2pdf()
+                              .set({
+                                margin: 10,
+                                filename: `${cls.className}.pdf`,
+                                image: {
+                                  type: "jpeg",
+                                  quality: 1,
+                                },
+                                html2canvas: {
+                                  scale: 2,
+                                  useCORS: true,
+                                },
+                                jsPDF: {
+                                  unit: "mm",
+                                  format: "a4",
+                                  orientation: "portrait",
+                                },
+                              })
+                              .from(element)
+                              .save();
+                          }
+                      }}>
+                        Download
+                      </button>
+                      &nbsp;
                       <button
                         className="action-btn"
                         onClick={async () => {
@@ -829,7 +860,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
                       >
                         Assign Roll Numbers A-Z
                       </button>
-                    )}
+                    </>}
                   </div>
                   <div className="class-stats">
                   <span>Total: {cls.totalStudents}</span>
