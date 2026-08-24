@@ -53,7 +53,7 @@ export class FeeService {
 
  static async editFees(receipt:any,amt:any) {
     try {
-      const response = await api.put(`/fees/edit/${amt}/${receipt}`);
+      const response = await api.put(`/fees/edit?amt=${amt}&receipt=${receipt}`);
       
       if (response.status >= 200 && response.status < 300) {
         return response.data;
