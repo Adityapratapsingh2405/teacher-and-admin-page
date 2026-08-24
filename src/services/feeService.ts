@@ -67,7 +67,7 @@ export class FeeService {
 
   static async deleteFees(receipt:any) {
     try {
-      const response = await api.delete(`/fees/delete/${receipt}`);
+      const response = await api.delete(`/fees/delete?receipt=${receipt}`);
       
       if (response.status >= 200 && response.status < 300) {
         return response.data;
