@@ -463,7 +463,7 @@ export class ResultPDFGenerator {
     doc.setFont('helvetica', 'bold');
     doc.text('Class:', studentInfoMiddle, yPos);
     doc.setFont('helvetica', 'normal');
-    doc.text(`${studentResults.className.split("-")[0]} - Section : ${studentResults.className.split("-")[1]}`, studentInfoMiddle + 15, yPos);
+    doc.text(studentResults.className, studentInfoMiddle + 15, yPos);
 
     // PEN
     doc.setFont('helvetica', 'bold');
@@ -477,26 +477,22 @@ export class ResultPDFGenerator {
     doc.line(15, yPos, pageWidth - 15, yPos);
     yPos += 8;
 
-    // Build table headers
-    // We'll create a proper 2-row header structure
-    // First row: Subject | Exam1 | Exam2 | ... | Total | %
-    // Second row: empty | Obt. Max | Obt. Max | ... | Obt. Max | empty
-    
-    const firstHeaderRow: string[] = ['Subject'];
-    const secondHeaderRow: string[] = [''];
-
-    examNames.forEach(examName => {
-      firstHeaderRow.push(examName);
-      secondHeaderRow.push('Obt.');
-      secondHeaderRow.push('Max');
-    });
-
-    firstHeaderRow.push('Total');
-    secondHeaderRow.push('Obt.');
-    secondHeaderRow.push('Max');
-
-    firstHeaderRow.push('%');
-    secondHeaderRow.push('');
+    // Match the screen table: exam and total headers span two columns, while
+    // Subject and percentage span both header rows.
+    const firstHeaderRow = [
+      { content: 'Subject', rowSpan: 2 },
+      ...examNames.map(examName => ({ content: examName, colSpan: 2 })),
+      { content: 'Total', colSpan: 2 },
+      { content: '%', rowSpan: 2 }
+    ];
+    const secondHeaderRow = [
+      ...examNames.flatMap(() => [
+        { content: 'Obt.' },
+        { content: 'Max' }
+      ]),
+      { content: 'Obt.' },
+      { content: 'Max' }
+    ];
 
     // Build table body
     const tableData: string[][] = [];
@@ -547,12 +543,11 @@ export class ResultPDFGenerator {
     totalRow.push(grandTotalMax.toString());
     totalRow.push(grandPercentage.toFixed(1) + '%');
 
-    tableData.push(totalRow);
-
     // Generate table with autoTable
     autoTable(doc, {
       head: [firstHeaderRow, secondHeaderRow],
       body: tableData,
+      foot: [totalRow],
       startY: yPos,
       theme: 'grid',
       styles: {
@@ -576,16 +571,15 @@ export class ResultPDFGenerator {
         fontStyle: 'bold'
       },
       didParseCell: function(data) {
-        // Highlight the last row (Overall Total)
-        if (data.row.index === tableData.length - 1) {
-          data.cell.styles.fillColor = [230, 230, 230];
-          data.cell.styles.fontStyle = 'bold';
+        if (data.section === 'body' && data.column.index >= totalRow.length - 3) {
+          data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+            ? [220, 252, 231]
+            : [240, 253, 244];
         }
-        // Highlight Total and Percentage columns
-        if (data.column.index >= firstHeaderRow.length - 3) {
-          data.cell.styles.fillColor = data.row.index === tableData.length - 1 
-            ? [200, 230, 201] 
-            : [232, 245, 233];
+        if (data.section === 'foot' && data.column.index >= totalRow.length - 3) {
+          data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+            ? [220, 252, 231]
+            : [219, 234, 254];
         }
       }
     });
