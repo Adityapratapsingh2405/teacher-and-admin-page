@@ -15,7 +15,9 @@ interface MarksheetRow {
   percentage: number;
 }
 
-const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownload }) => {
+const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownload }) => 
+  {
+ // console.log(">>> " , studentResults)
   // Transform exam-centric data to subject-centric data
   const marksheetData = useMemo(() => {
     const subjectMap = new Map<string, MarksheetRow>();
@@ -45,6 +47,8 @@ const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownl
         subject.totalMax += score.maxMarks || 0;
       });
     });
+
+    console.log(subjectMap)
 
     // Calculate percentages
     subjectMap.forEach((subject) => {
@@ -105,15 +109,16 @@ const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownl
         <table className="marksheet-table">
           <thead>
             <tr>
-              <th className="subject-header" rowSpan={2}>Subject</th>
+              <th rowSpan={2}>Subject</th>
               {marksheetData.exams.map((examName, idx) => (
-                <th key={idx} className="exam-header" colSpan={2}>
+                <th key={idx} colSpan={2}>
                   {examName}
                 </th>
               ))}
               <th className="total-header" colSpan={2}>Total</th>
               <th className="percentage-header" rowSpan={2}>%</th>
             </tr>
+
             <tr className="subheader-row">
               {marksheetData.exams.map((_, idx) => (
                 <React.Fragment key={idx}>

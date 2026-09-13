@@ -380,7 +380,9 @@ export class ResultPDFGenerator {
   static generateMarksheetPDF(
     studentResults: StudentResultsDTO,
     schoolName: string = 'School Learning Management System'
-  ): void {
+  ): void 
+  {
+    console.log("???? >> " , studentResults)
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
     let yPos = 20;

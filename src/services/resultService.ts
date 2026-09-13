@@ -110,7 +110,7 @@ const resultService = {
    * Get all exam results for a specific student
    */
   getStudentAllResults: async (panNumber: string): Promise<StudentResultsDTO> => {
-    const response = await api.get<StudentResultsDTO>(`/results/student/${panNumber}`);
+    const response = await api.get<StudentResultsDTO>(`/results/student?panNumber=${panNumber}`);
     return response.data;
   },
 
