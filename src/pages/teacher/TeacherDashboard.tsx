@@ -16,6 +16,7 @@ import { SessionService } from '../../services/sessionService';
 import HolidayService, { Holiday } from '../../services/holidayService';
 import PromotionAssignment from '../../components/PromotionAssignment';
 import PasswordResetModal from '../../components/PasswordResetModal';
+import MarksUpload from '../admin/MarksUpload';
 
 interface TeacherDashboardProps {
   onLogout: () => void;
@@ -2886,6 +2887,8 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
         return renderLeaveRequests();
       case 'students':
         return renderStudentInfo();
+      case 'marks-upload':
+              return <MarksUpload activeSessionId={activeSessionId} />;
       default:
         return renderHome();
     }
@@ -2945,6 +2948,12 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ onLogout }) => {
               onClick={() => setActiveTab('promotion')}
             >
               Promote Students
+            </button>
+             <button
+              className={`nav-item ${activeTab === 'marks-upload' ? 'active' : ''}`}
+              onClick={() => setActiveTab('marks-upload')}
+            >
+              Upload Marks
             </button>
             <button
               className={`nav-item ${activeTab === 'queries' ? 'active' : ''}`}
