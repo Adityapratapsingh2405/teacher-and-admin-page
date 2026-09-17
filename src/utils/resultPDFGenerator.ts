@@ -375,17 +375,47 @@ export class ResultPDFGenerator {
   }
 
   /**
+   * Load a school logo as a data URL so it can be embedded into the PDF.
+   */
+  private static async loadImageDataUrl(imageUrl?: string): Promise<string | null> {
+    if (!imageUrl) return null;
+
+    try {
+      if (imageUrl.startsWith('data:')) return imageUrl;
+
+      const response = await fetch(imageUrl);
+      if (!response.ok) return null;
+
+      const blob = await response.blob();
+      return await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error('Failed to read image'));
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+      console.warn('Unable to load school logo for PDF:', error);
+      return null;
+    }
+  }
+
+  /**
    * Generate comprehensive marksheet PDF with subjects as rows and exams as columns
    */
-  static generateMarksheetPDF(
+  static async generateMarksheetPDF(
     studentResults: StudentResultsDTO,
+    school:any,
     schoolName: string = 'School Learning Management System'
-  ): void 
+  ): Promise<void> 
   {
-    console.log("???? >> " , studentResults)
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
     let yPos = 20;
+
+    const resolvedSchoolName = school?.schoolName || schoolName;
+    const resolvedSchoolAddress = school?.schoolAddress || '';
+    const resolvedAffiliationNo = school?.affiliationNo || 'XXXXXX';
+    const logoDataUrl = await this.loadImageDataUrl(school?.schoolLogo);
 
     // Transform exam-centric data to subject-centric data
     const subjectMap = new Map<string, {
@@ -431,11 +461,30 @@ export class ResultPDFGenerator {
     const subjects = Array.from(subjectMap.values());
     const examNames = exams.map(e => e.examName);
 
-    // Header - School Name
+    // Header - School Name and details
+    const schoolHeaderY = yPos;
+    if (logoDataUrl) {
+      try {
+        doc.addImage(logoDataUrl, 'PNG', 18, schoolHeaderY - 8, 22, 22);
+      } catch (error) {
+        console.warn('School logo could not be added to PDF:', error);
+      }
+    }
+
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
-    doc.text(schoolName, pageWidth / 2, yPos, { align: 'center' });
-    yPos += 10;
+    doc.text(resolvedSchoolName, pageWidth / 2, schoolHeaderY, { align: 'center' });
+
+    if (resolvedSchoolAddress) {
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.text(resolvedSchoolAddress, pageWidth / 2, schoolHeaderY + 7, { align: 'center' });
+    }
+
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`AFFILIATION NO. ${resolvedAffiliationNo}`, pageWidth / 2, schoolHeaderY + (resolvedSchoolAddress ? 14 : 7), { align: 'center' });
+    yPos += 22;
 
     // Marksheet Title
     doc.setFontSize(14);

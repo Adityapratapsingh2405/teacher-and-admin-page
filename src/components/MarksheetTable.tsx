@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { StudentResultsDTO } from '../services/resultService';
 import './MarksheetTable.css';
-
+import AdminService from "../services/adminService";
 interface MarksheetTableProps {
   studentResults: StudentResultsDTO;
   onDownload: () => void;
@@ -19,6 +19,16 @@ const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownl
   {
  // console.log(">>> " , studentResults)
   // Transform exam-centric data to subject-centric data
+   const [school, setSchool] = useState<any>({});
+   useEffect(() => {
+       fetchSchool();
+     }, []);
+   const fetchSchool = async () => {
+      const id = localStorage.getItem("schoolId");
+      const res = await AdminService.school(id);
+      setSchool(res);
+    };
+
   const marksheetData = useMemo(() => {
     const subjectMap = new Map<string, MarksheetRow>();
 
@@ -94,11 +104,26 @@ const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownl
     <div className="marksheet-container">
       {/* Header Section */}
       <div className="marksheet-header">
+        <div className="school-brand">
+          <img
+            src={school?.schoolLogo || 'https://via.placeholder.com/80'}
+            alt={school?.schoolName || 'School logo'}
+            className="school-logo"
+            crossOrigin="anonymous"
+          />
+          <div className="school-meta">
+            <h1>{school?.schoolName}</h1>
+            <p>{school?.schoolAddress}</p>
+            <p>AFFILIATION NO. {school?.affiliationNo || 'XXXXXX'}</p>
+          </div>
+        </div>
+
         <div className="student-info">
           <h2>{studentResults.studentName}</h2>
           <p>Class: {studentResults.className}</p>
           <p>PEN: {studentResults.studentPanNumber}</p>
         </div>
+
         <button className="download-btn" onClick={onDownload}>
            Download Marksheet
         </button>

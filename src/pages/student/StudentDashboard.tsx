@@ -119,6 +119,16 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
   const [previousSchoolingLoading, setPreviousSchoolingLoading] = useState(false);
   const [previousSchoolingError, setPreviousSchoolingError] = useState<string | null>(null);
 
+   const [school, setSchool] = useState<any>({});
+     useEffect(() => {
+         fetchSchool();
+       }, []);
+     const fetchSchool = async () => {
+        const id = localStorage.getItem("schoolId");
+        const res = await AdminService.school(id);
+        setSchool(res);
+      };
+
   // Period settings state
   const [periodSettings, setPeriodSettings] = useState<PeriodSettings>({
     periodDuration: 40,
@@ -2096,7 +2106,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                 {showMarksheetView ? (
                   <MarksheetTable
                     studentResults={studentResults}
-                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(studentResults, 'School Learning Management System')}
+                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(studentResults, school,'School Learning Management System')}
                   />
                 ) : (
                   <>
