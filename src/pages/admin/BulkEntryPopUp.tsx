@@ -16,7 +16,7 @@ const studentColumns = [
   "Session",
   "Father Name",
   "Mother Name",
-  "Mobile", "DOB" , "Address" , "Transport"
+  "Mobile", "DOB" , "Address" , "Transport" , "Pre-session-fees"
 ];
 const teacherColumns = ["Name", "Email", "Mobile"];
 
@@ -172,7 +172,8 @@ const formatDate = (date:any) => {
             mobile: ob['Mobile'],
             dob: ob['DOB'],
             address: ob['Address'],
-            transport : ob['Transport']
+            transport : ob['Transport'],
+            previousSessionFees : ob['Pre-session-fees']
           });
           var newOb = {...ob,'Server Response':msg};
           if(msg!='success'){

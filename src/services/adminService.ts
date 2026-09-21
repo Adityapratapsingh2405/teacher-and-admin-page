@@ -105,6 +105,7 @@ type BulkStudentDataType = {
   dob: string | null;
   address: string | null;
   transport : string | null;
+  previousSessionFees : number | null;
 };
 type BulkTeacherDataType = {  
   name: string | null;

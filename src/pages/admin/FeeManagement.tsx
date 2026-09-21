@@ -65,7 +65,7 @@ const FeeManagement: React.FC = () =>
     setLoading(true);
     try {
       const catalog = await FeeService.getFeeCatalogByPan(student.panNumber);
-      //console.log(catalog)
+      console.log(catalog)
       setFeeCatalog(catalog);
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -312,7 +312,7 @@ const FeeManagement: React.FC = () =>
                       onClick={() => monthFee.status !== 'paid' && setSelectedMonth(monthFee)}
                     >
                       <div className="fee-month-header">
-                        <span className="month-name">{monthFee.type=='exam'?"Exam Fees":monthFee.month}</span>
+                        <span className="month-name">{monthFee.type=='exam'?"Exam Fees":monthFee.type=='pre-session'?"Pre Session Fees":monthFee.month}</span>
 
                         {monthFee.status=='paid'?<>
                           {monthFee.type!='exam'?<span

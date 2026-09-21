@@ -21,7 +21,8 @@ interface StudentFormData {
   previousSchool: string;
   photo: File | null;
   transport: boolean;
-   motherName?:string;
+  motherName?:string;
+  previousSessionFees?:number;
 }
 
 interface StudentRegistrationErrors {
@@ -65,7 +66,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
     bloodGroup: '',
     previousSchool: '',
     photo: null,
-    transport:false
+    transport:false,
+    previousSessionFees : 0
   });
   
   const [errors, setErrors] = useState<StudentRegistrationErrors>({});
@@ -289,7 +291,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
         sessionId: parseInt(formData.sessionId),
         photo: photoUrl,
         transport : formData.transport,
-        motherName : formData.motherName
+        motherName : formData.motherName,
+        previousSessionFees : formData.previousSessionFees
       };
 
       // Call backend API to register student
@@ -644,6 +647,21 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ onReg
               </select>
               {errors.sessionId && <span className="error-message">{errors.sessionId}</span>}
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="previousSessionFees">
+              Previous Session Pending Fees <span className="optional">(Optional)</span>
+            </label>
+            <input
+              type="text"
+              id="previousSessionFees"
+              name="previousSessionFees"
+              value={formData.previousSessionFees}
+              onChange={handleInputChange}
+              placeholder="Enter previous session pending fees"
+              disabled={isLoading}
+            />
           </div>
 
           <div className="form-group">

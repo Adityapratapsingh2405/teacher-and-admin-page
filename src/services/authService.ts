@@ -41,6 +41,7 @@ export interface StudentRegistrationData {
   photo?: string; // Photo as base64 string or URL
   transport?:boolean;
   motherName?:string;
+  previousSessionFees?:number;
 }
 
 export class AuthService {
