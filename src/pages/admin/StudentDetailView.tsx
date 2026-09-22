@@ -462,6 +462,20 @@ const StudentDetailView: React.FC<StudentDetailViewProps> = ({ student, feeCatal
                 <span>{displayStudent.transport?"Transport Added":"Not Added"}</span>
               )}
             </div>
+
+            <div className="info-item">
+              <label>Previous Session Fees</label>
+              {isEditing ? (
+                <input
+                type='number'                
+                className="edit-input"
+                value={displayStudent.previousSessionFees}
+                onChange={(e) => setEditedStudent({...editedStudent,previousSessionFees:e.target.value})}
+                />
+              ) : (
+                <span>{displayStudent.previousSessionFees}</span>
+              )}
+            </div>
           </div>
         </div>
 

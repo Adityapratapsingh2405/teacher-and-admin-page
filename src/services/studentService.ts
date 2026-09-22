@@ -112,7 +112,7 @@ export class StudentService {
   // Update student information
   static async updateStudent(panNumber: string, studentData: StudentData) {
     try {
-      const response = await api.put(`/students/${panNumber}`, studentData);
+      const response = await api.put(`/students?panNumber=${panNumber}`, studentData);
       
       if (response.status >= 200 && response.status < 300) {
         return response.data.data;
