@@ -2,6 +2,32 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { StudentResultsDTO, ExamResult } from '../services/resultService';
 
+interface CertificateSettings {
+  subjects: Array<string | {
+    subjectName: string;
+    mainResult?: boolean;
+    gradeSheet?: boolean;
+  }>;
+  points: string[];
+}
+
+const loadCertificateSettings = async (): Promise<CertificateSettings> => {
+  try {
+    const schoolId = localStorage.getItem('schoolId');
+    const schoolSettingsUrl = schoolId
+      ? `${import.meta.env.BASE_URL}certi-settings-school-${encodeURIComponent(schoolId)}.json`
+      : null;
+    const schoolResponse = schoolSettingsUrl ? await fetch(schoolSettingsUrl) : null;
+    const response = schoolResponse?.ok
+      ? schoolResponse
+      : await fetch(`${import.meta.env.BASE_URL}certi-settings.json`);
+    if (!response.ok) return { subjects: [], points: [] };
+    return await response.json() as CertificateSettings;
+  } catch {
+    return { subjects: [], points: [] };
+  }
+};
+
 export class ResultPDFGenerator {
   /**
    * Generate PDF for a single exam result
@@ -403,11 +429,13 @@ export class ResultPDFGenerator {
    * Generate comprehensive marksheet PDF with subjects as rows and exams as columns
    */
   static async generateMarksheetPDF(
+    selectedSubjects: Array<{ subjectName: string; mainResult?: boolean; gradeSheet?: boolean }>,
     studentResults: StudentResultsDTO,
     school:any,
     schoolName: string = 'School Learning Management System'
   ): Promise<void> 
   {
+    const certificateSettings = await loadCertificateSettings();
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
     let yPos = 20;
@@ -458,7 +486,19 @@ export class ResultPDFGenerator {
       }
     });
 
-    const subjects = Array.from(subjectMap.values());
+    const allSubjects = Array.from(subjectMap.values());
+    const mainResultSubjects = allSubjects.filter(subject => {
+      const selection = selectedSubjects.find(item => item.subjectName === subject.subjectName);
+      return selection?.mainResult === true;
+    });
+    const gradeSheetSubjects = allSubjects.filter(subject => {
+      const selection = selectedSubjects.find(item => item.subjectName === subject.subjectName);
+      return selection?.gradeSheet === true;
+    });
+    const includedSubjects = allSubjects.filter(subject => {
+      const selection = selectedSubjects.find(item => item.subjectName === subject.subjectName);
+      return selection?.mainResult === true || selection?.gradeSheet === true;
+    });
     const examNames = exams.map(e => e.examName);
 
     // Header - School Name and details
@@ -543,10 +583,7 @@ export class ResultPDFGenerator {
       { content: 'Max' }
     ];
 
-    // Build table body
-    const tableData: string[][] = [];
-
-    subjects.forEach(subject => {
+    const buildTableData = (subjectRows: typeof allSubjects): string[][] => subjectRows.map(subject => {
       const row: string[] = [subject.subjectName];
 
       examNames.forEach(examName => {
@@ -558,13 +595,12 @@ export class ResultPDFGenerator {
       row.push(subject.totalObtained.toString());
       row.push(subject.totalMax.toString());
       row.push(subject.percentage.toFixed(1) + '%');
-
-      tableData.push(row);
+      return row;
     });
 
     // Calculate overall totals row
     const overallTotals: { [examName: string]: { obtained: number; max: number } } = {};
-    subjects.forEach((subject) => {
+    includedSubjects.forEach((subject) => {
       Object.entries(subject.examMarks).forEach(([examName, marks]) => {
         if (!overallTotals[examName]) {
           overallTotals[examName] = { obtained: 0, max: 0 };
@@ -592,46 +628,60 @@ export class ResultPDFGenerator {
     totalRow.push(grandTotalMax.toString());
     totalRow.push(grandPercentage.toFixed(1) + '%');
 
-    // Generate table with autoTable
-    autoTable(doc, {
-      head: [firstHeaderRow, secondHeaderRow],
-      body: tableData,
-      foot: [totalRow],
-      startY: yPos,
-      theme: 'grid',
-      styles: {
-        fontSize: 8,
-        cellPadding: 3,
-        halign: 'center',
-        valign: 'middle'
-      },
-      headStyles: {
-        fillColor: [102, 126, 234],
-        textColor: [255, 255, 255],
-        fontStyle: 'bold',
-        halign: 'center'
-      },
-      columnStyles: {
-        0: { halign: 'left', fontStyle: 'bold', cellWidth: 40 } // Subject column
-      },
-      footStyles: {
-        fillColor: [230, 230, 230],
-        textColor: [0, 0, 0],
-        fontStyle: 'bold'
-      },
-      didParseCell: function(data) {
-        if (data.section === 'body' && data.column.index >= totalRow.length - 3) {
-          data.cell.styles.fillColor = data.column.index === totalRow.length - 1
-            ? [220, 252, 231]
-            : [240, 253, 244];
-        }
-        if (data.section === 'foot' && data.column.index >= totalRow.length - 3) {
-          data.cell.styles.fillColor = data.column.index === totalRow.length - 1
-            ? [220, 252, 231]
-            : [219, 234, 254];
-        }
+    const renderTable = (title: string, tableData: string[][], includeOverallTotal: boolean) => {
+      if (yPos > doc.internal.pageSize.getHeight() - 30) {
+        doc.addPage();
+        yPos = 20;
       }
-    });
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.text(title, 15, yPos);
+      yPos += 4;
+
+      autoTable(doc, {
+        head: [firstHeaderRow, secondHeaderRow],
+        body: tableData,
+        foot: includeOverallTotal ? [totalRow] : [],
+        startY: yPos,
+        theme: 'grid',
+        styles: {
+          fontSize: 8,
+          cellPadding: 3,
+          halign: 'center',
+          valign: 'middle'
+        },
+        headStyles: {
+          fillColor: [102, 126, 234],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold',
+          halign: 'center'
+        },
+        columnStyles: {
+          0: { halign: 'left', fontStyle: 'bold', cellWidth: 40 }
+        },
+        footStyles: {
+          fillColor: [230, 230, 230],
+          textColor: [0, 0, 0],
+          fontStyle: 'bold'
+        },
+        didParseCell: function(data) {
+          if (data.section === 'body' && data.column.index >= totalRow.length - 3) {
+            data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+              ? [220, 252, 231]
+              : [240, 253, 244];
+          }
+          if (data.section === 'foot' && data.column.index >= totalRow.length - 3) {
+            data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+              ? [220, 252, 231]
+              : [219, 234, 254];
+          }
+        }
+      });
+      yPos = (doc as any).lastAutoTable.finalY + 10;
+    };
+
+    renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
+    renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects), true);
 
     // Footer
     const finalY = (doc as any).lastAutoTable.finalY + 10;
@@ -645,7 +695,11 @@ export class ResultPDFGenerator {
     );
 
     // Grade Legend
-    const legendY = finalY + 6;
+    let legendY = finalY + 6;
+    if (legendY > doc.internal.pageSize.getHeight() - 12) {
+      doc.addPage();
+      legendY = 20;
+    }
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.text(
@@ -654,6 +708,34 @@ export class ResultPDFGenerator {
       legendY,
       { align: 'center' }
     );
+
+    const notes = (certificateSettings.points || []).filter(point => point.trim());
+    if (notes.length) {
+      let notesY = legendY + 12;
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const textWidth = pageWidth - 36;
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      if (notesY > pageHeight - 12) {
+        doc.addPage();
+        notesY = 20;
+      }
+      doc.text('Notes', 18, notesY);
+      notesY += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+
+      notes.forEach((point, index) => {
+        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
+        const lineHeight = 5;
+        if (notesY + lines.length * lineHeight > pageHeight - 12) {
+          doc.addPage();
+          notesY = 20;
+        }
+        doc.text(lines, 18, notesY);
+        notesY += lines.length * lineHeight + 2;
+      });
+    }
 
     // Save the PDF
     const fileName = `Marksheet_${studentResults.studentName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;

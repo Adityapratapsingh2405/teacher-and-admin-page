@@ -21,6 +21,16 @@ export interface SubjectResponse {
   updatedAt?: string;
 }
 
+export interface SubjectSelectionResponse {
+  id: number;
+  subjectName: string;
+  classId: number;
+  className: string;
+  sessionId?: number;
+  isMain?: boolean;
+  isGrade?: boolean;
+}
+
 export interface BulkSubjectData {
   classId: number;
   subjects: {
@@ -30,6 +40,37 @@ export interface BulkSubjectData {
 }
 
 export class SubjectService {
+
+  // SAve Selected Subjects
+  static async saveSelectedSubjects(data:any){
+    try {
+      const response = await api.post('/subjects/save-selected-subjects', data);
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to create subject');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to save selected subject';
+      throw new Error(message);
+    }
+  }
+
+  static async listSelectedSubjects(){
+    try {
+      const response = await api.get('/subjects/list-selected-subjects');
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to create subject');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to save selected subject';
+      throw new Error(message);
+    }
+  }
+
+
   // Create subject
   static async createSubject(subjectData: SubjectData) {
     try {

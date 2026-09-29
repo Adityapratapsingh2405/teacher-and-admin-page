@@ -43,6 +43,7 @@ import BonafideCertificate from './BonaFideCertificate';
 import IdentityCard from './IdentityCardPopUp';
 import TransferCertificate from './TransferCertificate';
 import ActivityUndertaking from './ActivityCertificate';
+import CertiSettings from './CertiSettings';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -2105,6 +2106,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         return <TimetableManagement />;
       case 'exams':
         return <ExamManagement />;
+      case 'certificate-format':
+          return <CertiSettings/>;
       case 'promotions':
         return <PromotionManagement />;
       case 'teacher-queries':
@@ -2210,6 +2213,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               onClick={() => setActiveTab('exams')}
             >
             Exams
+            </button>
+            <button
+              className={`nav-item ${activeTab === 'certificate-format' ? 'active' : ''}`}
+              onClick={() => setActiveTab('certificate-format')}
+            >
+             Certificate Format Setting
             </button>
             <button
               className={`nav-item ${activeTab === 'promotions' ? 'active' : ''}`}

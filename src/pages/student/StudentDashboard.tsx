@@ -25,6 +25,7 @@ import PreviousSchoolingTable from '../../components/PreviousSchoolingTable';
 import PasswordResetModal from '../../components/PasswordResetModal';
 import AdminService from '../../services/adminService';
 import { GeminiAssistant } from './GeminiComp';
+import SubjectService from '../../services/subjectService';
 
 interface StudentDashboardProps {
   onLogout: () => void;
@@ -80,6 +81,14 @@ const formatDateTime = (dateValue: any): string => {
   }
 };
 
+interface SubjectSetting {
+    classId: number;
+    sessionId: number;
+    subjectName: string;
+    mainResult: boolean;
+    gradeSheet: boolean;
+}
+
 const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) => 
 {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -119,6 +128,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
   const [previousSchoolingLoading, setPreviousSchoolingLoading] = useState(false);
   const [previousSchoolingError, setPreviousSchoolingError] = useState<string | null>(null);
 
+  const [selectedSubjects, setSelectedSubjects] = useState<SubjectSetting[]>([]);
+    
+
    const [school, setSchool] = useState<any>({});
      useEffect(() => {
          fetchSchool();
@@ -128,6 +140,20 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
         const res = await AdminService.school(id);
         setSchool(res);
       };
+
+      const fetchSelectSubjects = async()=>{
+        const schoolId = localStorage.getItem('schoolId');
+        if (!schoolId) throw new Error('School ID is missing.');
+        
+        const schoolSettingsResponse = await SubjectService.listSelectedSubjects();
+        const classSelectedData = schoolSettingsResponse.filter((ob:any)=>ob.classId==student.classId);
+        setSelectedSubjects(classSelectedData)
+      }
+
+      useEffect(()=>{
+        if(student)
+          fetchSelectSubjects()
+      },[student]);
 
   // Period settings state
   const [periodSettings, setPeriodSettings] = useState<PeriodSettings>({
@@ -352,6 +378,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
     fetchMyQueries();
     fetchMyLeaveRequests();
     fetchVideoLectures();
+    //fetchSelectSubjects();
   }, []);
 
   // Fetch video lectures for student's class
@@ -2105,8 +2132,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                 {/* Marksheet Table View */}
                 {showMarksheetView ? (
                   <MarksheetTable
-                    studentResults={studentResults}
-                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(studentResults, school,'School Learning Management System')}
+                    studentResults={studentResults}                   
+                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(selectedSubjects,studentResults, school,'School Learning Management System')}
                   />
                 ) : (
                   <>

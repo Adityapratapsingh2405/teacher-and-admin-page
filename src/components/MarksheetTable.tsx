@@ -15,7 +15,7 @@ interface MarksheetRow {
   percentage: number;
 }
 
-const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults, onDownload }) => 
+const MarksheetTable: React.FC<MarksheetTableProps> = ({ studentResults,  onDownload }) => 
   {
  // console.log(">>> " , studentResults)
   // Transform exam-centric data to subject-centric data
