@@ -56,6 +56,9 @@
 }
 
 .certi-settings__section {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 24px 0;
   border-bottom: 1px solid var(--certi-line);
 }
@@ -308,6 +311,7 @@
 
 .certi-settings__add-point {
   display: flex;
+  align-items: center;
   gap: 10px;
   margin-bottom: 14px;
 }
@@ -322,22 +326,72 @@
   font: inherit;
 }
 
+.certi-settings__add-point input:focus-visible {
+  outline: 2px solid var(--certi-accent);
+  outline-offset: 2px;
+}
+
+.certi-settings__point-groups {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.certi-settings__point-group {
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+
+.certi-settings__point-content {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 16px 18px 12px;
+  background: #fff;
+}
+
+.certi-settings__point-content .certi-settings__empty {
+  margin: 0;
+}
+
 .certi-settings__point-list {
   margin: 0;
   padding: 0;
-  list-style-position: inside;
+  list-style: none;
+  counter-reset: certificate-point;
 }
 
 .certi-settings__point-list li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid var(--certi-line);
 }
 
+.certi-settings__point-list li::before {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eef5f1;
+  color: var(--certi-accent);
+  content: counter(certificate-point);
+  counter-increment: certificate-point;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .certi-settings__point-list li span {
+  min-width: 0;
   overflow-wrap: anywhere;
 }
 
@@ -386,6 +440,24 @@
   .certi-settings__class-heading {
     align-items: flex-start;
     flex-wrap: wrap;
+  }
+
+  .certi-settings__point-content {
+    padding: 14px 12px 10px;
+  }
+
+  .certi-settings__add-point {
+    align-items: stretch;
+  }
+
+  .certi-settings__add-point .certi-settings__button {
+    padding: 0 10px;
+    white-space: nowrap;
+  }
+
+  .certi-settings__point-list li {
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    gap: 8px;
   }
 
   .certi-settings__class-heading h3 {

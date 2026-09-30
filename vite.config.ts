@@ -32,9 +32,19 @@ const certificateSettingsPlugin = () => ({
       request.on('end', async () => {
         try {
           const settings = JSON.parse(body)
-          if (!Array.isArray(settings.subjects) || !Array.isArray(settings.points)
-            || !settings.subjects.every((value: unknown) => typeof value === 'string')
-            || !settings.points.every((value: unknown) => typeof value === 'string')) {
+          const validSubjects = Array.isArray(settings.subjects) && settings.subjects.every((value: unknown) =>
+            typeof value === 'string'
+            || (typeof value === 'object' && value !== null && !Array.isArray(value)
+              && typeof (value as { subjectName?: unknown }).subjectName === 'string')
+          )
+          const validPoints = Array.isArray(settings.points)
+            ? settings.points.every((value: unknown) => typeof value === 'string')
+            : typeof settings.points === 'object' && settings.points !== null
+              && Object.entries(settings.points).every(([className, values]) =>
+                className.trim().length > 0 && Array.isArray(values)
+                && values.every((value: unknown) => typeof value === 'string')
+              )
+          if (!validSubjects || !validPoints) {
             throw new Error('Invalid certificate settings.')
           }
 

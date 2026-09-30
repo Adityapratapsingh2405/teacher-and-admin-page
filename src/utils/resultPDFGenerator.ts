@@ -8,25 +8,8 @@ interface CertificateSettings {
     mainResult?: boolean;
     gradeSheet?: boolean;
   }>;
-  points: string[];
+  points: string[] | Record<string, string[]>;
 }
-
-const loadCertificateSettings = async (): Promise<CertificateSettings> => {
-  try {
-    const schoolId = localStorage.getItem('schoolId');
-    const schoolSettingsUrl = schoolId
-      ? `${import.meta.env.BASE_URL}certi-settings-school-${encodeURIComponent(schoolId)}.json`
-      : null;
-    const schoolResponse = schoolSettingsUrl ? await fetch(schoolSettingsUrl) : null;
-    const response = schoolResponse?.ok
-      ? schoolResponse
-      : await fetch(`${import.meta.env.BASE_URL}certi-settings.json`);
-    if (!response.ok) return { subjects: [], points: [] };
-    return await response.json() as CertificateSettings;
-  } catch {
-    return { subjects: [], points: [] };
-  }
-};
 
 export class ResultPDFGenerator {
   /**
@@ -424,18 +407,19 @@ export class ResultPDFGenerator {
       return null;
     }
   }
-
   /**
    * Generate comprehensive marksheet PDF with subjects as rows and exams as columns
    */
   static async generateMarksheetPDF(
     selectedSubjects: Array<{ subjectName: string; mainResult?: boolean; gradeSheet?: boolean }>,
+    points : string[],
     studentResults: StudentResultsDTO,
     school:any,
     schoolName: string = 'School Learning Management System'
   ): Promise<void> 
   {
-    const certificateSettings = await loadCertificateSettings();
+    //console.log("points : " , points);
+
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
     let yPos = 20;
@@ -683,19 +667,36 @@ export class ResultPDFGenerator {
     renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
     renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects), true);
 
-    // Footer
-    const finalY = (doc as any).lastAutoTable.finalY + 10;
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'italic');
-    doc.text(
-      `Generated on: ${new Date().toLocaleString()}`,
-      pageWidth / 2,
-      finalY,
-      { align: 'center' }
-    );
+    const notes = points;
+    if (notes.length) {
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const textWidth = pageWidth - 36;
+      if (yPos > pageHeight - 24) {
+        doc.addPage();
+        yPos = 20;
+      }
+
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Important Notes', 18, yPos);
+      yPos += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+
+      notes.forEach((point, index) => {
+        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
+        const lineHeight = 5;
+        if (yPos + lines.length * lineHeight > pageHeight - 12) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(lines, 18, yPos);
+        yPos += lines.length * lineHeight + 2;
+      });
+    }
 
     // Grade Legend
-    let legendY = finalY + 6;
+    let legendY = yPos + 6;
     if (legendY > doc.internal.pageSize.getHeight() - 12) {
       doc.addPage();
       legendY = 20;
@@ -709,33 +710,16 @@ export class ResultPDFGenerator {
       { align: 'center' }
     );
 
-    const notes = (certificateSettings.points || []).filter(point => point.trim());
-    if (notes.length) {
-      let notesY = legendY + 12;
-      const pageHeight = doc.internal.pageSize.getHeight();
-      const textWidth = pageWidth - 36;
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      if (notesY > pageHeight - 12) {
-        doc.addPage();
-        notesY = 20;
-      }
-      doc.text('Notes', 18, notesY);
-      notesY += 6;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
 
-      notes.forEach((point, index) => {
-        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
-        const lineHeight = 5;
-        if (notesY + lines.length * lineHeight > pageHeight - 12) {
-          doc.addPage();
-          notesY = 20;
-        }
-        doc.text(lines, 18, notesY);
-        notesY += lines.length * lineHeight + 2;
-      });
-    }
+    // Footer
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'italic');
+    doc.text(
+      `Generated on: ${new Date().toLocaleString()}`,
+      pageWidth / 2,
+      legendY + 6,
+      { align: 'center' }
+    );
 
     // Save the PDF
     const fileName = `Marksheet_${studentResults.studentName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;

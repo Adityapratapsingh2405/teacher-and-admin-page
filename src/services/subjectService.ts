@@ -41,6 +41,35 @@ export interface BulkSubjectData {
 
 export class SubjectService {
 
+
+static async saveNotes(data:any){
+    try {
+      const response = await api.post('/subjects/save-notes', data);
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to create subject');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to save selected subject';
+      throw new Error(message);
+    }
+  }
+
+  static async getNotes(){
+    try {
+      const response = await api.get('/subjects/get-notes');
+      
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      }
+      throw new Error(response.data.message || 'Failed to create subject');
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message || 'Failed to save selected subject';
+      throw new Error(message);
+    }
+  }
+
   // SAve Selected Subjects
   static async saveSelectedSubjects(data:any){
     try {

@@ -129,7 +129,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
   const [previousSchoolingError, setPreviousSchoolingError] = useState<string | null>(null);
 
   const [selectedSubjects, setSelectedSubjects] = useState<SubjectSetting[]>([]);
-    
+  const [points, setPoints] = useState<string[]>([]);
 
    const [school, setSchool] = useState<any>({});
      useEffect(() => {
@@ -147,7 +147,13 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
         
         const schoolSettingsResponse = await SubjectService.listSelectedSubjects();
         const classSelectedData = schoolSettingsResponse.filter((ob:any)=>ob.classId==student.classId);
-        setSelectedSubjects(classSelectedData)
+        setSelectedSubjects(classSelectedData);
+
+        let noteResponse = await SubjectService.getNotes();
+        console.log("noteResponse : " , noteResponse)
+        console.log(student)
+        if(noteResponse!='no')
+          setPoints(noteResponse[student.classId]);
       }
 
       useEffect(()=>{
@@ -2132,8 +2138,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                 {/* Marksheet Table View */}
                 {showMarksheetView ? (
                   <MarksheetTable
-                    studentResults={studentResults}                   
-                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(selectedSubjects,studentResults, school,'School Learning Management System')}
+                    studentResults={studentResults}   
+                              
+                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(selectedSubjects,points,studentResults, school,'School Learning Management System')}
                   />
                 ) : (
                   <>
