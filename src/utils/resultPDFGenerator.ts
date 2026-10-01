@@ -723,11 +723,13 @@ export class ResultPDFGenerator {
     }
 
     // Grade Legend
-    const signatureStartY = doc.internal.pageSize.getHeight() - 62;
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const gradeScaleText = 'Grade Scale: A+ (90-100) | A (80-89) | B+ (70-79) | B (60-69) | C (50-59) | D (40-49) | F (<40)';
     let legendY = yPos + 10;
-    const minimumFooterGap = 26;
+    const signatureBlockGap = 12;
+    const signatureBlockHeight = 18 + 12;
 
-    if (legendY > signatureStartY - minimumFooterGap) {
+    if (legendY + signatureBlockGap + signatureBlockHeight > pageHeight - 18) {
       doc.addPage();
       legendY = 20;
     }
@@ -735,14 +737,14 @@ export class ResultPDFGenerator {
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.text(
-      'Grade Scale: A+ (90-100) | A (80-89) | B+ (70-79) | B (60-69) | C (50-59) | D (40-49) | F (<40)',
+      gradeScaleText,
       pageWidth / 2,
       legendY,
       { align: 'center' }
     );
 
-    // Footer with signature section
-    const finalSignatureY = signatureStartY;
+    // Footer with signature section just below the grade scale
+    const finalSignatureY = legendY + signatureBlockGap;
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, finalSignatureY);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'italic');
