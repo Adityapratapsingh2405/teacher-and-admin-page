@@ -48,7 +48,7 @@ export class ResultPDFGenerator {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
-    let yPos = 20;
+    let yPos = 12;
 
     // Header - School Name
     doc.setFontSize(18);
@@ -535,17 +535,17 @@ export class ResultPDFGenerator {
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.text(`AFFILIATION NO. ${resolvedAffiliationNo}`, pageWidth / 2, schoolHeaderY + (resolvedSchoolAddress ? 14 : 7), { align: 'center' });
-    yPos += 22;
+    yPos += 18;
 
     // Marksheet Title
     doc.setFontSize(14);
     doc.text('COMPREHENSIVE MARKSHEET', pageWidth / 2, yPos, { align: 'center' });
-    yPos += 12;
+    yPos += 8;
 
     // Add a line separator
     doc.setLineWidth(0.5);
     doc.line(15, yPos, pageWidth - 15, yPos);
-    yPos += 8;
+    yPos += 4;
 
     // Student Information
     doc.setFontSize(10);
@@ -570,12 +570,12 @@ export class ResultPDFGenerator {
     doc.text('PEN:', studentInfoRight, yPos);
     doc.setFont('helvetica', 'normal');
     doc.text(studentResults.studentPanNumber, studentInfoRight + 15, yPos);
-    yPos += 10;
+    yPos += 6;
 
     // Another separator
     doc.setLineWidth(0.3);
     doc.line(15, yPos, pageWidth - 15, yPos);
-    yPos += 8;
+    yPos += 4;
 
     // Match the screen table: exam and total headers span two columns, while
     // Subject and percentage span both header rows.
@@ -640,29 +640,28 @@ export class ResultPDFGenerator {
     totalRow.push(grandPercentage.toFixed(1) + '%');
 
     const renderTable = (title: string, tableData: string[][], includeOverallTotal: boolean) => {
-      if (yPos > doc.internal.pageSize.getHeight() - 30) {
-        doc.addPage();
-        yPos = 20;
-      }
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.text(title, 15, yPos);
-      yPos += 4;
+      const tableHeaderRow = firstHeaderRow.map((cell, index) =>
+        index === 0 ? { ...cell, content: title + ' Subjects' } : cell
+      );
 
       autoTable(doc, {
-        head: [firstHeaderRow, secondHeaderRow],
+        head: [tableHeaderRow, secondHeaderRow],
         body: tableData,
         foot: includeOverallTotal ? [totalRow] : [],
         startY: yPos,
+        margin: { left: 15, right: 15 },
         theme: 'grid',
         styles: {
-          fontSize: 8,
-          cellPadding: 3,
+          fontSize: 7,
+          cellPadding: 1.5,
           halign: 'center',
-          valign: 'middle'
+          valign: 'middle',
+          textColor: [39, 54, 59],
+          lineColor: [207, 218, 221],
+          lineWidth: 0.15
         },
         headStyles: {
-          fillColor: [102, 126, 234],
+          fillColor: [43, 104, 111],
           textColor: [255, 255, 255],
           fontStyle: 'bold',
           halign: 'center'
@@ -671,24 +670,43 @@ export class ResultPDFGenerator {
           0: { halign: 'left', fontStyle: 'bold', cellWidth: 40 }
         },
         footStyles: {
-          fillColor: [230, 230, 230],
-          textColor: [0, 0, 0],
+          fillColor: [231, 238, 239],
+          textColor: [31, 59, 64],
           fontStyle: 'bold'
         },
         didParseCell: function(data) {
-          if (data.section === 'body' && data.column.index >= totalRow.length - 3) {
-            data.cell.styles.fillColor = data.column.index === totalRow.length - 1
-              ? [220, 252, 231]
-              : [240, 253, 244];
+          if (data.section === 'head') {
+            data.cell.styles.fillColor = data.row.index === 0
+              ? [31, 76, 83]
+              : [54, 116, 123];
+          }
+          if (data.section === 'body') {
+            data.cell.styles.fillColor = data.row.index % 2 === 0
+              ? [255, 255, 255]
+              : [246, 249, 249];
+
+            if (data.column.index === 0) {
+              data.cell.styles.fillColor = data.row.index % 2 === 0
+                ? [239, 245, 246]
+                : [232, 241, 242];
+              data.cell.styles.textColor = [31, 69, 74];
+              data.cell.styles.fontStyle = 'bold';
+            }
+
+            if (data.column.index >= totalRow.length - 3) {
+              data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+                ? [218, 239, 226]
+                : [237, 246, 240];
+            }
           }
           if (data.section === 'foot' && data.column.index >= totalRow.length - 3) {
             data.cell.styles.fillColor = data.column.index === totalRow.length - 1
-              ? [220, 252, 231]
-              : [219, 234, 254];
+              ? [194, 226, 208]
+              : [216, 235, 222];
           }
         }
       });
-      yPos = (doc as any).lastAutoTable.finalY + 10;
+      yPos = (doc as any).lastAutoTable.finalY + 3;
     };
 
     renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
@@ -698,43 +716,28 @@ export class ResultPDFGenerator {
     if (notes.length) {
       const pageHeight = doc.internal.pageSize.getHeight();
       const textWidth = pageWidth - 36;
-      if (yPos > pageHeight - 24) {
-        doc.addPage();
-        yPos = 20;
-      }
-
-      doc.setFontSize(10);
+      doc.setFontSize(9);
       doc.setFont('helvetica', 'bold');
       doc.text('Important Notes', 18, yPos);
-      yPos += 6;
+      yPos += 4;
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
+      doc.setFontSize(8);
 
       notes.forEach((point, index) => {
         const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
-        const lineHeight = 5;
-        if (yPos + lines.length * lineHeight > pageHeight - 12) {
-          doc.addPage();
-          yPos = 20;
-        }
+        const lineHeight = 3.5;
         doc.text(lines, 18, yPos);
-        yPos += lines.length * lineHeight + 2;
+        yPos += lines.length * lineHeight + 0.5;
       });
     }
 
     // Grade Legend
     const pageHeight = doc.internal.pageSize.getHeight();
     const gradeScaleText = 'Grade Scale: A+ (90-100) | A (80-89) | B+ (70-79) | B (60-69) | C (50-59) | D (40-49) | F (<40)';
-    let legendY = yPos + 10;
-    const signatureBlockGap = 12;
-    const signatureBlockHeight = 18 + 12;
+    const legendY = yPos + 4;
+    const signatureBlockGap = 8;
 
-    if (legendY + signatureBlockGap + signatureBlockHeight > pageHeight - 18) {
-      doc.addPage();
-      legendY = 20;
-    }
-
-    doc.setFontSize(8);
+    doc.setFontSize(5);
     doc.setFont('helvetica', 'normal');
     doc.text(
       gradeScaleText,
@@ -751,7 +754,7 @@ export class ResultPDFGenerator {
     doc.text(
       `Generated on: ${new Date().toLocaleString()}`,
       pageWidth / 2,
-      signatureEndY + 6,
+      signatureEndY + 4,
       { align: 'center' }
     );
 
