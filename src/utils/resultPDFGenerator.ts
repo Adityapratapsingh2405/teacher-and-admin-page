@@ -215,7 +215,7 @@ export class ResultPDFGenerator {
     doc.text(this.getGradeInterpretation(examResult.overallGrade), pageWidth / 2, summaryY + 10, { align: 'center' });
 
     // Footer with signature section
-    const signatureStartY = pageHeight - 52;
+    const signatureStartY = pageHeight - 62;
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, signatureStartY);
     doc.setFontSize(8);
     doc.setTextColor(128, 128, 128);
@@ -369,7 +369,7 @@ export class ResultPDFGenerator {
     doc.text(`Overall Grade: ${this.calculateOverallGrade(avgPercentage)}`, 15, yPos);
 
     // Footer with signature section
-    const signatureStartY = pageHeight - 52;
+    const signatureStartY = pageHeight - 62;
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, signatureStartY);
     doc.setFontSize(8);
     doc.setTextColor(128, 128, 128);
@@ -723,11 +723,15 @@ export class ResultPDFGenerator {
     }
 
     // Grade Legend
-    let legendY = yPos + 6;
-    if (legendY > doc.internal.pageSize.getHeight() - 12) {
+    const signatureStartY = doc.internal.pageSize.getHeight() - 62;
+    let legendY = yPos + 10;
+    const minimumFooterGap = 26;
+
+    if (legendY > signatureStartY - minimumFooterGap) {
       doc.addPage();
       legendY = 20;
     }
+
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.text(
@@ -737,9 +741,8 @@ export class ResultPDFGenerator {
       { align: 'center' }
     );
 
-
     // Footer with signature section
-    const finalSignatureY = doc.internal.pageSize.getHeight() - 42;
+    const finalSignatureY = signatureStartY;
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, finalSignatureY);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'italic');
