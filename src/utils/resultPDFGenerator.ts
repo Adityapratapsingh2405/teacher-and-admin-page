@@ -11,6 +11,31 @@ interface CertificateSettings {
   points: string[] | Record<string, string[]>;
 }
 
+class SignatureFooter {
+  static addToPDF(doc: jsPDF, pageWidth: number, startY: number): number {
+    const leftMargin = 25;
+    const rightMargin = 25;
+    const totalWidth = pageWidth - leftMargin - rightMargin;
+    const itemWidth = totalWidth / 3;
+    const lineLength = itemWidth - 18;
+
+    const labels = ['Class Teacher', 'Principal', 'Parent'];
+
+    labels.forEach((label, index) => {
+      const x = leftMargin + (index * itemWidth) + 10;
+      doc.setDrawColor(0, 0, 0);
+      doc.setLineWidth(0.35);
+      doc.line(x, startY, x + lineLength, startY);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(0, 0, 0);
+      doc.text(label, x + (lineLength / 2), startY + 8, { align: 'center' });
+    });
+
+    return startY + 16;
+  }
+}
+
 export class ResultPDFGenerator {
   /**
    * Generate PDF for a single exam result
@@ -189,12 +214,13 @@ export class ResultPDFGenerator {
     doc.setFont('helvetica', 'normal');
     doc.text(this.getGradeInterpretation(examResult.overallGrade), pageWidth / 2, summaryY + 10, { align: 'center' });
 
-    // Footer
-    yPos = pageHeight - 20;
+    // Footer with signature section
+    const signatureStartY = pageHeight - 52;
+    const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, signatureStartY);
     doc.setFontSize(8);
     doc.setTextColor(128, 128, 128);
-    doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, yPos, { align: 'center' });
-    doc.text('This is a computer-generated document and does not require a signature.', pageWidth / 2, yPos + 4, { align: 'center' });
+    doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, signatureEndY + 6, { align: 'center' });
+    doc.text('This is a computer-generated document and does not require a signature.', pageWidth / 2, signatureEndY + 10, { align: 'center' });
 
     // Save PDF
     const fileName = `${studentResults.studentName.replace(/\s+/g, '_')}_${examResult.examName.replace(/\s+/g, '_')}_Result.pdf`;
@@ -342,12 +368,13 @@ export class ResultPDFGenerator {
     yPos += 6;
     doc.text(`Overall Grade: ${this.calculateOverallGrade(avgPercentage)}`, 15, yPos);
 
-    // Footer
-    yPos = pageHeight - 20;
+    // Footer with signature section
+    const signatureStartY = pageHeight - 52;
+    const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, signatureStartY);
     doc.setFontSize(8);
     doc.setTextColor(128, 128, 128);
-    doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, yPos, { align: 'center' });
-    doc.text('This is a computer-generated document.', pageWidth / 2, yPos + 4, { align: 'center' });
+    doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, signatureEndY + 6, { align: 'center' });
+    doc.text('This is a computer-generated document.', pageWidth / 2, signatureEndY + 10, { align: 'center' });
 
     // Save PDF
     const fileName = `${studentResults.studentName.replace(/\s+/g, '_')}_Complete_Academic_Report.pdf`;
@@ -711,13 +738,15 @@ export class ResultPDFGenerator {
     );
 
 
-    // Footer
+    // Footer with signature section
+    const finalSignatureY = doc.internal.pageSize.getHeight() - 42;
+    const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, finalSignatureY);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'italic');
     doc.text(
       `Generated on: ${new Date().toLocaleString()}`,
       pageWidth / 2,
-      legendY + 6,
+      signatureEndY + 6,
       { align: 'center' }
     );
 
