@@ -213,7 +213,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
         // Fetch current logged-in student's details using /api/students/me
         // This endpoint is secured for ROLE_STUDENT and doesn't require PEN parameter
         const studentData = await StudentService.getCurrentStudent();
-        console.log(studentData)
+        //console.log(studentData)
         // Try multiple possible field names for class ID
         const classId = studentData.classId || studentData.currentClassId || studentData.class_id;
         
@@ -2313,6 +2313,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                             onClick={() => {
                               try {
                                 ResultPDFGenerator.generateExamResultPDF(
+                                  selectedSubjects,points,
                                   studentResults,
                                   examResult,
                                   student?.schoolName || 'School Learning Management System'
