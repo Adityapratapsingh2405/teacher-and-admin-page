@@ -48,21 +48,21 @@ export class ResultPDFGenerator {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
-    let yPos = 12;
+    let yPos = 10;
 
     // Header - School Name
-    doc.setFontSize(18);
+    doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.text(schoolName, pageWidth / 2, yPos, { align: 'center' });
     yPos += 10;
 
     // Exam Title
-    doc.setFontSize(14);
+    doc.setFontSize(12);
     doc.text(examResult.examName, pageWidth / 2, yPos, { align: 'center' });
     yPos += 8;
 
     // Academic Result Header
-    doc.setFontSize(12);
+    doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.text('Academic Result', pageWidth / 2, yPos, { align: 'center' });
     yPos += 12;
@@ -73,7 +73,7 @@ export class ResultPDFGenerator {
     yPos += 8;
 
     // Student Information
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     doc.setFont('helvetica', 'bold');
     const studentInfoLeft = 15;
     const studentInfoRight = pageWidth / 2 + 10;
@@ -154,10 +154,15 @@ export class ResultPDFGenerator {
       }
     });
 
-    yPos = (doc as any).lastAutoTable.finalY + 12;
+    yPos = (doc as any).lastAutoTable.finalY + 8;
 
     // Overall Result Summary Box
-    if (yPos > pageHeight - 60) {
+    const boxHeight = 38;
+    const signatureGap = 5;
+    const signatureBlockHeight = 26;
+    const bottomMargin = 8;
+    const summaryAndFooterHeight = boxHeight + signatureGap + signatureBlockHeight + bottomMargin;
+    if (yPos > pageHeight - summaryAndFooterHeight) {
       doc.addPage();
       yPos = 20;
     }
@@ -166,56 +171,54 @@ export class ResultPDFGenerator {
     const boxX = 15;
     const boxY = yPos;
     const boxWidth = pageWidth - 30;
-    const boxHeight = 35;
-
-    // Background color based on grade
-    const gradeColors: { [key: string]: [number, number, number] } = {
-      'A+': [200, 246, 213],
-      'A': [154, 230, 180],
-      'B+': [104, 211, 145],
-      'B': [72, 187, 120],
-      'C': [254, 215, 170],
-      'D': [251, 211, 141],
-      'F': [252, 129, 129]
-    };
-
-    const bgColor = gradeColors[examResult.overallGrade] || [240, 240, 240];
-    doc.setFillColor(...bgColor);
+    doc.setFillColor(247, 250, 250);
     doc.rect(boxX, boxY, boxWidth, boxHeight, 'F');
 
-    // Border
-    doc.setDrawColor(100, 100, 100);
+    // Teal title band and border
+    doc.setFillColor(31, 76, 83);
+    doc.rect(boxX, boxY, boxWidth, 9, 'F');
+    doc.setDrawColor(207, 218, 221);
     doc.setLineWidth(0.5);
     doc.rect(boxX, boxY, boxWidth, boxHeight, 'S');
 
-    // Summary text
-    doc.setFontSize(12);
+    doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(0, 0, 0);
-    doc.text('Result Summary', pageWidth / 2, boxY + 8, { align: 'center' });
+    doc.setTextColor(255, 255, 255);
+    doc.text('RESULT SUMMARY', boxX + 5, boxY + 6);
+
+    const columnCenters = [boxX + boxWidth / 6, pageWidth / 2, boxX + (boxWidth * 5) / 6];
+    const metricLabels = ['MARKS', 'PERCENTAGE', 'GRADE'];
+    const metricValues = [
+      `${examResult.obtainedMarks} / ${examResult.totalMarks}`,
+      `${examResult.percentage.toFixed(2)}%`,
+      examResult.overallGrade
+    ];
+
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(95, 112, 115);
+    metricLabels.forEach((label, index) => {
+      doc.text(label, columnCenters[index], boxY + 16, { align: 'center' });
+    });
 
     doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    
-    const summaryY = boxY + 16;
-    const col1X = boxX + 20;
-    const col2X = pageWidth / 2 - 20;
-    const col3X = pageWidth / 2 + 20;
-
-    doc.text(`Total Marks: ${examResult.obtainedMarks}/${examResult.totalMarks}`, col1X, summaryY);
-    doc.text(`Percentage: ${examResult.percentage.toFixed(2)}%`, col2X, summaryY);
-    
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.text(`Grade: ${examResult.overallGrade}`, col3X, summaryY);
+    doc.setTextColor(31, 76, 83);
+    metricValues.forEach((value, index) => {
+      doc.text(value, columnCenters[index], boxY + 25, { align: 'center' });
+    });
 
-    // Grade interpretation
-    doc.setFontSize(8);
+    doc.setFontSize(7);
     doc.setFont('helvetica', 'normal');
-    doc.text(this.getGradeInterpretation(examResult.overallGrade), pageWidth / 2, summaryY + 10, { align: 'center' });
+    doc.setTextColor(95, 112, 115);
+    doc.text(this.getGradeInterpretation(examResult.overallGrade), pageWidth / 2, boxY + 33, { align: 'center' });
 
-    // Footer with signature section
-    const signatureStartY = pageHeight - 62;
+    // Footer with signature section, positioned after the result summary.
+    let signatureStartY = boxY + boxHeight + signatureGap;
+    if (signatureStartY + signatureBlockHeight > pageHeight - bottomMargin) {
+      doc.addPage();
+      signatureStartY = 30;
+    }
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, signatureStartY);
     doc.setFontSize(8);
     doc.setTextColor(128, 128, 128);
@@ -511,6 +514,15 @@ export class ResultPDFGenerator {
       return selection?.mainResult === true || selection?.gradeSheet === true;
     });
     const examNames = exams.map(e => e.examName);
+    const gradeFromPercentage = (percentage: number): string => {
+      if (percentage >= 90) return 'A+';
+      if (percentage >= 80) return 'A';
+      if (percentage >= 70) return 'B+';
+      if (percentage >= 60) return 'B';
+      if (percentage >= 50) return 'C';
+      if (percentage >= 40) return 'D';
+      return 'F';
+    };
 
     // Header - School Name and details
     const schoolHeaderY = yPos;
@@ -594,20 +606,57 @@ export class ResultPDFGenerator {
       { content: 'Max' }
     ];
 
-    const buildTableData = (subjectRows: typeof allSubjects): string[][] => subjectRows.map(subject => {
+    const buildTableData = (subjectRows: typeof allSubjects, showGrades = false): string[][] => subjectRows.map(subject => {
       const row: string[] = [subject.subjectName];
 
       examNames.forEach(examName => {
         const examMarks = subject.examMarks[examName];
+        if (showGrades) {
+          row.push(examMarks && examMarks.maxMarks > 0 && examMarks.marks !== null && examMarks.marks !== undefined
+            ? gradeFromPercentage((examMarks.marks / examMarks.maxMarks) * 100)
+            : '-');
+          return;
+        }
         row.push(examMarks ? (examMarks.marks !== null && examMarks.marks !== undefined ? examMarks.marks.toString() : '-') : '-');
         row.push(examMarks ? examMarks.maxMarks.toString() : '-');
       });
 
+      if (showGrades) {
+        row.push(subject.totalMax > 0 ? gradeFromPercentage(subject.percentage) : '-');
+        return row;
+      }
       row.push(subject.totalObtained.toString());
       row.push(subject.totalMax.toString());
       row.push(subject.percentage.toFixed(1) + '%');
       return row;
     });
+
+    const gradeSheetHeader = [
+      { content: 'GRADE SHEET SUBJECTS' },
+      ...examNames.map(examName => ({ content: examName })),
+      { content: 'Overall Grade' }
+    ];
+
+    const gradeSheetTotalRow: string[] = ['CLASS GRADE'];
+    examNames.forEach(examName => {
+      const examTotal = gradeSheetSubjects.reduce((total, subject) => {
+        const marks = subject.examMarks[examName];
+        total.obtained += marks?.marks || 0;
+        total.max += marks?.maxMarks || 0;
+        return total;
+      }, { obtained: 0, max: 0 });
+      gradeSheetTotalRow.push(examTotal.max > 0
+        ? gradeFromPercentage((examTotal.obtained / examTotal.max) * 100)
+        : '-');
+    });
+    const gradeSheetOverall = gradeSheetSubjects.reduce((total, subject) => {
+      total.obtained += subject.totalObtained;
+      total.max += subject.totalMax;
+      return total;
+    }, { obtained: 0, max: 0 });
+    gradeSheetTotalRow.push(gradeSheetOverall.max > 0
+      ? gradeFromPercentage((gradeSheetOverall.obtained / gradeSheetOverall.max) * 100)
+      : '-');
 
     // Calculate overall totals row
     const overallTotals: { [examName: string]: { obtained: number; max: number } } = {};
@@ -639,15 +688,18 @@ export class ResultPDFGenerator {
     totalRow.push(grandTotalMax.toString());
     totalRow.push(grandPercentage.toFixed(1) + '%');
 
-    const renderTable = (title: string, tableData: string[][], includeOverallTotal: boolean) => {
-      const tableHeaderRow = firstHeaderRow.map((cell, index) =>
-        index === 0 ? { ...cell, content: title + ' Subjects' } : cell
-      );
+    const renderTable = (title: string, tableData: string[][], includeOverallTotal: boolean, showGrades = false) => {
+      const tableHeaderRow = showGrades
+        ? gradeSheetHeader
+        : firstHeaderRow.map((cell, index) =>
+          index === 0 ? { ...cell, content: title + ' Subjects' } : cell
+        );
+      const tableFootRow = showGrades ? gradeSheetTotalRow : totalRow;
 
       autoTable(doc, {
-        head: [tableHeaderRow, secondHeaderRow],
+        head: showGrades ? [tableHeaderRow] : [tableHeaderRow, secondHeaderRow],
         body: tableData,
-        foot: includeOverallTotal ? [totalRow] : [],
+        foot: includeOverallTotal ? [tableFootRow] : [],
         startY: yPos,
         margin: { left: 15, right: 15 },
         theme: 'grid',
@@ -693,14 +745,18 @@ export class ResultPDFGenerator {
               data.cell.styles.fontStyle = 'bold';
             }
 
-            if (data.column.index >= totalRow.length - 3) {
+            if (showGrades && data.column.index === tableFootRow.length - 1) {
+              data.cell.styles.fillColor = [237, 246, 240];
+            } else if (!showGrades && data.column.index >= tableFootRow.length - 3) {
               data.cell.styles.fillColor = data.column.index === totalRow.length - 1
                 ? [218, 239, 226]
                 : [237, 246, 240];
             }
           }
-          if (data.section === 'foot' && data.column.index >= totalRow.length - 3) {
-            data.cell.styles.fillColor = data.column.index === totalRow.length - 1
+          if (data.section === 'foot' && showGrades && data.column.index > 0) {
+            data.cell.styles.fillColor = [216, 235, 222];
+          } else if (data.section === 'foot' && !showGrades && data.column.index >= tableFootRow.length - 3) {
+            data.cell.styles.fillColor = data.column.index === tableFootRow.length - 1
               ? [194, 226, 208]
               : [216, 235, 222];
           }
@@ -710,7 +766,7 @@ export class ResultPDFGenerator {
     };
 
     renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
-    renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects), true);
+    renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects, true), true, true);
 
     const notes = points;
     if (notes.length) {
