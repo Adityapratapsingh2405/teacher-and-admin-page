@@ -230,7 +230,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
           sessionId: studentData.sessionId,
           father : studentData.parentName,
           mother : studentData.motherName,
-          dob : studentData.dateOfBirth
+          dob : studentData.dateOfBirth,
+          address : studentData.address
         });
 
         // Fetch timetable for student's class - ONLY if classId is valid

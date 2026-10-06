@@ -89,7 +89,9 @@ export class ResultPDFGenerator {
 
     const detailsX = 8;
     const detailsWidth = pageWidth - 16;
-    const detailsHeight = 32;
+    doc.setFontSize(8);
+    const addressLines = doc.splitTextToSize(String(student?.address || '-'), detailsWidth - 35) as string[];
+    const detailsHeight = 36 + addressLines.length * 4;
     const detailsColumnWidth = detailsWidth / 3;
     doc.setFillColor(239, 245, 246);
     doc.roundedRect(detailsX, yPos, detailsWidth, detailsHeight, 1.5, 1.5, 'F');
@@ -128,6 +130,14 @@ export class ResultPDFGenerator {
       doc.setTextColor(39, 54, 59);
       doc.text(String(value), columnX + 4, yPos + 27, { maxWidth: detailsColumnWidth - 8 });
     });
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(43, 104, 111);
+    doc.text('ADDRESS', detailsX + 4, yPos + 35);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(39, 54, 59);
+    doc.text(addressLines, detailsX + 28, yPos + 35);
     yPos += detailsHeight + 5;
 
     const selectedSubjectNames = new Map(selectedSubjects.map(subject => [subject.subjectName, subject]));
@@ -332,6 +342,7 @@ export class ResultPDFGenerator {
     doc.addPage();
     yPos = 20;
     yPos = this.addPersonalDevelopmentTable(doc, yPos);
+    yPos = this.addPhysicalDevelopmentTable(doc, yPos);
     if (points.length) {
       const textWidth = pageWidth - 24;
       doc.setFontSize(8);
@@ -589,6 +600,42 @@ export class ResultPDFGenerator {
     return (doc as any).lastAutoTable.finalY + 8;
   }
 
+  private static addPhysicalDevelopmentTable(doc: jsPDF, startY: number): number {
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const tableWidth = pageWidth - 24;
+
+    autoTable(doc, {
+      startY,
+      head: [[{ content: 'PHYSICAL DEVELOPMENT', colSpan: 4 }]],
+      body: [['Height (cm)', '', 'Weight (kg)', '']],
+      tableWidth,
+      margin: { left: 12, right: 12 },
+      theme: 'grid',
+      styles: {
+        fontSize: 8,
+        cellPadding: 2,
+        minCellHeight: 10,
+        textColor: [39, 54, 59],
+        lineColor: [207, 218, 221],
+        lineWidth: 0.15
+      },
+      headStyles: {
+        fillColor: [31, 76, 83],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold',
+        halign: 'center'
+      },
+      columnStyles: {
+        0: { cellWidth: tableWidth * 0.22, fontStyle: 'bold' },
+        1: { cellWidth: tableWidth * 0.28 },
+        2: { cellWidth: tableWidth * 0.22, fontStyle: 'bold' },
+        3: { cellWidth: tableWidth * 0.28 }
+      }
+    });
+
+    return (doc as any).lastAutoTable.finalY + 8;
+  }
+
   /**
    * Load a school logo as a data URL so it can be embedded into the PDF.
    */
@@ -633,7 +680,6 @@ export class ResultPDFGenerator {
 
     const resolvedSchoolName = school?.schoolName || schoolName;
     const resolvedSchoolAddress = school?.schoolAddress || '';
-    const resolvedAffiliationNo = school?.affiliationNo || 'XXXXXX';
     const logoDataUrl = await this.loadImageDataUrl(school?.schoolLogo);
 
     // Transform exam-centric data to subject-centric data
@@ -719,7 +765,7 @@ export class ResultPDFGenerator {
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
-    doc.text(`AFFILIATION NO. ${resolvedAffiliationNo}`, pageWidth / 2, schoolHeaderY + (resolvedSchoolAddress ? 14 : 7), { align: 'center' });
+    //doc.text(`AFFILIATION NO. ${resolvedAffiliationNo}`, pageWidth / 2, schoolHeaderY + (resolvedSchoolAddress ? 14 : 7), { align: 'center' });
     yPos += 18;
 
     // Marksheet Title
@@ -770,6 +816,13 @@ export class ResultPDFGenerator {
       doc.text(String(value), columnX + 18, yPos, { maxWidth: pageWidth / 3 - 40 });
     });
     yPos += 6;
+
+    const addressLines = doc.splitTextToSize(String(student?.address || '-'), pageWidth - 50) as string[];
+    doc.setFont('helvetica', 'bold');
+    doc.text('Address:', studentInfoLeft, yPos);
+    doc.setFont('helvetica', 'normal');
+    doc.text(addressLines, studentInfoLeft + 18, yPos);
+    yPos += Math.max(6, addressLines.length * 4);
 
     // Another separator
     doc.setLineWidth(0.3);
@@ -970,6 +1023,7 @@ export class ResultPDFGenerator {
     doc.addPage();
     yPos = 20;
     yPos = this.addPersonalDevelopmentTable(doc, yPos);
+    yPos = this.addPhysicalDevelopmentTable(doc, yPos);
 
     const notes = points;
     if (notes.length) {

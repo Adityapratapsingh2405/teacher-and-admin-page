@@ -44,6 +44,7 @@ import IdentityCard from './IdentityCardPopUp';
 import TransferCertificate from './TransferCertificate';
 import ActivityUndertaking from './ActivityCertificate';
 import CertiSettings from './CertiSettings';
+import StudentResult from './Results';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -2104,6 +2105,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         return <EventManagement />;
       case 'timetable':
         return <TimetableManagement />;
+      case 'Student-Results':
+        return <StudentResult/>;  
       case 'exams':
         return <ExamManagement />;
       case 'certificate-format':
@@ -2201,6 +2204,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               onClick={() => setActiveTab('fees')}
             >
               Fee Management
+            </button>
+            <button
+              className={`nav-item ${activeTab === 'Student-Results' ? 'active' : ''}`}
+              onClick={() => setActiveTab('Student-Results')}
+            >
+              Student Result
             </button>
             <button
               className={`nav-item ${activeTab === 'timetable' ? 'active' : ''}`}
