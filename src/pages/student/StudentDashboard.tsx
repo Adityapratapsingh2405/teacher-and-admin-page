@@ -227,7 +227,10 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
           schoolTagline: studentData.schoolTagline || 'Learn • Lead • Succeed',
           classId: classId,
           section: studentData.section || 'A',
-          sessionId: studentData.sessionId
+          sessionId: studentData.sessionId,
+          father : studentData.parentName,
+          mother : studentData.motherName,
+          dob : studentData.dateOfBirth
         });
 
         // Fetch timetable for student's class - ONLY if classId is valid
@@ -2140,7 +2143,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                   <MarksheetTable
                     studentResults={studentResults}   
                               
-                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(selectedSubjects,points,studentResults, school,'School Learning Management System')}
+                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(student,selectedSubjects,points,studentResults, school,'School Learning Management System')}
                   />
                 ) : (
                   <>
@@ -2310,13 +2313,15 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                         <div style={{ marginTop: '1rem', textAlign: 'right' }}>
                           <button
                             className="download-btn"
-                            onClick={() => {
+                            onClick={async () => {
                               try {
-                                ResultPDFGenerator.generateExamResultPDF(
+                                await ResultPDFGenerator.generateExamResultPDF(
+                                  student,
                                   selectedSubjects,points,
                                   studentResults,
                                   examResult,
-                                  student?.schoolName || 'School Learning Management System'
+                                  student?.schoolName || 'School Learning Management System',
+                                  school
                                 );
                               } catch (error) {
                                 console.error('Error generating PDF:', error);

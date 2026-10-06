@@ -40,17 +40,28 @@ export class ResultPDFGenerator {
   /**
    * Generate PDF for a single exam result
    */
-  static generateExamResultPDF(
+  static async generateExamResultPDF(
+     student:any,
     selectedSubjects: Array<{ subjectName: string; mainResult?: boolean; gradeSheet?: boolean }>,
     points : string[],
     studentResults: StudentResultsDTO,
     examResult: ExamResult,
-    schoolName: string = 'School Learning Management System'
-  ): void {
+    schoolName: string = 'School Learning Management System',
+    school?: any
+  ): Promise<void> {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
+    const logoDataUrl = await this.loadImageDataUrl(school?.schoolLogo || student?.schoolLogo);
     let yPos = 10;
+
+    if (logoDataUrl) {
+      try {
+        doc.addImage(logoDataUrl, 'PNG', 8, 10, 20, 20);
+      } catch (error) {
+        console.warn('School logo could not be added to PDF:', error);
+      }
+    }
 
     doc.setFillColor(31, 76, 83);
     doc.rect(8, 8, pageWidth - 16, 2, 'F');
@@ -78,7 +89,7 @@ export class ResultPDFGenerator {
 
     const detailsX = 8;
     const detailsWidth = pageWidth - 16;
-    const detailsHeight = 20;
+    const detailsHeight = 32;
     const detailsColumnWidth = detailsWidth / 3;
     doc.setFillColor(239, 245, 246);
     doc.roundedRect(detailsX, yPos, detailsWidth, detailsHeight, 1.5, 1.5, 'F');
@@ -95,11 +106,27 @@ export class ResultPDFGenerator {
       doc.setFontSize(7);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(43, 104, 111);
-      doc.text(label, columnX + 4, yPos + 6);
+      doc.text(label, columnX + 4, yPos + 5);
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(39, 54, 59);
-      doc.text(value, columnX + 4, yPos + 13, { maxWidth: detailsColumnWidth - 8 });
+      doc.text(value, columnX + 4, yPos + 11, { maxWidth: detailsColumnWidth - 8 });
+    });
+    const familyDetails = [
+      ['FATHER', student?.father || '-'],
+      ['MOTHER', student?.mother || '-'],
+      ['DATE OF BIRTH', student?.dob || '-']
+    ];
+    familyDetails.forEach(([label, value], index) => {
+      const columnX = detailsX + index * detailsColumnWidth;
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(43, 104, 111);
+      doc.text(label, columnX + 4, yPos + 20);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(39, 54, 59);
+      doc.text(String(value), columnX + 4, yPos + 27, { maxWidth: detailsColumnWidth - 8 });
     });
     yPos += detailsHeight + 5;
 
@@ -110,13 +137,8 @@ export class ResultPDFGenerator {
     const gradeSheetSubjects = examResult.subjectScores.filter(subject =>
       selectedSubjectNames.get(subject.subjectName)?.gradeSheet === true
     );
-    const includedSubjects = examResult.subjectScores.filter(subject => {
-      const selection = selectedSubjectNames.get(subject.subjectName);
-      return selection?.mainResult === true || selection?.gradeSheet === true;
-    });
-
-    const totalObtained = includedSubjects.reduce((total, subject) => total + subject.marks, 0);
-    const totalMaximum = includedSubjects.reduce((total, subject) => total + subject.maxMarks, 0);
+    const totalObtained = mainResultSubjects.reduce((total, subject) => total + (subject.marks ?? 0), 0);
+    const totalMaximum = mainResultSubjects.reduce((total, subject) => total + subject.maxMarks, 0);
     const percentage = totalMaximum > 0 ? (totalObtained / totalMaximum) * 100 : 0;
     const overallGrade = this.calculateOverallGrade(percentage);
     const gradeFromPercentage = (value: number): string => this.calculateOverallGrade(value);
@@ -137,6 +159,7 @@ export class ResultPDFGenerator {
       head: [['Subject', 'Marks Obtained', 'Maximum Marks', 'Percentage', 'Grade']],
       body: tableData as any,
       theme: 'grid',
+      tableWidth: pageWidth - 16,
       headStyles: {
         fillColor: [31, 76, 83],
         textColor: [255, 255, 255],
@@ -153,11 +176,11 @@ export class ResultPDFGenerator {
       },
       alternateRowStyles: { fillColor: [247, 250, 250] },
       columnStyles: {
-        0: { halign: 'left', cellWidth: 60 },
-        1: { cellWidth: 25 },
-        2: { cellWidth: 30 },
-        3: { cellWidth: 25 },
-        4: { cellWidth: 20 }
+        0: { halign: 'left', cellWidth: (pageWidth - 16) * 0.35 },
+        1: { cellWidth: (pageWidth - 16) * 0.17 },
+        2: { cellWidth: (pageWidth - 16) * 0.2 },
+        3: { cellWidth: (pageWidth - 16) * 0.15 },
+        4: { cellWidth: (pageWidth - 16) * 0.13 }
       },
       margin: { left: 8, right: 8, top: 5, bottom: 5 },
       foot: [[
@@ -171,7 +194,6 @@ export class ResultPDFGenerator {
         fillColor: [216, 235, 222],
         textColor: [31, 59, 64],
         fontStyle: 'bold',
-        fontSize: 10,
         halign: 'center'
       },
       didParseCell: data => {
@@ -197,6 +219,7 @@ export class ResultPDFGenerator {
       head: [['GRADE SHEET SUBJECTS', 'Grade']],
       body: gradeSheetData,
       foot: [['CLASS GRADE', gradeSheetSubjects.length ? gradeFromPercentage(gradeSheetPercentage) : '-']],
+      tableWidth: pageWidth - 16,
       theme: 'grid',
       headStyles: {
         fillColor: [31, 76, 83],
@@ -215,7 +238,10 @@ export class ResultPDFGenerator {
         lineWidth: 0.15
       },
       alternateRowStyles: { fillColor: [247, 250, 250] },
-      columnStyles: { 0: { halign: 'left', cellWidth: 60 }, 1: { cellWidth: 30 } },
+      columnStyles: {
+        0: { halign: 'left', cellWidth: (pageWidth - 16) * 0.8 },
+        1: { cellWidth: (pageWidth - 16) * 0.2 }
+      },
       margin: { left: 8, right: 8, top: 5, bottom: 5 },
       footStyles: {
         fillColor: [216, 235, 222],
@@ -233,29 +259,6 @@ export class ResultPDFGenerator {
     });
 
     yPos = (doc as any).lastAutoTable.finalY + 4;
-
-    if (points.length) {
-      const textWidth = pageWidth - 24;
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(31, 76, 83);
-      doc.text('Important Notes', 12, yPos);
-      yPos += 3;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(7.5);
-      doc.setTextColor(39, 54, 59);
-
-      points.forEach((point, index) => {
-        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
-        const noteHeight = lines.length * 3 + 0.5;
-        if (yPos + noteHeight > pageHeight - 12) {
-          doc.addPage();
-          yPos = 20;
-        }
-        doc.text(lines, 12, yPos);
-        yPos += noteHeight;
-      });
-    }
 
     // Overall Result Summary Box
     const boxHeight = 34;
@@ -325,6 +328,32 @@ export class ResultPDFGenerator {
     doc.setTextColor(128, 128, 128);
     doc.text(`Generated on: ${new Date().toLocaleString()}`, pageWidth / 2, signatureEndY + 6, { align: 'center' });
     doc.text('This is a computer-generated document and does not require a signature.', pageWidth / 2, signatureEndY + 10, { align: 'center' });
+
+    doc.addPage();
+    yPos = 20;
+    yPos = this.addPersonalDevelopmentTable(doc, yPos);
+    if (points.length) {
+      const textWidth = pageWidth - 24;
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(31, 76, 83);
+      doc.text('Important Notes', 12, yPos);
+      yPos += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(39, 54, 59);
+
+      points.forEach((point, index) => {
+        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
+        const noteHeight = lines.length * 3 + 0.5;
+        if (yPos + noteHeight > pageHeight - 12) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(lines, 12, yPos);
+        yPos += noteHeight;
+      });
+    }
 
     // Save PDF
     const fileName = `${studentResults.studentName.replace(/\s+/g, '_')}_${examResult.examName.replace(/\s+/g, '_')}_Result.pdf`;
@@ -517,6 +546,52 @@ export class ResultPDFGenerator {
   /**
    * Load a school logo as a data URL so it can be embedded into the PDF.
    */
+  private static addPersonalDevelopmentTable(doc: jsPDF, startY: number): number {
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const tableWidth = pageWidth - 24;
+    const criteria = [
+      ['Personal Neatness', 'A'],
+      ['Punctuality', 'A+'],
+      ['Interaction with Children', 'A'],
+      ['Interaction with Teacher', 'A+'],
+      ['Shares with Friends', 'A'],
+      ['Discipline', 'A+'],
+      ['Participation in Class Activity', 'A']
+    ];
+
+    autoTable(doc, {
+      startY,
+      head: [['PERSONAL DEVELOPMENT', 'GRADE']],
+      body: criteria,
+      tableWidth,
+      margin: { left: 12, right: 12 },
+      theme: 'grid',
+      styles: {
+        fontSize: 8,
+        cellPadding: 2,
+        textColor: [39, 54, 59],
+        lineColor: [207, 218, 221],
+        lineWidth: 0.15
+      },
+      headStyles: {
+        fillColor: [31, 76, 83],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold',
+        halign: 'center'
+      },
+      bodyStyles: { minCellHeight: 8 },
+      columnStyles: {
+        0: { cellWidth: tableWidth * 0.78 },
+        1: { cellWidth: tableWidth * 0.22, halign: 'center' }
+      }
+    });
+
+    return (doc as any).lastAutoTable.finalY + 8;
+  }
+
+  /**
+   * Load a school logo as a data URL so it can be embedded into the PDF.
+   */
   private static async loadImageDataUrl(imageUrl?: string): Promise<string | null> {
     if (!imageUrl) return null;
 
@@ -542,6 +617,7 @@ export class ResultPDFGenerator {
    * Generate comprehensive marksheet PDF with subjects as rows and exams as columns
    */
   static async generateMarksheetPDF(
+    student:any,
     selectedSubjects: Array<{ subjectName: string; mainResult?: boolean; gradeSheet?: boolean }>,
     points : string[],
     studentResults: StudentResultsDTO,
@@ -550,7 +626,7 @@ export class ResultPDFGenerator {
   ): Promise<void> 
   {
     //console.log("points : " , points);
-  //console.log(selectedSubjects , points)
+  //console.log("student : " , student)
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
     let yPos = 20;
@@ -609,10 +685,6 @@ export class ResultPDFGenerator {
     const gradeSheetSubjects = allSubjects.filter(subject => {
       const selection = selectedSubjects.find(item => item.subjectName === subject.subjectName);
       return selection?.gradeSheet === true;
-    });
-    const includedSubjects = allSubjects.filter(subject => {
-      const selection = selectedSubjects.find(item => item.subjectName === subject.subjectName);
-      return selection?.mainResult === true || selection?.gradeSheet === true;
     });
     const examNames = exams.map(e => e.examName);
     const gradeFromPercentage = (percentage: number): string => {
@@ -683,6 +755,20 @@ export class ResultPDFGenerator {
     doc.text('PEN:', studentInfoRight, yPos);
     doc.setFont('helvetica', 'normal');
     doc.text(studentResults.studentPanNumber, studentInfoRight + 15, yPos);
+    yPos += 6;
+
+    const studentFamilyDetails = [
+      ['Father:', student?.father || '-'],
+      ['Mother:', student?.mother || '-'],
+      ['DOB:', student?.dob || '-']
+    ];
+    studentFamilyDetails.forEach(([label, value], index) => {
+      const columnX = [studentInfoLeft, studentInfoMiddle, studentInfoRight][index];
+      doc.setFont('helvetica', 'bold');
+      doc.text(label, columnX, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.text(String(value), columnX + 18, yPos, { maxWidth: pageWidth / 3 - 40 });
+    });
     yPos += 6;
 
     // Another separator
@@ -761,7 +847,7 @@ export class ResultPDFGenerator {
 
     // Calculate overall totals row
     const overallTotals: { [examName: string]: { obtained: number; max: number } } = {};
-    includedSubjects.forEach((subject) => {
+    mainResultSubjects.forEach((subject) => {
       Object.entries(subject.examMarks).forEach(([examName, marks]) => {
         if (!overallTotals[examName]) {
           overallTotals[examName] = { obtained: 0, max: 0 };
@@ -869,9 +955,24 @@ export class ResultPDFGenerator {
     renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
     renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects, true), true, true);
 
+    const pageHeight = doc.internal.pageSize.getHeight();
+    doc.setPage(1);
+    const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, pageHeight - 32);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'italic');
+    doc.text(
+      `Generated on: ${new Date().toLocaleString()}`,
+      pageWidth / 2,
+      signatureEndY + 4,
+      { align: 'center' }
+    );
+
+    doc.addPage();
+    yPos = 20;
+    yPos = this.addPersonalDevelopmentTable(doc, yPos);
+
     const notes = points;
     if (notes.length) {
-      const pageHeight = doc.internal.pageSize.getHeight();
       const textWidth = pageWidth - 36;
       doc.setFontSize(6);
       doc.setFont('helvetica', 'bold');
@@ -889,10 +990,8 @@ export class ResultPDFGenerator {
     }
 
     // Grade Legend
-    const pageHeight = doc.internal.pageSize.getHeight();
     const gradeScaleText = 'Grade Scale: A+ (90-100) | A (80-89) | B+ (70-79) | B (60-69) | C (50-59) | D (40-49) | F (<40)';
     const legendY = yPos + 4;
-    const signatureBlockGap = 8;
 
     doc.setFontSize(5);
     doc.setFont('helvetica', 'normal');
@@ -900,18 +999,6 @@ export class ResultPDFGenerator {
       gradeScaleText,
       pageWidth / 2,
       legendY,
-      { align: 'center' }
-    );
-
-    // Footer with signature section just below the grade scale
-    const finalSignatureY = legendY + signatureBlockGap;
-    const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, finalSignatureY);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'italic');
-    doc.text(
-      `Generated on: ${new Date().toLocaleString()}`,
-      pageWidth / 2,
-      signatureEndY + 4,
       { align: 'center' }
     );
 
