@@ -71,7 +71,10 @@ const StudentResult: React.FC = () => {
     );
 
     const handleStudentSelect = async (selectedStudent: StudentResponse) => {
-        setStudent(selectedStudent);
+        setStudent({...selectedStudent , 
+            father : selectedStudent.parentName,
+            mother : selectedStudent.motherName,
+            dob : selectedStudent.dateOfBirth});
         setStudentResults(null);
         setResultsError(null);
         setResultsLoading(true);
