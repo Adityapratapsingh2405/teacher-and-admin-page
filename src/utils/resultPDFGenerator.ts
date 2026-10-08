@@ -41,7 +41,7 @@ export class ResultPDFGenerator {
    * Generate PDF for a single exam result
    */
   static async generateExamResultPDF(
-     student:any,
+    student:any,
     selectedSubjects: Array<{ subjectName: string; mainResult?: boolean; gradeSheet?: boolean }>,
     points : string[],
     studentResults: StudentResultsDTO,
@@ -90,55 +90,92 @@ export class ResultPDFGenerator {
     const detailsX = 8;
     const detailsWidth = pageWidth - 16;
     doc.setFontSize(8);
-    const addressLines = doc.splitTextToSize(String(student?.address || '-'), detailsWidth - 35) as string[];
-    const detailsHeight = 36 + addressLines.length * 4;
     const detailsColumnWidth = detailsWidth / 3;
+    const leftLabelWidth = Math.max(...['STUDENT:', 'FATHER:', 'MOTHER:', 'DATE OF BIRTH:'].map(label => {
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'bold');
+      return doc.getTextWidth(label);
+    }));
+    const addressLabel = 'ADDRESS:';
+    const addressLabelWidth = doc.getTextWidth(addressLabel);
+    const addressLines = doc.splitTextToSize(
+      String(student?.address || '-'),
+      detailsColumnWidth - leftLabelWidth - addressLabelWidth - 12
+    ) as string[];
+    const detailsHeight = 29 + Math.max(1, addressLines.length) * 3.5;
     doc.setFillColor(239, 245, 246);
     doc.roundedRect(detailsX, yPos, detailsWidth, detailsHeight, 1.5, 1.5, 'F');
     doc.setDrawColor(207, 218, 221);
     doc.roundedRect(detailsX, yPos, detailsWidth, detailsHeight, 1.5, 1.5, 'S');
 
-    const studentDetails = [
+    const leftDetails = [
       ['STUDENT', studentResults.studentName],
-      ['CLASS', studentResults.className.split('-').map(part => part.trim()).join(' - ')],
-      ['PEN NUMBER', studentResults.studentPanNumber]
-    ];
-    studentDetails.forEach(([label, value], index) => {
-      const columnX = detailsX + index * detailsColumnWidth;
-      doc.setFontSize(7);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(43, 104, 111);
-      doc.text(label, columnX + 4, yPos + 5);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(39, 54, 59);
-      doc.text(value, columnX + 4, yPos + 11, { maxWidth: detailsColumnWidth - 8 });
-    });
-    const familyDetails = [
       ['FATHER', student?.father || '-'],
       ['MOTHER', student?.mother || '-'],
       ['DATE OF BIRTH', student?.dob || '-']
     ];
-    familyDetails.forEach(([label, value], index) => {
-      const columnX = detailsX + index * detailsColumnWidth;
+    leftDetails.forEach(([label, value], index) => {
+      const rowY = yPos + 6 + index * 5;
       doc.setFontSize(7);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(43, 104, 111);
-      doc.text(label, columnX + 4, yPos + 20);
-      doc.setFontSize(9);
+      const labelText = `${label}: `;
+      doc.text(labelText, detailsX + 4, rowY);
+      const labelWidth = leftLabelWidth + 1.5;
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(39, 54, 59);
-      doc.text(String(value), columnX + 4, yPos + 27, { maxWidth: detailsColumnWidth - 8 });
+      doc.text(String(value), detailsX + 4 + labelWidth, rowY, {
+        maxWidth: detailsColumnWidth - labelWidth - 8
+      });
+    });
+    const centerX = detailsX + detailsColumnWidth * 1.5;
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(43, 104, 111);
+    doc.text('CLASS', centerX, yPos + 9, { align: 'center' });
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(39, 54, 59);
+    doc.text(studentResults.className.split('-').map(part => part.trim()).join(' - '), centerX, yPos + 15, {
+      align: 'center',
+      maxWidth: detailsColumnWidth - 8
     });
     doc.setFontSize(7);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(43, 104, 111);
-    doc.text('ADDRESS', detailsX + 4, yPos + 35);
+    doc.text('SECTION', centerX, yPos + 23, { align: 'center' });
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(39, 54, 59);
+    doc.text(String(student?.section || '-'), centerX, yPos + 29, { align: 'center' });
+
+    const rightX = detailsX + detailsColumnWidth * 2 + 4;
+    const rightDetails = [
+      ['ADMISSION NUMBER', student?.panNumber || studentResults.studentPanNumber],
+      ['CLASS TEACHER', student?.classTeacherName || '-']
+    ];
+    rightDetails.forEach(([label, value], index) => {
+      const rowY = yPos + 9 + index * 16;
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(43, 104, 111);
+      doc.text(label, rightX, rowY);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(39, 54, 59);
+      doc.text(String(value), rightX, rowY + 6, { maxWidth: detailsColumnWidth - 8 });
+    });
+
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(43, 104, 111);
+    doc.text(addressLabel, detailsX + 4, yPos + 27);
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(39, 54, 59);
-    doc.text(addressLines, detailsX + 28, yPos + 35);
-    yPos += detailsHeight + 5;
+    doc.text(addressLines, detailsX + 4 + leftLabelWidth + 1.5, yPos + 27);
+    yPos += detailsHeight + 3;
 
     const selectedSubjectNames = new Map(selectedSubjects.map(subject => [subject.subjectName, subject]));
     const mainResultSubjects = examResult.subjectScores.filter(subject =>
@@ -345,6 +382,10 @@ export class ResultPDFGenerator {
     yPos = this.addPhysicalDevelopmentTable(doc, yPos);
     if (points.length) {
       const textWidth = pageWidth - 24;
+      if (yPos + 9 > pageHeight - 12) {
+        doc.addPage();
+        yPos = 20;
+      }
       doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(31, 76, 83);
@@ -355,14 +396,17 @@ export class ResultPDFGenerator {
       doc.setTextColor(39, 54, 59);
 
       points.forEach((point, index) => {
-        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
-        const noteHeight = lines.length * 3 + 0.5;
-        if (yPos + noteHeight > pageHeight - 12) {
-          doc.addPage();
-          yPos = 20;
+        let remainingLines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
+        while (remainingLines.length) {
+          if (yPos + 3 > pageHeight - 12) {
+            doc.addPage();
+            yPos = 20;
+          }
+          const availableLines = Math.max(1, Math.floor((pageHeight - 12 - yPos) / 3));
+          const lines = remainingLines.splice(0, availableLines);
+          doc.text(lines, 12, yPos);
+          yPos += lines.length * 3 + 0.5;
         }
-        doc.text(lines, 12, yPos);
-        yPos += noteHeight;
       });
     }
 
@@ -676,6 +720,7 @@ export class ResultPDFGenerator {
   //console.log("student : " , student)
     const doc = new jsPDF({ orientation: 'landscape' });
     const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
     let yPos = 20;
 
     const resolvedSchoolName = school?.schoolName || schoolName;
@@ -770,7 +815,7 @@ export class ResultPDFGenerator {
 
     // Marksheet Title
     doc.setFontSize(14);
-    doc.text('COMPREHENSIVE MARKSHEET', pageWidth / 2, yPos, { align: 'center' });
+    doc.text(`PROGRESS REPORT [${student.session}]`, pageWidth / 2, yPos, { align: 'center' });
     yPos += 8;
 
     // Add a line separator
@@ -779,50 +824,40 @@ export class ResultPDFGenerator {
     yPos += 4;
 
     // Student Information
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
     const studentInfoLeft = 15;
     const studentInfoMiddle = pageWidth / 3 + 10;
     const studentInfoRight = (pageWidth * 2) / 3 + 10;
-
-    // Name
-    doc.text('Student Name:', studentInfoLeft, yPos);
-    doc.setFont('helvetica', 'normal');
-    doc.text(studentResults.studentName, studentInfoLeft + 35, yPos);
-
-    // Class
-    doc.setFont('helvetica', 'bold');
-    doc.text('Class:', studentInfoMiddle, yPos);
-    doc.setFont('helvetica', 'normal');
-    doc.text(studentResults.className, studentInfoMiddle + 15, yPos);
-
-    // PEN
-    doc.setFont('helvetica', 'bold');
-    doc.text('PEN:', studentInfoRight, yPos);
-    doc.setFont('helvetica', 'normal');
-    doc.text(studentResults.studentPanNumber, studentInfoRight + 15, yPos);
-    yPos += 6;
-
-    const studentFamilyDetails = [
-      ['Father:', student?.father || '-'],
-      ['Mother:', student?.mother || '-'],
-      ['DOB:', student?.dob || '-']
-    ];
-    studentFamilyDetails.forEach(([label, value], index) => {
-      const columnX = [studentInfoLeft, studentInfoMiddle, studentInfoRight][index];
+    const drawStudentField = (label: string, value: unknown, x: number, rowY: number, maxWidth: number): number => {
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
-      doc.text(label, columnX, yPos);
+      doc.setTextColor(43, 104, 111);
+      doc.text(label, x, rowY);
+      const valueX = x + doc.getTextWidth(label) + 1.5;
       doc.setFont('helvetica', 'normal');
-      doc.text(String(value), columnX + 18, yPos, { maxWidth: pageWidth / 3 - 40 });
-    });
-    yPos += 6;
+      doc.setTextColor(39, 54, 59);
+      const textValue = String(value ?? '-');
+      doc.text(textValue, valueX, rowY, { maxWidth: Math.max(1, maxWidth - valueX + x) });
+      return valueX + doc.getTextWidth(textValue) + 4;
+    };
 
-    const addressLines = doc.splitTextToSize(String(student?.address || '-'), pageWidth - 50) as string[];
-    doc.setFont('helvetica', 'bold');
-    doc.text('Address:', studentInfoLeft, yPos);
-    doc.setFont('helvetica', 'normal');
-    doc.text(addressLines, studentInfoLeft + 18, yPos);
-    yPos += Math.max(6, addressLines.length * 4);
+    const infoRowOneY = yPos;
+    const infoRowTwoY = yPos + 5;
+    const infoRowThreeY = yPos + 10;
+    const leftColumnWidth = pageWidth / 3 - 18;
+    const halfLeftWidth = leftColumnWidth / 2;
+
+    drawStudentField('Student Name:', studentResults.studentName, studentInfoLeft, infoRowOneY, leftColumnWidth);
+    drawStudentField('Class:', studentResults.className, studentInfoMiddle, infoRowOneY, pageWidth / 3 - 18);
+    drawStudentField('Admission Number:', student?.panNumber || studentResults.studentPanNumber, studentInfoRight, infoRowOneY, pageWidth / 3 - 18);
+
+    drawStudentField('Father:', student?.father || '-', studentInfoLeft, infoRowTwoY, halfLeftWidth);
+    drawStudentField('Mother:', student?.mother || '-', studentInfoLeft + halfLeftWidth, infoRowTwoY, halfLeftWidth);
+    drawStudentField('Section:', student?.section || '-', studentInfoMiddle, infoRowTwoY, pageWidth / 3 - 18);
+    drawStudentField('Class Teacher:', student?.classTeacherName || '-', studentInfoRight, infoRowTwoY, pageWidth / 3 - 18);
+
+    const addressX = drawStudentField('DOB:', student?.dob || '-', studentInfoLeft, infoRowThreeY, 70);
+    drawStudentField('Address:', student?.address || '-', addressX, infoRowThreeY, pageWidth - addressX - 15);
+    yPos += 14;
 
     // Another separator
     doc.setLineWidth(0.3);
@@ -941,11 +976,11 @@ export class ResultPDFGenerator {
         body: tableData,
         foot: includeOverallTotal ? [tableFootRow] : [],
         startY: yPos,
-        margin: { left: 15, right: 15 },
+        margin: { left: 15, right: 15, bottom: 36 },
         theme: 'grid',
         styles: {
-          fontSize: 7,
-          cellPadding: 1.5,
+          fontSize: 6.5,
+          cellPadding: 1,
           halign: 'center',
           valign: 'middle',
           textColor: [39, 54, 59],
@@ -1002,13 +1037,12 @@ export class ResultPDFGenerator {
           }
         }
       });
-      yPos = (doc as any).lastAutoTable.finalY + 3;
+      yPos = (doc as any).lastAutoTable.finalY + 2;
     };
 
     renderTable('MAIN RESULT', buildTableData(mainResultSubjects), true);
     renderTable('GRADE SHEET', buildTableData(gradeSheetSubjects, true), true, true);
 
-    const pageHeight = doc.internal.pageSize.getHeight();
     doc.setPage(1);
     const signatureEndY = SignatureFooter.addToPDF(doc, pageWidth, pageHeight - 32);
     doc.setFontSize(9);
@@ -1028,6 +1062,10 @@ export class ResultPDFGenerator {
     const notes = points;
     if (notes.length) {
       const textWidth = pageWidth - 36;
+      if (yPos + 8 > pageHeight - 12) {
+        doc.addPage();
+        yPos = 20;
+      }
       doc.setFontSize(6);
       doc.setFont('helvetica', 'bold');
       doc.text('Important Notes', 18, yPos);
@@ -1036,16 +1074,28 @@ export class ResultPDFGenerator {
       doc.setFontSize(6);
 
       notes.forEach((point, index) => {
-        const lines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
         const lineHeight = 3.5;
-        doc.text(lines, 18, yPos);
-        yPos += lines.length * lineHeight + 0.5;
+        let remainingLines = doc.splitTextToSize(`${index + 1}. ${point}`, textWidth) as string[];
+        while (remainingLines.length) {
+          if (yPos + lineHeight > pageHeight - 12) {
+            doc.addPage();
+            yPos = 20;
+          }
+          const availableLines = Math.max(1, Math.floor((pageHeight - 12 - yPos) / lineHeight));
+          const lines = remainingLines.splice(0, availableLines);
+          doc.text(lines, 18, yPos);
+          yPos += lines.length * lineHeight + 0.5;
+        }
       });
     }
 
     // Grade Legend
     const gradeScaleText = 'Grade Scale: A+ (90-100) | A (80-89) | B+ (70-79) | B (60-69) | C (50-59) | D (40-49) | F (<40)';
-    const legendY = yPos + 4;
+    let legendY = yPos + 4;
+    if (legendY > pageHeight - 8) {
+      doc.addPage();
+      legendY = 20;
+    }
 
     doc.setFontSize(5);
     doc.setFont('helvetica', 'normal');

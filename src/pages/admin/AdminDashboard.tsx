@@ -45,6 +45,7 @@ import TransferCertificate from './TransferCertificate';
 import ActivityUndertaking from './ActivityCertificate';
 import CertiSettings from './CertiSettings';
 import StudentResult from './Results';
+import TopperAnalysis from './TopperAnalysis';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -2107,6 +2108,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
         return <TimetableManagement />;
       case 'Student-Results':
         return <StudentResult/>;  
+      case 'Topper-Analysis':
+        return <TopperAnalysis/>;    
       case 'exams':
         return <ExamManagement />;
       case 'certificate-format':
@@ -2210,6 +2213,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) =>
               onClick={() => setActiveTab('Student-Results')}
             >
               Student Result
+            </button>
+            
+            <button
+              className={`nav-item ${activeTab === 'Topper-Analysis' ? 'active' : ''}`}
+              onClick={() => setActiveTab('Topper-Analysis')}
+            >
+              Topper Analysis
             </button>
             <button
               className={`nav-item ${activeTab === 'timetable' ? 'active' : ''}`}

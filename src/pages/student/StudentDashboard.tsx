@@ -231,7 +231,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
           father : studentData.parentName,
           mother : studentData.motherName,
           dob : studentData.dateOfBirth,
-          address : studentData.address
+          address : studentData.address,
+          session : studentData.sessionId
         });
 
         // Fetch timetable for student's class - ONLY if classId is valid
@@ -2143,8 +2144,17 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ onLogout }) =>
                 {showMarksheetView ? (
                   <MarksheetTable
                     studentResults={studentResults}   
-                              
-                    onDownload={() => ResultPDFGenerator.generateMarksheetPDF(student,selectedSubjects,points,studentResults, school,'School Learning Management System')}
+                              onDownload={() => ResultPDFGenerator.generateMarksheetPDF(
+                                {
+                                  ...student,
+                                  classTeacherName: student?.classTeacherName || enquiryContacts.find(contact => contact.isClassTeacher)?.teacher
+                                },
+                                selectedSubjects,
+                                points,
+                                studentResults,
+                                school,
+                                'School Learning Management System'
+                              )}
                   />
                 ) : (
                   <>

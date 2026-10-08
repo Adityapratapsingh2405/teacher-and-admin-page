@@ -74,7 +74,10 @@ const StudentResult: React.FC = () => {
         setStudent({...selectedStudent , 
             father : selectedStudent.parentName,
             mother : selectedStudent.motherName,
-            dob : selectedStudent.dateOfBirth});
+            dob : selectedStudent.dateOfBirth,
+            session : selectedStudent.sessionId,
+            classTeacherName: classes.find(classInfo => classInfo.id === selectedStudent.classId)?.classTeacherName
+        });
         setStudentResults(null);
         setResultsError(null);
         setResultsLoading(true);
