@@ -17,17 +17,31 @@ interface MarkAttendanceProps {
   onClose: () => void;
 }
 
+// const getLocalDateString = () => {
+//   const localDate = new Date();
+//   localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+//   return localDate.toISOString().split('T')[0];
+// };
+const getLocalDateString = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+};
+
 const MarkAttendance: React.FC<MarkAttendanceProps> = ({ classId, className, section, onClose }) => {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [date] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(getLocalDateString);
   const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
     fetchStudents();
-  }, [classId]);
+  }, [classId, date]);
 
   const fetchStudents = async () => {
     try {
@@ -40,6 +54,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ classId, className, sec
       // Try to fetch existing attendance for today's date
       let existingAttendance: any = null;
       try {
+        console.log(date)
         existingAttendance = await AttendanceService.getAttendanceByClassAndDate(classId, date);
         console.log('Existing attendance found:', existingAttendance);
       } catch (attendanceError) {
@@ -107,6 +122,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ classId, className, sec
       const attendanceData = {
         classId: parseInt(classId),
         className: `${className}-${section}`,
+        date: date === getLocalDateString() ? null : date,
         studentAttendances: students.map(student => ({
           panNumber: student.panNumber,
           isPresent: student.isPresent
@@ -136,7 +152,15 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ classId, className, sec
           <div>
             <h2>Mark Attendance</h2>
             <p className="attendance-class-info">
-              {className} - Section {section} | Date: {new Date(date).toLocaleDateString()}
+              {className} - Section {section} | Date:{' '}
+              <input
+                className="attendance-date-picker"
+                type="date"
+                value={date}
+                max={getLocalDateString()}
+                onChange={(event) => setDate(event.target.value)}
+                aria-label="Attendance date"
+              />
             </p>
           </div>
           <button className="close-btn" onClick={onClose}>✕</button>

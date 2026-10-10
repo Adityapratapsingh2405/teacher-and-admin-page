@@ -43,6 +43,28 @@
   color: #6b7280;
 }
 
+.attendance-date-picker {
+  margin-left: 4px;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #1f2937;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.attendance-date-picker:hover {
+  border-color: #94a3b8;
+}
+
+.attendance-date-picker:focus-visible {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
 .close-btn {
   background: none;
   border: none;
